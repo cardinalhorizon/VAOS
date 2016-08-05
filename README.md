@@ -1,3 +1,3 @@
 # VIRTUAL AIRLINE OPERATIONS SYSTEM
 
-Welcome to the VAOS GitHub Page! Once the system core hits open beta, we will release the sources on this page.
+This is VAOS, a new framework for virtual airlines and the eventual replacement for phpVMS. This software is currently in alpha so you will find a lot of frequent changes. Documentation is still being developed.
