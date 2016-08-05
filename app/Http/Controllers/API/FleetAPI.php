@@ -33,22 +33,33 @@ class FleetAPI extends Controller
     			])->getBody();
     		// Add the airport to the database
     		$data = json_decode($res, true);
-    		$airport = new Aircraft();
+    		$aircraft = new Aircraft();
     		//return dd($data);
-    		$airport->name = $data[0]['name'];
-    		$airport->icao = $data[0]['icao'];
-    		$airport->maxgw = $data[0]['maxgw'];
-    		$airport->maxpax = $data[0]['maxpax'];
-    		$airport->range = $data[0]['range'];
-    		$airport->registration = $request->input('registration');
-    		$airport->enabled = true;
-    		$airport->hub = $request->input('hub');
-    		$airport->save();
+    		$aircraft->name = $data[0]['name'];
+    		$aircraft->icao = $data[0]['icao'];
+    		$aircraft->maxgw = $data[0]['maxgw'];
+    		$aircraft->maxpax = $data[0]['maxpax'];
+    		$aircraft->range = $data[0]['range'];
+    		$aircraft->registration = $request->input('registration');
+    		$aircraft->enabled = true;
+    		$aircraft->hub = $request->input('hub');
+    		$aircraft->save();
     	}
     	// use the rest of the query in the URI to add it to the system.
     	else
     	{
     		// insert manual entry system.
+            $aircraft = new Aircraft();
+            //return dd($data);
+            $aircraft->name = $request->input('name');
+            $aircraft->icao = $request->input('icao');
+            $aircraft->maxgw = $request->input('maxgw');
+            $aircraft->maxpax = $request->input('maxpax');
+            $aircraft->range = $request->input('range');
+            $aircraft->registration = $request->input('registration');
+            $aircraft->enabled = true;
+            $aircraft->hub = $request->input('hub');
+            $aircraft->save();
     	}
     }
     public function addseats(Request $request)
