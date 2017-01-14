@@ -36,3 +36,7 @@ $ php artisan vaos:installphpVMS
 ## Shared Hosting (cPanel)
 
 If you are using one of the official hosting partners, Instructions will be provided pertaining how they will be distributing VAOS on their system.
+
+---
+
+Interested in VAOS [Merch](#)? 
