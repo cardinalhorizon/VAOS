@@ -17,7 +17,6 @@ Apache 2.2 or latest nginx version.
 # Getting Started
 
 ## Dedicated Servers (SSH Access)
-> This will also work on Shared Hosts with SSH Access
 
 Using SSH, run the following commands
 ```
@@ -27,6 +26,8 @@ $ composer install
 $ php artisan key:generate
 $ php artisan migrate
 ```
+> This will also work on Shared Hosting with SSH Access that has git and Composer Installed.
+
 If required to use smartCARS support, please run the following command.
 
 ```
