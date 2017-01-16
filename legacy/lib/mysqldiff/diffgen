@@ -1,0 +1,57 @@
+#!/usr/bin/php
+<?php
+/**
+ * 
+ * Create a dump XML file using:
+ * mysqldump --xml --no-data testuser -utestuser -ptest1 > dump.xml
+ */
+
+define('THIS_PATH', dirname(__FILE__));
+require THIS_PATH.'/MySQLDiff.class.php';
+
+$shortopts = "u:p:d:h:f:t:";
+$options = getopt($shortopts);
+
+if(!isset($options['h'])) {
+    $options['h'] = 'localhost';
+}
+
+if(isset($options['t'])) {
+    $options['t'] = strtolower(trim($options['t']));
+    
+    if(($options['t'] != 'show' && $options['t'] != 'run')) {
+        $options['t'] = 'show';
+    }
+} else {
+    $options['t'] = 'show';
+}
+try {
+    $diff = new MySQLDiff(array(
+        'dbuser' => $options['u'],
+        'dbpass' => $options['p'],
+        'dbname' => $options['d'],
+        'dbhost' => $options['h'],
+        'dumpxml' => $options['f'],
+        )
+    );    
+} catch(Exception $e) {
+    echo $e->getMessage(); exit;
+}
+if($options['t'] == 'show') {
+    try {
+        $diff_lines = $diff->getSQLDiffs();
+    } catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+} elseif($options['t'] == 'run') {
+    try { 
+        $diff_lines = $diff->runSQLDiff();
+    } catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+}
+
+foreach($diff_lines as $line) {
+    echo $line."\n";
+}
+
