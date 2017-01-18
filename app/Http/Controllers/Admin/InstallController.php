@@ -13,6 +13,10 @@ class InstallController extends Controller
     public function index(Request $request)
     {
         // Return the view right now
+        if ($request->query('fresh')
+            return view('install.fresh');
+        else
+            return view('install.start');
     }
     public function doInstall(Request $request)
     {
