@@ -101,6 +101,8 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete the route from the system
+        ScheduleTemplate::destroy($id);
+        return redirect('/admin/schedule');
     }
 }
