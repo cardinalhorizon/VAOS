@@ -30,6 +30,8 @@ $ composer install
 $ php artisan key:generate
 $ php artisan migrate
 ```
+> This will also work on Shared Hosting with SSH Access that has git and Composer Installed.
+
 If required to use smartCARS support, please run the following command.
 
 ```
@@ -38,3 +40,7 @@ $ php artisan vaos:installphpVMS
 ## Shared Hosting (cPanel)
 
 If you are using one of the official hosting partners, Instructions will be provided pertaining how they will be distributing VAOS on their system.
+
+---
+
+Interested in VAOS [Merch](#)? 
