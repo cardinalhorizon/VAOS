@@ -79,13 +79,15 @@
                                         <button type="submit" class="btn btn-primary p-x-2">Login</button>
                                     </div>
                                     <div class="col-xs-6 text-xs-right">
+                                    <a href="{{ url('/password/reset') }}">
                                         <button type="button" class="btn btn-link p-x-0">Forgot password?</button>
+                                    </a>
                                     </div>
                                 </div>
                                 <div class="register">
                                     <div class="row">
                                         <p style="display: inline;">Not yet a member? </p>
-                                        <a href="/register">
+                                        <a href="{{ url('/register') }}">
                                             <button style="display: inline;" type="button" class="btn btn-primary">Register</button>
                                         </a>
                                     </div>
