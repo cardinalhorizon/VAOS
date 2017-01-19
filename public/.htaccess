@@ -3,7 +3,8 @@
         Options -MultiViews
     </IfModule>
 
-    php_flag opcache.enable Off
+	# This does not work on Servern with FastCGI or CGI
+    #php_flag opcache.enable Off
 
     RewriteEngine On
 
