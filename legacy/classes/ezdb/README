@@ -1,0 +1,40 @@
+ezDB
+
+Based on ezSQL by Justin Vincent.
+
+Release Notes:
+
+* Oracle8_9 class renamed to just oracle
+* Updated init() function to be dynamic, instead of hard-coding mysql/mysqli/oracle, etc. To add a DB connector type, just create:
+
+    ezdb_TYPE.class.php
+
+    Then call as:
+
+    DB::init(TYPE);
+
+* Added DB::set_error_handler($function) - pass in a function to call when there's an error
+  Same parameters as: http://us.php.net/manual/en/function.call-user-func-array.php
+  
+  This will be called if DB::$log_errors is true:
+  
+  DB::set_log_errors(true);
+  
+  An alternative to try/catch, as this works through every function called in the static class
+  
+  It passes one argument to it, which is an array containing debug information.
+  i.e.
+  function db_error($debug_info) { ... }
+  
+  $debug info will be an array with:
+  
+  $debug_info = array(
+		'backtrace' => $backtrace,
+		'sql' => self::$last_query,
+		'error' => self::$error,
+		'errno' => self::$errno,
+		'dbuser' => self::$dbuser,
+		'dbname' => self::$dbname,
+		'dbpass' => self::$dbpass,
+		'dbserver' => self::$dbserver,
+	);

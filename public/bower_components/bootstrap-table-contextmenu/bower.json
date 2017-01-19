@@ -1,0 +1,25 @@
+{
+    "name": "bootstrap-table-contextmenu",
+    "homepage": "https://github.com/prograhammer/bootstrap-table-contextmenu",
+    "authors": [
+        "David Graham <prograhammer@gmail.com>"
+    ],
+    "description": "An extension for wenzhixin's Bootstrap table that adds context menu support.",
+    "main": [
+        "src/bootstrap-table-contextmenu.js"
+    ],
+    "keywords": [
+        "bootstrap",
+        "table",
+        "bootstrap table",
+        "context menu"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "node_modules",
+        "extension.json",
+        "README.md",
+        ".gitignore",
+        "package.json"
+    ]
+}

@@ -1,0 +1,87 @@
+MySQLDiff Tool
+@author Nabeel Shahzad <https://github.com/nshahzad/MySQLDiff>
+
+===================
+About:
+===================
+
+This command line tool can be used to generate diffs between a MySQL XML dump
+file, and a database which currently exists. It will tell you the missing 
+tables and columns (return as an array), or generate MySQL queries to add the
+missing columns in.
+
+It can also pretty reliably create complete databases based on the XML dump file,
+with indexes. 
+
+Still a bit of a work-in-progress, please report bugs at the github site
+
+===================
+Usage:
+===================
+
+Generate a MySQL Dump file:
+
+mysqldump --xml --no-data testuser -utestuser -ptest1 > structure.xml
+
+Then call the command line script (diffgen):
+
+    diffgen -utestuser -ptest1 -dtestuser -hlocalhost -fstructure.xml -tshow
+ 
+    -u  Database User
+    -p  Database Password
+    -d  Database Name
+    -h  Database Host
+    -f  Dump File Path
+    -t  "show" or "run" - show will output the SQL, "run" will run the SQL
+    
+There's also a class file (which it is all from), which you can use to
+integrate into your own custom scripts (as-is the case with phpVMS, which
+is distributed with the structure.xml, and it "shapes" the database on the
+remote server properly).
+
+
+===================
+Class Usage:
+===================
+
+    $params = array(
+        'dbuser' => 'testuser',
+        'dbpass' => 'test1',
+        'dbname' => 'testuser',
+        'dbhost' => 'localhost',
+        'dumpxml' => 'structure.xml',
+    );
+    
+    try {
+        $diff = new MySQLDiff($params);    
+    } catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+    
+    # This returns an array of what's missing in the database
+    try {
+        $diff_lines = $diff->getDiffs();
+        var_dump($diff_lines);
+     catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+    
+    # This returns SQL queries which can be run to fix the database
+    try {
+        $diff_lines = $diff->getSQLDiffs();
+        var_dump($diff_lines);
+    } catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+    
+    # This generates the SQL and actually runs all of them
+    try { 
+        $diff_lines = $diff->runSQLDiff();
+        var_dump($diff_lines);
+    } catch(Exception $e) {
+        echo $e->getMessage(); exit;
+    }
+    
+    
+    
+    

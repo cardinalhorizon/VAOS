@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="testuser">
+	<table_structure name="testtable">
+		<field Field="id" Type="int(11)" Null="NO" Key="PRI" Extra="auto_increment" />
+		<field Field="name" Type="varchar(25)" Null="NO" Key="" Extra="" />
+		<field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" />
+		<key Table="testtable" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" />
+		<options Name="testtable" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2011-03-28 17:57:20" Update_time="2011-03-28 17:57:20" Collation="utf8_bin" Create_options="" Comment="" />
+	</table_structure>
+	<table_structure name="users">
+		<field Field="id" Type="int(11)" Null="NO" Key="PRI" Extra="auto_increment" />
+		<field Field="email" Type="varchar(25)" Null="NO" Key="UNI" Extra="" />
+		<field Field="profile" Type="text" Null="NO" Key="MUL" Extra="" />
+		<field Field="created" Type="datetime" Null="NO" Key="" Extra="" />
+		<field Field="saved" Type="int(11)" Null="NO" Key="MUL" Default="2" Extra="" />
+		<field Field="active" Type="tinyint(1)" Null="NO" Key="" Default="1" Extra="" />
+		<key Table="users" Non_unique="0" Key_name="PRIMARY" Seq_in_index="1" Column_name="id" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" />
+		<key Table="users" Non_unique="0" Key_name="email" Seq_in_index="1" Column_name="email" Collation="A" Cardinality="0" Null="" Index_type="BTREE" Comment="" />
+		<key Table="users" Non_unique="1" Key_name="saved" Seq_in_index="1" Column_name="saved" Collation="A" Null="" Index_type="BTREE" Comment="" />
+		<key Table="users" Non_unique="1" Key_name="profile" Seq_in_index="1" Column_name="profile" Null="" Index_type="FULLTEXT" Comment="" />
+		<options Name="users" Engine="MyISAM" Version="10" Row_format="Dynamic" Rows="0" Avg_row_length="0" Data_length="0" Max_data_length="281474976710655" Index_length="1024" Data_free="0" Auto_increment="1" Create_time="2011-03-28 17:58:03" Update_time="2011-03-28 17:58:03" Check_time="2011-03-28 17:58:03" Collation="latin1_swedish_ci" Create_options="" Comment="" />
+	</table_structure>
+</database>
+</mysqldump>
