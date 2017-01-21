@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class CrewOpsController extends Controller
 {
@@ -23,20 +24,50 @@ class CrewOpsController extends Controller
         $totalLogs = PIREP::where('user_id', Auth::user()->id)->get();
         return view('crewops.dashboard', ['bids' => $totalbids, 'logs' => $totalLogs]);
     }
+    public function profileUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore(Auth::id()),
+            ],
+            'vatsim' => 'integer',
+            'ivao' => 'integer',
+            'password' => 'same:password2',
+            'password2' => 'same:password',
+        ]);
+
+        $user = User::find(Auth::id());
+
+        $user->email = $request->email;
+        $user->vatsim = $request->vatsim;
+        $user->ivao = $request->ivao;
+
+        if(!empty($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        return redirect('flightops/profile/' . Auth::id());
+    }
     public function profileShow($id)
     {
-        return view('crewops.profile.view', ['id' => $id]);
+        $user = User::findOrFail($id);
+
+        $pireps = PIREP::where('user_id', $id)
+            ->orderBy('id', 'desc')
+            ->limit(10)
+            ->get();
+
+        return view('crewops.profile.view', ['user' => $user, 'pireps' => $pireps]);
     }
     public function profileEdit()
     {
         // Check if the user is the right user. We don't want someone modifying other people's profile.
         $user = User::find(Auth::user()->id);
         return view('crewops.profile.edit', ['user' => $user]);
-    }
-    public function getRoster()
-    {
-        $users = User::all();
-        return view('crewops.roster', ['users' => $users]);
     }
     public function getSchedule(Request $request)
     {
@@ -86,5 +117,11 @@ class CrewOpsController extends Controller
         $airlines = Airline::all();
         $aircraft = AircraftGroup::all();
         return view('crewops.schedule.search', ['airports' => $airports, 'airlines' => $airlines, 'aircraft' => $aircraft]);
+    }
+    public function getRoster()
+    {
+        $users = User::all();
+
+        return view('crewops.roster.view', ['users' => $users]);
     }
 }
