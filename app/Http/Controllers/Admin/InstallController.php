@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class InstallController extends Controller
 {
@@ -39,7 +40,8 @@ class InstallController extends Controller
                 'status' => 1,
                 'admin' => true
             ]);
-            Auth::login(1);
+            $user = User::find(1);
+            Auth::login($user);
             return redirect('/admin');
         }
         else return redirect('/');
