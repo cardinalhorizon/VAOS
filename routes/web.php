@@ -30,6 +30,7 @@ Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' =
     Route::get('/schedule/search', 'CrewOpsController@getScheduleSearch');
     Route::get('/logbook', 'CrewOpsController@getLogbook');
     Route::resource('/bids', 'BiddingController');
+    Route::get('/roster', 'CrewOpsController@getRoster');
 });
 
 // Web Admin Center

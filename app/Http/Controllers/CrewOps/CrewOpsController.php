@@ -69,11 +69,6 @@ class CrewOpsController extends Controller
         $user = User::find(Auth::user()->id);
         return view('crewops.profile.edit', ['user' => $user]);
     }
-    public function getRoster()
-    {
-        $users = User::all();
-        return view('crewops.roster', ['users' => $users]);
-    }
     public function getSchedule(Request $request)
     {
 
@@ -122,5 +117,11 @@ class CrewOpsController extends Controller
         $airlines = Airline::all();
         $aircraft = AircraftGroup::all();
         return view('crewops.schedule.search', ['airports' => $airports, 'airlines' => $airlines, 'aircraft' => $aircraft]);
+    }
+    public function getRoster()
+    {
+        $users = User::all();
+
+        return view('crewops.roster.view', ['users' => $users]);
     }
 }

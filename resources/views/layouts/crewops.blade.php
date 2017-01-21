@@ -84,7 +84,7 @@
                     <a href="{{ url('/flightops') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="{{ url('/flightops/roster') }}"><i class="fa fa-group fa-fw"></i> Roster (Broken)</a>
+                    <a href="{{ url('/flightops/roster') }}"><i class="fa fa-group fa-fw"></i> Roster</a>
                 </li>
                 <li>
                     <a href="{{ action('CrewOps\CrewOpsController@profileShow', ['id' => Auth::user()->id]) }}"><i class="fa fa-user fa-fw"></i> My Profile</a>
