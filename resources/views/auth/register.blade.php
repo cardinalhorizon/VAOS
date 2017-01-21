@@ -17,7 +17,8 @@
             background-size: cover;
             width: 100%;
             height: 100%;
-            padding: 0position: relative;
+            padding: 0;
+            position: relative;
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased; /* <-- macOS Only <-- */
             z-index: 1;
