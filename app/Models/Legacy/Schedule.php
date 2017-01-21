@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    protected $connection = 'phpVMS';
+    public $table = 'legacy_schedule';
     protected $guarded = [
         'id'
     ];

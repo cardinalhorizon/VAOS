@@ -74,20 +74,23 @@ class smartCARS {
 		$stmt->execute(array($user));
 		$res = $stmt->fetch();
 		$stmt->closeCursor();
-		if($res['id'] != "") {
-			if(skip_retired_check == false) {
-				if($res['retired'] != "0") {
-					$ret['result'] = "inactive";
-					return $ret;
-				}
-			}
-			if($res['confirmed'] == "0") {
-				$ret['result'] = "unconfirmed";
-				return $ret;					
-			}
-			
-			//$hash = md5($password.$res['salt']);
-			if(password_verify($password, $res['password'])/*$hash == $res['password']*/) {
+
+        $client = new GuzzleHttp\Client();
+
+        $response = $client->request('POST', WEB_URL.'api/v1/auth', [
+            'query' => [
+                'format' => 'email'
+            ],
+            'form_params' => [
+
+                'email' => $userid,
+                'password' => $password,
+
+            ]
+        ])->getBody();
+
+        $jdec = json_decode($response, true);
+			if($jdec['status'] == 200 /*password_verify($password, $res['password'])*/) {
 				$ret['dbid'] = $res['id'];
 				$ret['code'] = "N/A";//$res['code'];
 				
@@ -107,9 +110,6 @@ class smartCARS {
 			}                 
 			else
 				$ret['result'] = "failed";
-		}	
-		else
-			$ret['result'] = "failed";
 		return $ret;
 	}
 	
@@ -272,7 +272,7 @@ class smartCARS {
 	
 	static function getbidflights($dbid) {
 		global $dbConnection;
-		$stmt = $dbConnection->prepare("SELECT * FROM legacy_bids WHERE pilotid = ?");
+		$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_bids WHERE pilotid = ?");
 		$stmt->execute(array($dbid));
 		$bids = $stmt->fetchAll();
 		$stmt->closeCursor();
@@ -296,11 +296,10 @@ class smartCARS {
 		$ret['format']['daysofweek'] = 'daysofweek';
 		$ret['schedules'] = array();
 		foreach($bids as $bid) {
-			$stmt = $dbConnection->prepare("SELECT * FROM  legacy_schedules WHERE id = ?");
+			$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_schedule WHERE id = ?");
 			$stmt->execute(array($bid['routeid']));
 			$schedule = $stmt->fetch();
 			$stmt->closeCursor();
-			
 			if($schedule['id'] != "") {
 				$schedule['bidid'] = $bid['bidid'];
 				//How the 'load' value works:
@@ -323,25 +322,26 @@ class smartCARS {
 				array_push($ret['schedules'],$schedule);
 			}
 		}
+		//var_dump($ret);
 		return $ret;
 	}
 	
 	static function bidonflight($dbid, $routeid) {
 		global $dbConnection;
-		$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "schedules WHERE id = ? AND enabled != 0");
+		$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "legacy_schedule WHERE id = ? AND enabled != 0");
 		$stmt->execute(array($routeid));
 		$schedule = $stmt->fetch();
 		$stmt->closeCursor();
 		if($schedule['id'] != "") {
 			if(DISABLE_BIDS_ON_BID == true) {
-				$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "bids WHERE routeid = ?");
+				$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "legacy_bids WHERE routeid = ?");
 				$stmt->execute(array($routeid));
 				$bid = $stmt->fetch();
 				$stmt->closeCursor();
 				if($bid['bidid'] != "")
 					return 1;
 			}
-			$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "bids (pilotid, routeid, dateadded) VALUES (?, ?, NOW())");
+			$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "legacy_bids (pilotid, routeid, dateadded) VALUES (?, ?, NOW())");
 			$stmt->execute(array($dbid, $routeid));
 			$stmt->closeCursor();
 			return 0;
@@ -351,7 +351,7 @@ class smartCARS {
 	
 	static function deletebidflight($dbid, $bidid) {
 		global $dbConnection;
-		$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "bids WHERE bidid = ? LIMIT 1");
+		$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "legacy_bids WHERE bidid = ? LIMIT 1");
 		$stmt->execute(array($bidid));
 		$stmt->closeCursor();
 		
@@ -364,7 +364,7 @@ class smartCARS {
 			$stmt->execute(array($bidid, $dbid));
 			$stmt->closeCursor();
 			
-			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedules WHERE id = ?");
+			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedule WHERE id = ?");
 			$stmt->execute(array($crow['routeid']));
 			$stmt->closeCursor();
 		}
@@ -499,7 +499,7 @@ class smartCARS {
 	static function searchflights($dbid, $departureicao, $mintime, $maxtime, $arrivalicao, $aircraft) {
 		global $dbConnection;
         if ($departureicao != "" || $arrivalicao != "" || $mintime != "" || $maxtime != "") {
-            $param = "SELECT * FROM " . TABLE_PREFIX . "schedules";
+            $param = "SELECT * FROM " . TABLE_PREFIX . "legacy_schedule";
             $arg = array();
             if ($departureicao != "" && $arrivalicao == "") {
                 $param = $param . " WHERE depicao = :departure";
@@ -531,7 +531,7 @@ class smartCARS {
 			$param .= " AND enabled != 0";
         }
         else
-            $param = "SELECT * FROM " . TABLE_PREFIX . "schedules WHERE enabled != 0";		
+            $param = "SELECT * FROM " . TABLE_PREFIX . "legacy_schedule WHERE enabled != 0";
 		$use_ac = false;
         $valid_aircraft = array();
         if($aircraft != "") {			
@@ -588,7 +588,7 @@ class smartCARS {
 		$ret['format']['departuretime'] = 'deptime';
 		$ret['format']['arrivaltime'] = 'arrtime';
 		$ret['format']['daysofweek'] = 'daysofweek';
-		$ret['schedules'] = $flights;
+		$ret['schedule'] = $flights;
 		return $ret;
 	}	
 	
@@ -617,7 +617,7 @@ class smartCARS {
 			$stmt->closeCursor();
 		}
 		
-		$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "schedules (id, code, flightnum, depicao, arricao, route, aircraft, flightlevel, distance, deptime, arrtime, flighttime, price, flighttype, enabled) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");		
+		$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "legacy_schedule (id, code, flightnum, depicao, arricao, route, aircraft, flightlevel, distance, deptime, arrtime, flighttime, price, flighttype, enabled) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
 		$stmt->execute(array(
 			$flightcode,
 			$flightnumber,
@@ -636,7 +636,7 @@ class smartCARS {
 		$routeid = $dbConnection->lastInsertID();
 		$stmt->closeCursor();
 		
-		$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "bids (bidid, pilotid, routeid, dateadded) VALUES (NULL, ?, ?, NOW())");
+		$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "legacy_bids (bidid, pilotid, routeid, dateadded) VALUES (NULL, ?, ?, NOW())");
 		$stmt->execute(array(
 			$dbid,
 			$routeid
@@ -781,7 +781,7 @@ class smartCARS {
 			$stmt->execute(array($bidid, $dbid));
 			$stmt->closeCursor();
 			
-			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedules WHERE id = ?");
+			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedule WHERE id = ?");
 			$stmt->execute(array($crow['routeid']));
 			$stmt->closeCursor();
 		}

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Bid extends Model
 {
     protected $guarded = [];
-    protected $connection = 'phpVMS';
+    public $table = 'legacy_bids';
     public $timestamps = false;
 }

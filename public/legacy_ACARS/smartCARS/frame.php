@@ -19,7 +19,7 @@
 define('version','official-w3052-3/12/2016');
 define('LOAD_TYPE_RANDOM_EDITABLE','randomopen');
 define('LOAD_TYPE_RANDOM_LOCKED','randomlocked');
-require_once("../../../legacy/smartCARS/interface.php");
+require_once("interface.php");
 
 
 $dbcreds = smartCARS::getdbcredentials();
@@ -88,8 +88,10 @@ switch($action) {
 			else
 				echo($res['dbid'] . "," . $res['code'] . "," . $res['pilotid'] . "," . $_GET['sessionid'] . "," . $res['firstname'] . "," . $res['lastname'] . "," . $res['ranklevel'] . "," . $res['rankstring']);
 		}
+		else if ($res['result'] == "failedid")
+			echo("AUTH_FAILED_ID");
 		else
-			echo("AUTH_FAILED");
+		    echo("AUTH_FAILED");
 		break;
 	case "automaticlogin":
 		table_structure();
