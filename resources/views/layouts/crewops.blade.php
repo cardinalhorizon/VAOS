@@ -59,9 +59,7 @@
                 <i class="fa fa-user fa-fw"></i> {{ Auth::user()->username }} <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                <li><a href="{{ url('flightops/profile/' . Auth::id()) }}"><i class="fa fa-user fa-fw"></i> My Profile</a>
                 </li>
                 <li class="divider"></li>
                 <li><a class="dropdown-item" href="#" onclick="event.preventDefault();
@@ -89,7 +87,7 @@
                     <a href="{{ url('/flightops/roster') }}"><i class="fa fa-group fa-fw"></i> Roster (Broken)</a>
                 </li>
                 <li>
-                    <a href="{{ action('CrewOps\CrewOpsController@profileShow', ['id' => Auth::user()->id]) }}"><i class="fa fa-user fa-fw"></i> Profile (Broken)</a>
+                    <a href="{{ action('CrewOps\CrewOpsController@profileShow', ['id' => Auth::user()->id]) }}"><i class="fa fa-user fa-fw"></i> My Profile</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-plane fa-fw"></i> Schedule<span class="fa arrow"></span></a>
