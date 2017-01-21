@@ -58,5 +58,5 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
 
 // System Migration Routes
 Route::get('/setup', 'Admin\InstallController@index');
-Route::post('/install', 'Admin\InstallController@runMigration');
+Route::post('/install', 'Admin\InstallController@doInstall');
 Route::get('/accountmigrate', 'Admin\InstallController@migrate');

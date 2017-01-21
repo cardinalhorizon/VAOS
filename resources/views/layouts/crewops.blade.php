@@ -103,9 +103,11 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
+                 @if(env('VAOS_FF_ENABLED'))
+                 <li>
                     <a href="{{ url('/flightops/freeflight') }}"><i class="fa fa-book fa-fw"></i> Free Flight</a>
                 </li>
+                @endif
                 <li>
                     <a href="{{ url('/flightops/logbook') }}"><i class="fa fa-book fa-fw"></i> Logbook</a>
                 </li>
