@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
-Route::group(['prefix' => '1_0', 'namespace' => 'API'], function () {
+Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::post('/auth', 'AuthAPI@acarsLogin');
     Route::group(['prefix' => '/acars'], function ()
     {
@@ -43,8 +43,30 @@ Route::group(['prefix' => '1_0', 'namespace' => 'API'], function () {
         Route::post('/', 'AircraftAPI@addAircraft');
     });
     Route::post('/pireps', 'PIREPAPI@filePIREP');
-    // ACARS Client and Live Server Information
+});
 
-    Route::get('/legacy', 'ScheduleAPI@legacytest');
+/*
+|--------------------------------------------------------------------------
+| VAOS External ACARS Compatibility API
+|--------------------------------------------------------------------------
+|
+| This section of the API is to primarily support ACARS clients not
+| implementing the VAOS Central API Standard. Usually developers
+| will include VAOS specific interface files which call these
+| routes. For more information, please check the website.
+|
+*/
 
+Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
+
+    // smartCARS 2
+    Route::group(['prefix' => 'smartCARS'], function () {
+        Route::post('/positionreport', 'smartCARS@positionreport');
+        Route::post('/filepirep', 'smartCARS@filepirep');
+    });
+
+    // XACARS
+    Route::group(['prefix' => 'xacars'], function () {
+
+    });
 });
