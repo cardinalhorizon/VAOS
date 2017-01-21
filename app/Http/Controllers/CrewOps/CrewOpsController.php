@@ -9,6 +9,7 @@ use App\Models\Aircraft;
 use App\Models\Airport;
 use App\PIREP;
 use App\ScheduleTemplate;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,7 +25,18 @@ class CrewOpsController extends Controller
     }
     public function profileShow($id)
     {
-
+        return view('crewops.profile.view', ['id' => $id]);
+    }
+    public function profileEdit()
+    {
+        // Check if the user is the right user. We don't want someone modifying other people's profile.
+        $user = User::find(Auth::user()->id);
+        return view('crewops.profile.edit', ['user' => $user]);
+    }
+    public function getRoster()
+    {
+        $users = User::all();
+        return view('crewops.roster', ['users' => $users]);
     }
     public function getSchedule(Request $request)
     {
