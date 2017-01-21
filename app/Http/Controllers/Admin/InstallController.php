@@ -26,7 +26,7 @@ class InstallController extends Controller
             return redirect('/');
         }
     }
-    public function runMigration(Request $request)
+    public function doInstall(Request $request)
     {
         if(!Schema::hasTable('users')) {
             // Run the database migration
