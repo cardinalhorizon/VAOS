@@ -66,15 +66,15 @@
                                 <div class="input-group m-b-1"> <span class="input-group-addon">
                                         <i class="icon-user"></i>
                                         </span>
-                                    <input type="text" id="email" class="form-control" name="email" placeholder="Email"> </div>
+                                    <input type="text" id="username" class="form-control" name="username" placeholder="Username ore Email"> </div>
                                 <div class="input-group m-b-2"> <span class="input-group-addon">
                                         <i class="icon-lock"></i>
                                         </span>
                                     <input type="password" id="password" class="form-control" name="password" placeholder="Password">
                                     <div></div>
                                 </div> @if ($errors->has('password'))
-                                <div class="alert alert-danger" role="alert"> <strong>Whoops!</strong> {{ $errors->first('password') }} </div> @endif @if ($errors->has('email'))
-                                <div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong> {{ $errors->first('email') }} </div> @endif
+                                <div class="alert alert-danger" role="alert"> <strong>Whoops!</strong> {{ $errors->first('password') }} </div> @endif @if ($errors->has('username'))
+                                <div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong> {{ $errors->first('username') }} </div> @endif
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <button type="submit" class="btn btn-primary p-x-2">Login</button>
