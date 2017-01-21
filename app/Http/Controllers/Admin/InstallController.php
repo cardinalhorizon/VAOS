@@ -15,7 +15,7 @@ class InstallController extends Controller
     {
         if(!Schema::hasTable('users')) {
             // Return the view right now
-            if ($request->query('fresh'))
+            if ($request->query('mode') == "fresh")
                 return view('install.fresh');
             else
                 return view('install.start');
