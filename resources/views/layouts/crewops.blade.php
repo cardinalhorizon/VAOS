@@ -109,9 +109,6 @@
                 <li>
                     <a href="{{ url('/flightops/logbook') }}"><i class="fa fa-book fa-fw"></i> Logbook</a>
                 </li>
-                <li>
-                    <a href="{{ url('/flightops/downloads') }}"><i class="fa fa-download fa-fw"></i> Download Center (Broken)</a>
-                </li>
                 @if (Auth::user()->admin)
                     <li>
                         <a href="{{ url('/admin') }}"><i class="fa fa-database fa-fw"></i> Admin Panel</a>
