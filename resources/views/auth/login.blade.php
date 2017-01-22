@@ -66,7 +66,7 @@
                                 <div class="input-group m-b-1"> <span class="input-group-addon">
                                         <i class="icon-user"></i>
                                         </span>
-                                    <input type="text" id="username" class="form-control" name="username" placeholder="Username ore Email"> </div>
+                                    <input type="text" id="username" class="form-control" name="username" placeholder="Username or Email"> </div>
                                 <div class="input-group m-b-2"> <span class="input-group-addon">
                                         <i class="icon-lock"></i>
                                         </span>
