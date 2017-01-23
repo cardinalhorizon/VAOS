@@ -18,7 +18,7 @@ function returnData($result)
 }
 // If Bid is placed, get the first for the user
 if (strtolower($_REQUEST['DATA2']) == "bid") {
-    $res = $client->request('GET', VAOS_URL . 'api/1_0/bids', [
+    $res = $client->request('GET', VAOS_URL . 'api/v1/bids', [
         'query' => [
             'format' => 'xacars',
             'username' => $_REQUEST['DATA4']
@@ -34,7 +34,7 @@ if (strtolower($_REQUEST['DATA2']) == "bid") {
 // If specific bid number entered, get that instead.
 else if (is_numeric($_REQUEST['DATA2']))
 {
-    $res = $client->request('GET', VAOS_URL . 'api/1_0/bids', [
+    $res = $client->request('GET', VAOS_URL . 'api/v1/bids', [
         'query' => [
             'format' => 'xacars',
             'username' => $_REQUEST['DATA4'],
