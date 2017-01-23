@@ -92,7 +92,7 @@ function testUserLogin($pid, $pw)
 {
     $client = new GuzzleHttp\Client();
 
-    $res = $client->request('POST', VAOS_URL.'api/1_0/auth', [
+    $res = $client->request('POST', VAOS_URL.'api/v1/auth', [
         'query' => [
             'format' => 'username'
         ],
@@ -206,7 +206,7 @@ $pirepdata = array(
 );
 $client = new GuzzleHttp\Client();
 
-$ret = $client->request('POST', VAOS_URL.'api/1_0/pireps', [
+$ret = $client->request('POST', VAOS_URL.'api/v1/pireps', [
     'query' => [
         'format' => 'phpVMS'
     ],
