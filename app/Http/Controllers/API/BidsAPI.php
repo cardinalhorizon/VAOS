@@ -24,7 +24,7 @@ class BidsAPI extends Controller
         if ($request->query('format') == "xacars")
         {
             $user = User::where('username', $request->query('username'))->first();
-            $bid = Bid::where('user_id', $user->id)->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
+            $bid = self::getProperFlightNum($request->query('flightnum'), $user->id);
 
             return response()->json([
                 'status' => 200,
@@ -129,5 +129,32 @@ class BidsAPI extends Controller
         return response()->json([
             'status' => 200
         ]);
+    }
+    private static function getProperFlightNum($flightnum, $userid) {
+        if ($flightnum == '') return false;
+
+        $ret = array();
+        $flightnum = strtoupper($flightnum);
+        $airlines = Airline::all();
+
+        foreach ($airlines as $a) {
+            $a->icao = strtoupper($a->icao);
+
+            if (strpos($flightnum, $a->icao) === false) {
+                continue;
+            }
+
+            $ret['icao'] = $a->icao;
+            $ret['flightnum'] = str_ireplace($a->icao, '', $flightnum);
+
+            // ok now that we deduced that, let's find the bid.
+            //dd($userid);
+            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
+        }
+
+        # Invalid flight number
+        $ret['code'] = '';
+        $ret['flightnum'] = $flightnum;
+        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
     }
 }
