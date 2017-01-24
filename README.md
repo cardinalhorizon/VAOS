@@ -16,3 +16,5 @@ PHP: 5.6
 MySQL: 5.3
 
 Apache 2.2 or latest nginx version.
+
+This is a test
