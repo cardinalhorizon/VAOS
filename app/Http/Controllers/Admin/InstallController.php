@@ -29,8 +29,9 @@ class InstallController extends Controller
     public function doInstall(Request $request)
     {
         if(!Schema::hasTable('users')) {
+            Artisan::call('key:generate');
             // Run the database migration
-            $exitcode = Artisan::call('migrate');
+            Artisan::call('migrate');
             DB::table('users')->insert([
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
