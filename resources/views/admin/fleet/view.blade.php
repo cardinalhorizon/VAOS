@@ -14,10 +14,17 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Schedules Table
+                <i class="fa fa-align-justify"></i> Aircraft Table
             </div>
             <div class="card-block">
                 <div class="card-block">
+
+                    @if(session('aircraft_created'))   
+                        <div class="alert alert-success">Aircraft successfully created.</div>
+                    @elseif(session('aircraft_updated'))
+                        <div class="alert alert-success">Aircraft successfully updated.</div>
+                    @endif
+
                     <a href="{{ url('admin/fleet/create') }}" role="button" class="button btn btn-primary"><i class="fa fa-plus"></i>&nbsp; New Aircraft</a>
                 </div>
                 @if($fleet == '[]')
@@ -35,6 +42,7 @@
                             <th>Registration</th>
                             <th>Hub</th>
                             <th>Location</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -59,6 +67,10 @@
                                 @else
                                     <td>{{$a->location->icao}}</td>
                                 @endif
+
+                                <td>
+                                    <a href="{{ url('/admin/fleet/'.$a->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                                </td>
 
                             </tr>
                         @endforeach

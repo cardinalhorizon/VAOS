@@ -58,10 +58,12 @@ class FleetController extends Controller
         $data['group'] = null;
         //dd($data);
 
-        if (AircraftData::createAircraft($data))
-            return redirect('/admin/fleet/')->with(['success' => true]);
-        else
+        if (AircraftData::createAircraft($data)) {
+            $request->session()->flash('aircraft_created', true);
+            return redirect('admin/fleet');
+        } else {
             dd($data);
+        }
     }
 
     /**
@@ -72,7 +74,7 @@ class FleetController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('admin/fleet');
     }
 
     /**
@@ -83,7 +85,11 @@ class FleetController extends Controller
      */
     public function edit($id)
     {
-        //
+        $aircraft = Aircraft::findOrFail($id);
+
+        $airlines = Airline::all();
+        $acfgroups = AircraftGroup::where('userdefined', true)->get();
+        return view('admin.fleet.edit', ['aircraft' => $aircraft, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
     /**
@@ -95,7 +101,27 @@ class FleetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array();
+
+        $data['icao'] = $request->input('icao');
+        $data['name'] = $request->input('name');
+        $data['manufacturer'] = $request->input('manufacturer');
+        $data['registration'] = $request->input('registration');
+        $data['range'] = $request->input('range');
+        $data['maxpax'] = $request->input('maxpax');
+        $data['maxgw'] = $request->input('maxgw');
+        $data['enabled'] = $request->input('enabled');
+        $data['airline'] = $request->input('airline');
+        $data['hub'] = null;
+        $data['group'] = null;
+        //dd($data);
+
+        if (AircraftData::updateAircraft($data, $id)) {
+            $request->session()->flash('aircraft_updated', true);
+            return redirect('admin/fleet');
+        } else {
+            dd($data);
+        }
     }
 
     /**
