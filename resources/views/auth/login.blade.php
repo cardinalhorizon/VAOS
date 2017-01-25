@@ -9,8 +9,8 @@
     <!-- <link rel="shortcut icon" href="http://vaos.tk/assets/ico/favicon.png"> -->
     <title>Virtual Airline Operations System Login</title>
     <!-- Icons -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
     <style>
         body {
             background: url(http://i.imgur.com/Zc7kPV3.jpg) no-repeat fixed;
@@ -101,9 +101,9 @@
         </div>
     </div>
     <!-- Bootstrap and necessary plugins -->
-    <script src="http://vaos.tk/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="http://vaos.tk/bower_components/tether/dist/js/tether.min.js"></script>
-    <script src="http://vaos.tk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/tether/dist/js/tether.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script>
         $(' body ').css('top ', -(document.documentElement.scrollTop) + 'px ').addClass('noscroll ');
     </script>
