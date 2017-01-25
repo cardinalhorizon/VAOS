@@ -7,16 +7,23 @@
     <li class="breadcrumb-item">Home</li>
     <li class="breadcrumb-item"><a href="{{ url('admin/') }}">Admin</a>
     </li>
-    <li class="breadcrumb-item active">Users</li>
+    <li class="breadcrumb-item active">Airlines</li>
 @endsection
 
 @section('content')
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Current Users
+                <i class="fa fa-align-justify"></i> Airline Table
             </div>
             <div class="card-block">
+
+                @if(session('airline_created'))
+                    <div class="alert alert-success">Airline successfully created.</div>
+                @elseif(session('airline_updated'))
+                    <div class="alert alert-success">Airline successfully updated.</div>
+                @endif
+
                 <div class="card-block">
                     <a href="{{ url('admin/airlines/create') }}" role="button" class="button btn btn-primary"><i class="fa fa-plus"></i>&nbsp; New Airline</a>
                 </div>
@@ -29,11 +36,12 @@
                         <th>ICAO</th>
                         <th>IATA</th>
                         <th>Callsign</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($airlines as $a)
-                        <tr class="clickable-row" data-href="{{ url('/admin/schedule/'.$a->id) }}">
+                        <tr>
                             <td>{{ $a->id }}</td>
                             <td>{{ $a->name}}</td>
                             <td>{{ $a->icao }}</td>
@@ -43,6 +51,9 @@
                                 <td>N/A</td>
                             @endif
                             <td>{{ $a->callsign }}</td>
+                            <td>
+                                <a href="{{ url('admin/airlines/'.$a->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
