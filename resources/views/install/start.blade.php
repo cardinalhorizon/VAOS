@@ -19,7 +19,7 @@
                     <div class="panel-body">
                         <p>If you are a new virtual airline, this will be the option for you. This will set you up on a clean slate
                             with everything you will need.</p>
-                        <a href="{{ url('/setup?mode=fresh')}}" role="button" class="btn btn-lg btn-primary btn-block">Start Fresh</a>
+                        <a href="{{ url('/setup?mode=settings')}}" role="button" class="btn btn-lg btn-primary btn-block">Start Fresh</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                             <li>Airports (Updated Through Master Server)</li>
                         </ul>
                         <p>Expect other VA settings to be importable at a later date.</p>
-                        <a disabled href="{{ url('/setup?mode=fresh')}}" role="button" class="btn btn-lg btn-primary btn-block">Import Existing phpVMS VA</a>
+                        <a disabled href="{{ url('/setup?mode=settings')}}" role="button" class="btn btn-lg btn-primary btn-block">Import Existing phpVMS VA</a>
                     </div>
                 </div>
             </div>
