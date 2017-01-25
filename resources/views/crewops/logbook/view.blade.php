@@ -33,8 +33,10 @@
                                     <td>{{ $p->depapt->icao }}</td>
                                     <td>{{ $p->arrapt->icao }}</td>
                                     <td>{{ $p->aircraft->name }} ({{ $p->aircraft->registration }})</td>
-                                    @if($p->approved === 1)
+                                    @if($p->status === 1)
                                         <td>Approved</td>
+                                    @elseif($p->status === 2)
+                                        <td>Denied</td>
                                     @else
                                         <td>Pending</td>
                                     @endif

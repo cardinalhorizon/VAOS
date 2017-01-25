@@ -144,7 +144,7 @@
                         <a class="nav-link" href="{{ url('/admin/pireps') }}"><i class="fa fa-caret-right"></i> Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/admin/pireps/pending') }}"><i class="fa fa-caret-right"></i> Awaiting Approval</a>
+                        <a class="nav-link" href="{{ url('/admin/pireps?view=pending') }}"><i class="fa fa-caret-right"></i> Awaiting Approval</a>
                     </li>
                 </ul>
             </li>
