@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ config('app.name', 'VAOS') }} | Login to your airline">
-    <!-- <link rel="shortcut icon" href="http://vaos.tk/assets/ico/favicon.png"> -->
+    <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
     <title>Virtual Airline Operations System Login</title>
     <!-- Icons -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -50,7 +50,7 @@
         }
     </style>
     <!-- Main styles for this application -->
-    <link href="/css/style.css" rel="stylesheet"> </head>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> </head>
 
 <body style="overflow-x: hidden; overflow-y: hidden;" class="noscroll">
     <div class="container-fluid" style="height: 100% !important;">
