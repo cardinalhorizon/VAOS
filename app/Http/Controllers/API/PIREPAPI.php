@@ -41,8 +41,9 @@ class PIREPAPI extends Controller
             $pirep->user()->associate($request->input('pilotid'));
             // This is a legacy ACARS client. Treat it with respect, they won't be around
             // for too much longer. All we need is the user data, flight info and we are all set
+            //dd($request->all());
             $flightinfo = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'));
-
+            //dd($flightinfo);
             $pirep->airline()->associate($flightinfo->airline_id);
             $pirep->aircraft()->associate($flightinfo->aircraft_id);
             $pirep->depapt()->associate($flightinfo->depapt_id);
@@ -97,12 +98,12 @@ class PIREPAPI extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
+            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
+        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
 }

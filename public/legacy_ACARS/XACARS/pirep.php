@@ -179,40 +179,55 @@ if (($version  = CheckXAcarsVersion($_REQUEST['DATA1'])) <= 0)
     die('0|ERROR: Unknown XAcars version!');
 
 $data2 = $_REQUEST['DATA2'];
-$data = split("~", $data2);
+$data = explode("~", $data2);
+$client = new GuzzleHttp\Client();
+$res = $client->request('POST', VAOS_URL.'api/v1/auth', [
+    'query' => [
+        'format' => 'username'
+    ],
+    'form_params' => [
 
-$uid = testUserLogin($data[0], $data[1]);
-if( $uid == -1 )
-    die('0|ERROR: Invalid login!');    
+        'username' => $data[0],
+        'password' => $data[1],
+
+    ]
+])->getBody();
+
+$jdec = json_decode($res, true);
+
+
+//$uid = testUserLogin($data[0], $data[1]);
+if ($jdec['status'] != 200)
+    die('0|Invalid Username/Password');
 
 // ----------------------------------------------------------------------------
 // Parameterlist:
 // DATA1=XACARS|1.0&DATA2=username~password~flightnumber~aircrafticao~altitudeorFL~flightrules~depicao~desticao~alticao~deptime(dd.mm.yyyy hh:mm)~blocktime(hh:mm)~flighttime(hh:mm)~blockfuel~flightfuel~pax~cargo~online(VATSIM|ICAO|FPI|[other])
 
 $pirepdata = array(
-    'pilotid' => $uid,
+    'pilotid' => $jdec['user']['id'],
     'flightnum' => $data[2],
-    'depicao' => substr($data[6], 0,4),
-    'arricao' => substr($data[7], 0,4),
-    'route' => "",
-    'aircraft' => "",
-    'load' => "",
-    'flighttime' => $flighttime,
-    'landingrate' => null,
-    'submitdate' => date('Y-m-d H:i:s'),
+    'landingrate' => 1,
     'comment' => "Landing Rate Not Supported",
-    'fuelused' => $fuelused,
     'source' => 'XACARS'
 );
-$client = new GuzzleHttp\Client();
+//var_dump($pirepdata);
+
 
 $ret = $client->request('POST', VAOS_URL.'api/v1/pireps', [
     'query' => [
         'format' => 'phpVMS'
     ],
-    'form_params' => $data
+    'form_params' => [
+        'pilotid' => $jdec['user']['id'],
+        'flightnum' => $data[2],
+        'landingrate' => 1,
+        'comment' => "Landing Rate Not Supported",
+        'source' => 'XACARS'
+    ]
 ])->getBody();
 
+//echo $ret;
 $jdec = json_decode($ret, true);
 if ($jdec['status'] == 200)
 {
@@ -222,44 +237,3 @@ else
 {
     echo "0|ERROR";
 }
-/*
-$pirep = new acarsPirep();
-$pirep->timeReport    = time();
-$pirep->acarsID       = $version;
-$pirep->userID        = $uid;
-$pirep->flightRot     = $data[2];
-$pirep->acICAO        = $data[3];
-$pirep->flightType    = $data[5];
-
-$pirep->departure     = substr($data[6], 0,4);
-$pirep->destination   = substr($data[7], 0,4);
-$pirep->alternate     = substr($data[8], 0,4);
-
-// Reading timestamp "25.02.2006 12:18"
-$pirep->depTime       = strtotime( substr($data[9],3,2) . '/' . substr($data[9],0,2) . '/' . substr($data[9],6));
-$pirep->blockTime     = time2min($data[10]);
-$pirep->blockFuel     = lbs2kg(data2Int($data[12],0));
-$pirep->flightTime    = time2min($data[11]);
-$pirep->flightFuel    = lbs2kg(data2Int($data[13],0));
-
-if( $data[4] <> '' )
-    $pirep->cruise    = data2Int(substr($data[4],2),0) * 100;
-$pirep->pax           = data2Int($data[14],0);
-$pirep->cargo         = lbs2kg(data2Int($data[15],0));
-
-if( strtoupper($data[16]) == 'VATSIM' )
-   $pirep->online        = ONLINE_VATSIM;
-else if( strtoupper($data[16]) == 'IVAO' ) 
-   $pirep->online        = ONLINE_IVAO;
-else if( strtoupper($data[16]) == 'FPI' ) 
-   $pirep->online        = ONLINE_FPI;
-else  
-   $pirep->online        = ONLINE_OTHER;
-
-$rc = $pirep->doInsert();
-
-if ($rc)
-  echo "1|PIREP ACCEPTED";
-else echo "0|ERROR";
-
-?>

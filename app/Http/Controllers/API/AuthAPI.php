@@ -35,8 +35,10 @@ class AuthAPI extends Controller
         }
         if (Auth::validate($credentials))
         {
-            $ret = json_encode(['status' => 200,
-            'user' => User::where('email', $request->input('email'))->first()]);
+            if ($request->query('format') == 'username')
+                $ret = json_encode(['status' => 200, 'user' => User::where('username', $request->input('username'))->first()]);
+            if ($request->query('format') == 'email')
+                $ret = json_encode(['status' => 200, 'user' => User::where('email', $request->input('email'))->first()]);
             return $ret;
         }
         else

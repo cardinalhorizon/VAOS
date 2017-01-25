@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\AircraftGroup;
 use App\Models\Legacy;
 use App\Classes\VAOSHelpers;
+use App\Airline;
 
 use Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher;
 
@@ -149,12 +150,12 @@ class BidsAPI extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
+            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
+        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
 }
