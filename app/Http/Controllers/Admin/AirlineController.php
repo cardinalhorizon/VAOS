@@ -50,6 +50,8 @@ class AirlineController extends Controller
         $airline->callsign = $request->input('callsign');
 
         $airline->save();
+
+        $request->session()->flash('airline_created', true);
         return redirect('/admin/airlines');
     }
 
@@ -61,7 +63,7 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('admin/airlines');
     }
 
     /**
@@ -72,7 +74,9 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+
+        return view('admin.airline.edit', ['airline' => $airline]);
     }
 
     /**
@@ -84,7 +88,18 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $airline = Airline::find($id);
+
+        $airline->name = $request->input('name');
+        $airline->icao = $request->input('icao');
+        if ($request->input('iata') != null)
+            $airline->iata = $request->input('iata');
+        $airline->callsign = $request->input('callsign');
+
+        $airline->save();
+
+        $request->session()->flash('updated', true);
+        return redirect('/admin/airlines');
     }
 
     /**

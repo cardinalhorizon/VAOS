@@ -167,6 +167,63 @@ class VAOS_Schedule
         }
         $entry->save();
     }
+    public static function updateRoute($data, $id)
+    {
+        // Declare a new instance of the Schedule Model
+        $entry = ScheduleTemplate::find($id);
+        //dd($request);
+        // Before we add the route, lets check to see if the airport exists.
+        if (Airport::where('icao', $data['depicao'])->first() === null)
+        {
+            VAOS_Airports::AddAirport($data['depicao']);
+        }
+        if (Airport::where('icao', $data['arricao'])->first() === null)
+        {
+            VAOS_Airports::AddAirport($data['arricao']);
+        }
+        // add the form elements
+        // Search for the airline in the database
+
+
+        $entry->flightnum = $data['flightnum'];
+
+        // Setup the foreign keys. Lets now find the new airports
+
+        $dep = Airport::where('icao', $data['depicao'])->first();
+        $arr = Airport::where('icao', $data['arricao'])->first();
+        $entry->depapt()->associate($dep);
+        $entry->arrapt()->associate($arr);
+        $airline = Airline::find($data['airline']);
+        $entry->airline()->associate($airline);
+
+        if (array_key_exists('alticao', $data))
+        {
+            $entry->alticao = $data['alticao'];
+        }
+        if (array_key_exists('route', $data))
+        {
+            $entry->route = $data['route'];
+        }
+        //dd($data);
+        if (array_key_exists('aircraft_group', $data))
+        {
+            //dd($data);
+            $acfgrp = AircraftGroup::find($data['aircraft_group']);
+            $entry->aircraft_group()->associate($acfgrp);
+        }
+        $entry->seasonal = true;
+        //$entry->daysofweek = "0123456";
+        $entry->type = $data['type'];
+        if (array_key_exists('enabled', $data))
+        {
+            $entry->enabled = $data['enabled'];
+        }
+        else
+        {
+            $entry->enabled = 1;
+        }
+        $entry->save();
+    }
     public static function deleteBid($bid_id, $user_id)
     {
         $bid = ScheduleComplete::where(['user_id' => $user_id, 'id' => $bid_id])->firstOrFail();

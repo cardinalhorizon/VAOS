@@ -18,6 +18,13 @@
             </div>
             <div class="card-block">
                 <div class="card-block">
+
+                    @if(session('schedule_created'))
+                        <div class="alert alert-success">Route successfully created.</div>
+                    @elseif(session('schedule_updated'))
+                        <div class="alert alert-success">Route successfully updated.</div>
+                    @endif
+
                     <a href="{{ url('admin/schedule/create') }}" role="button" class="button btn btn-primary"><i class="fa fa-plus"></i>&nbsp; New Route</a>
                 </div>
                 @if($schedules == '[]')
@@ -41,7 +48,7 @@
                     </thead>
                     <tbody>
                     @foreach($schedules as $s)
-                    <tr class="clickable-row" data-href="{{ url('/admin/schedule/'.$s->id) }}">
+                    <tr>
                         <td>{{$s->airline->icao}}</td>
                         <td>{{$s->flightnum}}</td>
                         <td>{{$s->depapt->icao}} - {{$s->depapt->name}}</td>
@@ -66,8 +73,9 @@
                         @else
                             <td>Cargo</td>
                         @endif
-                        <td><div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <!--<a href="{{ url('/admin/schedule/'.$s->id.'/edit') }}" class="btn btn-warning">Edit</a> -->
+                        <td>
+                            <a href="{{ url('/admin/schedule/'.$s->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <a href="#" role="button" class="btn btn-danger" onclick="event.preventDefault();
                                         document.getElementById('delete-{{ $s->id }}').submit();">Delete</a>
                             </div>
