@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ config('app.name', 'VAOS') }} | Login to your airline">
-    <!-- <link rel="shortcut icon" href="http://vaos.tk/assets/ico/favicon.png"> -->
+    <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
     <title>Virtual Airline Operations System Registration</title>
     <!-- Icons -->
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/simple-line-icons.css" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
     <style>
         body {
             background: url(http://i.imgur.com/Zc7kPV3.jpg) no-repeat fixed;
@@ -50,7 +50,7 @@
         }
     </style>
     <!-- Main Styles For this App -->
-    <link href="/css/style.css" rel="stylesheet"> </head>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet"> </head>
 
 <body style="overflow-x: hidden; overflow-y: hidden;" class="noscroll">
     <div class="container-fluid" style="height: 100% !important;">
@@ -96,9 +96,9 @@
         </div>
     </div>
     <!-- Bootstrap and necessary plugins -->
-    <script src="http://vaos.tk/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="http://vaos.tk/bower_components/tether/dist/js/tether.min.js"></script>
-    <script src="http://vaos.tk/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower_components/tether/dist/js/tether.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script>
         $(' body ').css('top ', -(document.documentElement.scrollTop) + 'px ').addClass('noscroll ');
     </script>
