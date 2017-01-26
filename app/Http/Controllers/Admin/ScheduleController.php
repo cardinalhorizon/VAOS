@@ -56,6 +56,8 @@ class ScheduleController extends Controller
         // Convert Request into Array
         $data = $request->all();
         VAOS_Schedule::newRoute($data);
+
+        $request->session()->flash('schedule_created', true);
         return redirect('/admin/schedule');
     }
 
@@ -67,7 +69,7 @@ class ScheduleController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect('admin/schedule');
     }
 
     /**
@@ -78,7 +80,11 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $schedule = ScheduleTemplate::findOrFail($id);
+
+        $airlines = Airline::all();
+        $acfgroups = AircraftGroup::all();
+        return view('admin.schedules.edit', ['schedule' => $schedule, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
     /**
@@ -90,7 +96,11 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        VAOS_Schedule::updateRoute($data, $id);
+
+        $request->session()->flash('schedule_updated', true);
+        return redirect('/admin/schedule');
     }
 
     /**

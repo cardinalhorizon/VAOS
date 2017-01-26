@@ -11,7 +11,8 @@
         "kodeine/laravel-acl": "~1.0@dev",
         "chrisbjr/api-guard": "3.1.*",
         "doctrine/dbal": "^2.5",
-        "maatwebsite/excel": "^2.1"
+        "maatwebsite/excel": "^2.1",
+		"brotzka/laravel-dotenv-editor": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

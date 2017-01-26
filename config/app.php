@@ -14,6 +14,18 @@ return [
 
     'name' => env('VAOS_ORG_NAME', 'VAOS'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | VAOS Version
+    |--------------------------------------------------------------------------
+    |
+    | This is the VAOS version number. Currently Taylor has not decided on a
+    | version so it's called Beta 1, 2, 3... etc.
+    */
+
+    'version' => 'Beta 2',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -26,6 +38,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +184,7 @@ return [
         //Kodeine\Acl\AclServiceProvider::class,
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +245,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'ApiGuardAuth' => \Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
 
     ],
 
