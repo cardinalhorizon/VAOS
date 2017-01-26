@@ -14,18 +14,18 @@ return [
 
     'name' => env('VAOS_ORG_NAME', 'VAOS'),
 
+
     /*
     |--------------------------------------------------------------------------
-    | Application Environment
+    | VAOS Version
     |--------------------------------------------------------------------------
     |
-    | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
-    | services your application utilizes. Set this in your ".env" file.
-    |
+    | This is the VAOS version number. Currently Taylor has not decided on a
+    | version so it's called Beta 1, 2, 3... etc.
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'version' => 'Beta 2',
+
 
     /*
     |--------------------------------------------------------------------------

@@ -229,7 +229,7 @@
             <a href="http://fsvaos.net"></a> © {{ date("Y") }} {{ config('app.name', 'Airline Name') }}
         </span>
     <span class="pull-right">
-            Powered by <a href="http://fsvaos.net">Virtual Airline Operations System</a>
+            Powered by <a href="http://fsvaos.net">Virtual Airline Operations System | {{ config('app.version') }}</a>
         </span>
 </footer>
 

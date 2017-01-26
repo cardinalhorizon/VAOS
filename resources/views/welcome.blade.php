@@ -86,7 +86,7 @@
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
-                <b>Public Beta Release 2</b>
+                <b>{{ config('app.version') }}</b>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::asset('crewops/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    
 </head>
 <body>
 <div class="container">
@@ -23,7 +24,7 @@
     @yield('content')
 </div>
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <p class="pull-left navbar-text">Virtual Airline Operations System Version 1.0.0 Beta 2</p>
-        <p class="pull-right navbar-text">Copyright 2017 Cardinal Horizon</p>
+        <p class="pull-left navbar-text">Virtual Airline Operations System | {{ config('app.version') }}</p>
+        <p class="pull-right navbar-text">Copyright &copy; 2017 Cardinal Horizon</p>
     </nav>
 </body>
