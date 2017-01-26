@@ -23,7 +23,12 @@ CC Attribution-NonCommercial 4.0 International
 
 - **Apache 2.2 - 2.4.25+** or latest **nginx** version.
 
-## Donations
+# Installing VAOS
+
+Go to the Wiki page below to help you get started with VAOS.
+* [Getting Started With VAOS](https://github.com/FSVAOS/VAOS/wiki/Getting-Started)
+
+# Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
 
 Send donations to taylorbroad@gmail.com via. PayPal
