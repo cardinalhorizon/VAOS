@@ -107,7 +107,7 @@ class AircraftData
             $acf->range = $data['range'];
             $acf->maxpax = $data['maxpax'];
             $acf->maxgw = $data['maxgw'];
-            $acf->status = $data['enabled'];
+            $acf->status = $data['status'];
 
             // time for the optional stuff
 
