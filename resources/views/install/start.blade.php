@@ -1,8 +1,7 @@
 @extends('install.layout')
 @section('pageinfo')
     <p>This setup will walk you through the appropriate steps required to install VAOS on your web server.
-        Please notice that the system is in <b>EARLY ACCESS</b> which means that some features may be incomplete or
-        have bugs. If you find a bug, don't hessitate to reach out to Taylor Broad and the rest of the support
+        Please notice that the system is in <b>EARLY ACCESS</b> which means that some features may be incomplete or have bugs. If you find a bug, don't hesitate to reach out to Taylor Broad and the rest of the support
         members through our main website or AVSIM support forum.
     </p>
 @endsection

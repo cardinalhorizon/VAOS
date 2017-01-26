@@ -77,7 +77,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Welcome to the VAOS Pilot Center Alpha/Beta</h3>
+                    <h3 class="panel-title">Welcome to the VAOS Pilot Center {{ config('app.version') }}</h3>
                 </div>
                 <div class="panel-body">
                     This pilot center is still not working at 100% however you are able to use it to request bids and

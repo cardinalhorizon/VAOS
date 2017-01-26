@@ -14,6 +14,18 @@ return [
 
     'name' => env('VAOS_ORG_NAME', 'VAOS'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | VAOS Version
+    |--------------------------------------------------------------------------
+    |
+    | This is the VAOS version number. Currently Taylor has not decided on a
+    | version so it's called Beta 1, 2, 3... etc.
+    */
+
+    'version' => 'Beta 2',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -26,6 +38,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+
 
     /*
     |--------------------------------------------------------------------------
