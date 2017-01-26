@@ -75,16 +75,17 @@ class ImportExportController extends Controller
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => number_format($row->airline),
+                    'airline' => str_replace(',', '',$row->airline),
                     'icao' => $row->icao,
                     'name' => $row->name,
                     'manufacturer' => $row->manufacturer,
                     'registration' => $row->registration,
-                    'range' => number_format($row->range),
-                    'maxgw' => number_format($row->maxgw),
-                    'maxpax' => number_format($row->maxpax),
-                    'enabled' => number_format($row->enabled)
+                    'range' => str_replace(',', '',$row->range),
+                    'maxgw' => str_replace(',', '',$row->maxgw),
+                    'maxpax' => str_replace(',', '',$row->maxpax),
+                    'status' => str_replace(',', '',$row->status)
                 ];
+                //dd($data);
                 AircraftData::createAircraft($data);
             }
             return redirect('/admin/fleet');

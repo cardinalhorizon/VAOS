@@ -36,7 +36,7 @@ class AircraftData
             $acf->range = $data['range'];
             $acf->maxpax = $data['maxpax'];
             $acf->maxgw = $data['maxgw'];
-            $acf->status = $data['enabled'];
+            $acf->status = $data['status'];
 
             // time for the optional stuff
 
@@ -58,6 +58,7 @@ class AircraftData
             // Now the extremely fun part. Figuring out the aircraft group.
             // Aircraft Groups are both User Defined and System Defined.
             // First, we want to check if there is an aircraft group that already exists for this type.
+        //dd($acf);
             $acf->save();
             if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null )
             {
