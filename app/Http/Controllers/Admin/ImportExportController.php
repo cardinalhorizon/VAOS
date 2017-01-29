@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\AircraftGroup;
 use App\Airline;
 use App\Classes\AircraftData;
 use App\Classes\VAOS_Schedule;
@@ -69,6 +68,7 @@ class ImportExportController extends Controller
             $path = $request->file('file')->store('imports');
             //dd($path);
             // Load the Excel Import Object
+            
             $sheet = Excel::load('storage/app/'.$path, function ($reader) {})->get();
 
             foreach ($sheet as $row)
@@ -76,19 +76,21 @@ class ImportExportController extends Controller
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => str_replace(',', '',$row->airline),
+                    'airline' => $row->airline,
                     'icao' => $row->icao,
                     'name' => $row->name,
                     'manufacturer' => $row->manufacturer,
                     'registration' => $row->registration,
-                    'range' => str_replace(',', '',$row->range),
-                    'maxgw' => str_replace(',', '',$row->maxgw),
-                    'maxpax' => str_replace(',', '',$row->maxpax),
-                    'status' => str_replace(',', '',$row->status)
+                    'range' => $row->range,
+                    'maxgw' => $row->maxgw,
+                    'maxpax' => $row->maxpax,
+                    'enabled' => $row->status
                 ];
-                //dd($data);
                 AircraftData::createAircraft($data);
             }
+
+            $request->session()->flash('success', 'Fleet imported successfully.');
+
             return redirect('/admin/fleet');
         }
     }
@@ -118,19 +120,22 @@ class ImportExportController extends Controller
 
             foreach ($sheet as $row)
             {
-                $acfgrp = AircraftGroup::where('icao', $row->aircraft_group)->first();
                 $data = [
-                    'airline' => number_format($row->airline),
+                    'airline' => $row->airline,
                     'flightnum' => $row->flightnum,
                     'depicao' => $row->depicao,
                     'arricao' => $row->arricao,
-                    'aircraft_group' => $acfgrp->id,
-                    'type' => number_format($row->type),
-                    'enabled' => number_format($row->enabled)
+                    'aircraft_group' => $row->aircraft_group,
+                    'deptime' => $row->deptime,
+                    'arrtime' => $row->arrtime,
+                    'type' => $row->type,
+                    'enabled' => $row->enabled
                 ];
-                //dd($data);
                 VAOS_Schedule::newRoute($data);
             }
+
+            $request->session()->flash('success', 'Routes imported successfully.');
+            
             return redirect('/admin/schedule');
         }
     }

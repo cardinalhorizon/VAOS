@@ -68,10 +68,16 @@ class InstallController extends Controller
       $data = $request->all();
       $env = new Env();
       foreach ($data as $key => $value) {
-          if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL" ) {
+          if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
+            if ($value[0] == '"') {
               $env->changeEnv([
-                  $key => '"'. $value .'"'
+                $key => $value
               ]);
+            }else{
+              $env->changeEnv([
+                $key => '"' . $value . '"'
+              ]);
+            }
           }else{
               $env->changeEnv([
                   $key => $value

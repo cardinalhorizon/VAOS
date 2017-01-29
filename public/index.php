@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * VAOS - Virtual Airline Operations System
  *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
+ * @package  VAOS
+ * @author   Taylor Broad
  */
 
 /*

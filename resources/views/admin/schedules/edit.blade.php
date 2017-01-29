@@ -69,8 +69,9 @@
                         <label class="col-md-3 form-control-label" for="select">Aircraft Group</label>
                         <div class="col-md-9">
                             <select id="aircraft_group" name="aircraft_group" class="form-control" size="1">
+                                <option value="">Not Assigned</option>
                                 @foreach($acfgroups as $acf)
-                                    <option value="{{ $acf->id }}" @if($acf->id == $schedule->aircraft_group->id) selected="selected" @endif>{{ $acf->name }}</option>
+                                    <option value="{{ $acf->id }}" @if(!empty($schedule->aircraft_group->id)) @if($acf->id == $schedule->aircraft_group->id) selected="selected" @endif @endif>{{ $acf->name }}</option>
                                 @endforeach
                             </select>
                         </div>
