@@ -94,7 +94,7 @@
                         <div class="col-md-9">
                             <div class="checkbox">
                                 <label for="checkbox1">
-                                    <input type="checkbox" id="checkbox1" name="enabled" value="1"> Enabled
+                                    <input type="checkbox" id="checkbox1" name="status" value="1"> Enabled
                                 </label>
                             </div>
                         </div>
