@@ -1,0 +1,35 @@
+<table class="table table-border table-inverse">
+	<tr>
+		<td>airline</td>
+		<td>icao</td>
+		<td>name</td>
+		<td>manufacturer</td>
+		<td>registration</td>
+		<td>range</td>
+		<td>maxgw</td>
+		<td>maxpax</td>
+		<td>status</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>B738</td>
+		<td>B737-800</td>
+		<td>Boeing</td>
+		<td>N351JX</td>
+		<td>5500</td>
+		<td>155000</td>
+		<td>200</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>A320</td>
+		<td>A320-200</td>
+		<td>Airbus</td>
+		<td>N352JX</td>
+		<td>5500</td>
+		<td>155000</td>
+		<td>200</td>
+		<td>1</td>
+	</tr>
+</table>
