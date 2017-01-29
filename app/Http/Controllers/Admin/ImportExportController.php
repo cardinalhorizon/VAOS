@@ -134,7 +134,7 @@ class ImportExportController extends Controller
                 VAOS_Schedule::newRoute($data);
             }
 
-            $request->session()->flash('success', 'Routes imported successfully.')
+            $request->session()->flash('success', 'Routes imported successfully.');
             
             return redirect('/admin/schedule');
         }
