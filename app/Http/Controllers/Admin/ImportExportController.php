@@ -121,14 +121,15 @@ class ImportExportController extends Controller
             foreach ($sheet as $row)
             {
                 $data = [
-                    'airline' => number_format($row->airline),
-                    'airline' => number_format($row->airline),
+                    'airline' => $row->airline,
                     'flightnum' => $row->flightnum,
                     'depicao' => $row->depicao,
                     'arricao' => $row->arricao,
-                    'aircraft_group' => number_format($row->aircraft_group),
-                    'type' => number_format($row->type),
-                    'enabled' => number_format($row->enabled)
+                    'aircraft_group' => $row->aircraft_group,
+                    'deptime' => $row->deptime,
+                    'arrtime' => $row->arrtime,
+                    'type' => $row->type,
+                    'enabled' => $row->enabled
                 ];
                 VAOS_Schedule::newRoute($data);
             }

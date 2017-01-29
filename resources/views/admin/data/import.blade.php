@@ -15,7 +15,7 @@
 			<div class="card">
 				<div class="card-header">File Import</div>
 				<div class="card-block">
-					<p>Upload a CSV file to be imported into the {{ $route }} table.</p>
+					<p>Upload an XLSX file to be imported into the {{ $route }} table.</p>
 					<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admin/data/'.$route.'?action=import') }}">
 				        {{ csrf_field() }}
 				        <input type="file" name="file" id="file">
@@ -24,46 +24,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-8">
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">File Format Example</div>
 				<div class="card-block">
-					<p>The file must be uploaded as a CSV format in the following structure. Below is an example of the structure that should be used.</p>
-					<table class="table table-border table-inverse">
-						<tr>
-							<td>airline</td>
-							<td>icao</td>
-							<td>name</td>
-							<td>manufacturer</td>
-							<td>registration</td>
-							<td>range</td>
-							<td>maxgw</td>
-							<td>maxpax</td>
-							<td>status</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>B738</td>
-							<td>B737-800</td>
-							<td>Boeing</td>
-							<td>N351JX</td>
-							<td>5500</td>
-							<td>155000</td>
-							<td>200</td>
-							<td>1</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>A320</td>
-							<td>A320-200</td>
-							<td>Airbus</td>
-							<td>N352JX</td>
-							<td>5500</td>
-							<td>155000</td>
-							<td>200</td>
-							<td>1</td>
-						</tr>
-					</table>
+					<p>The file must be uploaded as a Microsoft Excel Worksheet (.xlsx) format in the following structure. Below is an example of the structure that should be used.</p>
+					@include('admin.partials.import_format.'.$route)
 				</div>
 			</div>
 		</div>
