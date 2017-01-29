@@ -68,6 +68,7 @@ class ImportExportController extends Controller
             $path = $request->file('file')->store('imports');
             //dd($path);
             // Load the Excel Import Object
+            
             $sheet = Excel::load('storage/app/'.$path, function ($reader) {})->get();
 
             foreach ($sheet as $row)
@@ -75,18 +76,21 @@ class ImportExportController extends Controller
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => number_format($row->airline),
+                    'airline' => $row->airline,
                     'icao' => $row->icao,
                     'name' => $row->name,
                     'manufacturer' => $row->manufacturer,
                     'registration' => $row->registration,
-                    'range' => number_format($row->range),
-                    'maxgw' => number_format($row->maxgw),
-                    'maxpax' => number_format($row->maxpax),
-                    'enabled' => number_format($row->enabled)
+                    'range' => $row->range,
+                    'maxgw' => $row->maxgw,
+                    'maxpax' => $row->maxpax,
+                    'enabled' => $row->status
                 ];
                 AircraftData::createAircraft($data);
             }
+
+            $request->session()->flash('success', 'Fleet imported successfully.');
+
             return redirect('/admin/fleet');
         }
     }
