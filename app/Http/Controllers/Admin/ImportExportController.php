@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AircraftGroup;
 use App\Airline;
 use App\Classes\AircraftData;
 use App\Classes\VAOS_Schedule;
@@ -117,16 +118,17 @@ class ImportExportController extends Controller
 
             foreach ($sheet as $row)
             {
+                $acfgrp = AircraftGroup::where('icao', $row->aircraft_group)->first();
                 $data = [
-                    'airline' => number_format($row->airline),
                     'airline' => number_format($row->airline),
                     'flightnum' => $row->flightnum,
                     'depicao' => $row->depicao,
                     'arricao' => $row->arricao,
-                    'aircraft_group' => number_format($row->aircraft_group),
+                    'aircraft_group' => $acfgrp->id,
                     'type' => number_format($row->type),
                     'enabled' => number_format($row->enabled)
                 ];
+                //dd($data);
                 VAOS_Schedule::newRoute($data);
             }
             return redirect('/admin/schedule');
