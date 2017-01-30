@@ -113,7 +113,7 @@ class FleetController extends Controller
         $data['range'] = $request->input('range');
         $data['maxpax'] = $request->input('maxpax');
         $data['maxgw'] = $request->input('maxgw');
-        $data['enabled'] = $request->input('enabled');
+        $data['status'] = $request->input('status');
         $data['airline'] = $request->input('airline');
         $data['hub'] = null;
         $data['group'] = null;
