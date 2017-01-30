@@ -25,8 +25,8 @@ CC Attribution-NonCommercial 4.0 International
 
 # Installing VAOS
 
-Go to the Wiki page below to help you get started with VAOS.
-* [Getting Started With VAOS](https://github.com/FSVAOS/VAOS/wiki/Getting-Started)
+Visit the Installation Guide to get started (updated each release):
+* [VAOS Installtaion Guide](https://github.com/FSVAOS/VAOS/blob/master/Documentation/InstallationGuide.pdf)
 
 # Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
