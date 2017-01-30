@@ -1,4 +1,4 @@
-![alt text](http://fsvaos.net/img/VAOSLarge.png)
+![alt text](http://i.imgur.com/6RfPiwq.png)
 
 # About
 
