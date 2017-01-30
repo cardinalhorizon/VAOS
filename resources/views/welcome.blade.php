@@ -23,6 +23,8 @@
             font-weight: 100;
             height: 100vh;
             margin: 0;
+            overflow-x: hidden;
+            overflow: hidden;
         }
         .full-height {
             height: 100vh;
@@ -56,7 +58,8 @@
             text-transform: uppercase;
         }
         .m-b-md {
-            margin-bottom: 40px;
+            margin-bottom: 2%; 
+
         }
         body {
             /* Credit to Vuk Martjin Radevic Wolf for BETA 3 Background Picture */
@@ -76,7 +79,7 @@
 <body>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
-        <div class="top-right links" color: white;>
+        <div class="top-right links" color: white; style="padding-left: 7px;">
             <b style="color: white;">Flight Crew Operations Center <i style="margin-top: 4.3px;" class="icon-arrow-right"></i></b>
             <a style="color: white;" href="{{ url('/login') }}">Login </a>
         </div>
@@ -84,7 +87,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; ">
+                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
