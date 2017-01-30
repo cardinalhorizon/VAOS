@@ -59,11 +59,13 @@
             margin-bottom: 40px;
         }
         body {
-            background: url(http://i.imgur.com/Zc7kPV3.jpg) no-repeat fixed;
+            /* Credit to Vuk Martjin Radevic Wolf for BETA 3 Background Picture */
+            background: url(http://i.imgur.com/7U0zKFE.png) no-repeat fixed;
             background-size: cover;
             width: 100%;
             height: 100%;
-            padding: 0position: relative;
+            padding: 0
+            position: relative;
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased; /* <-- macOS Only <-- */
             z-index: 1;
@@ -82,7 +84,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="http://i.imgur.com/Ksnw6Ue.png" style="max-width: 35%; ">
+                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
