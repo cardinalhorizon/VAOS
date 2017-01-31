@@ -7,7 +7,6 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,jQuery,CSS,HTML,RWD,Dashboard">
-    <link rel="shortcut icon" href="{{ URL::asset('img/favicon.png') }}">
 
     <title>{{ config('app.name', 'VAOS') }} | VAOS Admin Dashboard</title>
 
