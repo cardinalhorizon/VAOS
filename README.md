@@ -17,11 +17,11 @@ CC Attribution-NonCommercial 4.0 International
 
 # System Requirements
 
-- **PHP**: 5.6 - 7.0
+- **PHP**: 5.6 or newer
 
 - **MySQL**: MySQL Community Server 5.3.x or newer
 
-- **Apache 2.2 - 2.4.25+** or latest **nginx** version.
+- **Apache 2.2 - 2.4.25+** or latest **nginx** version
 
 # Installing VAOS
 
