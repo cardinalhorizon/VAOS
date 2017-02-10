@@ -22,6 +22,12 @@ class InstallController extends Controller
                 return view('install.fresh');
             }elseif($request->query('mode') == "settings"){
               $data = $env->getContent();
+              foreach ($data as $key => $value){
+                if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
+                  $value= str_replace('"','',$value);
+                  $data[$key] = $value;
+                }
+              }
               return view('install.settings')->with('data', $data);
             }else{
               return view('install.start');
@@ -83,7 +89,7 @@ class InstallController extends Controller
                   $key => $value
               ]);
           }
-    }
+      }
 
       return redirect('/setup?mode=fresh');
 
