@@ -63,15 +63,15 @@
                                     <form role="form" method="POST" action="{{ url('/register') }}"> {{ csrf_field() }}
                                         <div class="input-group m-b-1"> <span class="input-group-addon"><i class="icon-user"></i>
                                         </span>
-                                    <input type="text" name="first_name" class="form-control" placeholder="First Name" autofocus required> </div>
+                                    <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ old('first_name') }}" autofocus required> </div>
                                     <div class="input-group m-b-1"> <span class="input-group-addon"><i class="icon-user"></i>
                                     </span>
-                                <input type="text" name="last_name" class="form-control" placeholder="Last Name" required> </div>
+                                <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ old('last_name') }}" required> </div>
                                 <div class="input-group m-b-1"> <span class="input-group-addon"><i class="icon-user"></i>
                                 </span>
-                            <input type="text" name="username" class="form-control" placeholder="Username" required> </div>
+                            <input type="text" name="username" class="form-control" placeholder="Username" value="{{ old('username') }}" required> </div>
                             <div class="input-group m-b-1"> <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" name="email" placeholder="Email" required> </div>
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required> </div>
                         <div class="input-group m-b-1"> <span class="input-group-addon"><i class="icon-lock"></i>
                         </span>
                     <input type="password" name="password" class="form-control" placeholder="Password" required> </div>
@@ -82,6 +82,17 @@
                 @if(!empty(config('recaptcha.public_key') && config('recaptcha.private_key')))
                     {!! Recaptcha::render() !!}
                     <br>
+                @endif
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>The following errors occurred:</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
 
                 <button type="submit" class="btn btn-block btn-primary">Create Account</button>
