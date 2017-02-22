@@ -12,7 +12,8 @@
         "chrisbjr/api-guard": "3.1.*",
         "doctrine/dbal": "^2.5",
         "maatwebsite/excel": "^2.1",
-		"brotzka/laravel-dotenv-editor": "2.*"
+		"brotzka/laravel-dotenv-editor": "2.*",
+        "greggilbert/recaptcha": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

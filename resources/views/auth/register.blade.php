@@ -78,6 +78,12 @@
                     <div class="input-group m-b-2"> <span class="input-group-addon"><i class="icon-lock"></i>
                     </span>
                 <input type="password" name="password_confirmation" class="form-control" placeholder="Repeat password" required> </div>
+                
+                @if(!empty(config('recaptcha.public_key') && config('recaptcha.private_key')))
+                    {!! Recaptcha::render() !!}
+                    <br>
+                @endif
+
                 <button type="submit" class="btn btn-block btn-primary">Create Account</button>
                 <div class="register">
                     <div class="row">
