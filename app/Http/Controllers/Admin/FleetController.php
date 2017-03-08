@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\AircraftData;
+use App\Classes\VAOS_Aircraft;
 use App\Models\Aircraft;
 use Illuminate\Http\Request;
 use App\Airline;
@@ -61,7 +61,7 @@ class FleetController extends Controller
         $data['group'] = null;
         //dd($data);
 
-        if (AircraftData::createAircraft($data)) {
+        if (VAOS_Aircraft::createAircraft($data)) {
             $request->session()->flash('aircraft_created', true);
             return redirect('admin/fleet');
         } else {
@@ -119,7 +119,7 @@ class FleetController extends Controller
         $data['group'] = null;
         //dd($data);
 
-        if (AircraftData::updateAircraft($data, $id)) {
+        if (VAOS_Aircraft::updateAircraft($data, $id)) {
             $request->session()->flash('aircraft_updated', true);
             return redirect('admin/fleet');
         } else {

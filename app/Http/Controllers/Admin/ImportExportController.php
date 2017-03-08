@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Airline;
-use App\Classes\AircraftData;
+use App\Classes\VAOS_Aircraft;
 use App\Classes\VAOS_Schedule;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
@@ -86,7 +86,7 @@ class ImportExportController extends Controller
                     'maxpax' => $row->maxpax,
                     'enabled' => $row->status
                 ];
-                AircraftData::createAircraft($data);
+                VAOS_Aircraft::createAircraft($data);
             }
 
             $request->session()->flash('success', 'Fleet imported successfully.');

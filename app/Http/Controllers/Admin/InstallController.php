@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Classes\OTF_DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use Brotzka\DotenvEditor\DotenvEditor as Env;
 use App\User;
 
@@ -93,5 +95,22 @@ class InstallController extends Controller
 
       return redirect('/setup?mode=fresh');
 
+    }
+    public function phpVMSTransfer(Request $request)
+    {
+        // Set the database
+        $oldDB = new OTF_DB([
+            'database' => $request->input('database'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'prefix' => $request->input('prefix')
+        ]);
+        $aircraft = $oldDB->getTable('aircraft')->get();
+        $users = $oldDB->getTable('pilots')->get();
+        $pireps = $oldDB->getTable('pireps')->get();
+        $aircraft = $oldDB->getTable('aircraft')->get();
+        $aircraft = $oldDB->getTable('aircraft')->get();
+        $aircraft = $oldDB->getTable('aircraft')->get();
+        $aircraft = $oldDB->getTable('aircraft')->get();
     }
 }

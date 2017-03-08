@@ -71,8 +71,6 @@ class VAOS_Schedule
         $complete->load = 0;
         $complete->save();
 
-        if (env('LEGACY_SUPPORT'))
-        {
             // Add the schedule template into the legacy table
             $legacy = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
             $legacy->code = $template->airline->icao;
@@ -90,7 +88,7 @@ class VAOS_Schedule
             $legacy->flighttime = "0";
             $legacy->notes = "VAOS GENERATED ROUTE";
             $legacy->route_details = "{[]}";
-            $legacy->flightlevel = "35000";
+            $legacy->flightlevel = "0";
             $legacy->enabled = 1;
             $legacy->price = 175;
             $legacy->flighttype = "P";
@@ -100,6 +98,7 @@ class VAOS_Schedule
             // Now let's add the bid appropriately
 
             $legacybid = new Legacy\Bid();
+            $legacybid->parentid = $complete->id;
             $legacybid->pilotid = $user_id;
             $legacybid->routeid = $legacy->id;
             $legacybid->dateadded = Carbon::now();
@@ -107,7 +106,7 @@ class VAOS_Schedule
 
             $legacy->bidid = $legacybid->id;
             $legacy->save();
-        }
+
         return true;
     }
     public static function newRoute($data)
@@ -224,9 +223,15 @@ class VAOS_Schedule
         }
         $entry->save();
     }
-    public static function deleteBid($bid_id, $user_id)
+    public static function deleteBid($bid_id, $user_id = null)
     {
-        $bid = ScheduleComplete::where(['user_id' => $user_id, 'id' => $bid_id])->firstOrFail();
+        if (is_null($user_id))
+            $bid = ScheduleComplete::find($bid_id);
+        else
+            $bid = ScheduleComplete::where(['user_id' => $user_id, 'id' => $bid_id])->firstOrFail();
+
+        $legacybid = Legacy\Bid::where('parentid', $bid->id)->first();
+        $legacybid->delete();
         $bid->delete();
     }
 }
