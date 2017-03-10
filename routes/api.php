@@ -13,60 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
-Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
-    Route::post('/auth', 'AuthAPI@acarsLogin');
-    Route::group(['prefix' => '/acars'], function ()
-    {
-        Route::post('/posrpt', 'AcarsAPI@position');
-        Route::get('/wx', 'AcarsAPI@getwx');
-    });
-    // Airports Database Functions
-    Route::group(['prefix' => '/airports'], function ()
-    {
-        Route::post('/', 'AirportsAPI@add');
-    });
-    // Schedule System
-    Route::group(['prefix' => '/schedule'], function ()
-    {
-        Route::get('/', 'ScheduleAPI@index');
-        Route::get('/bid', 'BidsAPI@getBid');
-        Route::post('/bid', 'BidsAPI@fileBid');
-        Route::post('/', 'ScheduleAPI@add');
-    });
-    Route::get('/bids', 'BidsAPI@getBid');
-    Route::group(['prefix' => '/fleet'], function ()
-    {
-        Route::get('/', 'AircraftAPI@showAll');
-        Route::post('/', 'AircraftAPI@addAircraft');
-    });
-    Route::post('/pireps', 'PIREPAPI@filePIREP');
-});
+$basepath = base_path();
 
-/*
-|--------------------------------------------------------------------------
-| VAOS External ACARS Compatibility API
-|--------------------------------------------------------------------------
-|
-| This section of the API is to primarily support ACARS clients not
-| implementing the VAOS Central API Standard. Usually developers
-| will include VAOS specific interface files which call these
-| routes. For more information, please check the website.
-|
-*/
-
-Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
-
-    // smartCARS 2
-    Route::group(['prefix' => 'smartCARS'], function () {
-        Route::post('/positionreport', 'smartCARS@positionreport');
-        Route::post('/filepirep', 'smartCARS@filepirep');
-    });
-
-    // XACARS
-    Route::group(['prefix' => 'xacars'], function () {
-
-    });
-});
+// Dynamically include all files in the api directory
+foreach (new DirectoryIterator($basepath.'/routes/api') as $file)
+{
+  if (!$file->isDot() && !$file->isDir() && $file->getFilename() != '.gitignore')
+  {
+    require_once $basepath.'/routes/api/'.$file->getFilename();
+  }
+}
