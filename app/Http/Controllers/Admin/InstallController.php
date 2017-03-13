@@ -57,16 +57,6 @@ class InstallController extends Controller
             'status' => 1,
             'admin' => true
           ]);
-          /*
-            DB::table('users')->insert([
-                'first_name' => $request->input('first_name'),
-                'last_name' => $request->input('last_name'),
-                'email' => $request->input('email'),
-                'username' => $request->input('username'),
-                'password' => bcrypt($request->input('password')),
-                'status' => 1,
-                'admin' => true
-            ]);*/
 
             $env = new Env();
             $env->changeEnv([
