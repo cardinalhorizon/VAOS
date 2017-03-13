@@ -48,6 +48,16 @@ class InstallController extends Controller
             Artisan::call('key:generate');
             // Run the database migration
             Artisan::call('migrate');
+            User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'username' => $request->input('username'),
+            'status' => 1,
+            'admin' => true
+          ]);
+          /*
             DB::table('users')->insert([
                 'first_name' => $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
@@ -56,7 +66,7 @@ class InstallController extends Controller
                 'password' => bcrypt($request->input('password')),
                 'status' => 1,
                 'admin' => true
-            ]);
+            ]);*/
 
             $env = new Env();
             $env->changeEnv([
