@@ -95,7 +95,7 @@
                         <div class="col-md-9">
                             <div class="checkbox">
                                 <label for="checkbox1">
-                                    <input type="checkbox" id="checkbox1" name="enabled" @if($aircraft->status) checked @endif value="1"> Enabled
+                                    <input type="checkbox" id="checkbox1" name="status" @if($aircraft->status) checked @endif value="1"> Enabled
                                 </label>
                             </div>
                         </div>
