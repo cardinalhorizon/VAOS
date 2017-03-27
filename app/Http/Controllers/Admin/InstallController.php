@@ -17,19 +17,12 @@ class InstallController extends Controller
 {
     public function index(Request $request)
     {
-        $env = new Env();
-        if(!$env->getValue('VAOS_Setup')== true) {
+        if(!env('VAOS_Setup')== true) {
             // Return the view right now
             if ($request->query('mode') == "fresh"){
                 return view('install.fresh');
             }elseif($request->query('mode') == "settings"){
-              $data = $env->getContent();
-              foreach ($data as $key => $value){
-                if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
-                  $value= str_replace('"','',$value);
-                  $data[$key] = $value;
-                }
-              }
+              $data = $_ENV;
               return view('install.settings')->with('data', $data);
             }else{
               return view('install.start');
@@ -58,10 +51,7 @@ class InstallController extends Controller
             'admin' => true
           ]);
 
-            $env = new Env();
-            $env->changeEnv([
-                'VAOS_Setup' => true
-            ]);
+            $this->changeEnvironmentVariable('VAOS_Setup',true);
 
             $user = User::find(1);
             Auth::login($user);
@@ -74,28 +64,34 @@ class InstallController extends Controller
     public function settings(Request $request) {
 
       $data = $request->all();
-      $env = new Env();
       foreach ($data as $key => $value) {
-          if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
-            if ($value[0] == '"') {
-              $env->changeEnv([
-                $key => $value
-              ]);
-            }else{
-              $env->changeEnv([
-                $key => '"' . $value . '"'
-              ]);
-            }
+          /*if( $key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
+                $this->changeEnvironmentVariableSpecial($key,$value);
           }else{
-              $env->changeEnv([
-                  $key => $value
-              ]);
-          }
+              $this->changeEnvironmentVariable($key,$value);
+          }*/
+          $this->changeEnvironmentVariable($key,$value);
       }
 
       return redirect('/setup?mode=fresh');
 
     }
+
+    public function changeEnvironmentVariable($key,$value)
+    {
+        $path = base_path('.env');
+
+            $old = env($key);
+
+
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                "$key=".$old, "$key=".$value, file_get_contents($path)
+            ));
+        }
+    }
+
+
     public function phpVMSTransfer(Request $request)
     {
         // Set the database
