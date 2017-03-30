@@ -68,7 +68,8 @@ class InstallController extends Controller {
       if ($key != '_token') {
         if ($key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
           $this->changeEnvironmentVariableSpecial($key, $value);
-        } else {
+        }
+        else {
           $this->changeEnvironmentVariable($key, $value);
         }
       }
@@ -81,9 +82,11 @@ class InstallController extends Controller {
   public function changeEnvironmentVariable($key, $value) {
     $path = base_path('.env');
 
-    if(is_bool(env($key)))
-    {
-      $old = env($key)? 'true' : 'false';
+    if (is_bool(env($key))) {
+      $old = env($key) ? 'true' : 'false';
+    }
+    else {
+      $old = env($key);
     }
 
 
@@ -97,11 +100,12 @@ class InstallController extends Controller {
   public function changeEnvironmentVariableSpecial($key, $value) {
     $path = base_path('.env');
 
-    if(is_bool(env($key)))
-    {
-      $old = env($key)? 'true' : 'false';
+    if (is_bool(env($key))) {
+      $old = env($key) ? 'true' : 'false';
     }
-
+    else {
+      $old = env($key);
+    }
 
 
     if (file_exists($path)) {
