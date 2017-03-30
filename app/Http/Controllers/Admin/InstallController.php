@@ -81,7 +81,11 @@ class InstallController extends Controller {
   public function changeEnvironmentVariable($key, $value) {
     $path = base_path('.env');
 
-    $old = env($key);
+    if(is_bool(env($key)))
+    {
+      $old = env($key)? 'true' : 'false';
+    }
+
 
     if (file_exists($path)) {
       file_put_contents($path, str_replace(
@@ -93,7 +97,11 @@ class InstallController extends Controller {
   public function changeEnvironmentVariableSpecial($key, $value) {
     $path = base_path('.env');
 
-    $old = env($key);
+    if(is_bool(env($key)))
+    {
+      $old = env($key)? 'true' : 'false';
+    }
+
 
 
     if (file_exists($path)) {
