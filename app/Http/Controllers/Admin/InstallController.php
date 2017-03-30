@@ -84,6 +84,7 @@ class InstallController extends Controller {
 
     if (is_bool(env($key))) {
       $old = env($key) ? 'true' : 'false';
+      $value = $value ? 'true' : 'false';
     }
     else {
       $old = env($key);
@@ -100,13 +101,7 @@ class InstallController extends Controller {
   public function changeEnvironmentVariableSpecial($key, $value) {
     $path = base_path('.env');
 
-    if (is_bool(env($key))) {
-      $old = env($key) ? 'true' : 'false';
-    }
-    else {
       $old = env($key);
-    }
-
 
     if (file_exists($path)) {
       file_put_contents($path, str_replace(
