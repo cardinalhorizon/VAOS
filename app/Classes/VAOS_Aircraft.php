@@ -50,7 +50,7 @@ class VAOS_Aircraft
                 $acf->location()->associate($hub);
             }
             if (array_key_exists('airline', $data)) {
-                $air = Airline::find($data['airline']);
+                $air = Airline::where('icao', $data['airline'])->first();
 
                 $acf->airline()->associate($air);
             }
@@ -121,7 +121,7 @@ class VAOS_Aircraft
                 $acf->location()->associate($hub);
             }
             if (array_key_exists('airline', $data)) {
-                $air = Airline::find($data['airline']);
+                $air = Airline::where('icao', $data['airline'])->first();
 
                 $acf->airline()->associate($air);
             }

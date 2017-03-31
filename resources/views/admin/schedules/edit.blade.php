@@ -23,7 +23,7 @@
                         <div class="col-md-9">
                             <select id="airline" name="airline" class="form-control" size="1">
                                 @foreach($airlines as $a)
-                                    <option value="{{ $a->id }}" @if($a->id == $schedule->airline->id) selected="selected" @endif>{{ $a->icao }} - {{ $a->name }}</option>
+                                    <option value="{{ $a->icao }}" @if($a->id == $schedule->airline->id) selected="selected" @endif>{{ $a->icao }} - {{ $a->name }}</option>
                                 @endforeach
                             </select>
                         </div>

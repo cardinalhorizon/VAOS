@@ -98,7 +98,7 @@ class FleetAPI extends Controller
             $acf->location()->associate($hub);
         }
         if ($data['airline'] != null) {
-            $air = Airline::find($data['airline']);
+            $air = Airline::where('icao', $data['airline'])->first();
 
             $acf->airline()->associate($air);
         }

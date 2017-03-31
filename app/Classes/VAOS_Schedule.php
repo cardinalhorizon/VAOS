@@ -135,7 +135,7 @@ class VAOS_Schedule
         $arr = Airport::where('icao', $data['arricao'])->first();
         $entry->depapt()->associate($dep);
         $entry->arrapt()->associate($arr);
-        $airline = Airline::find($data['airline']);
+        $airline = Airline::where('icao', $data['airline'])->first();
         $entry->airline()->associate($airline);
 
         if (array_key_exists('alticao', $data))
@@ -192,7 +192,7 @@ class VAOS_Schedule
         $arr = Airport::where('icao', $data['arricao'])->first();
         $entry->depapt()->associate($dep);
         $entry->arrapt()->associate($arr);
-        $airline = Airline::find($data['airline']);
+        $airline = Airline::where('icao', $data['airline'])->first();
         $entry->airline()->associate($airline);
 
         if (array_key_exists('alticao', $data))

@@ -26,7 +26,7 @@
                                     <option value="0">No Airlines Found</option>
                                 @else
                                     @foreach($airlines as $a)
-                                    <option value="{{ $a->id }}" @if($a->id == $aircraft->airline->id) selected="selected" @endif>{{ $a->icao }} - {{ $a->name }}</option>
+                                    <option value="{{ $a->icao }}" @if($a->id == $aircraft->airline->id) selected="selected" @endif>{{ $a->icao }} - {{ $a->name }}</option>
                                     @endforeach
                                 @endif
                             </select>
