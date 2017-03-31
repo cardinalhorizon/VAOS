@@ -101,7 +101,7 @@ class ScheduleAPI extends Controller
     	}
     	if ($request->has('aircraft_group'))
     	{
-    	    $acfgrp = AircraftGroup::find($request->input('aircraft_group'));
+    	    $acfgrp = AircraftGroup::where('icao', $request->input('aircraft_group'))->first();
     		$entry->aircraft_group()->associate($acfgrp);
     	}
     	$entry->seasonal = true;
