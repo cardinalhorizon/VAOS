@@ -150,7 +150,7 @@ class VAOS_Schedule
         if (array_key_exists('aircraft_group', $data))
         {
             //dd($data);
-            $acfgrp = AircraftGroup::find($data['aircraft_group']);
+            $acfgrp = $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
             $entry->aircraft_group()->associate($acfgrp);
         }
         $entry->seasonal = true;
@@ -207,7 +207,7 @@ class VAOS_Schedule
         if (array_key_exists('aircraft_group', $data))
         {
             //dd($data);
-            $acfgrp = AircraftGroup::find($data['aircraft_group']);
+            $acfgrp = $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
             $entry->aircraft_group()->associate($acfgrp);
         }
         $entry->seasonal = true;

@@ -68,7 +68,7 @@
                         <div class="col-md-9">
                             <select id="aircraft_group" name="aircraft_group" class="form-control" size="1">
                                 @foreach($acfgroups as $acf)
-                                    <option value="{{ $acf->id }}">{{ $acf->name }}</option>
+                                    <option value="{{ $acf->icao }}">{{ $acf->name }}</option>
                                 @endforeach
                             </select>
                         </div>
