@@ -11,7 +11,7 @@
 		<td>status</td>
 	</tr>
 	<tr>
-		<td>1</td>
+		<td>JCO</td>
 		<td>B738</td>
 		<td>B737-800</td>
 		<td>Boeing</td>
@@ -22,7 +22,7 @@
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>1</td>
+		<td>JCO</td>
 		<td>A320</td>
 		<td>A320-200</td>
 		<td>Airbus</td>
