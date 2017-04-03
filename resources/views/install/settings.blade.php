@@ -22,7 +22,7 @@
                     <fieldset class="form-group">
                         <p class="text-muted">Choose your environment</p>
                         <label class="radio-inline control-label">
-                            <input type="radio" name="APP_ENV_Production" @if($data['APP_ENV'] == 'production')checked="checked"@endif>Production
+                            <input type="radio" name="APP_ENV_Production" @if($data['APP_ENV'] == 'production')checked="checked"@endif>Standard
                         </label>
                         <label class="radio-inline control-label">
                             <input type="radio" name="APP_ENV_Developmen" @if($data['APP_ENV'] == 'local')checked="checked"@endif>Development
