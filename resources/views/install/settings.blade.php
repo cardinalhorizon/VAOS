@@ -25,7 +25,7 @@
                             <input type="radio" name="APP_ENV_Production" @if($data['APP_ENV'] == 'production')checked="checked"@endif>Standard
                         </label>
                         <label class="radio-inline control-label">
-                            <input type="radio" name="APP_ENV_Developmen" @if($data['APP_ENV'] == 'local')checked="checked"@endif>Development
+                            <input type="radio" name="APP_ENV_Development" @if($data['APP_ENV'] == 'local')checked="checked"@endif>Development
                         </label>
                     </fieldset>
                     <div class="input-group m-b-1">
