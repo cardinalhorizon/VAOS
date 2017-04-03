@@ -50,6 +50,7 @@ class InstallController extends Controller {
       ]);
 
       $this->changeEnvironmentVariable('VAOS_Setup', TRUE);
+      Artisan::call('config:cache');
 
       $user = User::find(1);
       Auth::login($user);
