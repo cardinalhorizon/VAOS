@@ -70,14 +70,18 @@ class InstallController extends Controller {
   public function settings(Request $request) {
 
     $data = $request->all();
-    var_dump($data);
-    exit();
+
     foreach ($data as $key => $value) {
       if ($key != '_token') {
         if ($key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
           $this->changeEnvironmentVariableSpecial($key, $value);
         }
-        elseif ($key == "APP_ENV_Developmen" || $key == "APP_ENV_Production") {
+        elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
+            if ($key == "APP_ENV_Development"){
+                $value = 'local';
+            }else{
+                $value = 'production';
+            }
           $this->changeEnvironmentVariable('APP_ENV', $value);
         }else{
           $this->changeEnvironmentVariable($key, $value);
