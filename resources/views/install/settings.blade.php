@@ -19,6 +19,15 @@
                 <p class="text-muted">Put your Settings in to the Form</p>
                 <form role="form" method="POST" action="{{ url('/settings') }}">
                     {{ csrf_field() }}
+                    <fieldset class="form-group">
+                        <p class="text-muted">Choose your environment</p>
+                        <label class="radio-inline control-label">
+                            <input type="radio" name="APP_ENV_Production" @if($data['APP_ENV'] == 'production')checked="checked"@endif>Standard
+                        </label>
+                        <label class="radio-inline control-label">
+                            <input type="radio" name="APP_ENV_Developmen" @if($data['APP_ENV'] == 'local')checked="checked"@endif>Development
+                        </label>
+                    </fieldset>
                     <div class="input-group m-b-1">
                         <span class="input-group-addon">Application URL</span>
                         <input type="text" name="APP_URL" class="form-control" value="{{ $data['APP_URL'] }}" placeholder="http://yoursite.com/" autofocus required>
