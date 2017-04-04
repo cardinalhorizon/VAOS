@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Notifications\PirepFiled;
 
 class PIREPController extends Controller
 {
@@ -80,11 +81,12 @@ class PIREPController extends Controller
     public function update(Request $request, $id)
     {
         $pirep = PIREP::find($id);
-
+        $user = $pirep->user;
         // check if we are only changing the status
         if ($request->input('flag') == "status")
         {
             $pirep->status = $request->input('status');
+            $user->notify(new PirepFiled($pirep));
             $pirep->save();
             return redirect('/admin/pireps?view=pending');
         }
