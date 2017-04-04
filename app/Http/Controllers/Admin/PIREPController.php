@@ -86,8 +86,8 @@ class PIREPController extends Controller
         if ($request->input('flag') == "status")
         {
             $pirep->status = $request->input('status');
-            $user->notify(new PirepFiled($pirep));
             $pirep->save();
+            $user->notify(new PirepFiled($pirep));
             return redirect('/admin/pireps?view=pending');
         }
     }

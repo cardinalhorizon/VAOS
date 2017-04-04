@@ -44,23 +44,17 @@ class PirepFiled extends Notification
         return (new MailMessage)
           ->subject('Notification Subject')
           ->greeting('Hello!')
-          ->line('Your pilot report has been saved to the system!')
-          ->action('Notification Action', 'https://laravel.com')
-          ->line('Thank you for using our application!');
+          ->line('Your pilot report has been saved to the system!');
       }elseif ($notifiable->status == 1){
         return (new MailMessage)
           ->subject('Notification Subject')
           ->greeting('Hello!')
-          ->line('Your pilot report has been accepted!')
-          ->action('Notification Action', 'https://laravel.com')
-          ->line('Thank you for using our application!');
+          ->line('Your pilot report has been accepted!');
       }else{
         return (new MailMessage)
           ->subject('Notification Subject')
           ->greeting('Hello!')
-          ->line('Your pilot report has been rejected!')
-          ->action('Notification Action', 'https://laravel.com')
-          ->line('Thank you for using our application!');
+          ->line('Your pilot report has been rejected!');
       }
     }
 
