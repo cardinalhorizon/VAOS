@@ -39,19 +39,19 @@ class PirepFiled extends Notification {
     switch ($notifiable->status) {
       case 0:
         return (new MailMessage())
-          ->subject('Notification Subject')
+          ->subject('Pilot Report Notification')
           ->greeting('Hello!')
           ->line('Your pilot report has been saved to the system and will be reviewed briefly!');
         break;
       case 1:
         return (new MailMessage())
-          ->subject('Notification Subject')
+          ->subject('Pilot Report Notification')
           ->greeting('Hello!')
           ->line('Your pilot report has been accepted!');
         break;
       case 2:
         return (new MailMessage())
-          ->subject('Notification Subject')
+          ->subject('Pilot Report Notification')
           ->greeting('Hello!')
           ->line('Your pilot report has been rejected!');
         break;
