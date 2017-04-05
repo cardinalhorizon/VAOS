@@ -43,6 +43,24 @@ class PirepFiled extends Notification {
           ->greeting('Hello!')
           ->line('Your pilot report has been saved to the system and will be reviewed briefly!');
         break;
+      case 1 && env('VAOS_AA_ALL'):
+        return (new MailMessage())
+          ->subject('Pilot Report Notification')
+          ->greeting('Hello!')
+          ->line('Your pilot report has been saved to the system and has been autoaccepted!');
+        break;
+      case 1 && env('VAOS_AA_ENABLED'):
+        return (new MailMessage())
+          ->subject('Pilot Report Notification')
+          ->greeting('Hello!')
+          ->line('Your pilot report has been saved to the system and has been autoaccepted!');
+        break;
+      case 2 && env('VAOS_AA_ENABLED'):
+        return (new MailMessage())
+          ->subject('Pilot Report Notification')
+          ->greeting('Hello!')
+          ->line('Your pilot report has been saved to the system and has been autorejected!');
+        break;
       case 1:
         return (new MailMessage())
           ->subject('Pilot Report Notification')
