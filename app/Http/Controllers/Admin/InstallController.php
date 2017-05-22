@@ -51,11 +51,12 @@ class InstallController extends Controller {
 
       $this->changeEnvironmentVariable('VAOS_Setup', TRUE);
 
-      if (App::environment('production')) {
+      #Removed in the view for the moment
+      /*if (App::environment('production')) {
         Artisan::call('config:cache');
       }else{
         $this->changeEnvironmentVariable('APP_DEBUG', TRUE);
-      }
+      }*/
 
       $user = User::find(1);
       Auth::login($user);
@@ -75,14 +76,15 @@ class InstallController extends Controller {
       if ($key != '_token') {
         if ($key == "VAOS_ORG_NAME" || $key == "VAOS_ORG_EMAIL") {
           $this->changeEnvironmentVariableSpecial($key, $value);
-        }
+        /*}
+        #Removed in the view for the moment
         elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
             if ($key == "APP_ENV_Development"){
                 $value = 'local';
             }else{
                 $value = 'production';
             }
-          $this->changeEnvironmentVariable('APP_ENV', $value);
+          $this->changeEnvironmentVariable('APP_ENV', $value);*/
         }else{
           $this->changeEnvironmentVariable($key, $value);
         }
