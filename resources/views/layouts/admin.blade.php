@@ -54,7 +54,7 @@
                         <strong>Settings</strong>
                     </div>
 
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ url('admin/users/' . Auth::id()) }}"><i class="fa fa-user"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
                     <div class="divider"></div>
                     <a class="dropdown-item" href="#" onclick="event.preventDefault();

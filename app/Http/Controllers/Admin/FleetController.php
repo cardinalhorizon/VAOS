@@ -105,7 +105,6 @@ class FleetController extends Controller
     public function update(Request $request, $id)
     {
         $data = array();
-
         $data['icao'] = $request->input('icao');
         $data['name'] = $request->input('name');
         $data['manufacturer'] = $request->input('manufacturer');
@@ -113,7 +112,10 @@ class FleetController extends Controller
         $data['range'] = $request->input('range');
         $data['maxpax'] = $request->input('maxpax');
         $data['maxgw'] = $request->input('maxgw');
-        $data['status'] = $request->input('status');
+        if ($request->input('status') == 1)
+            $data['status'] = $request->input('status');
+        else
+            $data['status'] = 0;
         $data['airline'] = $request->input('airline');
         $data['hub'] = null;
         $data['group'] = null;

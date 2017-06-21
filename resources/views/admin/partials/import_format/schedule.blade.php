@@ -14,7 +14,7 @@
 		<td>enabled</td>
 	</tr>
 	<tr>
-		<td>1</td>
+		<td>JCO</td>
 		<td>66</td>
 		<td>KABQ</td>
 		<td>KJFK</td>
@@ -28,7 +28,7 @@
 		<td>1</td>
 	</tr>
 	<tr>
-		<td>1</td>
+		<td>JCO</td>
 		<td>1492</td>
 		<td>KACK</td>
 		<td>KJFK</td>
