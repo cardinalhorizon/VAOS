@@ -84,7 +84,7 @@ class ImportExportController extends Controller
                     'range' => $row->range,
                     'maxgw' => $row->maxgw,
                     'maxpax' => $row->maxpax,
-                    'enabled' => $row->status
+                    'status' => $row->status
                 ];
                 VAOS_Aircraft::createAircraft($data);
             }

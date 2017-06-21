@@ -23,6 +23,8 @@
             font-weight: 100;
             height: 100vh;
             margin: 0;
+            overflow-x: hidden;
+            overflow: hidden;
         }
         .full-height {
             height: 100vh;
@@ -56,14 +58,17 @@
             text-transform: uppercase;
         }
         .m-b-md {
-            margin-bottom: 40px;
+            margin-bottom: 2%; 
+
         }
         body {
-            background: url(http://i.imgur.com/Zc7kPV3.jpg) no-repeat fixed;
+            /* Credit to Vuk Martjin Radevic Wolf for BETA 3 Background Picture */
+            background: url(http://i.imgur.com/7U0zKFE.png) no-repeat fixed;
             background-size: cover;
             width: 100%;
             height: 100%;
-            padding: 0position: relative;
+            padding: 0
+            position: relative;
             font-family: "Roboto", sans-serif;
             -webkit-font-smoothing: antialiased; /* <-- macOS Only <-- */
             z-index: 1;
@@ -74,7 +79,7 @@
 <body>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
-        <div class="top-right links" color: white;>
+        <div class="top-right links" color: white; style="padding-left: 7px;">
             <b style="color: white;">Flight Crew Operations Center <i style="margin-top: 4.3px;" class="icon-arrow-right"></i></b>
             <a style="color: white;" href="{{ url('/login') }}">Login </a>
         </div>
@@ -82,7 +87,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="http://i.imgur.com/Ksnw6Ue.png" style="max-width: 35%; ">
+                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">

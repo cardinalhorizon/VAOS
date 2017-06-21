@@ -1,4 +1,4 @@
-![alt text](http://fsvaos.net/img/VAOSLarge.png)
+![alt text](http://i.imgur.com/hxQ7H4n.png)
 
 # About
 
@@ -17,16 +17,16 @@ CC Attribution-NonCommercial 4.0 International
 
 # System Requirements
 
-- **PHP**: 5.6 - 7.0
+- **PHP**: 5.6 or newer
 
 - **MySQL**: MySQL Community Server 5.3.x or newer
 
-- **Apache 2.2 - 2.4.25+** or latest **nginx** version.
+- **Apache 2.2 - 2.4.25+** or latest **nginx** version
 
 # Installing VAOS
 
-Go to the Wiki page below to help you get started with VAOS.
-* [Getting Started With VAOS](https://github.com/FSVAOS/VAOS/wiki/Getting-Started)
+Visit the Installation Guide to get started (updated each release):
+* [VAOS Installation Guide](https://github.com/FSVAOS/VAOS/blob/master/Documentation/InstallationGuide.pdf)
 
 # Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
