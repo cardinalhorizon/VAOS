@@ -112,6 +112,7 @@ class FleetController extends Controller
         $data['range'] = $request->input('range');
         $data['maxpax'] = $request->input('maxpax');
         $data['maxgw'] = $request->input('maxgw');
+
         if ($request->input('status') == 1)
             $data['status'] = $request->input('status');
         else
