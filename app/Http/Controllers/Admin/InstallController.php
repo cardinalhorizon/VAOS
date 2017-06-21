@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Config;
 use Brotzka\DotenvEditor\DotenvEditor as Env;
 use App\User;
 
+
 class InstallController extends Controller {
   public function index(Request $request) {
     if (env('VAOS_Setup') != TRUE) {
@@ -81,6 +82,7 @@ class InstallController extends Controller {
         elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
             if ($key == "APP_ENV_Development"){
                 $value = 'local';
+
             }else{
                 $value = 'production';
             }
@@ -107,10 +109,12 @@ class InstallController extends Controller {
     }
 
 
+
     if (file_exists($path)) {
       file_put_contents($path, str_replace(
         $key . "=" . $old, $key . "=" . $value, file_get_contents($path)
       ));
+
     }
   }
 
