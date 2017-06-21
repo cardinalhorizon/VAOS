@@ -128,7 +128,7 @@ switch($action) {
 		break;
 	case "getairports":
 		$res = smartCARS::getairports($_GET['dbid']);
-		$runcount = 0;
+		$rc = 0;
 		foreach($res['airports'] as $apt) {
 			if($rc != 0)
 				echo(";");
@@ -153,14 +153,30 @@ switch($action) {
 	case "getbidflights":
 		$res = smartCARS::getbidflights($_GET['dbid']);
 		$runcount = 0;
-		if(sizeof($res['schedules']) > 0) {
+		if(sizeof($res) > 0) {
 			$runcount = 0;
-			foreach($res['schedules'] as $schedule) {
+			foreach($res as $schedule) {
+			    //var_dump($schedule);
 				if($runcount != 0)
 					echo(";");
 				$schedule = str_replace(";","",$schedule);
 				$schedule = str_replace("|","",$schedule);
-				echo($schedule[$res['format']['bidid']] . "|" . $schedule[$res['format']['routeid']] . "|" . $schedule[$res['format']['code']] . "|" . $schedule[$res['format']['flightnumber']] . "|" . $schedule[$res['format']['departureicao']] . "|" . $schedule[$res['format']['arrivalicao']] . "|" . $schedule[$res['format']['route']] . "|" . $schedule[$res['format']['cruisingaltitude']] . "|" . $schedule[$res['format']['aircraft']] . "|" . $schedule[$res['format']['duration']] . "|" . $schedule[$res['format']['departuretime']] . "|" . $schedule[$res['format']['arrivaltime']] . "|" . $schedule[$res['format']['load']] . "|" . $schedule[$res['format']['type']] . "|" . $schedule[$res['format']['daysofweek']]);
+				//echo($schedule[$res['format']['bidid']] . "|" . $schedule[$res['format']['routeid']] . "|" . $schedule[$res['format']['code']] . "|" . $schedule[$res['format']['flightnumber']] . "|" . $schedule[$res['format']['departureicao']] . "|" . $schedule[$res['format']['arrivalicao']] . "|" . $schedule[$res['format']['route']] . "|" . $schedule[$res['format']['cruisingaltitude']] . "|" . $schedule[$res['format']['aircraft']] . "|" . $schedule[$res['format']['duration']] . "|" . $schedule[$res['format']['departuretime']] . "|" . $schedule[$res['format']['arrivaltime']] . "|" . $schedule[$res['format']['load']] . "|" . $schedule[$res['format']['type']] . "|" . $schedule[$res['format']['daysofweek']]);
+                echo($schedule[$res['format']['bidid']]
+                    . "|" . $schedule['routeid']
+                    . "|" . $schedule['code']
+                    . "|" . $schedule['flightnumber']
+                    . "|" . $schedule['departureicao']
+                    . "|" . $schedule['arrivalicao']
+                    . "|" . $schedule['route']
+                    . "|" . $schedule['cruisingaltitude']
+                    . "|" . $schedule['aircraft']
+                    . "|" . $schedule['duration']
+                    . "|" . $schedule['departuretime']
+                    . "|" . $schedule['arrivaltime']
+                    . "|" . $schedule['load']
+                    . "|" . $schedule['type']
+                    . "|" . $schedule['daysofweek']);
 				$runcount++;
 			}
 		}

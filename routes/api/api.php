@@ -63,6 +63,7 @@ Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
     Route::group(['prefix' => 'smartCARS'], function () {
         Route::post('/positionreport', 'smartCARS@positionreport');
         Route::post('/filepirep', 'smartCARS@filepirep');
+        Route::get('/bids/{user_id}', 'smartCARS@getbids');
     });
 
     // XACARS
