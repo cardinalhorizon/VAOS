@@ -32,9 +32,6 @@
             </li>
 
             <li class="nav-item p-x-1">
-                <a class="nav-link" href="{{ url('/admin') }}">Dashboard</a>
-            </li>
-            <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{ url('/flightops') }}">Pilot Center</a>
             </li>
             <li class="nav-item p-x-1">

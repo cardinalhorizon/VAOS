@@ -55,7 +55,8 @@
     <script type="text/javascript">
         $(document).ready( function () {
             $('#table_id').DataTable( {
-                responsive: true
+                responsive: true,
+                "autoWidth": false
             });
             $(".clickable-row").click(function() {
                 window.document.location = $(this).data("href");
