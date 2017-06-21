@@ -17,10 +17,6 @@
                 <i class="fa fa-align-justify"></i> Current Users
             </div>
             <div class="card-block">
-                <div class="card-block">
-                    <a href="{{ url('admin/schedule/create') }}" role="button" class="button btn btn-primary"><i class="fa fa-plus"></i>&nbsp; New User</a>
-                </div>
-
                 <table id="table_id" class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -30,11 +26,12 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($users as $u)
-                        <tr class="clickable-row" data-href="{{ url('/admin/users/'.$u->id) }}">
+                        <tr>
                             <td>{{ $u->id }}</td>
                             <td>{{ $u->first_name }}</td>
                             <td>{{ $u->last_name }}</td>
@@ -45,6 +42,9 @@
                             @else
                                 <td>Awaiting Approval</td>
                             @endif
+                            <td>
+                                <a href="{{ url('admin/users/'.$u->id) }}" class="btn btn-sm btn-primary">Details</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -60,9 +60,6 @@
             $('#table_id').DataTable( {
                 responsive: true,
                 "autoWidth": false
-            });
-            $(".clickable-row").click(function() {
-                window.document.location = $(this).data("href");
             });
         } );
     </script>

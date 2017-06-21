@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -50,7 +51,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -73,7 +76,41 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
+            'vatsim' => 'integer',
+            'ivao' => 'integer',
+        ]);
+
+        $user = User::find($id);
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+
+        if(strlen($request->vatsim) > 0) {
+            $user->vatsim = $request->vatsim;
+        } else {
+            $user->vatsim = null;
+        }
+
+        if(strlen($request->ivao) > 0) {
+            $user->ivao = $request->ivao;
+        } else {
+            $user->ivao = null;
+        }
+
+        $user->save();
+
+        $request->session()->flash('user_updated', true);
+
+        return redirect('admin/users/'.$id);
     }
 
     /**

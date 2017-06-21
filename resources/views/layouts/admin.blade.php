@@ -31,9 +31,6 @@
             </li>
 
             <li class="nav-item p-x-1">
-                <a class="nav-link" href="{{ url('/admin') }}">Dashboard</a>
-            </li>
-            <li class="nav-item p-x-1">
                 <a class="nav-link" href="{{ url('/flightops') }}">Pilot Center</a>
             </li>
             <li class="nav-item p-x-1">
@@ -57,7 +54,7 @@
                         <strong>Settings</strong>
                     </div>
 
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ url('admin/users/' . Auth::id()) }}"><i class="fa fa-user"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
                     <div class="divider"></div>
                     <a class="dropdown-item" href="#" onclick="event.preventDefault();
@@ -126,17 +123,6 @@
                 </ul>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-globe"></i> Airports</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-buttons.html"><i class="fa fa-caret-right"></i> View Airports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-social-buttons.html"><i class="fa fa-caret-right"></i> Hubs</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
                 <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book"></i> PIREPs @if(\App\PIREP::where('status', 0)->count() > 0)<span class="tag tag-danger" style="margin-right: 15px; margin-top: 3px;">{{ \App\PIREP::where('status', 0)->count() }}</span>@endif</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
@@ -173,23 +159,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/admin/groups') }}"><i class="fa fa-caret-right"></i> Groups</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-cog"></i> Core Settings</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages-login.html" target="_top"><i class="fa fa-caret-right"></i> VAOS Settings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages-register.html" target="_top"><i class="fa fa-caret-right"></i> ACARS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages-404.html" target="_top"><i class="fa fa-caret-right"></i> About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages-500.html" target="_top"><i class="fa fa-caret-right"></i> Support</a>
                     </li>
                 </ul>
             </li>

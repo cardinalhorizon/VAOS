@@ -12,7 +12,7 @@
         "chrisbjr/api-guard": "3.1.*",
         "doctrine/dbal": "^2.5",
         "maatwebsite/excel": "^2.1",
-		"brotzka/laravel-dotenv-editor": "2.*"
+        "greggilbert/recaptcha": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -20,7 +20,8 @@
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "laravel/homestead": "^4.0"
+        "laravel/homestead": "^4.0",
+        "barryvdh/laravel-ide-helper": "^2.3"
     },
     "autoload": {
         "classmap": [
@@ -48,6 +49,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },

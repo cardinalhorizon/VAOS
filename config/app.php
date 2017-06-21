@@ -24,7 +24,7 @@ return [
     | version so it's called Beta 1, 2, 3... etc.
     */
 
-    'version' => 'Beta 3',
+    'version' => 'Beta 4',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,7 @@ return [
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -246,7 +247,8 @@ return [
         'ApiGuardAuth' => \Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
-
+        'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        
     ],
 
 ];

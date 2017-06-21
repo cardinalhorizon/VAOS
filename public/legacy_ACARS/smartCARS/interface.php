@@ -91,19 +91,19 @@ class smartCARS {
 
         $jdec = json_decode($response, true);
 			if($jdec['status'] == 200 /*password_verify($password, $res['password'])*/) {
-				$ret['dbid'] = $res['id'];
-				$ret['code'] = "N/A";//$res['code'];
+				$ret['dbid'] = $jdec['user']['id'];
+				$ret['code'] = "";//$res['code'];
 				
 				//$newpltid = $res['username'] + PILOTID_OFFSET;
 				$var = "";
 				//for($i = strlen($newpltid); $i < PILOTID_LENGTH; $i++)
 				//	$var .= "0";
-				$ret['pilotid'] = $res['username'];
+				$ret['pilotid'] = $jdec['user']['username'];
 				
 				//$ret['pilotid'] = $res['pilotid'] + PILOTID_OFFSET;
-				$ret['firstname'] = $res['first_name'];
-				$ret['lastname'] = $res['last_name'];
-				$ret['email'] = $res['email'];
+				$ret['firstname'] = $jdec['user']['first_name'];
+				$ret['lastname'] = $jdec['user']['last_name'];
+				$ret['email'] = $jdec['user']['email'];
 				$ret['ranklevel'] = "0";//$res['ranklevel'];
 				$ret['rankstring'] = "Rank Unavailable";//$res['rank'];
 				$ret['result'] = "ok";
@@ -143,9 +143,9 @@ class smartCARS {
 				}
 				
 				$ret['dbid'] = $res['id'];
-				$ret['code'] = "N/A";//$res['code'];
+				$ret['code'] = "";//$res['code'];
 				
-				$newpltid = $res['pilotid'] + PILOTID_OFFSET;
+				$newpltid = $res['username'];
 				$var = "";
 				//for($i = strlen($newpltid); $i < PILOTID_LENGTH; $i++)
 					//$var .= "0";
@@ -203,19 +203,19 @@ class smartCARS {
 	static function getpilotcenterdata($dbid) {
 		global $dbConnection;
 		$ret = array();
-		$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "pilots WHERE pilotid = ?");
+		$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "users WHERE id = ?");
 		$stmt->execute(array($dbid));
 		$res = $stmt->fetch();
 		$stmt->closeCursor();
 		$ret = array();
-		if($res['pilotid'] != "") {
-			$ret['totalhours'] = $res['totalhours'];
-			$ret['totalflights'] = $res['totalflights'];			
-			if($res['totalflights'] > 0) {
-				$stmt = $dbConnection->prepare("SELECT landingrate FROM " . TABLE_PREFIX . "pireps WHERE pilotid = ?" . (include_pending_flights_in_stats == false ? "AND accepted = 1" : "AND accepted != 2") . " ORDER BY submitdate");
+		if($res['id'] != "") {
+			$ret['totalhours'] = "N/A";
+			$ret['totalflights'] = "N/A";
+			//if($res['totalflights'] > 0) {
+				$stmt = $dbConnection->prepare("SELECT landingrate FROM " . TABLE_PREFIX . "pireps WHERE user_id = ?" . (include_pending_flights_in_stats == false ? "AND status = 1" : "AND status != 2") . " ORDER BY submitdate");
 				$stmt->execute(array($dbid));
 				$pireps = $stmt->fetchAll();
-				$stmt->closeCursor();				
+				$stmt->closeCursor();
 				$total_landing = 0;
 				$sizeofpireps = sizeof($pireps);
 				foreach($pireps as $pirep) {
@@ -226,11 +226,11 @@ class smartCARS {
 				else
 					$ret['averagelandingrate'] = "0";
 				$ret['totalpireps'] = $sizeofpireps;
-			}
-			else {
-				$ret['averagelandingrate'] = "N/A";			
-				$ret['totalpireps'] = "0";
-			}
+			//}
+			//else {
+			//	$ret['averagelandingrate'] = "N/A";
+			//	$ret['totalpireps'] = "0";
+			//}
 		}
 		return $ret;
 	}
@@ -271,6 +271,7 @@ class smartCARS {
 	}
 	
 	static function getbidflights($dbid) {
+		/*
 		global $dbConnection;
 		$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_bids WHERE pilotid = ?");
 		$stmt->execute(array($dbid));
@@ -322,8 +323,13 @@ class smartCARS {
 				array_push($ret['schedules'],$schedule);
 			}
 		}
+		*/
+        $client = new GuzzleHttp\Client();
+
+        $response = $client->request('GET', WEB_URL.'api/acars/smartCARS/bids/'. $dbid)->getBody();
+        $jdec = json_decode($response, true);
 		//var_dump($ret);
-		return $ret;
+		return $jdec;
 	}
 	
 	static function bidonflight($dbid, $routeid) {
@@ -693,7 +699,7 @@ class smartCARS {
         $fields = array(
             'pilotid' =>$dbid,
             'flightnum' =>$flightnumber,
-            'pilotname' => $pilotdet['firstname'] . " " . $pilotdet['lastname'],
+            'pilotname' => $pilotdet['first_name'] . " " . $pilotdet['last_name'],
             'aircraft' =>$aircraft,
             'lat' =>$lat,
             'lng' =>$lon,
@@ -759,6 +765,9 @@ class smartCARS {
         $client = new GuzzleHttp\Client();
 
         $ret = $client->request('POST', VAOS_URL.'api/acars/smartCARS/filepirep', [
+        	'query' => [
+        		'format' => 'phpVMS'
+			],
 			'form_params' => $pirepdata
         ])->getBody();
 
