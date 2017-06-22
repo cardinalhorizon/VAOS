@@ -184,7 +184,7 @@ return [
         //Kodeine\Acl\AclServiceProvider::class,
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+        //Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 
         /*
