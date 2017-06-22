@@ -52,5 +52,5 @@ if ($num_result > 0)
 else
 {
 	echo "0|Flightnumber not found";
-}
+}*/
 ?>
