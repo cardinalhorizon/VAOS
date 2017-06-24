@@ -50,6 +50,9 @@
                     <li class="list-group-item">
                         <strong>Registration Date:</strong> <span class="pull-right">{{ date('d/m/Y', strtotime($user->created_at)) }}</span>
                     </li>
+                    <li class="list-group-item">
+                        <strong>Average Landing Rate:</strong> <span class="pull-right">{{ \App\PIREP::where('id', $user->id)->avg('landingrate') }}</span
+                    </li>
                 </ul>
             </div>
         </div>
