@@ -34,4 +34,4 @@ Donations are greatly appreciated and go towards further development of VAOS and
 Send donations to taylorbroad@gmail.com via. PayPal
 
 # Current Beta Version
-##### BETA 3
+##### BETA 4
