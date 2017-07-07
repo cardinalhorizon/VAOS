@@ -47,7 +47,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">{{ config('app.name', 'VAOS') }} Operations Center</a>
+        <a class="navbar-brand" href="index.php">{{ config('app.name', 'VAOS') }} Operations Center</a>
     </div>
     <!-- /.navbar-header -->
 
