@@ -153,7 +153,7 @@ class VAOS_Schedule
             $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
             $entry->aircraft_group()->associate($acfgrp);
         }
-        $entry->seasonal = true;
+        $entry->seasonal = false;
         //$entry->daysofweek = "0123456";
         $entry->type = $data['type'];
         if (array_key_exists('enabled', $data))

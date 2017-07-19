@@ -22,6 +22,7 @@
                             <th width="25%">First Name</th>
                             <th width="25%">Last Name</th>
                             <th width="15%">Total Flights</th>
+                            <th>Landing Rate Avg</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,6 +33,7 @@
                                 <td>{{ $u->first_name }}</td>
                                 <td>{{ $u->last_name }}</td>
                                 <td>{{ count($u->pirep) }}</td>
+                                <td>{{ \App\PIREP::where('user_id', $u->id)->avg('landingrate') }}</td>
                             </tr>
                         @endforeach
                         </tbody>
