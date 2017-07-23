@@ -31,9 +31,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($pireps as $p)
+                    @foreach($pireps as $a)
                         <tr>
-                            <td>{{ $p->date_created }}</td>
+                            <td>{{ $a->date_created }}</td>
                             <td>{{ $a->user()->username }}</td>
                             <td>{{ $a->airline()->icao }}</td>
                             <td>{{ $a->flightnum }}</td>
