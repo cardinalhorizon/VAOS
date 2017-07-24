@@ -14,8 +14,8 @@ class UserModify extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avitar_url')->nullable();
-            $table->boolean('avitar_local')->nullable();
+            $table->string('avatar_url')->nullable();
+            $table->boolean('avatar_local')->nullable();
             $table->string('cover_url')->nullable();
             $table->boolean('cover_local')->nullable();
             $table->integer('online_status')->nullable();
