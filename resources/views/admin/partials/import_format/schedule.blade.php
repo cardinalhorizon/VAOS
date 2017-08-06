@@ -1,7 +1,7 @@
 <style>
 pre {
 background-color: #444856;
-font-color: white;
+color: white;
 }
 </style>
 
