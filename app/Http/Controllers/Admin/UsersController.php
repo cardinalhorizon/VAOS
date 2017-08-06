@@ -94,6 +94,18 @@ class UsersController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
 
+        if(strlen($request->cover_url) > 0) {
+            $user->cover_url = $request->cover_url;
+        } else {
+            $user->cover_url = null;
+        }
+
+        if(strlen($request->avatar_url) > 0) {
+            $user->avatar_url = $request->avatar_url;
+        } else {
+            $user->avatar_url = null;
+        }
+
         if(strlen($request->vatsim) > 0) {
             $user->vatsim = $request->vatsim;
         } else {

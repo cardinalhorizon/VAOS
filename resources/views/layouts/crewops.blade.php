@@ -14,47 +14,38 @@
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('/bower_components/materialize/dist/css/materialize.css') }}"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
 
     <title>Crew Operations</title>
     @yield('customcss')
 </head>
 <body class="grey lighten-3">
-<nav class="blue darken-3" style="position: absolute; top: 0; z-index: 888">
-    <div class="nav-wrapper">
-
-        <a href="#" class="brand-logo" style="margin-left: 18rem;">{{ config('app.name', 'VAOS') }} Flight Operations</a>
-        <ul id="nav-mobile" style="margin-right: 2rem;" class="right hide-on-med-and-down">
-            <li>VAOS Version 1.0 Release Candidate</li>
-        </ul>
+<nav class="grey darken-3 z-depth-2">
+    <div class="container" style="width: 90%">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo" style="display: inline-flex; vertical-align: middle;">
+                {{ config('app.name') }} Operations Center</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a id="slide-button" href="#" data-activates="slide-out">{{ Auth::user()->username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                {{--
+                @if(Auth::guest())
+                    <li><a class="btn light-blue darken-3" href="{{ url('/login') }}">Login / Register</a></li>
+                @else
+                    <li><a class="btn blue darken-4" href="{{ url('/flightops') }}">Community Center</a></li>
+                @endif
+                --}}
+            </ul>
+        </div>
     </div>
 </nav>
 <!-- Personal Menu Side Popout -->
+<!--
 <div class="blue darken-4 z-depth-2" style="width: 250px; height: 64px; padding-left: 1rem; position: absolute; top: 0px; z-index: 955">
-<a href="#" id="slide-button" style="color: white;" data-activates="slide-out">
-    <div style="height: 64px; width: 100%;position: relative;">
-        <div style="height: 58px; width: 58px; margin-top: .2rem; overflow: hidden;" class="circle">
-            <img style="height: 58px;" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'">
-        </div>
-        <span style="position: absolute; top: 25%; left: 64px; font-size: 20px;">{{ Auth::user()->username }}</span>
-    </div>
-</a>
+
+
+
 </div>
-
-<div id="iBar" style="height: 100%; width: 250px; margin-top: 64px;" class="hide-on-med-and-down">
-    <!--<ul>
-        <li>
-
-        </li>
-        <li style="height: 44px; padding-left: 1rem; background-color: #CCCCCC">
-            <a href="#">
-                <div style="line-height: 44px;">Link Text</div>
-            </a>
-        </li>
-    </ul> -->
-</div>
-
-
+-->
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="user-view">
@@ -62,7 +53,7 @@
                 <span class="red darken-3 white-text" style="position: absolute;bottom: 7px;right: 0;line-height: 20px;padding: 0 10px;">STAFF</span>
             @endif
             <div class="background">
-                <img src="{{ Auth::user()->cover_url }}" onerror="this.src='{{ url('/img/cover_default.png') }}'" style="width:100%;">
+                <img src="{{ Auth::user()->cover_url }}" onerror="this.src='http://i.imgur.com/7U0zKFE.png'" style="width:100%;">
             </div>
             <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><img class="circle" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'"></a>
             <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><span class="white-text name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></a>

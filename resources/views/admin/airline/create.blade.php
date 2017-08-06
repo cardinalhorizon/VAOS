@@ -10,7 +10,7 @@
 @section('content')
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/airlines') }}">
         {{csrf_field()}}
-        <div class="col-lg-4">
+        <div class="col-lg-8 col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> Basic Information
@@ -40,12 +40,32 @@
                             <input type="text" id="callsign" name="callsign" class="form-control" placeholder="eg. Jet Connect">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">Airline Logo</label>
+                        <div class="col-md-9">
+                            <input type="text" id="callsign" name="logo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">Airline Icon</label>
+                        <div class="col-md-9">
+                            <input type="text" id="callsign" name="widget" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">Colors:</label>
+                        <div class="col-md-3">
+                            <input type="text" id="callsign" name="color_primary" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="callsign" name="color_secondary" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" id="callsign" name="color_highlight" class="form-control">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-block">
+                <div class="card-footer">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>&nbsp; Submit</button>
                     <button type="reset" class="btn btn-danger"><i class="fa fa-ban"></i>&nbsp; Reset</button>
                 </div>

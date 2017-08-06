@@ -3,9 +3,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
-    <div style="margin-left: 250px; position: absolute; top: 50px;z-index: 0;">
-        <div class="row" style="min-width: 50%; max-width: 80%; margin: auto;">
-
+        <div class="row" style="">
+            <div class="col l8 offset-l2">
                 <div class="card">
                     <div class="card-image" style="overflow: hidden; height: 300px;">
                         <img
@@ -23,7 +22,7 @@
                                             @foreach(App\Models\Airport::all() as $a)
                                                 <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
                                             @endforeach
-                                        </select>
+                                        </select>compcompocompioasdffasdf
                                         <label>Departure Airport</label>
                                     </div>
                                     <div class="input-field col s6">
@@ -48,15 +47,20 @@
                     </div>
                     </form>
                 </div>
+            </div>
             <div class="col s12">
                 {{ $schedules->appends(\Illuminate\Support\Facades\Input::except('page'))->links('vendor.pagination.material') }}
             </div>
+
+        </div>
+    <div class="container">
+        <div class="row">
             @foreach($schedules as $s)
                 <div class="col s6">
                     <div class="card sticky-action">
                         <div class="card-image grey darken-3" style="height:150px; overflow: hidden;">
                             <!-- <img class="activator" src="https://raw.githubusercontent.com/CardinalHorizon/VAOS/master/public/img/login.png"> -->
-                            <img style="width: 150px; height: 150px; position: absolute;" src="{{ url('/img/AirlineLogos/LogoIcon.png') }}">
+                            <img style="width: 150px; height: 150px; position: absolute;" src="{{ $s->airline->widget }}">
                             <span style="bottom: -20px; font-size: 30px;z-index: 1;" class="card-title">{{ $s->airline->icao }}{{ $s->flightnum }}</span>
                         </div>
 

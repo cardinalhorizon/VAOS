@@ -34,11 +34,11 @@
                     @foreach($pireps as $p)
                         <tr>
                             <td>{{ $p->date_created }}</td>
-                            <td>{{ $a->user()->username }}</td>
-                            <td>{{ $a->airline()->icao }}</td>
-                            <td>{{ $a->flightnum }}</td>
-                            <td>{{ $a->depapt()->icao }}</td>
-                            <td>{{ $a->arrapt()->icao }}</td>
+                            <td>{{ $p->user()->username }}</td>
+                            <td>{{ $p->airline()->icao }}</td>
+                            <td>{{ $p->flightnum }}</td>
+                            <td>{{ $p->depapt()->icao }}</td>
+                            <td>{{ $p->arrapt()->icao }}</td>
                             <td>
                                 <a href="{{ url('admin/pireps/'.$a->id) }}" class="btn btn-primary btn-sm">View</a>
                             </td>
