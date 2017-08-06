@@ -1,3 +1,10 @@
+<style>
+pre {
+background-color: #444856;
+font-color: white;
+}
+</style>
+
 <pre>
 [
    {
