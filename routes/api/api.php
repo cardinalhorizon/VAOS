@@ -37,11 +37,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
         //Route::post('/', 'ScheduleAPI@add');
     });
     Route::get('/bids', 'BidsAPI@getBid');
-    Route::group(['prefix' => '/fleet'], function ()
-    {
-        Route::get('/', 'AircraftAPI@showAll');
-        Route::post('/', 'AircraftAPI@addAircraft');
-    });
     Route::post('/pireps', 'PIREPAPI@filePIREP');
 });
 
