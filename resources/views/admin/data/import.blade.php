@@ -15,7 +15,7 @@
 			<div class="card">
 				<div class="card-header">File Import</div>
 				<div class="card-block">
-					<p>Upload an XLSX file to be imported into the {{ $route }} table.</p>
+					<p>Upload a .JSON file to be imported into the {{ $route }} table.</p>
 					<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admin/data/'.$route.'?action=import') }}">
 				        {{ csrf_field() }}
 				        <input type="file" name="file" id="file">
@@ -30,7 +30,7 @@
 			<div class="card">
 				<div class="card-header">File Format Example</div>
 				<div class="card-block">
-					<p>The file must be uploaded as a Microsoft Excel Worksheet (.xlsx) format in the following structure. Below is an example of the structure that should be used.</p>
+					<p>The file must be uploaded as a JSON (.json) format in the following structure. Below is an example of the structure that should be used.</p>
 					@include('admin.partials.import_format.'.$route)
 				</div>
 			</div>

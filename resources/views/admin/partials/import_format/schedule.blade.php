@@ -1,44 +1,31 @@
-<table class="table table-border table-inverse">
-	<tr>
-		<td>airline</td>
-		<td>flightnum</td>
-		<td>depicao</td>
-		<td>arricao</td>
-		<td>route</td>
-		<td>aircraft_group</td>
-		<td>deptime</td>
-		<td>arrtime</td>
-		<td>notes</td>
-		<td>type</td>
-		<td>daysofweek</td>
-		<td>enabled</td>
-	</tr>
-	<tr>
-		<td>JCO</td>
-		<td>66</td>
-		<td>KABQ</td>
-		<td>KJFK</td>
-		<td></td>
-		<td>A320</td>
-		<td>5:09:00</td>
-		<td>10:09:00</td>
-		<td>FlightAware Schedule</td>
-		<td>1</td>
-		<td>123456</td>
-		<td>1</td>
-	</tr>
-	<tr>
-		<td>JCO</td>
-		<td>1492</td>
-		<td>KACK</td>
-		<td>KJFK</td>
-		<td></td>
-		<td>RJ85</td>
-		<td>13:08:00</td>
-		<td>14:08:00</td>
-		<td>FlightAware Schedule</td>
-		<td>1</td>
-		<td>123456</td>
-		<td>1</td>
-	</tr>
-</table>
+<style>
+pre {
+background-color: #444856;
+color: white;
+}
+</style>
+
+<pre>
+
+[
+   {
+      "airline": "EIN",
+      "flightnum": "631",
+      "depicao": "EBBR",
+      "arricao": "EIDW",
+      "aircraft_group": "A320-214",
+      "enabled": "1",
+      "type": "P"
+   },
+   {
+      "airline": "EIN",
+      "flightnum": "73",
+      "depicao": "LPFR",
+      "arricao": "EGAC",
+      "aircraft_group": "A320-214",
+      "enabled": "1",
+      "type": "P"
+   }
+]
+
+</pre>
