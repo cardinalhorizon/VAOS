@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "fsvaos/vaos",
+    "description": "Virtual Airline Operations System",
     "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "GNU",
     "type": "project",
     "require": {
         "php": ">=5.6.4",

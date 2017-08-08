@@ -19,6 +19,7 @@
     <title>Crew Operations</title>
     @yield('customcss')
 </head>
+
 <body class="grey lighten-3">
 <nav class="grey darken-3 z-depth-2">
     <div class="container" style="width: 90%">
@@ -38,14 +39,6 @@
         </div>
     </div>
 </nav>
-<!-- Personal Menu Side Popout -->
-<!--
-<div class="blue darken-4 z-depth-2" style="width: 250px; height: 64px; padding-left: 1rem; position: absolute; top: 0px; z-index: 955">
-
-
-
-</div>
--->
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="user-view">
