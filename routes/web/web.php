@@ -23,14 +23,15 @@ Auth::routes();
 
 Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' => 'auth'], function() {
     Route::get('/', 'CrewOpsController@index');
-    Route::post('/profile/settings', 'CrewOpsController@profileUpdate');
-    Route::get('/profile/settings', 'CrewOpsController@profileEdit');
+    Route::post('/settings', 'CrewOpsController@profileUpdate');
+    Route::get('/settings', 'CrewOpsController@profileEdit');
     Route::get('/profile/{id}', 'CrewOpsController@profileShow');
     Route::get('/schedule', 'CrewOpsController@getSchedule');
     Route::get('/schedule/search', 'CrewOpsController@getScheduleSearch');
     Route::get('/logbook', 'CrewOpsController@getLogbook');
     Route::resource('/bids', 'BiddingController');
     Route::get('/roster', 'CrewOpsController@getRoster');
+    Route::post('/filepirep', 'CrewOpsController@postManualPirep');
 });
 
 // Web Admin Center

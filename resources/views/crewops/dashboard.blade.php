@@ -3,139 +3,100 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Dashboard</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-plane fa-5x"></i>
+    <div class="container" style="width: 90%">
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="card">
+                    <form action="{{ url('/flightops/schedule') }}" method="GET">
+                        <div class="card-content">
+                            <span class="card-title">Search For Flights</span>
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="col s12">
+                                    <div class="row" style="margin-bottom: 0;">
+                                        <div class="input-field col s12">
+                                            <input placeholder="Any" list="apt" name="depapt" type="text">
+                                            <datalist id="apt">
+                                                @foreach(App\Models\Airport::all() as $a)
+                                                    <option value="{{ $a->icao }}">{{ $a->name }}</option>
+                                                @endforeach
+                                            </datalist>
+                                            <label>Departure Airport</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input placeholder="Any" list="apt" name="arrapt" type="text">
+                                            <label>Arrival Airport</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input placeholder="Any" list="acf" name="aircraft_group" type="text">
+                                            <label>Aircraft</label>
+                                            <datalist id="acf">
+                                                @foreach(App\AircraftGroup::all() as $a)
+                                                    <option value="{{ $a->icao }}">{{ $a->name }}</option>
+                                                @endforeach
+                                            </datalist>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ $bids->count() }}</div>
-                            <div>Active Bids</div>
+                        <div class="card-action">
+                            <button class="btn green darken-3" type="submit">Search</button>
                         </div>
-                    </div>
-                </div>
-                <a href="{{ url('/flightops/bids') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Bids</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-book fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge">{{ $logs->count() }}</div>
-                            <div>Logged Flights</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ url('/flightops/logbook') }}">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Logbook</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Your Stats</h3>
-                </div>
-                <div class="panel-body">
-                    <ul style="list-style: none; padding-left:0;">
-                        <li>Database ID: {{ Auth::user()->id }}</li>
-                        <li>Name: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</li>
-                    </ul>
-                </div>
-                <a href="#">
-                    <div class="panel-footer">
-                        <span class="pull-left">View Profile</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Welcome to the VAOS Pilot Center {{ config('app.version') }}</h3>
-                </div>
-                <div class="panel-body">
-                    This pilot center is still not working at 100% however you are able to use it to request bids and
-                    accept flights. Please message the official facebook page if you find a bug. ~Taylor
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Search Schedule
+            <div class="col s12 m6">
+                <div class="card ">
+                    <div class="card-content">
+                        <span class="card-title">Recent Flights</span>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th width="20%">Flight</th>
+                                <th width="20%">Departure</th>
+                                <th width="20%">Arrival</th>
+                                <th width="20%">Date</th>
+                                <th width="20%">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(\App\PIREP::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
+                                <tr>
+                                    <td>{{ $p->airline->icao . $p->flightnum }}</td>
+                                    <td>{{ $p->depapt->icao }}</td>
+                                    <td>{{ $p->arrapt->icao }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
+                                    @if($p->status == 0)
+                                        <td>
+                                            <div class="yellow-text">Pending</div>
+                                        </td>
+                                    @elseif($p->status == 1)
+                                        <td>
+                                            <div class="green-text">Approved</div>
+                                        </td>
+                                    @elseif($p->status == 2)
+                                        <td>
+                                            <div class="red-text">Rejected</div>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <form action="{{ url('/flightops/schedule') }}" method="GET">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label>Airline</label>
-                            <select id="airline" name="airline" class="form-control">
-                                <option value="0">Any</option>
-                                @foreach(\App\Airline::all() as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Departure</label>
-                            <select id="depapt" name="depapt" class="form-control">
-                                <option value="0">Any</option>
-                                @foreach(\App\Models\Airport::all() as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Arrival</label>
-                            <select id="arrapt" name="arrapt" class="form-control">
-                                <option value="0">Any</option>
-                                @foreach(\App\Models\Airport::all() as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Aircraft</label>
-                            <select id="aircraft" name="aircraft" class="form-control">
-                                <option value="0">Any</option>
-                                @foreach(\App\AircraftGroup::all() as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">My Stats</span>
+                        <ul class="collection with-header">
+                            <li class="collection-item"><div>Join Date<div class="secondary-content">{{ date('d/m/Y', strtotime(Auth::user()->created_at)) }}</div></div></li>
+                            <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count(Auth::user()->pirep) }}</div></div></li>
+                            <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', Auth::user()->id)->avg('landingrate') }}</div></div></li>
+                        </ul>
                     </div>
-                    <div class="panel-footer">
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

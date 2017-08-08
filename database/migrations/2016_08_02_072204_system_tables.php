@@ -84,9 +84,9 @@ class SystemTables extends Migration
             $table->string('name');
             $table->string('manufacturer');
             $table->string('registration');
-            $table->integer('range');
-            $table->integer('maxpax');
-            $table->integer('maxgw');
+            $table->integer('range')->nullable();
+            $table->integer('maxpax')->nullable();
+            $table->integer('maxgw')->nullable();
             $table->integer('status');
             $table->integer('hub_id')->unsigned()->nullable();
             $table->foreign('hub_id')->references('id')->on('airports')->onDelete('set null');

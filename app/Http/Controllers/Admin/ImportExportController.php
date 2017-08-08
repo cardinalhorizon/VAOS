@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AircraftGroup;
 use App\Airline;
-use App\Classes\VAOS_Aircraft;
+use App\Classes\AircraftData;
 use App\Classes\VAOS_Schedule;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -68,25 +70,25 @@ class ImportExportController extends Controller
             $path = $request->file('file')->store('imports');
             //dd($path);
             // Load the Excel Import Object
-            
-            $sheet = Excel::load('storage/app/'.$path, function ($reader) {})->get();
 
-            foreach ($sheet as $row)
+            $data = json_decode(Storage::get($path), true);
+
+            foreach ($data as $row)
             {
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => $row->airline,
-                    'icao' => $row->icao,
-                    'name' => $row->name,
-                    'manufacturer' => $row->manufacturer,
-                    'registration' => $row->registration,
-                    'range' => $row->range,
-                    'maxgw' => $row->maxgw,
-                    'maxpax' => $row->maxpax,
-                    'status' => $row->status
+                    'airline' => Airline::where('icao', $row['airline'])->first(),
+                    'icao' => $row['icao'],
+                    'name' => $row['name'],
+                    'manufacturer' => $row['manufacturer'],
+                    'registration' => $row['registration'],
+                    'range' => $row['range'],
+                    'maxgw' => $row['maxgw'],
+                    'maxpax' => $row['maxpax'],
+                    'status' => $row['status']
                 ];
-                VAOS_Aircraft::createAircraft($data);
+                AircraftData::createAircraft($data);
             }
 
             $request->session()->flash('success', 'Fleet imported successfully.');
@@ -113,26 +115,44 @@ class ImportExportController extends Controller
             */
             // Import the File to the file system
             //dd($request);
-            $path = $request->file('file')->store('imports');
+            $path = $request->file('file')->storeAS('imports', 'schedule.json');
             //dd($path);
             // Load the Excel Import Object
+            $data = json_decode(Storage::get($path), true);
+            foreach ($data as $d)
+            {
+                $airline = Airline::where('icao', $d['airline'])->first();
+                VAOS_Schedule::newRoute([
+                    'depicao' => $d['depicao'],
+                    'arricao' => $d['arricao'],
+                    'airline' => $airline->id,
+                    'flightnum' => $d['flightnum'],
+                    'aircraft_group' => $d['aircraft_group'],
+                    'type' => $d['type'],
+                    'enabled' => $d['enabled']
+                ]);
+            }
+            /*
             $sheet = Excel::load('storage/app/'.$path, function ($reader) {})->get();
-
+            dd($sheet);
             foreach ($sheet as $row)
             {
+                $acfgrp = AircraftGroup::where('icao', $row->aircraft_group)->first();
                 $data = [
                     'airline' => $row->airline,
                     'flightnum' => $row->flightnum,
                     'depicao' => $row->depicao,
                     'arricao' => $row->arricao,
-                    'aircraft_group' => $row->aircraft_group,
+                    'aircraft_group' => $acfgrp,
                     'deptime' => $row->deptime,
                     'arrtime' => $row->arrtime,
                     'type' => $row->type,
                     'enabled' => $row->enabled
                 ];
+                //dd($data);
                 VAOS_Schedule::newRoute($data);
             }
+            */
 
             $request->session()->flash('success', 'Routes imported successfully.');
             

@@ -51,6 +51,14 @@
                         <label>IVAO ID</label>
                         <input type="text" class="form-control" name="ivao" value="{{ $user->ivao }}">
                     </div>
+                    <div class="form-group">
+                        <label>Cover URL</label>
+                        <input type="text" class="form-control" name="cover_url" value="{{ $user->cover_url }}">
+                    </div>
+                    <div class="form-group">
+                        <label>Avatar URL</label>
+                        <input type="text" class="form-control" name="avatar_url" value="{{ $user->avatar_url }}">
+                    </div>
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <button type="submit" class="btn btn-primary">Update</button>

@@ -1,0 +1,67 @@
+{
+  "name": "materialize",
+  "description": "A modern responsive front-end framework based on Material Design",
+  "keywords": [
+    "css",
+    "js",
+    "sass",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "ux",
+    "material",
+    "design"
+  ],
+  "main": [
+    "bin/materialize.css",
+    "bin/materialize.js",
+    "fonts/roboto/Roboto-Bold.woff",
+    "fonts/roboto/Roboto-Bold.woff2",
+    "fonts/roboto/Roboto-Light.woff",
+    "fonts/roboto/Roboto-Light.woff2",
+    "fonts/roboto/Roboto-Medium.woff",
+    "fonts/roboto/Roboto-Medium.woff2",
+    "fonts/roboto/Roboto-Regular.woff",
+    "fonts/roboto/Roboto-Regular.woff2",
+    "fonts/roboto/Roboto-Thin.woff",
+    "fonts/roboto/Roboto-Thin.woff2"
+  ],
+  "ignore": [
+    "jade/",
+    ".gitignore",
+    "CNAME",
+    "css/",
+    "bower.json",
+    "README.md",
+    "images/",
+    "js/jquery.timeago.js",
+    "js/init.js",
+    "js/prism.js",
+    "res/",
+    "sass/style.scss",
+    "sass/ghpages-materialize.scss",
+    "**/*.html",
+    "**/*.zip",
+    "**/*.txt",
+    "sitemap.xml",
+    "package.json",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "jquery": ">=3.2.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/Dogfalo/materialize",
+  "version": "0.99.0",
+  "_release": "0.99.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.99.0",
+    "commit": "701c72f27108b2c63f2ba01de828ca4cc5f8dfff"
+  },
+  "_source": "https://github.com/Dogfalo/materialize.git",
+  "_target": "^0.99.0",
+  "_originalSource": "materialize",
+  "_direct": true
+}

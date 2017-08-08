@@ -4,13 +4,13 @@ namespace App\Http\Controllers\API;
 use App\AircraftGroup;
 use App\Airline;
 use App\Classes\VAOS_Airports;
+use App\Classes\VAOS_Schedule;
 use App\Models\Airport;
 use App\Http\Controllers;
 use App\ScheduleTemplate;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use PhpVMS\Classes\CentralData;
 
 class ScheduleAPI extends Controller
 {
@@ -130,10 +130,25 @@ class ScheduleAPI extends Controller
     {
 
     }
-    public function legacytest()
+    public function jsonadd(Request $request)
     {
-        return CentralData::send_pilots();
+        $data = json_decode($request->getContent(), true);
+        foreach ($data as $d)
+        {
+            VAOS_Schedule::newRoute([
+                'depicao' => $d['depicao'],
+                'arricao' => $d['arricao'],
+                'airline' => $d['airline'],
+                'flightnum' => $d['flightnum'],
+                'aircraft_group' => $d['aircraft_group'],
+                'enabled' => $d['enabled']
+            ]);
+        }
+        return response()->json([
+            'status' => 200
+        ]);
     }
+
     /**
      * Remove the specified resource from storage.
      *

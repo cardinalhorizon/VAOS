@@ -8,136 +8,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/bower_components/materialize/dist/css/materialize.css') }}"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
 
     <title>Crew Operations</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{{URL::asset('crewops/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{{URL::asset('crewops/vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{URL::asset('crewops/dist/css/sb-admin-2.css')}}" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="{{URL::asset('crewops/vendor/morrisjs/morris.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('crewops/dist/css/custom.css')}}" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{URL::asset('css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-    @yield('head')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="{{ URL::asset('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js') }}"></script>
-    <script src="{{ URL::asset('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}"></script>
-    <![endif]-->
-
+    @yield('customcss')
 </head>
 
-<body>
-<div class="wrapper">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.php">{{ config('app.name', 'VAOS') }} Operations Center</a>
-    </div>
-    <!-- /.navbar-header -->
-
-    <ul class="nav navbar-top-links navbar-right">
-
-        <!-- /.dropdown -->
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> {{ Auth::user()->username }} <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="{{ url('flightops/profile/' . Auth::id()) }}"><i class="fa fa-user fa-fw"></i> My Profile</a>
-                </li>
-                <li class="divider"></li>
-                <li><a class="dropdown-item" href="#" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> Logout</a>
-
-                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
-            </ul>
-            <!-- /.dropdown-user -->
-        </li>
-        <!-- /.dropdown -->
-    </ul>
-    <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                </li>
-                <li>
-                    <a href="{{ url('/flightops') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url('/flightops/roster') }}"><i class="fa fa-group fa-fw"></i> Roster</a>
-                </li>
-                <li>
-                    <a href="{{ action('CrewOps\CrewOpsController@profileShow', ['id' => Auth::user()->id]) }}"><i class="fa fa-user fa-fw"></i> My Profile</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-plane fa-fw"></i> Schedule<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="{{ url('/flightops/schedule') }}">View Schedule</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/flightops/bids') }}">View Bids</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                 @if(env('VAOS_FF_ENABLED'))
-                 <li>
-                    <a href="{{ url('/flightops/freeflight') }}"><i class="fa fa-book fa-fw"></i> Free Flight</a>
-                </li>
+<body class="grey lighten-3">
+<nav class="grey darken-3 z-depth-2">
+    <div class="container" style="width: 90%">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo" style="display: inline-flex; vertical-align: middle;">
+                {{ config('app.name') }} Operations Center</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a id="slide-button" href="#" data-activates="slide-out">{{ Auth::user()->username }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                {{--
+                @if(Auth::guest())
+                    <li><a class="btn light-blue darken-3" href="{{ url('/login') }}">Login / Register</a></li>
+                @else
+                    <li><a class="btn blue darken-4" href="{{ url('/flightops') }}">Community Center</a></li>
                 @endif
-                <li>
-                    <a href="{{ url('/flightops/logbook') }}"><i class="fa fa-book fa-fw"></i> Logbook</a>
-                </li>
-                @if (Auth::user()->admin)
-                    <li>
-                        <a href="{{ url('/admin') }}"><i class="fa fa-database fa-fw"></i> Admin Panel</a>
-                    </li>
-                @endif
+                --}}
             </ul>
         </div>
-        <!-- /.sidebar-collapse -->
     </div>
-    <!-- /.navbar-static-side -->
 </nav>
-    <div id="page-wrapper">
-        @yield('content')
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="user-view">
+            @if(Auth::user()->admin)
+                <span class="red darken-3 white-text" style="position: absolute;bottom: 7px;right: 0;line-height: 20px;padding: 0 10px;">STAFF</span>
+            @endif
+            <div class="background">
+                <img src="{{ Auth::user()->cover_url }}" onerror="this.src='http://i.imgur.com/7U0zKFE.png'" style="width:100%;">
+            </div>
+            <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><img class="circle" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'"></a>
+            <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><span class="white-text name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></a>
+            <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><span class="white-text email">{{ Auth::user()->username }}</span></a>
+        </div>
+    </li>
+
+        <li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>
+        <li><a href="{{ url('/flightops/map/') }}">Flight Map</a></li>
+        <li><div class="divider"></div></li>
+        <li><a href="{{ url('/flightops/freeflight') }}">Free Flight</a></li>
+        <li><a href="{{ url('/flightops/schedule') }}">Schedule</a></li>
+        <li><a href="#filePIREP">File PIREP</a></li>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-image" style="height:100px; overflow: hidden;">
+                    <img src="http://flyjetconnect.org/img/712_1.png">
+                    <span class="card-title">Bids: {{ \App\Bid::where('user_id', Auth::user()->id)->count() }}</span>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url('/flightops/bids') }}">View Bids</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="card">
+                <div class="card-image" style="height:100px; overflow: hidden;">
+                    <img src="https://raw.githubusercontent.com/CardinalHorizon/VAOS/master/public/img/login.png">
+                    <span class="card-title">Flights: {{ \App\PIREP::where('user_id', Auth::user()->id)->count() }}</span>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url('/flightops/logbook') }}">View Logbook</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect" href="{{ url('/flightops/settings') }}">User Settings</a></li>
+    @if(Auth::user()->admin)
+        <li><a class="waves-effect" href="{{ url('/admin') }}">Admin Panel</a></li>
+    @endif
+    <li><a class="waves-effect" href="#!">About</a></li>
+    <li><a class="waves-effect" onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">Log Out</a></li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+    </form>
+</ul>
+<!-- Main Sidebar Static -->
+
+@yield('content')
+
+<div id="filePIREP" class="modal">
+    <form action="{{ url('/flightops/filepirep') }}" method="POST">
+        {{csrf_field()}}
+        <div class="modal-content">
+            <h4>Manually File PIREP</h4>
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select name="bid">
+                                <option value="" disabled selected>Select Bid</option>
+                                @foreach(App\Bid::where('user_id', Auth::user()->id)->get() as $bid)
+                                    <option value="{{ $bid->id }}">{{ $bid->airline->icao }}{{ $bid->flightnum }}</option>
+                                @endforeach
+                            </select>
+                            <label>Bid</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input placeholder="Placeholder" name="onlineID" id="onlineID" type="text" class="validate">
+                            <label for="onlineID">Online Network ID</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button href="#!" type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">File PIREP</button>
+        </div>
+    </form>
 </div>
-<!-- jQuery -->
-<script src="{{ URL::asset('crewops/vendor/jquery/jquery.min.js') }}"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ URL::asset('crewops/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="{{ URL::asset('crewops/vendor/metisMenu/metisMenu.min.js') }}"></script>
-
-<!-- Morris Charts JavaScript -->
-<script src="{{ URL::asset('crewops/vendor/raphael/raphael.min.js') }}"></script>
-<script src="{{ URL::asset('crewops/vendor/morrisjs/morris.min.js') }}"></script>
-<script src="{{ URL::asset('crewops/data/morris-data.js') }}"></script>
-@yield('js')
-<!-- Custom Theme JavaScript -->
-<script src="{{ URL::asset('crewops/dist/js/sb-admin-2.js') }}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('/bower_components/materialize/dist/js/materialize.js') }}"></script>
+<script>
+    $("#slide-button").sideNav();
+    $('.modal').modal();
+    $('select').material_select();
+</script>
 </body>
+</html>

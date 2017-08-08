@@ -75,18 +75,18 @@ class CrewOpsController extends Controller
         $query = array();
 
         // Check the request for specific info??
-        if ($request->query('airline') != 0)
-            $query['airline_id'] = $request->query('airline');
+        if ($request->has('airline'))
+            $query['airline_id'] = Airline::where('icao', $request->query('airline'))->first()->id;
 
-        if ($request->query('depapt') != 0)
-            $query['depapt_id'] = $request->query('depapt');
+        if ($request->has('depapt'))
+            $query['depapt_id'] = Airport::where('icao', $request->query('depapt'))->first()->id;
 
-        if ($request->query('arrapt') != 0)
-            $query['arrapt_id'] = $request->query('arrapt');
+        if ($request->has('arrapt'))
+            $query['arrapt_id'] = Airport::where('icao', $request->query('arrapt'))->first()->id;
 
-        if ($request->query('aircraft') != 0)
-            $query['aircraft_group_id'] = $request->query('aircraft');
-
+        if ($request->has('aircraft'))
+            $query['aircraft_group_id'] = AircraftGroup::where('icao', $request->query('aircraft'))->first()->id;
+        //dd($query);
         // Load all the schedules within the database
         if (empty($query)) {
             $schedules = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('airline_id', 'desc')->paginate(9);
@@ -123,5 +123,26 @@ class CrewOpsController extends Controller
         $users = User::all();
 
         return view('crewops.roster.view', ['users' => $users]);
+    }
+    public function postManualPirep(Request $request)
+    {
+
+        $flightinfo = Bid::find($request->bid);
+        $pirep = new PIREP();
+        $pirep->user()->associate(Auth::user()->id);
+        $pirep->airline()->associate($flightinfo->airline_id);
+        $pirep->aircraft()->associate($flightinfo->aircraft_id);
+        $pirep->depapt()->associate($flightinfo->depapt_id);
+        $pirep->arrapt()->associate($flightinfo->arrapt_id);
+        $pirep->flightnum = $flightinfo->flightnum;
+        $pirep->route = "Manually Filed";
+        $pirep->status = 0;
+        $pirep->landingrate = $request->input('landingrate');
+
+        $pirep->save();
+        $flightinfo->delete();
+
+        $request->session()->flash('success', 'Manual PIREP submitted for manual approval.');
+        return redirect('/flightops');
     }
 }

@@ -1,126 +1,109 @@
 @extends('layouts.crewops')
 @section('head')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://raw.githubusercontent.com/cesarve77/select2-materialize/master/select2-materialize.css" type="text/css" rel="stylesheet" >
 @endsection
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <span style="right: 15px; position: absolute; bottom: 30px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalSearch">Search Schedule</button></span>
-            <h1 class="page-header">Schedule</h1>
+    <div class="z-depth-2" style="position: relative; width: 100%; height: 300px; overflow: hidden; background: url(http://i.imgur.com/3UZDNCM.png);     background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;">
+        <div style="height: 100%; background: linear-gradient(rgba(255,0,0,0), rgba(255,0,0,0), rgba(69,69,69,0.9))">
+        </div>
+        <h3 class="white-text" style="position: absolute; bottom: 0; left: 2rem;">Airline Schedule</h3>
+        <div class="container" style="position: inherit;">
+            <div style="position: absolute; right: 0; bottom: 1rem;">
+                <a class="waves-effect waves-light btn modal-trigger" href="#modalsearch">Search</a>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn modal-trigger" href="#modalsearch">Search</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s10">
+                {{ $schedules->appends(\Illuminate\Support\Facades\Input::except('page'))->links('vendor.pagination.material') }}
+            </div>
+            <div class="col s2">
+
+            </div>
+            @foreach($schedules as $s)
+                <div class="col m6 s12">
+                    <div class="card">
+                        <div class="card-image grey darken-3" style="height:150px; overflow: hidden;">
+                            <!-- <img class="activator" src="https://raw.githubusercontent.com/CardinalHorizon/VAOS/master/public/img/login.png"> -->
+                            <img style="width: 150px; height: 150px; position: absolute;" src="{{ $s->airline->widget }}">
+                            <span style="bottom: -20px; font-size: 30px;z-index: 1;" class="card-title">{{ $s->airline->icao }}{{ $s->flightnum }}</span>
+                        </div>
+
+                        <div class="card-content">
+                            <a style="position: absolute;right: 24px;bottom: 135px;" class="btn-floating activator waves-effect waves-light red"><i class="material-icons">more_vert</i></a>
+                            <span style="display: inline-flex; vertical-align: middle;" class="card-title activator grey-text text-darken-4">{{ $s->depapt->iata }}<i class="material-icons">&#xE5C8;</i>{{ $s->arrapt->iata }}<i class="material-icons"></i></span>
+                        </div>
+                        <div class="card-reveal" style="z-index: 2;">
+                            <span class="card-title grey-text text-darken-4">{{ $s->airline->icao }}{{ $s->flightnum }}<i class="material-icons right">close</i></span>
+                            <ul class="collection with-header">
+                                <li class="collection-item"><div>Aircraft Group<div class="secondary-content">@if($s->aircraft_group == null)
+                                                Not Assigned
+                                            @else
+                                                {{$s->aircraft_group->name}}
+                                            @endif</div></div></li>
+                                <li class="collection-item"><div>Airline<div class="secondary-content">{{ $s->airline->name }}</div></div></li>
+                            </ul>
+                        </div>
+                        <form action="{{ url('/flightops/bids') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input hidden name="schedule_id" value="{{ $s->id }}"/>
+                            <div class="card-action">
+                                @if(Auth::guest())
+                                    <b>PLEASE LOGIN TO BID ON FLIGHT</b>
+                                @else
+                                    <button type="submit" class="btn green">Simple Bid</button>
+                                    <a class="btn blue" disabled>Advanced Bid</a>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
-    <div class="row">
-        {{ $schedules['data'] }}
-        @if($schedules['data'] == '[]')
-            <div class="col-sm-12">
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Routes Not Found.</strong> The search parameters you entered yielded no results.
-            </div>
-            </div>
-        @else
-        @foreach($schedules as $s)
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-body" style="padding: 10px;">
-                        <div class="flightpanel">
-                            <div class="airline-text">{{ $s->airline->icao }}{{ $s->flightnum }}</div>
-                            <div class="arrdep">{{ $s->depapt->icao }} - {{ $s->arrapt->icao }}</div>
-                            <div class="flightpanel-details">
-                                <div>@if($s->aircraft_group == null)
-                                        Not Assigned
-                                    @else
-                                        {{$s->aircraft_group->name}}
-                                    @endif
-                                    <i class="fa fa-plane fa-fw"></i>
-                                </div>
+    <!-- Search Modal -->
+    <div id="modalsearch" class="modal">
+        <form action="{{ url('/schedule') }}" method="GET">
+            <div class="modal-content">
+                <h4>Search Routes</h4>
+                <div class="row" style="margin-bottom: 0;">
+                    <div class="col s12">
+                        <div class="row" style="margin-bottom: 0;">
+                            <div class="input-field col s12">
+                                <input placeholder="Any" list="apt" name="depapt" type="text">
+                                <datalist id="apt">
+                                    <option value="0" selected>Any</option>
+                                    @foreach(App\Models\Airport::all() as $a)
+                                        <option value="{{ $a->icao }}">{{ $a->name }}</option>
+                                    @endforeach
+                                </datalist>
+                                <label>Departure Airport</label>
                             </div>
-                            <img id="airline-icon" src="{{ url('/img/AirlineLogos/LogoIcon.png') }}"/>
+                            <div class="input-field col s12">
+                                <input placeholder="Any" list="apt" name="arrapt" type="text">
+                                <label>Arrival Airport</label>
+                            </div>
                         </div>
                     </div>
-                    <form action="{{ url('/flightops/bids') }}" method="POST">
-                    <div class="panel-footer">
-                        <span class="pull-left">
-                            {{ csrf_field() }}
-                                <input hidden name="schedule_id" value="{{ $s->id }}"/>
-                                @if($s->aircraft_group == null)
-                                    <select id="airline" name="airline" class="form-control" size="1">
-                                        @foreach($aircraft as $a)
-                                            <option value="{{ $a->id }}">{{ $a->name }} - {{ $a->registration }}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
-                        </span>
-                        <span class="pull-right">
-                            <button type="submit" class="btn btn-primary">Bid</button>
-                            <!-- <a href="{{ url('/flightops/bids/create?schedule='.$s->id) }}" class="btn btn-info" role="button">Adv. Bid</a> -->
-                        </span>
-                        <div class="clearfix"></div>
-                    </div>
-                    </form>
                 </div>
             </div>
-        @endforeach
-            <div class="col-sm-12"> {!! $schedules->appends(\Illuminate\Support\Facades\Input::except('page'))->links() !!}</div>
-            @endif
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modalSearch" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Search Routes</h4>
-                </div>
-                <form action="{{ url('/flightops/schedule') }}" method="GET">
-                <div class="modal-body">
-                            <div class="form-group">
-                                <label>Airline</label>
-                                <select id="airline" name="airline" class="form-control" style="width: 100%;">
-                                    <option value="0">Any</option>
-                                    @foreach(\App\Airline::all() as $a)
-                                        <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Departure</label>
-                                <select id="depapt" name="depapt" class="form-control" style="width: 100%;">
-                                    <option value="0">Any</option>
-                                    @foreach(\App\Models\Airport::all() as $a)
-                                        <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Arrival</label>
-                                <select id="arrapt" name="arrapt" class="form-control" style="width: 100%;">
-                                    <option value="0">Any</option>
-                                    @foreach(\App\Models\Airport::all() as $a)
-                                        <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Aircraft</label>
-                                <select id="aircraft" name="aircraft" class="form-control" style="width: 100%;">
-                                    <option value="0">Any</option>
-                                    @foreach(\App\AircraftGroup::all() as $a)
-                                        <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                    @endforeach
-                                </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
-                </div>
-                </form>
+            <div class="modal-footer">
+                <button class="btn-flat green darken-3 white-text" type="submit">Search</button>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Cancel</a>
             </div>
-        </div>
+        </form>
     </div>
 @endsection
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
