@@ -1,56 +1,19 @@
 @extends('layouts.crewops')
 @section('customcss')
-    <style>
-        @media (max-width: 1500px)
-        {
-            .MainContent {
-                position: absolute;
-                top: 50px;
-                z-index: 0;
-            }
-        }
-        @media (min-width: 1500px)
-        {
-            .MainContent {
-                position: absolute;
-                top: 50px;
-                z-index: 0;
-                margin-left: 250px;
-                margin-right: 250px;
-            }
-        }
-    </style>
+
 @endsection
 @section('content')
-    <div class="MainContent">
-            <div class="user-view z-depth-2">
-                <div style="overflow: hidden; height: 300px; width: 100%; position: relative">
-                    <img src="{{ Auth::user()->cover_url }}" onerror="this.src='{{ url('/img/cover_default.png') }}'" style="width: 100%;">
-                    <div style="position: absolute; top: 40px; left: 4rem;">
-                        <img class="circle" style="border: solid; border-color: white; width: 200px; height: 200px;" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'">
-
-                    </div>
-                    <div style="position: absolute; bottom: .5rem; text-align: center; left: .5rem; align-items: center; width: 300px;">
-                        <span style="font-size: 26px;" class="white-text name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
-                    </div>
-
-                </div>
-            </div>
+    <div class="z-depth-2" style="position: relative; width: 100%; height: 300px; overflow: hidden; background: url('{{ Auth::user()->cover_url }}'), url(/img/cover_default.png);     background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;">
+        <div style="height: 100%; background: linear-gradient(rgba(255,0,0,0), rgba(255,0,0,0), rgba(69,69,69,0.9))">
+        </div>
+        <h3 class="white-text" style="position: absolute; bottom: 0; left: 2rem;">{{ $user->first_name }} {{ $user->last_name }}</h3>
+    </div>
+    <div class="container" style="width: 90%">
         <div class="row">
-            <div class="col l3">
-                <div class="card white">
-                    <div class="card-content">
-                        <span class="card-title">VA Stats</span>
-                        <ul class="collection with-header">
-                            <li class="collection-item"><div>Join Date<div class="secondary-content">{{ date('d/m/Y', strtotime($user->created_at)) }}</div></div></li>
-                            <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count($user->pirep) }}</div></div></li>
-                            <li class="collection-item"><div>Average Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', $user->id)->avg('landingrate') }}</div></div></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col l9">
-                <div class="card white">
+            <div class="col s12 m6">
+                <div class="card ">
                     <div class="card-content">
                         <span class="card-title">Recent Flights</span>
                         <table class="table">
@@ -64,7 +27,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($pireps as $p)
+                            @foreach(\App\PIREP::where('user_id', $user->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
                                 <tr>
                                     <td>{{ $p->airline->icao . $p->flightnum }}</td>
                                     <td>{{ $p->depapt->icao }}</td>
@@ -87,6 +50,18 @@
                             @endforeach
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">My Stats</span>
+                        <ul class="collection with-header">
+                            <li class="collection-item"><div>Join Date<div class="secondary-content">{{ date('d/m/Y', strtotime($user->created_at)) }}</div></div></li>
+                            <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count($user->pirep) }}</div></div></li>
+                            <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', $user->id)->avg('landingrate') }}</div></div></li>
+                        </ul>
                     </div>
                 </div>
             </div>

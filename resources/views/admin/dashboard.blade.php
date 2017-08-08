@@ -1,16 +1,10 @@
 @extends('layouts.admin')
 
-@section('breadcrumb')
-    <li class="breadcrumb-item">Home</li>
-    <li class="breadcrumb-item"><a href="#">Admin</a>
-    </li>
-    <li class="breadcrumb-item active">Dashboard</li>
-@endsection
 
 @section('content')
     <div class="col-xs-6 col-lg-3">
         <div class="card">
-            <div class="card-block p-a-1 clearfix">
+            <div class="card-block">
                 @if(\App\PIREP::where('status', 0)->count())
                     <i class="fa fa-plane bg-danger p-a-1 font-2xl m-r-1 pull-left"></i>
                     <div class="h5 text-danger m-b-0 m-t-h">{{ \App\PIREP::where('status', 0)->count() }}</div>

@@ -31,6 +31,7 @@ Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' =
     Route::get('/logbook', 'CrewOpsController@getLogbook');
     Route::resource('/bids', 'BiddingController');
     Route::get('/roster', 'CrewOpsController@getRoster');
+    Route::post('/filepirep', 'CrewOpsController@postManualPirep');
 });
 
 // Web Admin Center
