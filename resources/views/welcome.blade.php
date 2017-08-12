@@ -87,7 +87,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
+                <img src="https://i.imgur.com/ZIhSJFH.jpg" style="max-width: 35%; min-height: : 25%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
