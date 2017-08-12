@@ -15,7 +15,7 @@
         <style>
         
         body {
-        background: url(http://i.imgur.com/lH3nDFa.png) no-repeat fixed;
+        background: url(https://i.imgur.com/akFJhP8.jpg) no-repeat fixed;
         background-size: cover;
         width: 100%;
         height: 300%;
@@ -74,7 +74,7 @@
         <div class="container-fluid" style="height: 300% !important;">
             <div class="row">
                 <div class="col-md-8 element">
-                    <img src="http://i.imgur.com/Ksnw6Ue.png" style="width: 500px; ">
+                    <img src="https://i.imgur.com/0BEIm3k.png" style="width: 500px; ">
                     </img>
                 </div>
                 <div class="col-md-4" style="margin: 0px; padding: 0px;">
