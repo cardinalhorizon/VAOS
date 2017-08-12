@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="{{URL::asset('crewops/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="/css/simple-line-icons.css" rel="stylesheet">
@@ -80,7 +81,7 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links" color: white; style="padding-left: 7px;">
-            <b style="color: white;">Flight Crew Operations Center <i style="margin-top: 4.3px;" class="icon-arrow-right"></i></b>
+            <b style="color: white;">Flight Crew Operations Center <i class="fa fa-chevron-right" aria-hidden="true"></i></b>
             <a style="color: white;" href="{{ url('/login') }}">Login </a>
         </div>
         @endif
