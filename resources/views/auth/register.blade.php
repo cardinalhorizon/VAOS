@@ -7,7 +7,7 @@
     <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description">
     <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
     <title>
-        VAOS Registration
+        {{ config('app.name') }} Registration
     </title>
     <!-- Icons -->
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -82,7 +82,7 @@
                         <div class="card p-a-2" style="margin: 0px;">
                             <div class="card-block" style="padding-bottom: 300% !important; padding-top: 15%; margin: 0px; height: 300% !important;">
                                 <h1>
-                                    Register
+                                    {{ config('app.name') }} Registration
                                 </h1>
                                 <p class="text-muted">
                                     Create an account
