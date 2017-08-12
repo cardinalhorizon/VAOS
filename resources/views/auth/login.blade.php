@@ -4,23 +4,16 @@
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description">
+        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description"></meta>
         <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
         <title>
-            VAOS Login
+            {{ config('app.name') }} Login
         </title>
         <!-- Icons -->
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
         <!-- Main styles for this application -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        </link>
-        </link>
-        </link>
-        </meta>
-        </meta>
-        </meta>
-        </meta>
      <style>
         body {
         background: url(https://i.imgur.com/akFJhP8.jpg) no-repeat fixed;
@@ -87,7 +80,7 @@
                         <div class="card p-a-2" style="margin: 0px;">
                             <div class="card-block" style="padding-bottom: 180%; padding-top: 15%; margin: 0px; height: 100% !important;">
                                 <h1>
-                                    VAOS Login
+                                    {{ config('app.name') }} Login
                                 </h1>
                                 <p class="text-muted">
                                     Sign In to your account
