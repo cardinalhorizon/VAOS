@@ -7,8 +7,6 @@ The Virtual Airline Operations System project is an open source and modern Virtu
 
 # License
 
-GPL v3
-
 ![GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)
 
 [GPL v3](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
@@ -25,8 +23,8 @@ GPL v3
 
 # Installing VAOS
 
-Visit the Installation Guide to get started (updated each release):
-* [VAOS Installation Guide](https://github.com/FSVAOS/VAOS/blob/master/Documentation/InstallationGuide.pdf)
+Head over to the VAOS wiki to get started:
+* [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Video-Documentation)
 
 # Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
