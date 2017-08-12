@@ -79,7 +79,7 @@
         <div class="container-fluid" style="height: 100% !important;">
             <div class="row">
                 <div class="col-md-8 element">
-                    <img src="http://i.imgur.com/Ksnw6Ue.png" style="width: 500px; ">
+                    <img src="https://i.imgur.com/0BEIm3k.png" style="width: 500px; ">
                     </img>
                 </div>
                 <div class="col-md-4" style="margin: 0px; padding: 0px;">
