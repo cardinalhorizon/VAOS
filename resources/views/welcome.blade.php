@@ -98,6 +98,7 @@
     </div>
     <script src="{{ URL::asset('crewops/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('crewops/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://use.fontawesome.com/27fef86760.js"></script>
 </body>
 
 </html>
