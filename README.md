@@ -1,4 +1,4 @@
-![alt text](http://i.imgur.com/E2Qa1tf.jpg)
+![alt text](https://i.imgur.com/53yyaeT.png)
 
 # About
 
@@ -17,11 +17,11 @@ CC Attribution-NonCommercial 4.0 International
 
 # System Requirements
 
-- **PHP**: 5.6 or newer
+- **PHP**: 7.0 or newer
 
 - **MySQL**: MySQL Community Server 5.3.x or newer
 
-- **Apache 2.2 - 2.4.25+** or latest **nginx** version
+- **Apache 2.2 +** or latest **nginx** version
 
 # Installing VAOS
 
@@ -33,5 +33,5 @@ Donations are greatly appreciated and go towards further development of VAOS and
 
 Send donations to taylorbroad@gmail.com via. PayPal
 
-# Current Beta Version
-##### BETA 4
+# Current Release Version
+##### version 1.0
