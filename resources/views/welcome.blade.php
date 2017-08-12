@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VAOS Public Beta</title>
+    <title>Welcome to {{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -62,8 +62,8 @@
 
         }
         body {
-            /* Credit to Vuk Martjin Radevic Wolf for BETA 3 Background Picture */
-            background: url(http://i.imgur.com/7U0zKFE.png) no-repeat fixed;
+            /* Credit to Matthew S. for the background picture */
+            background: url(http://i.imgur.com/AeTf0AW.png) no-repeat fixed;
             background-size: cover;
             width: 100%;
             height: 100%;
