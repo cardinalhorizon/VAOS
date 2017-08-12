@@ -23,7 +23,7 @@
         </meta>
      <style>
         body {
-        background: url(http://i.imgur.com/lH3nDFa.png) no-repeat fixed;
+        background: url(https://i.imgur.com/akFJhP8.jpg) no-repeat fixed;
         background-size: cover;
         width: 100%;
         height: 100%;
