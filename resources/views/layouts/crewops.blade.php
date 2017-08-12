@@ -54,10 +54,11 @@
         </div>
     </li>
 
-        <li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>
-        <li><a href="{{ url('/flightops/map/') }}">Flight Map</a></li>
+        <li><a href="{{ url('/flightops') }}">Home</a></li>
+        <!--<li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>-->
+        <!--<li><a href="{{ url('/flightops/map/') }}">Flight Map</a></li>-->
         <li><div class="divider"></div></li>
-        <li><a href="{{ url('/flightops/freeflight') }}">Free Flight</a></li>
+        <!--<li><a href="{{ url('/flightops/freeflight') }}">Free Flight</a></li>-->
         <li><a href="{{ url('/flightops/schedule') }}">Schedule</a></li>
         <li><a href="#filePIREP">File PIREP</a></li>
 
