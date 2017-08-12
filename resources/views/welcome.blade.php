@@ -63,7 +63,7 @@
         }
         body {
             /* Credit to Matthew S. for the background picture */
-            background: url(http://i.imgur.com/AeTf0AW.png) no-repeat fixed;
+            background: url(https://i.imgur.com/ZIhSJFH.jpg) no-repeat fixed;
             background-size: cover;
             width: 100%;
             height: 100%;
@@ -87,7 +87,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="https://i.imgur.com/ZIhSJFH.jpg" style="max-width: 35%; min-height: : 25%; ">
+                <img src="https://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
