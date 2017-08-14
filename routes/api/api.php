@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     {
         Route::post('/posrpt', 'AcarsAPI@position');
         Route::get('/wx', 'AcarsAPI@getwx');
+        Route::get('/data', 'AcarsAPI@getAcarsData');
     });
     // Airports Database Functions
     Route::group(['prefix' => '/airports'], function ()
