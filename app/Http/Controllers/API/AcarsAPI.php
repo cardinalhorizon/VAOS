@@ -116,7 +116,8 @@ class AcarsAPI extends Controller
         if ($request->query('format') == 'phpVMS') {
 
             /**
-             * So here we are to make
+             * So here we are to make the magic happen that all external apps which use the old phpVMS format, work again
+             * Treat it with respect, this won't be around for too much longer.
              */
 
             if(!$flights)
@@ -191,8 +192,8 @@ class AcarsAPI extends Controller
                 $data->deplng = (string) $flight->bid->depapt->lon;
                 $data->depname = $flight->bid->depapt->name;
                 $data->deptime = $flight->bid->deptime;
-                $data->distremain = null; // TODO: Adding distance remain
-                $data->distremaining = null; // TODO: Adding distance remaining
+                $data->distremain = $flight->distremaining;
+                $data->distremaining = $flight->distremaining;
                 $data->firstname = $flight->user->first_name;
                 $data->flightnum = $flight->bid->airline->icao.$flight->bid->flightnum;
                 $data->gs = (string) $flight->groundspeed;
@@ -201,15 +202,15 @@ class AcarsAPI extends Controller
                 $data->lastname = $flight->user->last_name;
                 $data->lastupdate = (string) $flight->updated_at;
                 $data->lat = (string) $flight->lat;
-                $data->lng = (string) $flight->lon;
-                $data->online = null; // TODO: Adding online platform or write offline
+                $data->lng = (string)$flight->lon;
+                $data->online = $flight->online;
                 $data->phasedetail = $flight->phase;
                 $data->pilotid = $flight->user->pilotid; // TODO Make pilot ID work
                 $data->pilotname = $flight->user->first_name.' '.$flight->user->last_name;
                 $data->registration = $flight->bid->aircraft->registration;
                 $data->route = $flight->bid->route;
                 $data->route_details = $flight->bid->route_details;
-                $data->timeremaining = null; // TODO: Adding Timeremaining
+                $data->timeremaining = $flight->timeremaining;
 
 
                 $c = (array)$data;
@@ -228,18 +229,9 @@ class AcarsAPI extends Controller
 
                 //VAOS normalize the data. This will be removed when the Todos are done
 
-                if ($c['distremain'] == ''){
-                    $c['distremain'] = '0';
+                if ($c['route'] == ''){
+                    $c['route'] = '';
                 }
-
-                if ($c['distremaining'] == ''){
-                    $c['distremaining'] = '0';
-                }
-
-                if ($c['online'] == ''){
-                    $c['online'] = 'Offline';
-                }
-
 
                 $acarsflights[] = $c; // Convert the object to an array
             }
