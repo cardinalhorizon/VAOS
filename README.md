@@ -1,4 +1,4 @@
-![alt text](http://i.imgur.com/E2Qa1tf.jpg)
+![alt text](https://i.imgur.com/53yyaeT.png)
 
 # About
 
@@ -7,31 +7,29 @@ The Virtual Airline Operations System project is an open source and modern Virtu
 
 # License
 
-CC Attribution-NonCommercial 4.0 International
+![GPL v3](https://www.gnu.org/graphics/gplv3-127x51.png)
 
-![Creative Commons /w Attribution Non-Commerical](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)
-
-![alt text](https://creativecommons.org//wp-content/themes/creativecommons.org/images/chooser_cc.png "CC") ![alt text](https://creativecommons.org/wp-content/themes/creativecommons.org/images/chooser_by.png "CC") ![alt text](https://creativecommons.org//wp-content/themes/creativecommons.org/images/chooser_nc.png "CC")
+[GPL v3](https://www.gnu.org/licenses/quick-guide-gplv3.en.html)
 
 
 
 # System Requirements
 
-- **PHP**: 5.6 or newer
+- **PHP**: 7.0 or newer
 
 - **MySQL**: MySQL Community Server 5.3.x or newer
 
-- **Apache 2.2 - 2.4.25+** or latest **nginx** version
+- **Apache 2.2+** or latest **nginx** version
 
 # Installing VAOS
 
-Visit the Installation Guide to get started (updated each release):
-* [VAOS Installation Guide](https://github.com/FSVAOS/VAOS/blob/master/Documentation/InstallationGuide.pdf)
+Head over to the VAOS wiki to get started:
+* [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Video-Documentation)
 
 # Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
 
 Send donations to taylorbroad@gmail.com via. PayPal
 
-# Current Beta Version
-##### BETA 4
+# Current Release Version
+##### version 1.0

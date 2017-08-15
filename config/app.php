@@ -21,10 +21,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This is the VAOS version number. Currently Taylor has not decided on a
-    | version so it's called Beta 1, 2, 3... etc.
+    | version so it's called Beta 1, 2, 3... etc. !Edit, v1.0 has been released :)
     */
 
-    'version' => 'Beta 4',
+    'version' => 'Version 1.0',
 
     /*
     |--------------------------------------------------------------------------

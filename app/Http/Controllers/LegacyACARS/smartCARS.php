@@ -44,6 +44,7 @@ class smartCARS extends Controller
         $pirep->route = "NOT SUPPORTED";
         $pirep->status = 0;
         $pirep->landingrate = $request->input('landingrate');
+        $pirep->flighttime = $request->input('flighttime');
 
         // Auto Accept System
         if (env('VAOS_AA_ENABLED')) {
@@ -93,13 +94,13 @@ class smartCARS extends Controller
             $report['heading'] = $request->input('heading');
             $report['altitude'] = $request->input('alt');
             $report['groundspeed'] = $request->input('gs');
+            $report['distremain'] = $request->input('distremain');
+            $report['timeremaining'] = $request->input('timeremaining');
+            $report['online'] = $request->input('online');
             /*
             'deptime'
             'arrtime'
             'route'
-            'distremain'
-            'timeremaining'
-            'phasedetail'
             */
             $report['phase'] = $request->input('phasedetail');
             $report['client'] = $request->input('client');
@@ -121,6 +122,9 @@ class smartCARS extends Controller
         $rpt->groundspeed = $report['groundspeed'];
         $rpt->phase = $report['phase'];
         $rpt->client = $report['client'];
+        $rpt->distremain =  $report['distremain'];
+        $rpt->timeremaining = $report['timeremaining'];
+        $rpt->online =  $report['online'];
         $rpt->save();
         return response()->json([
             'status' => 200

@@ -24,7 +24,7 @@
 <nav class="grey darken-3 z-depth-2">
     <div class="container" style="width: 90%">
         <div class="nav-wrapper">
-            <a href="/" class="brand-logo" style="display: inline-flex; vertical-align: middle;">
+            <a href="/flightops" class="brand-logo" style="display: inline-flex; vertical-align: middle;">
                 {{ config('app.name') }} Operations Center</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a id="slide-button" href="#" data-activates="slide-out">{{ Auth::user()->username }}<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -54,10 +54,11 @@
         </div>
     </li>
 
-        <li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>
-        <li><a href="{{ url('/flightops/map/') }}">Flight Map</a></li>
+        <li><a href="{{ url('/flightops') }}">Home</a></li>
+        <!--<li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>-->
+        <!--<li><a href="{{ url('/flightops/map/') }}">Flight Map</a></li>-->
         <li><div class="divider"></div></li>
-        <li><a href="{{ url('/flightops/freeflight') }}">Free Flight</a></li>
+        <!--<li><a href="{{ url('/flightops/freeflight') }}">Free Flight</a></li>-->
         <li><a href="{{ url('/flightops/schedule') }}">Schedule</a></li>
         <li><a href="#filePIREP">File PIREP</a></li>
 

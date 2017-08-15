@@ -4,26 +4,19 @@
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description">
+        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description"></meta>
         <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
         <title>
-            VAOS Login
+            {{ config('app.name') }} Login
         </title>
         <!-- Icons -->
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
         <!-- Main styles for this application -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        </link>
-        </link>
-        </link>
-        </meta>
-        </meta>
-        </meta>
-        </meta>
      <style>
         body {
-        background: url(http://i.imgur.com/lH3nDFa.png) no-repeat fixed;
+        background: url(https://i.imgur.com/akFJhP8.jpg) no-repeat fixed;
         background-size: cover;
         width: 100%;
         height: 100%;
@@ -79,7 +72,7 @@
         <div class="container-fluid" style="height: 100% !important;">
             <div class="row">
                 <div class="col-md-8 element">
-                    <img src="http://i.imgur.com/Ksnw6Ue.png" style="width: 500px; ">
+                    <img src="https://i.imgur.com/0BEIm3k.png" style="width: 500px; ">
                     </img>
                 </div>
                 <div class="col-md-4" style="margin: 0px; padding: 0px;">
@@ -87,7 +80,7 @@
                         <div class="card p-a-2" style="margin: 0px;">
                             <div class="card-block" style="padding-bottom: 180%; padding-top: 15%; margin: 0px; height: 100% !important;">
                                 <h1>
-                                    VAOS Login
+                                    {{ config('app.name') }} Login
                                 </h1>
                                 <p class="text-muted">
                                     Sign In to your account

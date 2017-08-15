@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VAOS Public Beta</title>
+    <title>Welcome to {{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="{{URL::asset('crewops/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="/css/simple-line-icons.css" rel="stylesheet">
@@ -62,8 +63,8 @@
 
         }
         body {
-            /* Credit to Vuk Martjin Radevic Wolf for BETA 3 Background Picture */
-            background: url(http://i.imgur.com/7U0zKFE.png) no-repeat fixed;
+            /* Credit to Matthew S. for the background picture */
+            background: url(https://i.imgur.com/ZIhSJFH.jpg) no-repeat fixed;
             background-size: cover;
             width: 100%;
             height: 100%;
@@ -80,14 +81,14 @@
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
         <div class="top-right links" color: white; style="padding-left: 7px;">
-            <b style="color: white;">Flight Crew Operations Center <i style="margin-top: 4.3px;" class="icon-arrow-right"></i></b>
+            <b style="color: white;">Flight Crew Operations Center <i class="fa fa-chevron-right" aria-hidden="true"></i></b>
             <a style="color: white;" href="{{ url('/login') }}">Login </a>
         </div>
         @endif
 
         <div class="content">
             <div class="title m-b-md">
-                <img src="http://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
+                <img src="https://i.imgur.com/0BEIm3k.png" style="max-width: 35%; min-height: : 25%; ">
             </div>
 
             <div class="links" style="color: white; margin: 0px; padding: 0px;">
@@ -97,6 +98,7 @@
     </div>
     <script src="{{ URL::asset('crewops/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('crewops/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="https://use.fontawesome.com/27fef86760.js"></script>
 </body>
 
 </html>
