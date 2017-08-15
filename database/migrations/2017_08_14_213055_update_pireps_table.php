@@ -14,7 +14,7 @@ class UpdatePirepsTable extends Migration
     public function up()
     {
         Schema::table('pireps', function (Blueprint $table) {
-            $table->string('flighttime', 10);
+            $table->double('flighttime',10,2);
             $table->smallInteger('distance');
         });
     }
