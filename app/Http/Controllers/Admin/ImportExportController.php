@@ -104,55 +104,24 @@ class ImportExportController extends Controller
     {
         if ($request->query('action') == 'import')
         {
-            /*
-            $progress = new JobProgress([
-                'task' => 'import',
-                'slug' => 'Import Schedule Templates',
-                'description' => 'Uploading Workbook',
-                'totalitems' => 1,
-                'itemscompleted' => 0
-            ]);
-            */
-            // Import the File to the file system
-            //dd($request);
+
             $path = $request->file('file')->storeAS('imports', 'schedule.json');
             //dd($path);
             // Load the Excel Import Object
             $data = json_decode(Storage::get($path), true);
             foreach ($data as $d)
             {
-                $airline = Airline::where('icao', $d['airline'])->first();
-                VAOS_Schedule::newRoute([
+                $route = [
                     'depicao' => $d['depicao'],
                     'arricao' => $d['arricao'],
-                    'airline' => $airline->id,
+                    'airline' => $d['airline'],
                     'flightnum' => $d['flightnum'],
                     'aircraft_group' => $d['aircraft_group'],
                     'type' => $d['type'],
                     'enabled' => $d['enabled']
-                ]);
-            }
-            /*
-            $sheet = Excel::load('storage/app/'.$path, function ($reader) {})->get();
-            dd($sheet);
-            foreach ($sheet as $row)
-            {
-                $acfgrp = AircraftGroup::where('icao', $row->aircraft_group)->first();
-                $data = [
-                    'airline' => $row->airline,
-                    'flightnum' => $row->flightnum,
-                    'depicao' => $row->depicao,
-                    'arricao' => $row->arricao,
-                    'aircraft_group' => $acfgrp,
-                    'deptime' => $row->deptime,
-                    'arrtime' => $row->arrtime,
-                    'type' => $row->type,
-                    'enabled' => $row->enabled
                 ];
-                //dd($data);
-                VAOS_Schedule::newRoute($data);
+                VAOS_Schedule::newRoute($route);
             }
-            */
 
             $request->session()->flash('success', 'Routes imported successfully.');
             
