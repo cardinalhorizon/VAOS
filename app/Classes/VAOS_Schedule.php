@@ -70,7 +70,7 @@ class VAOS_Schedule
         $complete->arrtime = Carbon::now();
         $complete->load = 0;
         $complete->save();
-
+        /*
             // Add the schedule template into the legacy table
             $legacy = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
             $legacy->code = $template->airline->icao;
@@ -106,7 +106,7 @@ class VAOS_Schedule
 
             $legacy->bidid = $legacybid->id;
             $legacy->save();
-
+        */
         return true;
     }
     public static function newRoute($data)
