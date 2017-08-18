@@ -45,7 +45,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
     Route::resource('/users', 'UsersController');
     Route::resource('/groups', 'UserGroupsController');
     Route::resource('/pireps', 'PIREPController');
-
+    Route::get('/migrate', 'InstallController@dbMigrate');
     Route::group(['prefix' => '/data'], function () {
         Route::get('/system', 'ImportExportController@getSystem');
         Route::post('/system', 'ImportExportController@postSystem');
@@ -63,3 +63,4 @@ Route::get('/setup', 'Admin\InstallController@index');
 Route::post('/settings', 'Admin\InstallController@settings');
 Route::post('/install', 'Admin\InstallController@doInstall');
 Route::get('/accountmigrate', 'Admin\InstallController@migrate');
+
