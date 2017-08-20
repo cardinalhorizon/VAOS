@@ -15,7 +15,7 @@ color: white;
       "arricao": "EIDW",
       "aircraft_group": "A320-214",
       "enabled": "1",
-      "type": "P"
+      "type": 1
    },
    {
       "airline": "EIN",
@@ -23,8 +23,8 @@ color: white;
       "depicao": "LPFR",
       "arricao": "EGAC",
       "aircraft_group": "A320-214",
-      "enabled": "1",
-      "type": "P"
+      "enabled": 1,
+      "type": 1
    }
 ]
 
