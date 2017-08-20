@@ -23,8 +23,8 @@ The Virtual Airline Operations System project is an open source and modern Virtu
 
 # Installing VAOS
 
-Head over to the VAOS wiki to get started:
-* [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Video-Documentation)
+Head over to the VAOS wiki to get started with the full installation guide for shared and dedicated hosting:
+* [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Installation-Guide)
 
 # Donations
 Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
