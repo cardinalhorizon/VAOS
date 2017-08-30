@@ -230,8 +230,6 @@ class VAOS_Schedule
         else
             $bid = ScheduleComplete::where(['user_id' => $user_id, 'id' => $bid_id])->firstOrFail();
 
-        $legacybid = Legacy\Bid::where('parentid', $bid->id)->first();
-        $legacybid->delete();
         $bid->delete();
     }
 }
