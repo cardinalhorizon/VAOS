@@ -8,7 +8,6 @@
 
 namespace App\Classes;
 
-
 class AircraftListExcel extends \Maatwebsite\Excel\Files\ExcelFile
 {
     protected $delimiter  = ',';

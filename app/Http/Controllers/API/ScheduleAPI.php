@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\AircraftGroup;
 use App\Airline;
 use App\Classes\VAOS_Airports;
@@ -21,12 +22,8 @@ class ScheduleAPI extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->input('codeshare') == true)
-        {
-
-        }
-        else {
-
+        if ($request->input('codeshare') == true) {
+        } else {
             $schedule = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
             return response()->json([
                 'status' => 200,
@@ -41,16 +38,13 @@ class ScheduleAPI extends Controller
     public function get(Request $request)
     {
         // find out if this is calling the ID or the airport identifier
-        if ($request->has('depicao'))
-        {
+        if ($request->has('depicao')) {
             $route = ScheduleTemplate::where('depicao', $request->depicao)->get();
         }
-        if ($request->has('arricao'))
-        {
-        	$route = ScheduleTemplate::where('arricao', $request->arricao)->get();
+        if ($request->has('arricao')) {
+            $route = ScheduleTemplate::where('arricao', $request->arricao)->get();
         }
-        if ($request->has('id'))
-        {
+        if ($request->has('id')) {
             $route = ScheduleTemplate::find($request->id);
         }
         return json_encode(['status' => 200,
@@ -64,60 +58,50 @@ class ScheduleAPI extends Controller
      */
     public function add(Request $request)
     {
-    	// Declare a new instance of the Schedule Model
-    	$entry = new ScheduleTemplate();
-    	
-    	// Before we add the route, lets check to see if the airport exists.
-    	if (Airport::where('icao', $request->input('depicao'))->first() === null)
-    	{
-    		VAOS_Airports::AddAirport($request->input('depicao'));
-    	}
-    	if (Airport::where('icao', $request->input('arricao'))->first() === null)
-    	{
+        // Declare a new instance of the Schedule Model
+        $entry = new ScheduleTemplate();
+        
+        // Before we add the route, lets check to see if the airport exists.
+        if (Airport::where('icao', $request->input('depicao'))->first() === null) {
+            VAOS_Airports::AddAirport($request->input('depicao'));
+        }
+        if (Airport::where('icao', $request->input('arricao'))->first() === null) {
             VAOS_Airports::AddAirport($request->input('arricao'));
-    	}
-    	// add the form elements
+        }
+        // add the form elements
         // Search for the airline in the database
 
 
-    	$entry->flightnum = $request->input('flightnum');
+        $entry->flightnum = $request->input('flightnum');
 
         // Setup the foreign keys. Lets now find the new airports
 
         $dep = Airport::where('icao', $request->input('depicao'))->first();
         $arr = Airport::where('icao', $request->input('arricao'))->first();
-    	$entry->depapt()->associate($dep);
-    	$entry->arrapt()->associate($arr);
+        $entry->depapt()->associate($dep);
+        $entry->arrapt()->associate($arr);
         $airline = Airline::where('icao', $request->input('code'))->first();
         $entry->airline()->associate($airline);
 
-    	if ($request->has('alticao'))
-    	{
-    		$entry->alticao = $request->input('alticao');
-    	}
-    	if ($request->has('route'))
-    	{
-    		$entry->route = $request->input('route');
-    	}
-    	if ($request->has('aircraft_group'))
-    	{
-    	    $acfgrp = AircraftGroup::where('icao', $request->input('aircraft_group'))->first();
-    		$entry->aircraft_group()->associate($acfgrp);
-    	}
-    	$entry->seasonal = true;
-    	//$entry->daysofweek = "0123456";
-    	$entry->type = $request->input('type');
-    	if ($request->has('enabled'))
-    	{
-    		$entry->enabled = $request->input('enabled');
-    	}
-    	else
-    	{
-    		$entry->enabled = 1;
-    	}
-    	$entry->save();
-
-
+        if ($request->has('alticao')) {
+            $entry->alticao = $request->input('alticao');
+        }
+        if ($request->has('route')) {
+            $entry->route = $request->input('route');
+        }
+        if ($request->has('aircraft_group')) {
+            $acfgrp = AircraftGroup::where('icao', $request->input('aircraft_group'))->first();
+            $entry->aircraft_group()->associate($acfgrp);
+        }
+        $entry->seasonal = true;
+        //$entry->daysofweek = "0123456";
+        $entry->type = $request->input('type');
+        if ($request->has('enabled')) {
+            $entry->enabled = $request->input('enabled');
+        } else {
+            $entry->enabled = 1;
+        }
+        $entry->save();
     }
     /**
      * Update the specified resource in storage.
@@ -128,13 +112,11 @@ class ScheduleAPI extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
     public function jsonadd(Request $request)
     {
         $data = json_decode($request->getContent(), true);
-        foreach ($data as $d)
-        {
+        foreach ($data as $d) {
             VAOS_Schedule::newRoute([
                 'depicao' => $d['depicao'],
                 'arricao' => $d['arricao'],
@@ -161,6 +143,5 @@ class ScheduleAPI extends Controller
     }
     public function test(Request $request)
     {
-
     }
 }

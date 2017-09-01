@@ -7,8 +7,10 @@
  */
 
 namespace App\Classes;
+
 use App\Airline;
 use App\Bid;
+
 /**
  * Helper Class that converts phpVMS formatted data into VAOS friendly stuff.
  * Class phpVMSLegacy
@@ -16,8 +18,11 @@ use App\Bid;
  */
 class phpVMSLegacy
 {
-    public static function getFlightBid($flightnum, $userid) {
-        if ($flightnum == '') return false;
+    public static function getFlightBid($flightnum, $userid)
+    {
+        if ($flightnum == '') {
+            return false;
+        }
 
         $ret = array();
         $flightnum = strtoupper($flightnum);

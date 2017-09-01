@@ -22,8 +22,7 @@ class FleetAPI extends Controller
     {
         // POST http://airline.com/api/1_0/fleet
         // First lets check to see if we are adding via local provided data or from Central's database
-        if ($request->query('source') == 'local')
-        {
+        if ($request->query('source') == 'local') {
             // This route is to add an aircraft providing ALL local values. This will be fun!!!
 
             // lets steralize the array before sending it to the class. Things can get messy
@@ -41,9 +40,7 @@ class FleetAPI extends Controller
             $data['group'] = $request->input('group');
             //dd(AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first());
             // $result = AircraftData::createAircraft($data);
-        }
-        else
-        {
+        } else {
             // Lets Call Home to retrieve our data. Much easier!!
             $client = new Client();
 
@@ -53,8 +50,7 @@ class FleetAPI extends Controller
                 ]
             ])->getBody();
 
-            if ($res['status'] == 404)
-            {
+            if ($res['status'] == 404) {
                 // well the main server is a useless piece of shit so lets inform the user that.
                 return response()->json([
                     'status' => 501
@@ -113,8 +109,7 @@ class FleetAPI extends Controller
 
         $sysgrp = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
 
-        if ($sysgrp === null )
-        {
+        if ($sysgrp === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
                 'name' => $data['name'],
@@ -124,15 +119,12 @@ class FleetAPI extends Controller
             // now lets associate the aircraft with the new group.
             $group->save();
             $acf->aircraft_group()->attach($group);
-        }
-        else
-        {
+        } else {
             // ok now that we know that the group exists, lets add it to the already existing system group.
             $acf->aircraft_group()->attach($sysgrp);
         }
         // Now that is done, lets check if we want to add it to a user defined group.
-        if ($data['group'] != null)
-        {
+        if ($data['group'] != null) {
             $acf->aircraft_group()->attach($data['group']);
         }
 

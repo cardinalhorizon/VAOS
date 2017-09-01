@@ -6,7 +6,7 @@
  * Time: 1:09 AM
  */
 
-require_once (__DIR__."/vendor/autoload.php");
+require_once(__DIR__."/vendor/autoload.php");
 
 // lets load the environment file in the project directory
 

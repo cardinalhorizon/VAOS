@@ -16,6 +16,5 @@ class ACARS_SessionAPI extends Controller
     public function addSession(Request $request)
     {
         $acars = new ACARS_Session();
-
     }
 }

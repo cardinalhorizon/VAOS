@@ -36,8 +36,7 @@ class PIREPAPI extends Controller
         // first let's retrieve the original bid from the database and enter in all the values
 
 
-        if ($request->query('format') == 'phpVMS')
-        {
+        if ($request->query('format') == 'phpVMS') {
             $pirep->user()->associate($request->input('pilotid'));
             // This is a legacy ACARS client. Treat it with respect, they won't be around
             // for too much longer. All we need is the user data, flight info and we are all set
@@ -55,11 +54,13 @@ class PIREPAPI extends Controller
 
             // Auto Accept System
             if (env('VAOS_AA_ENABLED')) {
-                if ($request->input('landingrate') >= env('VAOS_AA_LR'))
+                if ($request->input('landingrate') >= env('VAOS_AA_LR')) {
                     $pirep->status = 1;
+                }
             }
-            if (env('VAOS_AA_ALL'))
+            if (env('VAOS_AA_ALL')) {
                 $pirep->status = 1;
+            }
 
             $pirep->save();
             // now let's take care of comments.
@@ -79,8 +80,11 @@ class PIREPAPI extends Controller
             ]);
         }
     }
-    private static function getProperFlightNum($flightnum, $userid) {
-        if ($flightnum == '') return false;
+    private static function getProperFlightNum($flightnum, $userid)
+    {
+        if ($flightnum == '') {
+            return false;
+        }
 
         $ret = array();
         $flightnum = strtoupper($flightnum);

@@ -16,6 +16,7 @@ class VAOS_ImportExport
 {
     public static function importFleet(AircraftListExcel $file)
     {
-        Excel::load($file, function($reader) {})->get();
+        Excel::load($file, function ($reader) {
+        })->get();
     }
 }

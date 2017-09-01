@@ -18,8 +18,9 @@ class AirlineController extends Controller
         // Return the list of airlines
 
         $airlines = Airline::all();
-        if ($airlines->count() == 0)
+        if ($airlines->count() == 0) {
             return redirect('/admin/airlines/create');
+        }
         return view('admin.airline.view', ['airlines' => $airlines]);
     }
 
@@ -45,13 +46,16 @@ class AirlineController extends Controller
 
         $airline->name = $request->input('name');
         $airline->icao = $request->input('icao');
-        if ($request->input('iata') != null)
+        if ($request->input('iata') != null) {
             $airline->iata = $request->input('iata');
+        }
         $airline->callsign = $request->input('callsign');
-        if ($request->input('logo') != null)
+        if ($request->input('logo') != null) {
             $airline->logo = $request->input('logo');
-        if ($request->input('widget') != null)
+        }
+        if ($request->input('widget') != null) {
             $airline->widget = $request->input('widget');
+        }
 
         $airline->save();
 
@@ -96,13 +100,16 @@ class AirlineController extends Controller
 
         $airline->name = $request->input('name');
         $airline->icao = $request->input('icao');
-        if ($request->input('iata') != null)
+        if ($request->input('iata') != null) {
             $airline->iata = $request->input('iata');
+        }
         $airline->callsign = $request->input('callsign');
-        if ($request->input('logo') != null)
+        if ($request->input('logo') != null) {
             $airline->logo = $request->input('logo');
-        if ($request->input('widget') != null)
+        }
+        if ($request->input('widget') != null) {
             $airline->widget = $request->input('widget');
+        }
 
         $airline->save();
 

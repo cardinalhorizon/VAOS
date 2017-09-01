@@ -10,6 +10,5 @@ class CodeshareAPI extends Controller
 {
     public function GetSchedule()
     {
-    	
     }
 }

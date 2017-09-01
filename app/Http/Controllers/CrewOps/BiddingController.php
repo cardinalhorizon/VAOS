@@ -28,7 +28,6 @@ class BiddingController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -40,15 +39,15 @@ class BiddingController extends Controller
     public function store(Request $request)
     {
         // file the bid within the system.
-        if ($request->input('aircraft_id') === null)
+        if ($request->input('aircraft_id') === null) {
             // The schedule filed has a aircraft group assigned. Let the system handle it.
             $bid = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'));
-        else
+        } else {
             // No group assignment. This means an aircraft nees to be provided. Otherwise it will fail.
             $bid = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'), $request->input('aircraft_id'));
+        }
 
-        if ($bid)
-        {
+        if ($bid) {
             return redirect('/flightops');
         }
     }

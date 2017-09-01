@@ -26,31 +26,31 @@ function returnData($result)
         ]
     ])->getBody();
     $jdec = json_decode($res, true);
-    if ($jdec['status'] == 404)
+    if ($jdec['status'] == 404) {
         echo "0|No Bids Found In System";
-    else
-    	returnData($jdec['bid']);
+    } else {
+        returnData($jdec['bid']);
+    }
 /*
 $query = mysql_query("SEECT * FROM `flights` where flightnumber='".$_REQUEST['DATA2']."'");
 $num_result = mysql_num_rows($query);
 if ($num_result > 0)
 {
-	for ($i=0;$i<$num_result;$i++)
-	{
-		$result = mysql_fetch_array($query);
-		echo "1|flightplan\n";
-		echo $result['departure']."\n";
-		echo $result['destination']."\n";
-		echo $result['alternate']."\n";
-		echo $result['route']."\n";
-		echo $result['pax']."\n";
-		echo $result['cargo']."\n";
-		echo $result['rules']."\n";
-		echo $result['aircraft']."\n";
-	}
+    for ($i=0;$i<$num_result;$i++)
+    {
+        $result = mysql_fetch_array($query);
+        echo "1|flightplan\n";
+        echo $result['departure']."\n";
+        echo $result['destination']."\n";
+        echo $result['alternate']."\n";
+        echo $result['route']."\n";
+        echo $result['pax']."\n";
+        echo $result['cargo']."\n";
+        echo $result['rules']."\n";
+        echo $result['aircraft']."\n";
+    }
 }
 else
 {
-	echo "0|Flightnumber not found";
+    echo "0|Flightnumber not found";
 }*/
-?>

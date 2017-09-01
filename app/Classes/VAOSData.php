@@ -15,7 +15,7 @@ namespace App\Classes;
  */
 class VAOSData
 {
-    function __construct()
+    public function __construct()
     {
     }
 }

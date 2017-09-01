@@ -18,8 +18,7 @@ class PIREPController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->query('view') == "pending")
-        {
+        if ($request->query('view') == "pending") {
             $pireps = PIREP::where('status', 0)->with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
             return view('admin.pireps.pending', ['pireps' => $pireps]);
         }
@@ -83,8 +82,7 @@ class PIREPController extends Controller
         $pirep = PIREP::find($id);
         $user = $pirep->user;
         // check if we are only changing the status
-        if ($request->input('flag') == "status")
-        {
+        if ($request->input('flag') == "status") {
             $pirep->status = $request->input('status');
             $pirep->save();
             //$user->notify(new PirepFiled($pirep));
@@ -102,5 +100,4 @@ class PIREPController extends Controller
     {
         //
     }
-
 }

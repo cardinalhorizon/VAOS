@@ -12,15 +12,13 @@ use App\User;
 use Illuminate\Http\Request;
 use stdClass;
 
-
 class AcarsAPI extends Controller
 {
     public function position(Request $request)
     {
         $report = array();
         // First off, lets establish the format. Is this phpvms?
-        if ($request->query('format') == 'phpVMS')
-        {
+        if ($request->query('format') == 'phpVMS') {
             // well shoot, we got a legacy ACARS client. Let's sterilize the data and format the input.
             $report['user'] = User::find($request->input('pilotid'));
             $report['user_id'] = $request->input('pilotid');
@@ -47,9 +45,7 @@ class AcarsAPI extends Controller
             */
             $report['phase'] = $request->input('phasedetail');
             $report['client'] = $request->input('client');
-        }
-        else
-        {
+        } else {
             return response()->json([
                 'status' => 800,
             ]);
@@ -76,8 +72,11 @@ class AcarsAPI extends Controller
      * @param $flightnum
      * @return array|bool
      */
-    public static function getProperFlightNum($flightnum, $userid) {
-        if ($flightnum == '') return false;
+    public static function getProperFlightNum($flightnum, $userid)
+    {
+        if ($flightnum == '') {
+            return false;
+        }
 
         $ret = array();
         $flightnum = strtoupper($flightnum);
@@ -109,8 +108,8 @@ class AcarsAPI extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public static function getAcarsData(Request $request){
-
+    public static function getAcarsData(Request $request)
+    {
         $flights  = ACARSData::with(['bid.airline', 'bid.aircraft', 'bid.depapt', 'bid.arrapt', 'user'])->get();
 
         if ($request->query('format') == 'phpVMS') {
@@ -120,14 +119,14 @@ class AcarsAPI extends Controller
              * Treat it with respect, this won't be around for too much longer.
              */
 
-            if(!$flights)
+            if (!$flights) {
                 $flights = array();
+            }
 
             $acarsflights = [];
 
             foreach ($flights as $flight) {
-
-                if($flight->bid->route == '') {
+                if ($flight->bid->route == '') {
                     $flight->bid->route_details = array();
                 } else {
 
@@ -156,19 +155,19 @@ class AcarsAPI extends Controller
                  */
 
                 /* If no heading was passed via ACARS app then calculate it
-				This should probably move to inside the ACARSData function, so then
-				 the heading is always there for no matter what the calculation is
-				*/
+                This should probably move to inside the ACARSData function, so then
+                 the heading is always there for no matter what the calculation is
+                */
 
-                if($flight->heading == '') {
+                if ($flight->heading == '') {
                     /* Calculate an angle based on current coords and the
                         destination coordinates */
                     $flight->heading = intval(atan2(($flight->lat - $flight->bid->arrapt->lat), ($flight->lon - $flight->bid->arrapt->lon)) * 180 / 3.14);
                     //$flight->heading *= intval(180/3.14159);
-                    if(($flight->lon - $flight->bid->arrapt->lon) < 0) {
+                    if (($flight->lon - $flight->bid->arrapt->lon) < 0) {
                         $flight->heading += 180;
                     }
-                    if($flight->heading < 0) {
+                    if ($flight->heading < 0) {
                         $flight->heading += 360;
                     }
                 }
@@ -220,16 +219,16 @@ class AcarsAPI extends Controller
                  */
 
                 // Normalize the data
-                if($c['timeremaining'] == '') {
+                if ($c['timeremaining'] == '') {
                     $c['timeremaining'] =  '-';
                 }
-                if(trim($c['phasedetail']) == '') {
+                if (trim($c['phasedetail']) == '') {
                     $c['phasedetail'] = 'Enroute';
                 }
 
                 //VAOS normalize the data. This will be removed when the Todos are done
 
-                if ($c['route'] == ''){
+                if ($c['route'] == '') {
                     $c['route'] = '';
                 }
 
@@ -237,8 +236,7 @@ class AcarsAPI extends Controller
             }
 
             return json_encode($acarsflights); // Convert to json format
-
-        }else{
+        } else {
             return response()->json([
                 'status' => 200,
                 'ACARSData' => $flights

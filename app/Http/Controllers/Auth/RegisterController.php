@@ -48,7 +48,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         // Check if reCAPTCHA credentials set
-        if(!empty(config('recaptcha.public_key') && config('recaptcha.private_key'))) {
+        if (!empty(config('recaptcha.public_key') && config('recaptcha.private_key'))) {
             
             // Return with reCAPTCHA validator
             return Validator::make($data, [
@@ -59,7 +59,6 @@ class RegisterController extends Controller
                 'password' => 'required|min:6|confirmed',
                 'g-recaptcha-response' => 'recaptcha',
             ]);
-
         } else {
 
             // reCAPTCHA credentials not set
@@ -70,9 +69,7 @@ class RegisterController extends Controller
                 'email' => 'required|email|max:255|unique:users',
                 'password' => 'required|min:6|confirmed',
             ]);
-
         }
-
     }
 
     /**
@@ -84,7 +81,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -94,6 +90,5 @@ class RegisterController extends Controller
             'status' => 1,
             'admin' => false
         ]);
-
     }
 }
