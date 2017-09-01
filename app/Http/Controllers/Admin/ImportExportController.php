@@ -16,12 +16,10 @@ class ImportExportController extends Controller
 {
     public function getSystem(Request $request)
     {
-
     }
     public function postSystem(Request $request)
     {
-        if ($request->query('task') == 'import')
-        {
+        if ($request->query('task') == 'import') {
             $progress = new JobProgress([
                 'task' => 'import',
                 'slug' => 'Import VAOS System',
@@ -35,9 +33,7 @@ class ImportExportController extends Controller
 
             // Load the Excel Import Object
             Excel::load($path, function ($reader) {
-
             });
-
         }
     }
     public function getAirlines(Request $request)
@@ -50,12 +46,11 @@ class ImportExportController extends Controller
     }
     public function getFleet(Request $request)
     {
-        return view('admin.data.import',['route' => 'fleet']);
+        return view('admin.data.import', ['route' => 'fleet']);
     }
     public function postFleet(Request $request)
     {
-        if ($request->query('action') == 'import')
-        {
+        if ($request->query('action') == 'import') {
             /*
             $progress = new JobProgress([
                 'task' => 'import',
@@ -73,8 +68,7 @@ class ImportExportController extends Controller
 
             $data = json_decode(Storage::get($path), true);
 
-            foreach ($data as $row)
-            {
+            foreach ($data as $row) {
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
@@ -98,12 +92,11 @@ class ImportExportController extends Controller
     }
     public function getSchedule(Request $request)
     {
-        return view('admin.data.import',['route' => 'schedule']);
+        return view('admin.data.import', ['route' => 'schedule']);
     }
     public function postSchedule(Request $request)
     {
-        if ($request->query('action') == 'import')
-        {
+        if ($request->query('action') == 'import') {
             /*
             $progress = new JobProgress([
                 'task' => 'import',
@@ -119,8 +112,7 @@ class ImportExportController extends Controller
             //dd($path);
             // Load the Excel Import Object
             $data = json_decode(Storage::get($path), true);
-            foreach ($data as $d)
-            {
+            foreach ($data as $d) {
                 $airline = Airline::where('icao', $d['airline'])->first();
                 VAOS_Schedule::newRoute([
                     'depicao' => $d['depicao'],

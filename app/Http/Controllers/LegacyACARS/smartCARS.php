@@ -12,7 +12,6 @@ use App\ACARSData;
 use App\PIREPComment;
 use App\Models\Legacy;
 
-
 class smartCARS extends Controller
 {
     public function filePIREP(Request $request)
@@ -48,11 +47,13 @@ class smartCARS extends Controller
 
         // Auto Accept System
         if (env('VAOS_AA_ENABLED')) {
-            if ($request->input('landingrate') >= env('VAOS_AA_LR'))
+            if ($request->input('landingrate') >= env('VAOS_AA_LR')) {
                 $pirep->status = 1;
+            }
         }
-        if (env('VAOS_AA_ALL'))
+        if (env('VAOS_AA_ALL')) {
             $pirep->status = 1;
+        }
 
 
         $pirep->save();
@@ -76,8 +77,7 @@ class smartCARS extends Controller
     {
         $report = array();
         // First off, lets establish the format. Is this phpvms?
-        if ($request->query('format') == 'phpVMS')
-        {
+        if ($request->query('format') == 'phpVMS') {
             // well shoot, we got a legacy ACARS client. Let's sterilize the data and format the input.
             $report['user'] = User::find($request->input('pilotid'))->id;
             $report['user_id'] = $request->input('pilotid');
@@ -104,9 +104,7 @@ class smartCARS extends Controller
             */
             $report['phase'] = $request->input('phasedetail');
             $report['client'] = $request->input('client');
-        }
-        else
-        {
+        } else {
             return response()->json([
                 'status' => 800,
             ]);
@@ -157,8 +155,11 @@ class smartCARS extends Controller
         }
         return response()->json($export);
     }
-    private static function getProperFlightNum($flightnum, $userid) {
-        if ($flightnum == '') return false;
+    private static function getProperFlightNum($flightnum, $userid)
+    {
+        if ($flightnum == '') {
+            return false;
+        }
 
         $ret = array();
         $flightnum = strtoupper($flightnum);
@@ -177,7 +178,6 @@ class smartCARS extends Controller
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
             return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
-
         }
 
         # Invalid flight number

@@ -8,7 +8,6 @@
 
 namespace App\Classes;
 
-
 use App\Setting;
 
 class VAOSSettings

@@ -72,5 +72,4 @@ class CreateApiKeysTable extends Migration
         Schema::drop('api_keys');
         Schema::drop('api_logs');
     }
-
 }

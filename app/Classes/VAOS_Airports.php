@@ -35,11 +35,8 @@ class VAOS_Airports
             $airport->lon = $data['airport']['longitude_deg'];
             $airport->city = $data['airport']['municipality'];
             $airport->country = $data['airport']['iso_country'];
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return dd($data);
-
         }
         $airport->save();
     }

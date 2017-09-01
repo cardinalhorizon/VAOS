@@ -44,7 +44,7 @@ class CrewOpsController extends Controller
         $user->vatsim = $request->vatsim;
         $user->ivao = $request->ivao;
 
-        if(!empty($request->password)) {
+        if (!empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
 
@@ -71,29 +71,32 @@ class CrewOpsController extends Controller
     }
     public function getSchedule(Request $request)
     {
-
         $query = array();
 
         // Check the request for specific info??
-        if ($request->has('airline'))
+        if ($request->has('airline')) {
             $query['airline_id'] = Airline::where('icao', $request->query('airline'))->first()->id;
+        }
 
-        if ($request->has('depapt'))
+        if ($request->has('depapt')) {
             $query['depapt_id'] = Airport::where('icao', $request->query('depapt'))->first()->id;
+        }
 
-        if ($request->has('arrapt'))
+        if ($request->has('arrapt')) {
             $query['arrapt_id'] = Airport::where('icao', $request->query('arrapt'))->first()->id;
+        }
 
-        if ($request->has('aircraft'))
+        if ($request->has('aircraft')) {
             $query['aircraft_group_id'] = AircraftGroup::where('icao', $request->query('aircraft'))->first()->id;
+        }
         //dd($query);
         // Load all the schedules within the database
         if (empty($query)) {
             $schedules = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('airline_id', 'desc')->paginate(9);
             //dd($schedules);
-        }
-        else
+        } else {
             $schedules = ScheduleTemplate::where($query)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('arrapt_id', 'desc')->paginate(9);
+        }
         $aircraft = Aircraft::all();
         //$schedules = ScheduleTemplate::all();
         //dd($schedules);
@@ -126,7 +129,6 @@ class CrewOpsController extends Controller
     }
     public function postManualPirep(Request $request)
     {
-
         $flightinfo = Bid::find($request->bid);
         $pirep = new PIREP();
         $pirep->user()->associate(Auth::user()->id);

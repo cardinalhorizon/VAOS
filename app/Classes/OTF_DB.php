@@ -13,7 +13,8 @@ namespace App\Classes;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
-class OTF_DB {
+class OTF_DB
+{
     /**
      * The name of the database we're connecting to on the fly.
      *
@@ -41,8 +42,7 @@ class OTF_DB {
         $driver  = isset($options['driver']) ? $options['driver'] : Config::get("database.default");
         $default = Config::get("database.connections.$driver");
         // Loop through our default array and update options if we have non-defaults
-        foreach($default as $item => $value)
-        {
+        foreach ($default as $item => $value) {
             $default[$item] = isset($options[$item]) ? $options[$item] : $default[$item];
         }
         // Set the temporary configuration

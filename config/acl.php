@@ -25,6 +25,6 @@ return [
      * Cache Minutes
      * Set the minutes that roles and permissions will be cached.
      */
-		
+        
     'cacheMinutes' => 1,
 ];

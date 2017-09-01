@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+
 class AdminPerms
 {
     /**
@@ -16,8 +17,9 @@ class AdminPerms
     public function handle($request, Closure $next)
     {
         // Check if the user is an admin. If not, deny him.
-        if (!Auth::user()->admin)
+        if (!Auth::user()->admin) {
             abort(403, 'Account does not have admin permissions');
+        }
         return $next($request);
     }
 }

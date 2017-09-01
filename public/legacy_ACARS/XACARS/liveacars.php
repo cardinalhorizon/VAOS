@@ -9,52 +9,52 @@
 // In functions.php the database is connected as used to
 require("../boot.php");
 
-define("ACARS_UNKNOWN",   -1);
-define("ACARS_XACARS",    3);
-define("ACARS_XACARS_MSFS",    4);
+define("ACARS_UNKNOWN", -1);
+define("ACARS_XACARS", 3);
+define("ACARS_XACARS_MSFS", 4);
 
 
 define("FLIGHTSTATUS_BOARDING", 1);
-define("FLIGHTSTATUS_TAXIOUT",  2);
-define("FLIGHTSTATUS_DEPARTURE",3);
-define("FLIGHTSTATUS_CLIMB",    4);
-define("FLIGHTSTATUS_CRUISE",   5);
-define("FLIGHTSTATUS_DESC",     6);
+define("FLIGHTSTATUS_TAXIOUT", 2);
+define("FLIGHTSTATUS_DEPARTURE", 3);
+define("FLIGHTSTATUS_CLIMB", 4);
+define("FLIGHTSTATUS_CRUISE", 5);
+define("FLIGHTSTATUS_DESC", 6);
 define("FLIGHTSTATUS_APPROACH", 7);
-define("FLIGHTSTATUS_LANDED",   8);
-define("FLIGHTSTATUS_TAXIIN",   9);
-define("FLIGHTSTATUS_IN",      10);
-define("FLIGHTSTATUS_END",     10);
-define("FLIGHTSTATUS_UNKNOWN",  0);
-define("FLIGHTSTATUS_CRASH",   99);
+define("FLIGHTSTATUS_LANDED", 8);
+define("FLIGHTSTATUS_TAXIIN", 9);
+define("FLIGHTSTATUS_IN", 10);
+define("FLIGHTSTATUS_END", 10);
+define("FLIGHTSTATUS_UNKNOWN", 0);
+define("FLIGHTSTATUS_CRASH", 99);
 
-define("VSPEED_CRZ",   0);
-define("VSPEED_GND",   0);  
-define("VSPEED_CLB",   +1);
-define("VSPEED_DES",   -1);
+define("VSPEED_CRZ", 0);
+define("VSPEED_GND", 0);
+define("VSPEED_CLB", +1);
+define("VSPEED_DES", -1);
    
 // ----------------------------------------------------------------------------
 // Classes for ACARS_FLIGHT and ACARS_POSITION
 
-Class acarsFlight
+class acarsFlight
 {
-    var $flightID;
-    var $userID;
-    var $acarsID       = ACARS_XACARS;
-    var $aircraft      = '';
-    var $flightRot     = '';
-    var $flightType    = 'IFR';
-    var $flightPlan    = '';
-    var $departure     = '';
-    var $destination   = '';
-    var $curPositionID = 0;
+    public $flightID;
+    public $userID;
+    public $acarsID       = ACARS_XACARS;
+    public $aircraft      = '';
+    public $flightRot     = '';
+    public $flightType    = 'IFR';
+    public $flightPlan    = '';
+    public $departure     = '';
+    public $destination   = '';
+    public $curPositionID = 0;
     
-    function doInsert()
+    public function doInsert()
     {
         $sql  = 'INSERT INTO acars_flight(acarsFlightID, userID, acarsID, acType, callsign,
-                    flightType, flightPlan, departure, destination) VALUES ( ' 
+                    flightType, flightPlan, departure, destination) VALUES ( '
               . $this->flightID . ', '
-              . $this->userID . ', '        
+              . $this->userID . ', '
               . $this->acarsID . ', '
               . "'{$this->aircraft}', "
               . "'{$this->flightRot}', "
@@ -63,39 +63,40 @@ Class acarsFlight
               . "'{$this->departure}', "
               . "'{$this->destination}');";
 
-        if(!mysql_query($sql))
+        if (!mysql_query($sql)) {
             die('0|SQL query failed (INSERT acars flight)   ' . $sql);
-    }    
-}    
+        }
+    }
+}
 
-Class acarsPosition
+class acarsPosition
 {
-    var $msgtype    = '??';
-    var $flightID   = 0;
-    var $remoteTime = 0;
-    var $posLat     = 0; 
-    var $posLon     = 0;
-    var $flightstat = FLIGHTSTATUS_UNKNOWN;
-    var $vs         = VSPEED_GND;
-    var $hdg = 0;
-    var $alt = 0;
-    var $gs  = 0;
-    var $tas = 0;
-    var $ias = 0;
-    var $wnd = '00000';
-    var $oat = 0;
-    var $tat = 0;
-    var $fob = 0;
-    var $distFromDep    = 0;
-    var $distTotal      = 0;    
-    var $msgdata = '';
+    public $msgtype    = '??';
+    public $flightID   = 0;
+    public $remoteTime = 0;
+    public $posLat     = 0;
+    public $posLon     = 0;
+    public $flightstat = FLIGHTSTATUS_UNKNOWN;
+    public $vs         = VSPEED_GND;
+    public $hdg = 0;
+    public $alt = 0;
+    public $gs  = 0;
+    public $tas = 0;
+    public $ias = 0;
+    public $wnd = '00000';
+    public $oat = 0;
+    public $tat = 0;
+    public $fob = 0;
+    public $distFromDep    = 0;
+    public $distTotal      = 0;
+    public $msgdata = '';
     
-    function doInsert()
+    public function doInsert()
     {
         $sql  = 'INSERT INTO acars_position (acarsFlightID, acarsMsgID, systemTime, remoteTime, msgtype, flightStatus,  
                  latitude, longitude, heading, altitude, VS, GS, IAS, TAS, FOB, WND, OAT, TAT, distFromDep, 
                  distTotal, pauseMode, message) 
-                 VALUES ( '                
+                 VALUES ( '
              . $this->flightID . ", '', "               // FlightID, MsgID := ''
              . time() . ', '                            // Time Stamp
              . $this->remoteTime . ', '                 // Remote Time Stamp
@@ -110,21 +111,21 @@ Class acarsPosition
              . "'{$this->wnd}', "                       // Winddaten
              . $this->oat . ', ' . $this->tat . ', '    // OAT und TAT
              . $this->distFromDep . ', '                // distFromDep
-             . $this->distTotal . ', '                  // distTotal              
-             . "0, \"{$this->msgdata}\");";  
+             . $this->distTotal . ', '                  // distTotal
+             . "0, \"{$this->msgdata}\");";
         
-        if(!mysql_query($sql))
+        if (!mysql_query($sql)) {
             die('0|SQL query failed (INSERT acars position)   ' . $sql);
+        }
 
-        if( $this->msgtype <> 'ZZ' )
-        {
-              // If the message wasn't a ENDFLIGHT message, the actual position is going to be written in acars_flight
+        if ($this->msgtype <> 'ZZ') {
+            // If the message wasn't a ENDFLIGHT message, the actual position is going to be written in acars_flight
             $newID = mysql_insert_id(); // maybe this function does not work on each system
             $query = "UPDATE acars_flight SET curPositionID = {$newID}, active = 1 WHERE acarsFlightID = {$this->flightID};";
             $result = mysql_query($query) or die("0|SQL query failed (UPDATE acars_flight)");
         }
                  
-        return True;
+        return true;
     }
 }
 
@@ -135,10 +136,9 @@ function testPilotID($pid)
 {
     $q_user = @mysql_query("SELECT id FROM user WHERE isactive=1 and username = '{$pid}' LIMIT 1");
 
-    if(@mysql_num_rows($q_user) == 0)
+    if (@mysql_num_rows($q_user) == 0) {
         return -1;
-    else
-    {
+    } else {
         $user = @mysql_fetch_array($q_user);
         return $user['id'];
     }
@@ -162,90 +162,103 @@ function testUserLogin($pid, $pw)
 
     $jdec = json_decode($res, true);
 
-    if ($jdec['status'] == 200)
+    if ($jdec['status'] == 200) {
         return $jdec['user']['id'];
-    else
+    } else {
         return -1;
+    }
 }
 
 function CheckXAcarsVersion($DATA1)
 {
-    if( (strcmp($DATA1, "XACARS|1.0")==0)
+    if ((strcmp($DATA1, "XACARS|1.0")==0)
         || (strcmp($DATA1, "XACARS|1.1")==0)
-        || (strcmp($DATA1, "XACARS|2.0")==0)        
-        || (strcmp($DATA1, "XACARS|2.5")==0) 
-        || (strcmp($DATA1, "XACARS|3.0")==0) )        
+        || (strcmp($DATA1, "XACARS|2.0")==0)
+        || (strcmp($DATA1, "XACARS|2.5")==0)
+        || (strcmp($DATA1, "XACARS|3.0")==0)) {
         return ACARS_XACARS;
-    elseif( (strcmp($DATA1, "XACARS_MSFS|1.0")==0)
+    } elseif ((strcmp($DATA1, "XACARS_MSFS|1.0")==0)
         || (strcmp($DATA1, "XACARS_MSFS|1.1")==0)
-        || (strcmp($DATA1, "XACARS_MSFS|2.0")==0)        
-        || (strcmp($DATA1, "XACARS_MSFS|2.5")==0) 
-        || (strcmp($DATA1, "XACARS_MSFS|3.0")==0) ) 
+        || (strcmp($DATA1, "XACARS_MSFS|2.0")==0)
+        || (strcmp($DATA1, "XACARS_MSFS|2.5")==0)
+        || (strcmp($DATA1, "XACARS_MSFS|3.0")==0)) {
         return ACARS_XACARS_MSFS;
-    else
+    } else {
         return ACARS_UNKNOWN;
+    }
 }
 
-Function lbs2kg( $lbs )
+function lbs2kg($lbs)
 {
-    return( $lbs / 2.204622915 );
+    return($lbs / 2.204622915);
 }
 
-function latDegDecMin2DecDeg( $dat )
+function latDegDecMin2DecDeg($dat)
 {
-    if( $dat=='' )
-        return( 0 ); 
+    if ($dat=='') {
+        return(0);
+    }
 
     $i = 0;
     $j = strpos($dat, ' ', 0);
-    $k = max( strpos($dat, '.', $j), $j+1);
+    $k = max(strpos($dat, '.', $j), $j+1);
 
-    $dec  = substr($dat,1,$j);                // degrees
+    $dec  = substr($dat, 1, $j);                // degrees
     $dec += substr($dat, $j+1, $k-$j+2) / 60; // decimal minutes
     
-    If( $dat{0} == 'S' )
+    if ($dat{0} == 'S') {
         $dec = -$dec;
+    }
         
-    return round($dec,4);
+    return round($dec, 4);
 }
 
-function lonDegDecMin2DecDeg( $dat )
+function lonDegDecMin2DecDeg($dat)
 {
-    if( $dat=='' )
-        return( 0 ); 
+    if ($dat=='') {
+        return(0);
+    }
     
     $i = 0;
     $j = strpos($dat, ' ', 0);
-    $k = max( strpos($dat, '.', $j), $j+1);
+    $k = max(strpos($dat, '.', $j), $j+1);
 
-    $dec  = substr($dat,1,$j);                // degrees
+    $dec  = substr($dat, 1, $j);                // degrees
     $dec += substr($dat, $j+1, $k-$j+2) / 60; // decimal minutes
     
-    If( $dat{0} == 'W' )
+    if ($dat{0} == 'W') {
         $dec = -$dec;
+    }
 
-    return round($dec,4);
+    return round($dec, 4);
 }
 
 // ----------------------------------------------------------------------------
 // Decode ACARS message
 
-if (!isset($_REQUEST['DATA1'])) die('0|Invalid Data1');
-if (!isset($_REQUEST['DATA2'])) die('0|Invalid Data2');
+if (!isset($_REQUEST['DATA1'])) {
+    die('0|Invalid Data1');
+}
+if (!isset($_REQUEST['DATA2'])) {
+    die('0|Invalid Data2');
+}
 
-if (($version  = CheckXAcarsVersion($_REQUEST['DATA1'])) <= 0)
+if (($version  = CheckXAcarsVersion($_REQUEST['DATA1'])) <= 0) {
     die('0|Invalid XAcars Version');
+}
 
 $data2 = $_REQUEST['DATA2'];
-if (!isset($_REQUEST['DATA3']))
+if (!isset($_REQUEST['DATA3'])) {
     $data3 = '';
-else
+} else {
     $data3 = $_REQUEST['DATA3'];
+}
 
-if (!isset($_REQUEST['DATA4']))
+if (!isset($_REQUEST['DATA4'])) {
     $data4 = '';
-else
+} else {
     $data4 = $_REQUEST['DATA4'];
+}
 
 $data2 = str_replace("\'", "''", $data2);
 $data3 = str_replace("\'", "''", $data3);
@@ -276,20 +289,17 @@ switch ($data2) {
     case "BEGINFLIGHT":
         /* Begin Flight logging on ACARS */
         $data = preg_split("\|", $data3);
-        if( count($data) < 16 )
-        {
+        if (count($data) < 16) {
             echo '0|Invalid login data ('. count($data) . ')';
             break;
         }
         
         $uid = testUserLogin($data[0], $data[17]);
-        if( $uid == -1 )
-        {
+        if ($uid == -1) {
             echo '0|Login failed';
             break;
         }
-        if( $data[6] <> '' )
-        {
+        if ($data[6] <> '') {
             //N52 23.1890 E13 31.0944
             $tmp = preg_split(' ', $data[6]);
 
@@ -317,17 +327,17 @@ switch ($data2) {
         $acarsflight->acarsID  = ACARS_XACARS;
         
         // *** Origin and Destination Airports
-        if (strlen($data[5]) != 0)
-        {
+        if (strlen($data[5]) != 0) {
             $plan = preg_split('~', $data[5]);
             $acarsflight->departure   = strtoupper($plan[0]);
 
-            if (count($plan) > 1)
+            if (count($plan) > 1) {
                 $acarsflight->destination = strtoupper($plan[count($plan) - 1]);
+            }
         }
 
         $acarsflight->aircraft   = $data[3];       // AircraftRegistration
-        $acarsflight->flightType = $data[15];      // flightType   
+        $acarsflight->flightType = $data[15];      // flightType
         $acarsflight->flightPlan = $data[5];       // flightPlan
         $acarsflight->flightRot  = $data[2];       // FlightNumber
         $acarsflight->doInsert();
@@ -335,8 +345,7 @@ switch ($data2) {
         $acarspos = new acarsPosition();
         $acarspos->flightID     = $acarsflight->flightID;
         $acarspos->msgtype      = 'PR';
-        if( $data[6] <> '' )
-        {
+        if ($data[6] <> '') {
             //N52 23.1890 E13 31.0944
             $tmp = preg_split(' ', $data[6]);
             
@@ -366,99 +375,104 @@ switch ($data2) {
                 
         // Decode the message
         // Messagetype: PR=Position Report, AR=Alitude Report, WX=Weather,
-        //              QA=OUT, QB=OFF, QC=ON, QD=IN, QM=Flight Statistics, CM=User Message        
+        //              QA=OUT, QB=OFF, QC=ON, QD=IN, QM=Flight Statistics, CM=User Message
         $j = strpos($data4, 'Msg Label: ', 0);
-        if ($j != false) 
-        {
+        if ($j != false) {
             $j = $j + strlen('Msg Label: ');
             $acarspos->msgtype = substr($data4, $j, 2);
-        }
-        else
+        } else {
             die('ERROR - Wrong Message format: Msg Label is missing');
+        }
 
         // Remote Timestamp auslesen  [01/17/2006 06:58Z]
-        $acarspos->remoteTime = strtotime( substr($data4, 1,17));
+        $acarspos->remoteTime = strtotime(substr($data4, 1, 17));
             
         $j = strpos($data4, 'Message:', 0);
-        if ($j == false)
+        if ($j == false) {
             die('ERROR - Wrong Message format: Messagebody is missing');
+        }
             
         $j = $j + 9; // strlen('Message:\n')
         $data = preg_split('/', substr($data4, $j));
         
-        foreach( $data as $cmdStr)
-        {           
-
-            $k = strpos($cmdStr, ' '); 
+        foreach ($data as $cmdStr) {
+            $k = strpos($cmdStr, ' ');
             $cmd = strtoupper(substr($cmdStr, 0, $k));
-            $cnt = trim(substr($cmdStr,$k));
+            $cnt = trim(substr($cmdStr, $k));
 
-            switch( $cmd )
-            {
+            switch ($cmd) {
                 case 'POS':
                     $tmp = preg_split(' ', $cnt);
                     $acarspos->posLat       = latDegDecMin2DecDeg(trim($tmp[0] . ' ' . $tmp[1]));
                     $acarspos->posLon       = lonDegDecMin2DecDeg(trim($tmp[2] . ' ' . $tmp[3]));
                     $i = strpos($cnt, '[');
-                    if( $i > 0 )
+                    if ($i > 0) {
                         $acarspos->waypoint = substr($cnt, $i+1, -1);
+                    }
                 break;
 
                 case 'HDG':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->hdg = $cnt;
+                    }
                     break;
                 
                 case 'ALT':
                     $i = strpos($cnt, ' ');
-                    if( $i == false )
+                    if ($i == false) {
                         $acarspos->alt = $cnt;
-                    else
-                    {
+                    } else {
                         $acarspos->alt = substr($cnt, 0, $i);
-                        if( strpos( $cnt, 'CLIMB' ) != False)
+                        if (strpos($cnt, 'CLIMB') != false) {
                             $acarspos->vs = VSPEED_CLB;
-                        elseif( strpos( $cnt, 'DESC' ) != False)
+                        } elseif (strpos($cnt, 'DESC') != false) {
                             $acarspos->vs = VSPEED_DES;
-                        elseif( strpos( $cnt, 'LEVEL' ) != False)
+                        } elseif (strpos($cnt, 'LEVEL') != false) {
                             $acarspos->vs = VSPEED_CRZ;
+                        }
                     }
                     break;
  
                 case 'IAS':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->ias = $cnt;
+                    }
                     break;
                     
                 case 'TAS':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->tas = $cnt;
+                    }
                     break;
 
                 case 'OAT':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->oat = $cnt;
+                    }
                     break;
                     
                 case 'TAT':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->tat = $cnt;
+                    }
                     break;
 
                 case 'FOB':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->fob = lbs2kg($cnt);
+                    }
                     break;
                     
                 case 'WND':
-                    if( is_numeric($cnt) == True)
+                    if (is_numeric($cnt) == true) {
                         $acarspos->wnd = $cnt;
+                    }
                     break;
 
                 case 'DST':
-                    $i = strpos( $cnt, '-' );
-                    $acarspos->distFromDep = substr($cnt,0, $i-1);
-                    $acarspos->distTotal   = substr($cnt,$i+2);
+                    $i = strpos($cnt, '-');
+                    $acarspos->distFromDep = substr($cnt, 0, $i-1);
+                    $acarspos->distTotal   = substr($cnt, $i+2);
                     break;
 
                 case 'AP':
@@ -467,71 +481,70 @@ switch ($data2) {
             }
         }
         
-        switch( $acarspos->msgtype )
-        {
+        switch ($acarspos->msgtype) {
             case 'QA':   // QA = OUT Message
-                $acarspos->waypoint     = $acarspos->airport;  
+                $acarspos->waypoint     = $acarspos->airport;
                 $acarspos->flightstat   = FLIGHTSTATUS_TAXIOUT;
                 $acarspos->vs           = VSPEED_GND;
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
 
             case 'QB':   // QB = OFF Message
-                $query = "SELECT curWaypoint FROM acars_position WHERE acarsFlightID = {$acarspos->flightID} AND msgtype = 'QA'";                
+                $query = "SELECT curWaypoint FROM acars_position WHERE acarsFlightID = {$acarspos->flightID} AND msgtype = 'QA'";
                 $result = @mysql_query($query) or die("0|SQL query failed");
-                if (@mysql_num_rows($result) > 0)
-                {
+                if (@mysql_num_rows($result) > 0) {
                     $temp = @mysql_fetch_array($result);
-                    $acarspos->waypoint     = $temp[0];  
+                    $acarspos->waypoint     = $temp[0];
                 }
                 $acarspos->flightstat   = FLIGHTSTATUS_DEPARTURE;
                 $acarspos->vs           = VSPEED_CLB;
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
 
             case 'QC':   // QC = ON  Message
-                $acarspos->waypoint     = $acarspos->airport;  
+                $acarspos->waypoint     = $acarspos->airport;
                 $acarspos->flightstat   = FLIGHTSTATUS_LANDED;
                 $acarspos->vs           = VSPEED_GND;
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
 
             case 'QD':   // QD = IN Message
                 $acarspos->flightstat   = FLIGHTSTATUS_IN;
                 $acarspos->vs           = VSPEED_GND;
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
 
             case 'PR':   // PR = Position Report Message
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
                 
             case 'AR':   // AR = Altitude Report Message
-                if( $acarspos->vs == VSPEED_CRZ )
+                if ($acarspos->vs == VSPEED_CRZ) {
                     $acarspos->flightstat = FLIGHTSTATUS_CRUISE;
-                elseif( $acarspos->vs == VSPEED_CLB )
-                {
-                    if( $acarspos->distFromDep > 30 ) 
+                } elseif ($acarspos->vs == VSPEED_CLB) {
+                    if ($acarspos->distFromDep > 30) {
                         // Inflight Climb (more then 30nm from departure - insert what you want)
                         $acarspos->flightstat = FLIGHTSTATUS_CRUISE;
-                    else
+                    } else {
                         // Initial Climb
                         $acarspos->flightstat = FLIGHTSTATUS_CLIMB;
-                }
-                elseif( $acarspos->vs == VSPEED_DES )
-                    if( ($acarspos->distTotal - $acarspos->distFromDep) > 100    ) 
+                    }
+                } elseif ($acarspos->vs == VSPEED_DES) {
+                    if (($acarspos->distTotal - $acarspos->distFromDep) > 100) {
                         // Inflight Descend (more then 100Nm to destination - insert what you want)
                         $acarspos->flightstat = FLIGHTSTATUS_CRUISE;
-                    else
+                    } else {
                         // Initial Descend
                         $acarspos->flightstat = FLIGHTSTATUS_DESC;
+                    }
+                }
                     
-                $acarspos->doInsert();        
+                $acarspos->doInsert();
                 print '1|';
             break;
         }
@@ -546,8 +559,8 @@ switch ($data2) {
 
         $acarspos->flightID     = $data3;
         $acarspos->flightstat   = FLIGHTSTATUS_END;
-        $acarspos->msgtype      = 'ZZ';        
-        $acarspos->doInsert();        
+        $acarspos->msgtype      = 'ZZ';
+        $acarspos->doInsert();
 
         print "1|";
         break;

@@ -52,10 +52,11 @@ class FleetController extends Controller
         $data['range'] = $request->input('range');
         $data['maxpax'] = $request->input('maxpax');
         $data['maxgw'] = $request->input('maxgw');
-        if ($request->input('status') == 1)
+        if ($request->input('status') == 1) {
             $data['status'] = $request->input('status');
-        else
+        } else {
             $data['status'] = 0;
+        }
         $data['airline'] = $request->input('airline');
         $data['hub'] = null;
         $data['group'] = null;
@@ -113,10 +114,11 @@ class FleetController extends Controller
         $data['maxpax'] = $request->input('maxpax');
         $data['maxgw'] = $request->input('maxgw');
 
-        if ($request->input('status') == 1)
+        if ($request->input('status') == 1) {
             $data['status'] = $request->input('status');
-        else
+        } else {
             $data['status'] = 0;
+        }
         $data['airline'] = $request->input('airline');
         $data['hub'] = null;
         $data['group'] = null;

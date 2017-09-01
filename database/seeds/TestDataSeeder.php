@@ -11,6 +11,5 @@ class TestDataSeeder extends Seeder
      */
     public function run()
     {
-
     }
 }

@@ -13,5 +13,4 @@ class Airport extends Model
     {
         return $this->hasMany('App\ScheduleTemplate');
     }
-
 }

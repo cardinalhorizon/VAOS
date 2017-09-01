@@ -13,51 +13,51 @@ require("../boot.php");
 // ----------------------------------------------------------------------------
 // General Constants
 
-define("ACARS_UNKNOWN",     0);
-define("ACARS_XACARS",      3);
+define("ACARS_UNKNOWN", 0);
+define("ACARS_XACARS", 3);
 define("ACARS_XACARS_MSFS", 4);
-define("ONLINE_VATSIM",     1);
-define("ONLINE_IVAO",       2);
-define("ONLINE_FPI",        3);
-define("ONLINE_OTHER",      0);
+define("ONLINE_VATSIM", 1);
+define("ONLINE_IVAO", 2);
+define("ONLINE_FPI", 3);
+define("ONLINE_OTHER", 0);
 
 
 // ----------------------------------------------------------------------------
 // PIREP Class
 
-Class acarsPirep
+class acarsPirep
 {
-    var $pirepID       = 0;
-    var $timeReport    = 0;
-    var $acarsID       = ACARS_UNKNOWN;
-    var $userID        = 0;
-    var $flightRot     = 0;
-    var $acICAO        = '';
-    var $flightType    = 'IFR';
-    var $departure     = '';
-    var $destination   = '';
-    var $alternate     = '';
+    public $pirepID       = 0;
+    public $timeReport    = 0;
+    public $acarsID       = ACARS_UNKNOWN;
+    public $userID        = 0;
+    public $flightRot     = 0;
+    public $acICAO        = '';
+    public $flightType    = 'IFR';
+    public $departure     = '';
+    public $destination   = '';
+    public $alternate     = '';
 
-    var $depTime       = '00:00';
-    var $blockTime     = 0;
-    var $blockFuel     = 0;
-    var $flightTime    = 0;
-    var $flightFuel    = 0;
+    public $depTime       = '00:00';
+    public $blockTime     = 0;
+    public $blockFuel     = 0;
+    public $flightTime    = 0;
+    public $flightFuel    = 0;
 
-    var $cruise        = 0;
-    var $pax           = 0;
-    var $cargo         = 0;
-    var $online        = 0;
-    var $message       = '';
+    public $cruise        = 0;
+    public $pax           = 0;
+    public $cargo         = 0;
+    public $online        = 0;
+    public $message       = '';
             
-    function doInsert()
+    public function doInsert()
     {
         $sql  = 'INSERT INTO acars_pirep (timereport, acarsid, iduser, flightrot, acicao, 
                     flighttype, departure, destination, alternate, deptime, blocktime, blockfuel, flighttime,
-                    flightfuel, cruise, pax, cargo, online, message) VALUES ( ' 
+                    flightfuel, cruise, pax, cargo, online, message) VALUES ( '
               . $this->timeReport . ', '
               . $this->acarsID . ', '
-              . $this->userID . ', '        
+              . $this->userID . ', '
               . "'{$this->flightRot}', "
               . "'{$this->acICAO}', "
               . "'{$this->flightType}', "
@@ -75,14 +75,14 @@ Class acarsPirep
               . $this->online . ', '
               . "'{$this->message}');";
               
-        if(!mysql_query($sql))
+        if (!mysql_query($sql)) {
             die('0|SQL query failed (INSERT acars pirep)   ' . $sql);
+        }
         
         $this->pirepID = mysql_insert_id();
                               
         return 1;
     }
-            
 }
 
 // ----------------------------------------------------------------------------
@@ -106,77 +106,87 @@ function testUserLogin($pid, $pw)
 
     $jdec = json_decode($res, true);
 
-    if ($jdec['status'] == 200)
+    if ($jdec['status'] == 200) {
         return $jdec['user']['id'];
-    else
+    } else {
         return -1;
+    }
 }
 
 function CheckXAcarsVersion($DATA1)
 {
-    if( (strcmp($DATA1, "XACARS|1.0")==0)
+    if ((strcmp($DATA1, "XACARS|1.0")==0)
         || (strcmp($DATA1, "XACARS|1.1")==0)
-        || (strcmp($DATA1, "XACARS|2.0")==0)        
-        || (strcmp($DATA1, "XACARS|2.5")==0) 
-        || (strcmp($DATA1, "XACARS|3.0")==0) )        
+        || (strcmp($DATA1, "XACARS|2.0")==0)
+        || (strcmp($DATA1, "XACARS|2.5")==0)
+        || (strcmp($DATA1, "XACARS|3.0")==0)) {
         return ACARS_XACARS;
-    elseif( (strcmp($DATA1, "XACARS_MSFS|1.0")==0)
+    } elseif ((strcmp($DATA1, "XACARS_MSFS|1.0")==0)
         || (strcmp($DATA1, "XACARS_MSFS|1.1")==0)
-        || (strcmp($DATA1, "XACARS_MSFS|2.0")==0)        
-        || (strcmp($DATA1, "XACARS_MSFS|2.5")==0) 
-        || (strcmp($DATA1, "XACARS_MSFS|3.0")==0) ) 
+        || (strcmp($DATA1, "XACARS_MSFS|2.0")==0)
+        || (strcmp($DATA1, "XACARS_MSFS|2.5")==0)
+        || (strcmp($DATA1, "XACARS_MSFS|3.0")==0)) {
         return ACARS_XACARS_MSFS;
-    else
+    } else {
         return ACARS_UNKNOWN;
-}
-
-Function data2Int( $data, $default )
-{
-    if( !empty($data) || (isset($data) && $data == '0') )
-        return( (integer)$data );
-    else
-        return $default;
-}
-
-Function data2Str( $data, $default, $allowTags, $stripSql = True )
-{
-    if( !empty($data) )
-    {
-        if( $stripSql == True)
-            $str = mysqlclean($data, -1);
-        else
-            $str = $data;
-            
-        if( $allowTags == True )
-            return( strip_tags($str, ALLOWABLE_TAGS) );
-        else
-            return( strip_tags($str) );
     }
-    else
+}
+
+function data2Int($data, $default)
+{
+    if (!empty($data) || (isset($data) && $data == '0')) {
+        return((integer)$data);
+    } else {
         return $default;
+    }
 }
 
-Function time2min( $time )
+function data2Str($data, $default, $allowTags, $stripSql = true)
 {
-    if( !empty($time) )
-        return( substr($time,0,2)*60 + substr($time,3,2) );
-    else
+    if (!empty($data)) {
+        if ($stripSql == true) {
+            $str = mysqlclean($data, -1);
+        } else {
+            $str = $data;
+        }
+            
+        if ($allowTags == true) {
+            return(strip_tags($str, ALLOWABLE_TAGS));
+        } else {
+            return(strip_tags($str));
+        }
+    } else {
+        return $default;
+    }
+}
+
+function time2min($time)
+{
+    if (!empty($time)) {
+        return(substr($time, 0, 2)*60 + substr($time, 3, 2));
+    } else {
         return 0;
+    }
 }
 
-Function lbs2kg( $lbs )
+function lbs2kg($lbs)
 {
-    return( $lbs / 2.204622915 );
+    return($lbs / 2.204622915);
 }
 
 // ----------------------------------------------------------------------------
 // Decoding ACARS Message
 
-if (!isset($_REQUEST['DATA1'])) die('0|Invalid Data1');
-if (!isset($_REQUEST['DATA2'])) die('0|Invalid Data2');
+if (!isset($_REQUEST['DATA1'])) {
+    die('0|Invalid Data1');
+}
+if (!isset($_REQUEST['DATA2'])) {
+    die('0|Invalid Data2');
+}
 
-if (($version  = CheckXAcarsVersion($_REQUEST['DATA1'])) <= 0)
+if (($version  = CheckXAcarsVersion($_REQUEST['DATA1'])) <= 0) {
     die('0|ERROR: Unknown XAcars version!');
+}
 
 $data2 = $_REQUEST['DATA2'];
 $data = explode("~", $data2);
@@ -197,8 +207,9 @@ $jdec = json_decode($res, true);
 
 
 //$uid = testUserLogin($data[0], $data[1]);
-if ($jdec['status'] != 200)
+if ($jdec['status'] != 200) {
     die('0|Invalid Username/Password');
+}
 
 // ----------------------------------------------------------------------------
 // Parameterlist:
@@ -229,11 +240,8 @@ $ret = $client->request('POST', VAOS_URL.'api/v1/pireps', [
 
 //echo $ret;
 $jdec = json_decode($ret, true);
-if ($jdec['status'] == 200)
-{
+if ($jdec['status'] == 200) {
     echo "1|PIREP ACCEPTED";
-}
-else
-{
+} else {
     echo "0|ERROR";
 }

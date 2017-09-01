@@ -7,7 +7,7 @@
  * Software License Agreement (BSD License)
  *
  * Modifications Copyright (c) 2016 Taylor Broad, cardinalhorizon.com
- * 
+ *
  * For information about backwards compatibility in future VAOS releases,
  * visit http://fsvaos.com/legacy
  *
@@ -40,7 +40,7 @@
  */
 
 /* This is for a popup box, or an AJAX call
-	Don't show the site header/footer
+    Don't show the site header/footer
 */
 
 // Turn on the lights to the old hangar (Composer Bootstrap).
@@ -63,7 +63,7 @@ $BaseTemplate = new TemplateSet;
 
 //load the legacy notification
 $settings_file = SKINS_PATH . '/' . CURRENT_SKIN . '.php';
-if(file_exists($settings_file)) {
+if (file_exists($settings_file)) {
     include $settings_file;
 }
 
