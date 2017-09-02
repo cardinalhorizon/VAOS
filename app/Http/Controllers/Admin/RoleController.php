@@ -18,7 +18,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-
         if (! Laratrust::can('read-acl')) {
             return abort(403);
         }
