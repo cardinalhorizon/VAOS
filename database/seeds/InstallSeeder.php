@@ -19,7 +19,7 @@ class InstallSeeder extends Seeder
 
         foreach ($config as $key => $modules) {
             // Create a new role
-            $role = \App\Role::create([
+            $role = \App\Models\Role::create([
           'name' => $key,
           'display_name' => ucwords(str_replace('_', ' ', $key)),
           'description' => ucwords(str_replace('_', ' ', $key)),
@@ -34,7 +34,7 @@ class InstallSeeder extends Seeder
                 foreach ($permissions as $p => $perm) {
                     $permissionValue = $mapPermission->get($perm);
 
-                    $permission = \App\Permission::firstOrCreate([
+                    $permission = \App\Models\Permission::firstOrCreate([
               'name' => $permissionValue.'-'.$module,
               'display_name' => ucfirst($permissionValue).' '.ucfirst($module),
               'description' => ucfirst($permissionValue).' '.ucfirst($module),
