@@ -31,7 +31,7 @@ class AirportsAPI extends Controller
     	//return dd($data);
     	$airport->id = $data['airport']['id'];
     	$airport->name = $data['airport']['name'];
-    	$airport->icao = $data['airport']['ident'];
+    	$airport->icao = $data['airport']['gps_code'];
     	$airport->lat = $data['airport']['latitude_deg'];
     	$airport->lon = $data['airport']['longitude_deg'];
     	$airport->country = $data['airport']['iso_country'];
@@ -56,7 +56,7 @@ class AirportsAPI extends Controller
     	try {
             $airport->id = $data['airport']['id'];
             $airport->name = $data['airport']['name'];
-            $airport->icao = $data['airport']['ident'];
+            $airport->icao = $data['airport']['gps_code'];
             $airport->iata = $data['airport']['iata_code'];
             $airport->lat = $data['airport']['latitude_deg'];
             $airport->lon = $data['airport']['longitude_deg'];
