@@ -12,13 +12,9 @@ namespace App\Classes;
 use App\AircraftGroup;
 use App\Models\Airport;
 use App\Airline;
-use App\Models\Legacy;
 use App\ScheduleComplete;
 use App\ScheduleTemplate;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class VAOS_Schedule
 {
@@ -70,43 +66,7 @@ class VAOS_Schedule
         $complete->arrtime = Carbon::now();
         $complete->load = 0;
         $complete->save();
-        /*
-            // Add the schedule template into the legacy table
-            $legacy = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
-            $legacy->code = $template->airline->icao;
-            $legacy->flightnum = $template->flightnum;
-            $legacy->depicao = $template->depapt->icao;
-            $legacy->arricao = $template->arrapt->icao;
-            if ($template->route = null)
-                $legacy->route = $template->route;
-            else
-                $legacy->route = "NO ROUTE";
-            $legacy->aircraft = $acfgrp->aircraft[0]->id;
-            $legacy->distance = VAOSHelpers::getDistance($template->depapt->lat, $template->depapt->lon, $template->arrapt->lat, $template->arrapt->lon, "M");
-            $legacy->deptime = Carbon::now()->toTimeString();
-            $legacy->arrtime = Carbon::now()->addHours(2)->toTimeString();
-            $legacy->flighttime = "0";
-            $legacy->notes = "VAOS GENERATED ROUTE";
-            $legacy->route_details = "{[]}";
-            $legacy->flightlevel = "0";
-            $legacy->enabled = 1;
-            $legacy->price = 175;
-            $legacy->flighttype = "P";
-            $legacy->daysofweek = "0123456";
-            $legacy->save();
 
-            // Now let's add the bid appropriately
-
-            $legacybid = new Legacy\Bid();
-            $legacybid->parentid = $complete->id;
-            $legacybid->pilotid = $user_id;
-            $legacybid->routeid = $legacy->id;
-            $legacybid->dateadded = Carbon::now();
-            $legacybid->save();
-
-            $legacy->bidid = $legacybid->id;
-            $legacy->save();
-        */
         return true;
     }
     public static function newRoute($data)

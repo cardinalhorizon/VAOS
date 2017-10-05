@@ -35,7 +35,7 @@ class smartCARS extends Controller
         $pirep->user()->associate($request->input('pilotid'));
         // This is a legacy ACARS client. Treat it with respect, they won't be around
         // for too much longer. All we need is the user data, flight info and we are all set
-        $flightinfo = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'));
+        $flightinfo = Bid::find($request->input('legacyroute'));
         $pirep->airline()->associate($flightinfo->airline_id);
         $pirep->aircraft()->associate($flightinfo->aircraft_id);
         $pirep->depapt()->associate($flightinfo->depapt_id);
