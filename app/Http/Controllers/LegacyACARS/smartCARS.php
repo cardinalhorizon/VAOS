@@ -45,6 +45,8 @@ class smartCARS extends Controller
         $pirep->status = 0;
         $pirep->landingrate = $request->input('landingrate');
         $pirep->flighttime = $request->input('flighttime');
+        $pirep->acars_client = $request->input('source');
+        $pirep->fuel_used = $request->input('fuelused');
 
         // Auto Accept System
         if (env('VAOS_AA_ENABLED')) {
