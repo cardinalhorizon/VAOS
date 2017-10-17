@@ -11,7 +11,7 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
-        "santigarcor/laratrust": "4.0.*"
+        "santigarcor/laratrust": "5.0.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",
