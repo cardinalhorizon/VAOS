@@ -11,6 +11,6 @@ class Airport extends Model
     protected $fillable = ['id', 'name', 'city', 'county', 'iata','icao', 'lat', 'lon'];
 
     public function schedules(){
-        return $this->hasMany('App\Schedules');
+        return $this->hasMany('App\Models\Schedules');
     }
 }
