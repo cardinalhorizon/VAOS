@@ -57,11 +57,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function hub(){
+    public function hub()
+    {
         return $this->belongsTo('App\Models\Hub');
     }
 
-    public function logbookentry(){
+    public function logbookentry()
+    {
         $this->hasMany('App\Models\LogbookEntry');
     }
 }
