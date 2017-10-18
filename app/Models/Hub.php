@@ -8,15 +8,18 @@ class Hub extends Model
 {
     protected $fillable = ['airport_id', 'airline_id'];
 
-    public function airport(){
+    public function airport()
+    {
         return $this->hasOne('App\Models\Airport');
     }
 
-    public function airline(){
+    public function airline()
+    {
         return $this->belongsTo('App\Models\Airline');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->hasMany('App\Models\User');
     }
 }
