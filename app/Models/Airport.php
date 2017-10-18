@@ -12,6 +12,6 @@ class Airport extends Model
 
     public function schedule()
     {
-        return $this->hasMany('App\Models\Schedules');
+        return $this->hasMany('App\Models\ScheduledFlight');
     }
 }
