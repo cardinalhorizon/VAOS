@@ -32,6 +32,19 @@ use Laravel\Passport\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereRoleIs($role = '')
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $username
+ * @property string $fshub_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string|null $legacy_totalhours
+ * @property int $status
+ * @property-read \App\Models\Hub $hub
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereFshubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLegacyTotalhours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereUsername($value)
  */
 class User extends Authenticatable
 {
