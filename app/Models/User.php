@@ -56,4 +56,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function hub(){
+        return $this->belongsTo('App\Models\Hub');
+    }
+
+    public function logbookentry(){
+        $this->hasMany('App\Models\LogbookEntry');
+    }
 }
