@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Laratrust\LaratrustRole;
+use Laratrust\Models\LaratrustRole;
 
 /**
  * App\Models\Role
