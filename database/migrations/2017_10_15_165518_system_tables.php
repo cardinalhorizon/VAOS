@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
 class SystemTables extends Migration
 {
     /**
@@ -220,7 +219,6 @@ class SystemTables extends Migration
 
                 // FS Hub & WebCARS Information
                 $table->string('globalID');
-
             });
             Schema::create('bid_alternates', function (Blueprint $table) {
                 $table->increments('id');
