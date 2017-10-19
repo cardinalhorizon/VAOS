@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Aircraft
  *
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ScheduledFlight[] $scheduledflight
  */
 class Aircraft extends Model
 {
@@ -31,5 +32,9 @@ class Aircraft extends Model
     public function aircraft_group()
     {
         $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_pivot');
+    }
+
+    public function scheduledflight(){
+        return $this->belongsToMany('App\Models\ScheduledFlight', 'aircraft_scheduled_flight');
     }
 }

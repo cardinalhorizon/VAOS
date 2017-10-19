@@ -42,6 +42,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Airline $airline
+ * @property-read \App\Models\Airport $arrapt
+ * @property-read \App\Models\Airport $depapt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Aircraft[] $aircraft
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\AircraftGroup[] $aircraftgroup
  */
 class ScheduledFlight extends Model
 {
@@ -58,5 +63,13 @@ class ScheduledFlight extends Model
     public function arrapt()
     {
         return $this->belongsTo('App\Models\Airport');
+    }
+
+    public function aircraftgroup(){
+        return $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_scheduled_flight');
+    }
+
+    public function aircraft(){
+        return $this->belongsToMany('App\Models\Aircraft', 'aircraft_scheduled_flight');
     }
 }

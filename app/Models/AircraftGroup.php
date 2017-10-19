@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AircraftGroup whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AircraftGroup whereUserdefined($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Aircraft[] $aircraft
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ScheduledFlight[] $scheduledflight
  */
 class AircraftGroup extends Model
 {
@@ -34,5 +36,9 @@ class AircraftGroup extends Model
     public function aircraft()
     {
         return $this->belongsToMany('App\Models\Aircraft', 'aircraft_group_pivot');
+    }
+
+    public function scheduledflight(){
+        return $this->belongsToMany('App\Models\ScheduledFlight', 'aircraft_group_scheduled_flight');
     }
 }
