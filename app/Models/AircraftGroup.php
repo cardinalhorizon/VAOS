@@ -38,7 +38,8 @@ class AircraftGroup extends Model
         return $this->belongsToMany('App\Models\Aircraft', 'aircraft_group_pivot');
     }
 
-    public function scheduledflight(){
+    public function scheduledflight()
+    {
         return $this->belongsToMany('App\Models\ScheduledFlight', 'aircraft_group_scheduled_flight');
     }
 }

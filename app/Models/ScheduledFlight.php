@@ -65,11 +65,13 @@ class ScheduledFlight extends Model
         return $this->belongsTo('App\Models\Airport');
     }
 
-    public function aircraftgroup(){
+    public function aircraftgroup()
+    {
         return $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_scheduled_flight');
     }
 
-    public function aircraft(){
+    public function aircraft()
+    {
         return $this->belongsToMany('App\Models\Aircraft', 'aircraft_scheduled_flight');
     }
 }
