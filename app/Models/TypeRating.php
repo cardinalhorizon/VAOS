@@ -29,7 +29,8 @@ class TypeRating extends Model
 {
     protected $fillable = ['airline_id', 'name', 'identifier', 'description'];
 
-    public function airline(){
+    public function airline()
+    {
         //
     }
 }
