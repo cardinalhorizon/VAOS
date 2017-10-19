@@ -45,12 +45,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ScheduledFlight extends Model
 {
-
     protected $fillable = ['airline_id', 'airline_id', 'flightnum', 'sub', 'depapt_id', 'arrapt_id', 'seasonal', 'startdate', 'enddate', 'deptime', 'arrtime', 'type', 'enabled', 'notes'];
 
     public function airline()
     {
-
         return $this->belongsTo('App\Models\Airline');
     }
     public function depapt()
