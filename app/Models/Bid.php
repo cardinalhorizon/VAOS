@@ -41,14 +41,17 @@ class Bid extends Model
     {
         return $this->belongsTo('App\Models\Aircraft');
     }
-    public function alternates(){
+    public function alternates()
+    {
         return $this->hasMany('App\Models\BidAlternate');
     }
-    public function biddoc(){
+    public function biddoc()
+    {
         return $this->hasMany('App\Models\BidDoc');
     }
 
-    public function bidcomment(){
+    public function bidcomment()
+    {
         return $this->hasMany('App\Models\BidComment');
     }
 }

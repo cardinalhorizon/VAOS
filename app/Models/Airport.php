@@ -39,7 +39,8 @@ class Airport extends Model
         return $this->hasMany('App\Models\ScheduledFlight');
     }
 
-    public function bid(){
+    public function bid()
+    {
         return $this->hasMany('App\Models\Bid');
     }
 }

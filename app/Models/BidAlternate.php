@@ -13,11 +13,13 @@ class BidAlternate extends Model
 {
     protected $fillable = [];
 
-    public function bid(){
+    public function bid()
+    {
         return $this->belongsTo('App\Models\Bid');
     }
 
-    public function airport(){
+    public function airport()
+    {
         return $this->belongsTo('App\Models\Airport');
     }
 }
