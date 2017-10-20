@@ -199,6 +199,8 @@ class SystemTables extends Migration
                 $table->integer('aircraft_id')->unsigned();
                 $table->foreign('aircraft_id')->references('id')->on('aircraft')->onDelete('cascade');
 
+                $table->integer('bid_type');
+
                 // Insert Alternate Airport List table
                 $table->time('scheduled_out')->nullable();
                 $table->time('scheduled_off')->nullable();
@@ -291,6 +293,7 @@ class SystemTables extends Migration
                 // Aircraft specific details
                 $table->integer('landingrate')->nullable();
                 $table->integer('fuelused')->nullable();
+                $table->text('clientLogRaw')->nullable(); // for smartCARS
             });
             Schema::create('logbook_alternates', function (Blueprint $table) {
                 $table->increments('id');
