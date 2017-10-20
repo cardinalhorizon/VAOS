@@ -11,5 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BidDoc extends Model
 {
-    //
+    protected $fillable = [];
+
+    public function bid(){
+        return $this->belongsTo('App\Models\Bid');
+    }
 }
