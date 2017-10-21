@@ -59,7 +59,7 @@ class LaratrustSeeder extends Seeder
                 'email' => $key.'@app.com',
                 'password' => bcrypt('password'),
                 'status' => 1,
-                'fshub_id' => random_int(1,100)
+                'fshub_id' => random_int(1, 100)
             ]);
 
             $user->attachRole($role);
