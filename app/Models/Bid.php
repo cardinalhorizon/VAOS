@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Bid
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\Aircraft $aircraft
+ * @property-read \App\Models\Airline $airline
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidAlternate[] $alternates
+ * @property-read \App\Models\Airport $arrapt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidComment[] $bidcomment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidDoc[] $biddoc
+ * @property-read \App\Models\User $captain
+ * @property-read \App\Models\Airport $depapt
+ * @property-read \App\Models\User $dispatcher
+ * @property-read \App\Models\User $fo
  */
 class Bid extends Model
 {

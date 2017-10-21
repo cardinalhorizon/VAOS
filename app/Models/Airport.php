@@ -27,6 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereLon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereName($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bid[] $bid
  */
 class Airport extends Model
 {

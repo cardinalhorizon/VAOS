@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\BidDoc
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\Bid $bid
  */
 class BidDoc extends Model
 {
