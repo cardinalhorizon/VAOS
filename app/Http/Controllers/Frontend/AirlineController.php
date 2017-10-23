@@ -134,6 +134,6 @@ class AirlineController extends Controller
         $airline->delete();
 
         //TODO: Add view to this function
-        return redirect()->route('airline.index')->with('success', 'Sucessfully delete the '. $airline->name .' airline from the database');
+        return redirect()->route('airline.index')->with('success', 'Successfully delete the '. $airline->name .' airline from the database');
     }
 }
