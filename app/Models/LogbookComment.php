@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\LogbookComment
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\LogbookEntry $logbookentry
+ * @property-read \App\Models\User $user
  */
 class LogbookComment extends Model
 {

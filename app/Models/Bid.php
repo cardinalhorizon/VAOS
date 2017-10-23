@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Airport $depapt
  * @property-read \App\Models\User $dispatcher
  * @property-read \App\Models\User $fo
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidComment[] $comment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidDoc[] $doc
+ * @property-read \App\Models\TelemetryPoint $telemetrypoint
  */
 class Bid extends Model
 {

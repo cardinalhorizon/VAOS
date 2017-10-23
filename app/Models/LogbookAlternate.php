@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\LogbookAlternate
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\Airport $airport
+ * @property-read \App\Models\LogbookEntry $logbookentry
  */
 class LogbookAlternate extends Model
 {

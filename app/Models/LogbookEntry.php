@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Airport $depapt
  * @property-read \App\Models\User $dispatcher
  * @property-read \App\Models\User $fo
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LogbookAlternate[] $alternates
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\LogbookComment[] $comment
+ * @property-read \App\Models\TelemetryPoint $telemetrypoint
  */
 class LogbookEntry extends Model
 {
