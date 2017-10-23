@@ -11,5 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LogbookComment extends Model
 {
-    //
+    protected $fillable = [];
+
+    public function logbookentry()
+    {
+        return $this->belongsTo('App\Models\LogbookEntry');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

@@ -55,12 +55,12 @@ class Bid extends Model
     {
         return $this->hasMany('App\Models\BidAlternate');
     }
-    public function biddoc()
+    public function doc()
     {
         return $this->hasMany('App\Models\BidDoc');
     }
 
-    public function bidcomment()
+    public function comment()
     {
         return $this->hasMany('App\Models\BidComment');
     }

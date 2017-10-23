@@ -48,4 +48,12 @@ class LogbookEntry extends Model
     {
         return $this->belongsTo('App\Models\Aircraft');
     }
+    public function alternates()
+    {
+        return $this->hasMany('App\Models\LogbookAlternate');
+    }
+    public function comment()
+    {
+        return $this->hasMany('App\Models\LogbookComment');
+    }
 }

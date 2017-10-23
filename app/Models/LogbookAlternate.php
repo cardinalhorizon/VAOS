@@ -11,5 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LogbookAlternate extends Model
 {
-    //
+    protected $fillable = [];
+
+    public function logbookentry()
+    {
+        return $this->belongsTo('App\Models\LogbookEntry');
+    }
+
+    public function airport()
+    {
+        return $this->belongsTo('App\Models\Airport');
+    }
 }
