@@ -9,17 +9,20 @@ use App\Http\Controllers\Controller;
 class AircraftController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the fleet.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $fleet = Aircraft::with('hub')->with('location')->with('airline')->get();
+
+        //TODO: Add view to this function
+        return view('aircraft.index', compact($fleet));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new aircraft.
      *
      * @return \Illuminate\Http\Response
      */
@@ -29,7 +32,7 @@ class AircraftController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created aircraft in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -40,7 +43,7 @@ class AircraftController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified aircraft.
      *
      * @param  \App\Models\Aircraft  $aircraft
      * @return \Illuminate\Http\Response
@@ -51,7 +54,7 @@ class AircraftController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified aircraft.
      *
      * @param  \App\Models\Aircraft  $aircraft
      * @return \Illuminate\Http\Response
@@ -62,7 +65,7 @@ class AircraftController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified aircraft in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Aircraft  $aircraft
@@ -74,7 +77,7 @@ class AircraftController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified aircraft from storage.
      *
      * @param  \App\Models\Aircraft  $aircraft
      * @return \Illuminate\Http\Response
