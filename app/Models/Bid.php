@@ -59,9 +59,11 @@ class Bid extends Model
     {
         return $this->hasMany('App\Models\BidDoc');
     }
-
     public function comment()
     {
         return $this->hasMany('App\Models\BidComment');
+    }
+    public function telemetrypoint(){
+        return $this->hasOne('App\Models\TelemetryPoint');
     }
 }

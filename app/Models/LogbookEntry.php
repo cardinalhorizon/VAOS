@@ -56,4 +56,7 @@ class LogbookEntry extends Model
     {
         return $this->hasMany('App\Models\LogbookComment');
     }
+    public function telemetrypoint(){
+        return $this->hasOne('App\Models\TelemetryPoint');
+    }
 }

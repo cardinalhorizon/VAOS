@@ -11,5 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TelemetryPoint extends Model
 {
-    //
+    protected $fillable = [];
+
+    public function bid(){
+        return $this->belongsTo('App\Models\Bid');
+    }
+
+    public function logbookentry(){
+        return $this->belongsTo('App\Models\LogbookEntry');
+    }
 }
