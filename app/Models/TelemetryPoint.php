@@ -13,11 +13,13 @@ class TelemetryPoint extends Model
 {
     protected $fillable = [];
 
-    public function bid(){
+    public function bid()
+    {
         return $this->belongsTo('App\Models\Bid');
     }
 
-    public function logbookentry(){
+    public function logbookentry()
+    {
         return $this->belongsTo('App\Models\LogbookEntry');
     }
 }

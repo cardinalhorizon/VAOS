@@ -63,7 +63,8 @@ class Bid extends Model
     {
         return $this->hasMany('App\Models\BidComment');
     }
-    public function telemetrypoint(){
+    public function telemetrypoint()
+    {
         return $this->hasOne('App\Models\TelemetryPoint');
     }
 }
