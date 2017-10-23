@@ -7,7 +7,6 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Laratrust;
-use Session;
 
 class RoleController extends Controller
 {
@@ -24,7 +23,7 @@ class RoleController extends Controller
 
         $roles = Role::all();
 
-        return view('admin.roles.view')->withRoles($roles);
+        return view('admin.roles.view', compact($roles));
     }
 
     /**
@@ -40,7 +39,7 @@ class RoleController extends Controller
 
         $permissions = Permission::all();
 
-        return view('admin.roles.create')->withPermissions($permissions);
+        return view('admin.roles.create', compact($permissions));
     }
 
     /**
@@ -55,22 +54,21 @@ class RoleController extends Controller
             return abort(403);
         }
 
-        $this->validate($request, [
+        $this->validateWith([
             'display_name' => 'required|max:255',
             'name' => 'required|max:100|alpha_dash|unique:roles,name',
             'description' => 'sometimes|max:255',
         ]);
-        $role = new Role();
-        $role->display_name = $request->display_name;
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $role =  Role::create([
+            'display_name' => $request->input('display_name'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description')
+        ]);
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }
-        Session::flash('success', 'Successfully created the new '.$role->display_name.' role in the database.');
 
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with('success', 'Successfully created the new '. $role->display_name .' role in the database.');
     }
 
     /**
@@ -114,19 +112,20 @@ class RoleController extends Controller
             return abort(403);
         }
 
-        $this->validate($request, [
+        $this->validateWith([
             'display_name' => 'required|max:255',
             'description' => 'sometimes|max:255',
         ]);
-        $role->display_name = $request->display_name;
-        $role->description = $request->description;
-        $role->save();
+        $role->update([
+            'display_name' => $request->input('display_name'),
+            'description' => $request->input('description'),
+        ]);
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }
-        Session::flash('success', 'Successfully update the '.$role->display_name.' role in the database.');
+        Session::flash();
 
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.index')->with('success', 'Successfully update the '.$role->display_name.' role in the database.');
     }
 
     /**
