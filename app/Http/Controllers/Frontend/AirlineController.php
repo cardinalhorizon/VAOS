@@ -17,7 +17,7 @@ class AirlineController extends Controller
     {
         $airlines = Airline::all();
 
-         //TODO: Add view to this function
+        //TODO: Add view to this function
         return view('airline.index', compact($airlines));
     }
 
