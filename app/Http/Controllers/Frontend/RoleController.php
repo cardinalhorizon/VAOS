@@ -123,7 +123,6 @@ class RoleController extends Controller
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }
-        Session::flash();
 
         return redirect()->route('roles.index')->with('success', 'Successfully update the '.$role->display_name.' role in the database.');
     }
