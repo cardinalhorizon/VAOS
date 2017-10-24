@@ -125,17 +125,17 @@ class PermissionController extends Controller
         if (! Laratrust::can('update-acl')) {
             return abort(403);
         }
-        $this->validate($request, [
+        $this->validateWith([
             'display_name' => 'required|max:255',
             'description' => 'sometimes|max:255',
         ]);
 
-        $permission->display_name = $request->display_name;
-        $permission->description = $request->description;
-        $permission->save();
-        Session::flash('success', 'Updated the '.$permission->display_name.' permission.');
+        $permission->update([
+            'display_name' => $request->input('display_name'),
+            'description' => $request->input('description')
+        ]);
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('success', 'Updated the '.$permission->display_name.' permission.');
     }
 
     /**
