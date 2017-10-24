@@ -312,7 +312,7 @@ class SystemTables extends Migration
              * route.
              */
 
-            Schema::create('telemetry_point', function (Blueprint $table) {
+            Schema::create('telemetry_points', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('bid_id')->nullable();
                 $table->unsignedInteger('logbook_entry_id')->nullable();
@@ -333,6 +333,24 @@ class SystemTables extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('airports');
+        Schema::dropIfExists('airlines');
+        Schema::dropIfExists('hubs');
+        Schema::dropIfExists('aircraft');
+        Schema::dropIfExists('aircraft_groups');
+        Schema::dropIfExists('aircraft_group_pivot');
+        Schema::dropIfExists('type_ratings');
+        Schema::dropIfExists('scheduled_flights');
+        Schema::dropIfExists('aircraft_group_scheduled_flight');
+        Schema::dropIfExists('aircraft_scheduled_flight');
+        Schema::dropIfExists('bids');
+        Schema::dropIfExists('bid_alternates');
+        Schema::dropIfExists('bid_paperworks');
+        Schema::dropIfExists('bid_comments');
+        Schema::dropIfExists('logbook_entries');
+        Schema::dropIfExists('logbook_alternates');
+        Schema::dropIfExists('logbook_comments');
+        Schema::dropIfExists('telemetry_points');
+
     }
 }
