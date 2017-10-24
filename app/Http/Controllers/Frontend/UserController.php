@@ -37,7 +37,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validateWith([
 
         ]);
@@ -45,7 +44,6 @@ class UserController extends Controller
         User::create([
 
         ]);
-
     }
 
     /**
