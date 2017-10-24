@@ -71,7 +71,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($user->id === Auth::id()){
+        if ($user->id === Auth::id()) {
             $this->validateWith([
 
             ]);
@@ -81,7 +81,7 @@ class ProfileController extends Controller
             ]);
 
             return redirect()->route('profile.show', $user->id)->with('success', 'Your user information was successfully updated in the database');
-        }else{
+        } else {
             return redirect()->route('profile.show', $user->id)->with('error', 'You are not allowed to update ' . $user->username . ' user information');
         }
     }
