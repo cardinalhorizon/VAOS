@@ -351,6 +351,5 @@ class SystemTables extends Migration
         Schema::dropIfExists('logbook_alternates');
         Schema::dropIfExists('logbook_comments');
         Schema::dropIfExists('telemetry_points');
-
     }
 }
