@@ -54,16 +54,13 @@ class RoleController extends Controller
             return abort(403);
         }
 
-        $this->validateWith([
+        $data = $this->validateWith([
             'display_name' => 'required|max:255',
             'name' => 'required|max:100|alpha_dash|unique:roles,name',
             'description' => 'sometimes|max:255',
         ]);
-        $role =  Role::create([
-            'display_name' => $request->input('display_name'),
-            'name' => $request->input('name'),
-            'description' => $request->input('description')
-        ]);
+        $role =  Role::create($data);
+
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }
@@ -112,14 +109,12 @@ class RoleController extends Controller
             return abort(403);
         }
 
-        $this->validateWith([
+        $data = $this->validateWith([
             'display_name' => 'required|max:255',
             'description' => 'sometimes|max:255',
         ]);
-        $role->update([
-            'display_name' => $request->input('display_name'),
-            'description' => $request->input('description'),
-        ]);
+        $role->update($data);
+
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }

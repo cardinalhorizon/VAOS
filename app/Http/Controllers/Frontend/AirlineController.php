@@ -40,7 +40,7 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateWith([
+       $data = $this->validateWith([
             'icao' => 'required|alpha|min:3|max:3|unique:airlines, icao',
             'fshub_id' => 'nullable',
             'iata' => 'required|alpha|min:2|max:2|unique:airlines, iata',
@@ -51,15 +51,7 @@ class AirlineController extends Controller
 
         ]);
 
-        $airline = Airline::create([
-            'icao' => $request->input('icao'),
-            'fshub_id' => $request->input('fshub_id'),
-            'iata' => $request->input('iata'),
-            'name' => $request->input('name'),
-            'logo' => $request->input('logo'),
-            'widget' => $request->input('widget'),
-            'callsign' => $request->input('callsign')
-        ]);
+        $airline = Airline::create($data);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully created the new '. $airline->name . ' airline to the database');
@@ -98,7 +90,7 @@ class AirlineController extends Controller
      */
     public function update(Request $request, Airline $airline)
     {
-        $this->validateWith([
+       $data = $this->validateWith([
             'icao' => "required|alpha|min:3|max:3|unique:airlines, icao, $airline->id",
             'fshub_id' => 'nullable',
             'iata' => "required|alpha|min:2|max:2|unique:airlines, iata, $airline->id",
@@ -109,15 +101,7 @@ class AirlineController extends Controller
 
         ]);
 
-        $airline->update([
-            'icao' => $request->input('icao'),
-            'fshub_id' => $request->input('fshub_id'),
-            'iata' => $request->input('iata'),
-            'name' => $request->input('name'),
-            'logo' => $request->input('logo'),
-            'widget' => $request->input('widget'),
-            'callsign' => $request->input('callsign')
-        ]);
+        $airline->update($data);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully update the '. $airline->name . ' airline in the database');

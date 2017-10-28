@@ -51,16 +51,12 @@ class PermissionController extends Controller
             return abort(403);
         }
         if ($request->permission_type == 'basic') {
-            $this->validateWith([
+            $data =$this->validateWith([
                 'display_name' => 'required|max:255',
                 'name' => 'required|max:255|alphadash|unique:permissions,name',
                 'description' => 'sometimes|max:255',
             ]);
-            $permission = Permission::create([
-            'name' => $request->input('name'),
-            'display_name' => $request->input('display_name'),
-            'description' => $request->input('description'),
-            ]);
+            $permission = Permission::create($data);
 
             return redirect()->route('permissions.index')->with('success', 'Permission has been successfully added');
         } elseif ($request->permission_type == 'crud') {
@@ -110,7 +106,7 @@ class PermissionController extends Controller
             return abort(403);
         }
 
-        return view('admin.permissions.edit')->withPermission($permission);
+        return view('admin.permissions.edit', compact($permission));
     }
 
     /**
@@ -125,15 +121,12 @@ class PermissionController extends Controller
         if (! Laratrust::can('update-acl')) {
             return abort(403);
         }
-        $this->validateWith([
+        $data = $this->validateWith([
             'display_name' => 'required|max:255',
             'description' => 'sometimes|max:255',
         ]);
 
-        $permission->update([
-            'display_name' => $request->input('display_name'),
-            'description' => $request->input('description')
-        ]);
+        $permission->update($data);
 
         return redirect()->route('permissions.index')->with('success', 'Updated the '.$permission->display_name.' permission.');
     }
