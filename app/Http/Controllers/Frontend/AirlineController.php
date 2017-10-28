@@ -40,7 +40,7 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-       $data = $this->validateWith([
+        $data = $this->validateWith([
             'icao' => 'required|alpha|min:3|max:3|unique:airlines, icao',
             'fshub_id' => 'nullable',
             'iata' => 'required|alpha|min:2|max:2|unique:airlines, iata',
@@ -90,7 +90,7 @@ class AirlineController extends Controller
      */
     public function update(Request $request, Airline $airline)
     {
-       $data = $this->validateWith([
+        $data = $this->validateWith([
             'icao' => "required|alpha|min:3|max:3|unique:airlines, icao, $airline->id",
             'fshub_id' => 'nullable',
             'iata' => "required|alpha|min:2|max:2|unique:airlines, iata, $airline->id",
