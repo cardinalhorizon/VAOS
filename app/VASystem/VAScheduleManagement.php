@@ -8,8 +8,6 @@
 
 namespace App\VASystem;
 
-
 class VAScheduleManagement
 {
-
 }

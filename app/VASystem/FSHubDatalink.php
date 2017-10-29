@@ -8,7 +8,6 @@
 
 namespace App\VASystem;
 
-
 class FSHubDatalink
 {
     public static function syncLogbookData($pilot)
