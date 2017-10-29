@@ -22,7 +22,7 @@ class PermissionController extends Controller
         }
         $permissions = Permission::all();
 
-        return view('admin.permissions.view')->withPermissions($permissions);
+        return view('admin.permissions.view', compact($permissions));
     }
 
     /**
@@ -51,19 +51,14 @@ class PermissionController extends Controller
             return abort(403);
         }
         if ($request->permission_type == 'basic') {
-            $this->validate($request, [
+            $data =$this->validateWith([
                 'display_name' => 'required|max:255',
                 'name' => 'required|max:255|alphadash|unique:permissions,name',
                 'description' => 'sometimes|max:255',
             ]);
-            $permission = new Permission();
-            $permission->name = $request->name;
-            $permission->display_name = $request->display_name;
-            $permission->description = $request->description;
-            $permission->save();
-            Session::flash('success', 'Permission has been successfully added');
+            $permission = Permission::create($data);
 
-            return redirect()->route('permissions.index');
+            return redirect()->route('permissions.index')->with('success', 'Permission has been successfully added');
         } elseif ($request->permission_type == 'crud') {
             $this->validate($request, [
                 'resource' => 'required|min:3|max:100|alpha',
@@ -74,15 +69,14 @@ class PermissionController extends Controller
                     $slug = strtolower($x).'-'.strtolower($request->resource);
                     $display_name = ucwords($x.' '.$request->resource);
                     $description = 'Allows a user to '.strtoupper($x).' a '.ucwords($request->resource);
-                    $permission = new Permission();
-                    $permission->name = $slug;
-                    $permission->display_name = $display_name;
-                    $permission->description = $description;
-                    $permission->save();
+                    $permission = Permission::create([
+                        'name' => $slug,
+                        'display_name' => $display_name,
+                        'description' => $description
+                    ]);
                 }
-                Session::flash('success', 'Permissions were all successfully added');
 
-                return redirect()->route('permissions.index');
+                return redirect()->route('permissions.index')->with('success', 'Permissions were all successfully added');
             }
         } else {
             return redirect()->route('permissions.create')->withInput();
@@ -112,7 +106,7 @@ class PermissionController extends Controller
             return abort(403);
         }
 
-        return view('admin.permissions.edit')->withPermission($permission);
+        return view('admin.permissions.edit', compact($permission));
     }
 
     /**
@@ -127,17 +121,14 @@ class PermissionController extends Controller
         if (! Laratrust::can('update-acl')) {
             return abort(403);
         }
-        $this->validate($request, [
+        $data = $this->validateWith([
             'display_name' => 'required|max:255',
             'description' => 'sometimes|max:255',
         ]);
 
-        $permission->display_name = $request->display_name;
-        $permission->description = $request->description;
-        $permission->save();
-        Session::flash('success', 'Updated the '.$permission->display_name.' permission.');
+        $permission->update($data);
 
-        return redirect()->route('permissions.index');
+        return redirect()->route('permissions.index')->with('success', 'Updated the '.$permission->display_name.' permission.');
     }
 
     /**

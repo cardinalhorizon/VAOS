@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Bid
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\Aircraft $aircraft
+ * @property-read \App\Models\Airline $airline
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidAlternate[] $alternates
+ * @property-read \App\Models\Airport $arrapt
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidComment[] $bidcomment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidDoc[] $biddoc
+ * @property-read \App\Models\User $captain
+ * @property-read \App\Models\Airport $depapt
+ * @property-read \App\Models\User $dispatcher
+ * @property-read \App\Models\User $fo
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidComment[] $comment
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BidDoc[] $doc
+ * @property-read \App\Models\TelemetryPoint $telemetrypoint
  */
 class Bid extends Model
 {
@@ -45,13 +58,16 @@ class Bid extends Model
     {
         return $this->hasMany('App\Models\BidAlternate');
     }
-    public function biddoc()
+    public function doc()
     {
         return $this->hasMany('App\Models\BidDoc');
     }
-
-    public function bidcomment()
+    public function comment()
     {
         return $this->hasMany('App\Models\BidComment');
+    }
+    public function telemetrypoint()
+    {
+        return $this->hasOne('App\Models\TelemetryPoint');
     }
 }

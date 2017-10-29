@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\BidComment
  *
  * @mixin \Eloquent
+ * @property-read \App\Models\Bid $bid
+ * @property-read \App\Models\User $user
  */
 class BidComment extends Model
 {
