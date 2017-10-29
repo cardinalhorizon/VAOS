@@ -37,6 +37,16 @@ class SystemTables extends Migration
                 $table->double('lon');
                 $table->softDeletes();
             });
+            Schema::create('airport_parking_spot', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('airport_id');
+                $table->string('name');
+                $table->integer('type');
+                $table->integer('size_class');
+                $table->boolean('isArea');
+                $table->double('lat')->nullable();
+                $table->double('lon')->nullable();
+            });
 
             Schema::create('airlines', function (Blueprint $table) {
                 $table->increments('id');
@@ -98,6 +108,22 @@ class SystemTables extends Migration
                 $table->foreign('aircraft_group_id')->references('id')->on('aircraft_groups')->onDelete('cascade');
                 $table->timestamps();
                 $table->softDeletes();
+            });
+
+            Schema::create('aircraft_layouts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('aircraft_icao');
+            });
+
+            Schema::create('aircraft_layout_sections', function (Blueprint $t) {
+                $t->increments('id');
+                $t->unsignedInteger('aircraft_layout_id');
+                $t->integer('type');
+                $t->string('name');
+                $t->integer('pax');
+                $t->integer('cargo_containers');
+                $t->double('cargo_volume');
             });
             /*
              * New to 1.1, Type ratings are replacing the ranking system commonly found in phpVMS installations.
@@ -237,6 +263,7 @@ class SystemTables extends Migration
             });
             Schema::create('bid_comments', function (Blueprint $table) {
                 $table->increments('id');
+                $table->unsignedInteger('bid_id');
                 $table->unsignedInteger('user_id');
                 $table->text('message');
                 $table->timestamps();
@@ -253,9 +280,9 @@ class SystemTables extends Migration
                 $table->increments('id');
                 $table->integer('status');
                 $table->string('client');
-                $table->unsignedInteger('airline_id');
+                $table->unsignedInteger('airline_id')->nullable();
                 $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('set null');
-                $table->string('flightnum');
+                $table->string('flightnum')->nullable();
                 $table->string('sub')->nullable();
                 $table->unsignedInteger('captain_id');
                 $table->foreign('captain_id')->references('id')->on('users')->onDelete('set null');
@@ -300,6 +327,7 @@ class SystemTables extends Migration
             });
             Schema::create('logbook_comments', function (Blueprint $table) {
                 $table->increments('id');
+                $table->unsignedInteger('logbook_entry_id');
                 $table->unsignedInteger('user_id');
                 $table->text('message');
                 $table->timestamps();
