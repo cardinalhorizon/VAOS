@@ -116,14 +116,14 @@ class SystemTables extends Migration
                 $table->string('aircraft_icao');
             });
 
-            Schema::create('aircraft_layout_sections', function (Blueprint $t) {
-                $t->increments('id');
-                $t->unsignedInteger('aircraft_layout_id');
-                $t->integer('type');
-                $t->string('name');
-                $t->integer('pax');
-                $t->integer('cargo_containers');
-                $t->double('cargo_volume');
+            Schema::create('aircraft_layout_sections', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('aircraft_layout_id');
+                $table->integer('type');
+                $table->string('name');
+                $table->integer('pax');
+                $table->integer('cargo_containers');
+                $table->double('cargo_volume');
             });
             /*
              * New to 1.1, Type ratings are replacing the ranking system commonly found in phpVMS installations.
