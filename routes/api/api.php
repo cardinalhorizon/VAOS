@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/', function () {
-
     $settings = new \App\VASystem\DBSettings();
     return response()->json([
         'version' => config('vaos.version'),

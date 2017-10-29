@@ -12,7 +12,6 @@ class VASystem
 {
     public static function addAirport($icao)
     {
-
     }
     public static function regenerateSettings()
     {

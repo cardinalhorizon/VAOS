@@ -8,11 +8,9 @@
 
 namespace App\VASystem;
 
-
 class VAAirlineManagement
 {
     public static function addAirline($data)
     {
-
     }
 }
