@@ -8,7 +8,6 @@
 
 namespace App\VASystem;
 
-
 class VAFlightManagement
 {
     public static function createNewBid()

@@ -8,7 +8,6 @@
 
 namespace App\VASystem;
 
-
 use App\Models\Setting;
 
 class DBSettings
@@ -19,26 +18,19 @@ class DBSettings
     {
         // Grab all the settings from the database
         $output = Setting::all();
-        foreach ($output as $setting)
-        {
+        foreach ($output as $setting) {
             $values[$setting->key] = $setting->value;
         }
     }
     public function get($key)
     {
-        try
-        {
+        try {
             $output = $this->settingArray[$key];
             return $output;
-        }
-        catch (Exception $e)
-        {
-            if(config('app.debug'))
-            {
+        } catch (Exception $e) {
+            if (config('app.debug')) {
                 dd($e);
-            }
-            else
-            {
+            } else {
                 report($e);
                 return null;
             }
