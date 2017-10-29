@@ -8,11 +8,14 @@
 
 namespace App\VASystem;
 
-
 class VASystem
 {
     public static function addAirport($icao)
     {
 
+    }
+    public static function regenerateSettings()
+    {
+        // TODO: Make Default Settings with their values
     }
 }

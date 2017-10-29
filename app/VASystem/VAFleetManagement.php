@@ -13,7 +13,7 @@ use App\Models\Airline;
 use App\Models\Aircraft;
 use App\Models\Airport;
 
-class VAAircraft
+class VAFleetManagement
 {
     public static function createAircraft($data)
     {
