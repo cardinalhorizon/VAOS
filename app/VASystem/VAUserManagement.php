@@ -8,7 +8,6 @@
 
 namespace App\VASystem;
 
-
 class VAUserManagement
 {
     public static function addTypeRating($array)
@@ -21,15 +20,11 @@ class VAUserManagement
     }
     public static function addUserAirline($user, $airline, $pilotID = null)
     {
-
     }
     public static function removeUserAirline($user, $airline)
     {
-
     }
     public static function acceptUserAccount($user)
     {
-
     }
-
 }

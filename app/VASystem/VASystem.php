@@ -8,11 +8,9 @@
 
 namespace App\VASystem;
 
-
 class VASystem
 {
     public static function addAirport($icao)
     {
-
     }
 }
