@@ -51,8 +51,7 @@ class VAAircraft
         // First, we want to check if there is an aircraft group that already exists for this type.
         //dd($acf);
         $acf->save();
-        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null )
-        {
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
                 'name' => $data['name'],
@@ -61,16 +60,13 @@ class VAAircraft
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
-        }
-        else
-        {
+        } else {
             $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
         }
         $acf->aircraft_group()->attach($group);
         //
         // Now that is done, lets check if we want to add it to a user defined group.
-        if (array_key_exists('group', $data))
-        {
+        if (array_key_exists('group', $data)) {
             $acf->aircraft_group()->attach($data['group']);
         }
 
@@ -121,8 +117,7 @@ class VAAircraft
         // Aircraft Groups are both User Defined and System Defined.
         // First, we want to check if there is an aircraft group that already exists for this type.
         $acf->save();
-        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null )
-        {
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
                 'name' => $data['name'],
@@ -131,9 +126,7 @@ class VAAircraft
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
-        }
-        else
-        {
+        } else {
             $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
         }
 
@@ -144,8 +137,7 @@ class VAAircraft
         $acf->aircraft_group()->attach($group);
         //
         // Now that is done, lets check if we want to add it to a user defined group.
-        if (array_key_exists('group', $data))
-        {
+        if (array_key_exists('group', $data)) {
             $acf->aircraft_group()->attach($data['group']);
         }
 
