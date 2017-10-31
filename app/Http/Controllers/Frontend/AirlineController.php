@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Airline;
-use App\Repositories\AirlineRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\AirlineRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 class AirlineController extends Controller
 {
-
     private $airlineRepo;
 
     public function __construct(AirlineRepository $airlinesRepo)
@@ -18,11 +17,11 @@ class AirlineController extends Controller
         $this->airlineRepo = $airlinesRepo;
     }
 
-
     /**
      * Display a listing of airlines.
      *
      * @param Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
