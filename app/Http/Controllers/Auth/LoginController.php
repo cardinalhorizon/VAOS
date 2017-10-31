@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -35,13 +35,15 @@ class LoginController extends Controller
      */
 
     /**
-     * Override the trait method to allow login using either email or username
+     * Override the trait method to allow login using either email or username.
+     *
      * @param Request $request
+     *
      * @return array
      */
     protected function credentials(Request $request)
     {
-        $usernameInput = trim($request->{$this->username()});
+        $usernameInput  = trim($request->{$this->username()});
         $usernameColumn = filter_var($usernameInput, FILTER_VALIDATE_EMAIL) ? 'email' : $this->username();
 
         return [$usernameColumn => $usernameInput, 'password' => $request->password];

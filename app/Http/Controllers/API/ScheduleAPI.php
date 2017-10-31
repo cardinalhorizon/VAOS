@@ -2,32 +2,29 @@
 
 namespace App\Http\Controllers\API;
 
-use App\AircraftGroup;
 use App\Airline;
+use App\AircraftGroup;
+use App\Models\Airport;
+use App\Models\Schedule;
+use App\ScheduleTemplate;
+use Illuminate\Http\Request;
 use App\Classes\VAOS_Airports;
 use App\Classes\VAOS_Schedule;
-use App\Models\Airport;
-use App\Http\Controllers;
-use App\ScheduleTemplate;
-use App\Models\Schedule;
-use Illuminate\Http\Request;
-use App\Http\Requests;
 
 class ScheduleAPI extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     *
      */
     public function index(Request $request)
     {
         if ($request->input('codeshare') == true) {
         } else {
             $schedule = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
+
             return response()->json([
-                'status' => 200,
-                'schedule' => $schedule
+                'status'   => 200,
+                'schedule' => $schedule,
             ]);
         }
     }
@@ -47,20 +44,23 @@ class ScheduleAPI extends Controller
         if ($request->has('id')) {
             $route = ScheduleTemplate::find($request->id);
         }
+
         return json_encode(['status' => 200,
-            'schedule' => $route]);
+            'schedule'               => $route, ]);
     }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function add(Request $request)
     {
         // Declare a new instance of the Schedule Model
         $entry = new ScheduleTemplate();
-        
+
         // Before we add the route, lets check to see if the airport exists.
         if (Airport::where('icao', $request->input('depicao'))->first() === null) {
             VAOS_Airports::AddAirport($request->input('depicao'));
@@ -70,7 +70,6 @@ class ScheduleAPI extends Controller
         }
         // add the form elements
         // Search for the airline in the database
-
 
         $entry->flightnum = $request->input('flightnum');
 
@@ -103,31 +102,35 @@ class ScheduleAPI extends Controller
         }
         $entry->save();
     }
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
     }
+
     public function jsonadd(Request $request)
     {
         $data = json_decode($request->getContent(), true);
         foreach ($data as $d) {
             VAOS_Schedule::newRoute([
-                'depicao' => $d['depicao'],
-                'arricao' => $d['arricao'],
-                'airline' => $d['airline'],
-                'flightnum' => $d['flightnum'],
+                'depicao'        => $d['depicao'],
+                'arricao'        => $d['arricao'],
+                'airline'        => $d['airline'],
+                'flightnum'      => $d['flightnum'],
                 'aircraft_group' => $d['aircraft_group'],
-                'enabled' => $d['enabled']
+                'enabled'        => $d['enabled'],
             ]);
         }
+
         return response()->json([
-            'status' => 200
+            'status' => 200,
         ]);
     }
 
@@ -135,12 +138,14 @@ class ScheduleAPI extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
     {
         //
     }
+
     public function test(Request $request)
     {
     }

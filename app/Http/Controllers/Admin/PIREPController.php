@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\PIREP;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use App\Notifications\PirepFiled;
+use App\Http\Controllers\Controller;
 
 class PIREPController extends Controller
 {
@@ -18,8 +16,9 @@ class PIREPController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->query('view') == "pending") {
+        if ($request->query('view') == 'pending') {
             $pireps = PIREP::where('status', 0)->with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
+
             return view('admin.pireps.pending', ['pireps' => $pireps]);
         }
         $pireps = PIREP::with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
@@ -41,6 +40,7 @@ class PIREPController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,6 +52,7 @@ class PIREPController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,6 +64,7 @@ class PIREPController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,14 +77,15 @@ class PIREPController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $pirep = PIREP::find($id);
-        $user = $pirep->user;
+        $user  = $pirep->user;
         // check if we are only changing the status
-        if ($request->input('flag') == "status") {
+        if ($request->input('flag') == 'status') {
             $pirep->status = $request->input('status');
             $pirep->save();
             //$user->notify(new PirepFiled($pirep));
@@ -94,6 +97,7 @@ class PIREPController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

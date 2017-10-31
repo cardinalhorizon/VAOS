@@ -38,14 +38,14 @@ class VAOSNewAirline extends Command
      */
     public function handle()
     {
-        $name = $this->ask('Airline Name:');
-        $icao = $this->ask('ICAO:');
+        $name     = $this->ask('Airline Name:');
+        $icao     = $this->ask('ICAO:');
         $callsign = $this->ask('Callsign:');
 
         $airline = new Airline([
-            'name' => $name,
-            'icao' => $icao,
-            'callsign' => $callsign
+            'name'     => $name,
+            'icao'     => $icao,
+            'callsign' => $callsign,
         ]);
         $airline->save();
         $this->info('Airline Created');

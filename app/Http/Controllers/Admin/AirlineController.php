@@ -21,6 +21,7 @@ class AirlineController extends Controller
         if ($airlines->count() == 0) {
             return redirect('/admin/airlines/create');
         }
+
         return view('admin.airline.view', ['airlines' => $airlines]);
     }
 
@@ -38,6 +39,7 @@ class AirlineController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,6 +62,7 @@ class AirlineController extends Controller
         $airline->save();
 
         $request->session()->flash('airline_created', true);
+
         return redirect('/admin/airlines');
     }
 
@@ -67,6 +70,7 @@ class AirlineController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -78,6 +82,7 @@ class AirlineController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,6 +97,7 @@ class AirlineController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -114,6 +120,7 @@ class AirlineController extends Controller
         $airline->save();
 
         $request->session()->flash('updated', true);
+
         return redirect('/admin/airlines');
     }
 
@@ -121,6 +128,7 @@ class AirlineController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

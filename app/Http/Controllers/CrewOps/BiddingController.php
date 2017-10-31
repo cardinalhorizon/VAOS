@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\CrewOps;
 
 use App\Bid;
-use App\Classes\VAOS_Schedule;
 use Illuminate\Http\Request;
+use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +18,7 @@ class BiddingController extends Controller
     public function index()
     {
         $bids = Bid::where('user_id', Auth::user()->id)->with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
+
         return view('crewops.bids.view', ['bids' => $bids]);
     }
 
@@ -34,6 +35,7 @@ class BiddingController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,6 +58,7 @@ class BiddingController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -67,6 +70,7 @@ class BiddingController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,6 +83,7 @@ class BiddingController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,11 +95,13 @@ class BiddingController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         VAOS_Schedule::deleteBid($id, Auth::user()->id);
+
         return redirect('/flightops/bids');
     }
 }

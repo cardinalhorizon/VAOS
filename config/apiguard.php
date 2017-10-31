@@ -12,9 +12,9 @@ return [
     |
     */
 
-    'logging'              => true,
+    'logging' => true,
 
-    'models'               => [
+    'models' => [
 
         'apiKey' => \Chrisbjr\ApiGuard\Models\ApiKey::class,
 
@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'keyName'              => 'X-Authorization',
+    'keyName' => 'X-Authorization',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'includeKeyword'       => 'include',
+    'includeKeyword' => 'include',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'keyLimitIncrement'    => '1 hour',
+    'keyLimitIncrement' => '1 hour',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
 
     'methodLimitIncrement' => '5 minutes',
 
-    'providers'            => [
+    'providers' => [
 
         /*
         |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ return [
         | Specify the provider that is used to authenticate users.
         |
         */
-        'auth' => Chrisbjr\ApiGuard\Providers\Auth\Illuminate::class
+        'auth' => Chrisbjr\ApiGuard\Providers\Auth\Illuminate::class,
 
     ],
 

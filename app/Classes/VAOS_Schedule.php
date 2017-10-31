@@ -3,21 +3,19 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 10/23/16
- * Time: 8:55 PM
+ * Time: 8:55 PM.
  */
 
 namespace App\Classes;
 
-use App\AircraftGroup;
-use App\Models\Airport;
+use App\User;
 use App\Airline;
+use Carbon\Carbon;
+use App\AircraftGroup;
 use App\Models\Legacy;
+use App\Models\Airport;
 use App\ScheduleComplete;
 use App\ScheduleTemplate;
-use App\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class VAOS_Schedule
 {
@@ -35,7 +33,6 @@ class VAOS_Schedule
 
         // ok lets assign the first aircraft on the list
         // TODO Change aircraft selection behavior. Current: First on list
-
 
         $complete = new ScheduleComplete();
 
@@ -58,9 +55,9 @@ class VAOS_Schedule
         $defaults = json_decode($template->defaults);
 
         $complete->flightnum = $template->flightnum;
-        $complete->route = $defaults['route'];
+        $complete->route     = $defaults['route'];
         // Now lets encode the cruise altitude in the JSON
-        $rte_data = array();
+        $rte_data = [];
 
         $rte_data['cruise'] = $defaults['cruise'];
         // store it
@@ -69,40 +66,40 @@ class VAOS_Schedule
 
         $complete->deptime = Carbon::now();
         $complete->arrtime = Carbon::now();
-        $complete->load = 0;
+        $complete->load    = 0;
         $complete->save();
 
         // Add the schedule template into the legacy table
-        $legacy = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
-        $legacy->code = $template->airline->icao;
+        $legacy            = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
+        $legacy->code      = $template->airline->icao;
         $legacy->flightnum = $template->flightnum;
-        $legacy->depicao = $template->depapt->icao;
-        $legacy->arricao = $template->arrapt->icao;
+        $legacy->depicao   = $template->depapt->icao;
+        $legacy->arricao   = $template->arrapt->icao;
         if ($template->route = null) {
             $legacy->route = $template->route;
         } else {
-            $legacy->route = "NO ROUTE";
+            $legacy->route = 'NO ROUTE';
         }
-        $legacy->aircraft = $acfgrp->aircraft[0]->id;
-        $legacy->distance = VAOSHelpers::getDistance($template->depapt->lat, $template->depapt->lon, $template->arrapt->lat, $template->arrapt->lon, "M");
-        $legacy->deptime = Carbon::now()->toTimeString();
-        $legacy->arrtime = Carbon::now()->addHours(2)->toTimeString();
-        $legacy->flighttime = "0";
-        $legacy->notes = "VAOS GENERATED ROUTE";
-        $legacy->route_details = "{[]}";
-        $legacy->flightlevel = "0";
-        $legacy->enabled = 1;
-        $legacy->price = 175;
-        $legacy->flighttype = "P";
-        $legacy->daysofweek = "0123456";
+        $legacy->aircraft      = $acfgrp->aircraft[0]->id;
+        $legacy->distance      = VAOSHelpers::getDistance($template->depapt->lat, $template->depapt->lon, $template->arrapt->lat, $template->arrapt->lon, 'M');
+        $legacy->deptime       = Carbon::now()->toTimeString();
+        $legacy->arrtime       = Carbon::now()->addHours(2)->toTimeString();
+        $legacy->flighttime    = '0';
+        $legacy->notes         = 'VAOS GENERATED ROUTE';
+        $legacy->route_details = '{[]}';
+        $legacy->flightlevel   = '0';
+        $legacy->enabled       = 1;
+        $legacy->price         = 175;
+        $legacy->flighttype    = 'P';
+        $legacy->daysofweek    = '0123456';
         $legacy->save();
 
         // Now let's add the bid appropriately
 
-        $legacybid = new Legacy\Bid();
-        $legacybid->parentid = $complete->id;
-        $legacybid->pilotid = $user_id;
-        $legacybid->routeid = $legacy->id;
+        $legacybid            = new Legacy\Bid();
+        $legacybid->parentid  = $complete->id;
+        $legacybid->pilotid   = $user_id;
+        $legacybid->routeid   = $legacy->id;
         $legacybid->dateadded = Carbon::now();
         $legacybid->save();
 
@@ -111,6 +108,7 @@ class VAOS_Schedule
 
         return true;
     }
+
     public static function newRoute($data)
     {
         // Declare a new instance of the Schedule Model
@@ -125,7 +123,6 @@ class VAOS_Schedule
         }
         // add the form elements
         // Search for the airline in the database
-
 
         $entry->flightnum = $data['flightnum'];
 
@@ -160,6 +157,7 @@ class VAOS_Schedule
         }
         $entry->save();
     }
+
     public static function updateRoute($data, $id)
     {
         // Declare a new instance of the Schedule Model
@@ -174,7 +172,6 @@ class VAOS_Schedule
         }
         // add the form elements
         // Search for the airline in the database
-
 
         $entry->flightnum = $data['flightnum'];
 
@@ -209,6 +206,7 @@ class VAOS_Schedule
         }
         $entry->save();
     }
+
     public static function deleteBid($bid_id, $user_id = null)
     {
         if (is_null($user_id)) {

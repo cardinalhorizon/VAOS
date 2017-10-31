@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\VAOS_Aircraft;
-use App\Models\Aircraft;
-use Illuminate\Http\Request;
 use App\Airline;
 use App\AircraftGroup;
-use App\Http\Requests;
+use App\Models\Aircraft;
+use Illuminate\Http\Request;
+use App\Classes\VAOS_Aircraft;
 use App\Http\Controllers\Controller;
 
 class FleetController extends Controller
@@ -31,8 +30,9 @@ class FleetController extends Controller
      */
     public function create()
     {
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
         $acfgroups = AircraftGroup::where('userdefined', true)->get();
+
         return view('admin.fleet.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
@@ -40,30 +40,32 @@ class FleetController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data = array();
-        $data['icao'] = $request->input('icao');
-        $data['name'] = $request->input('name');
+        $data                 = [];
+        $data['icao']         = $request->input('icao');
+        $data['name']         = $request->input('name');
         $data['manufacturer'] = $request->input('manufacturer');
         $data['registration'] = $request->input('registration');
-        $data['range'] = $request->input('range');
-        $data['maxpax'] = $request->input('maxpax');
-        $data['maxgw'] = $request->input('maxgw');
+        $data['range']        = $request->input('range');
+        $data['maxpax']       = $request->input('maxpax');
+        $data['maxgw']        = $request->input('maxgw');
         if ($request->input('status') == 1) {
             $data['status'] = $request->input('status');
         } else {
             $data['status'] = 0;
         }
         $data['airline'] = $request->input('airline');
-        $data['hub'] = null;
-        $data['group'] = null;
+        $data['hub']     = null;
+        $data['group']   = null;
         //dd($data);
 
         if (VAOS_Aircraft::createAircraft($data)) {
             $request->session()->flash('aircraft_created', true);
+
             return redirect('admin/fleet');
         } else {
             dd($data);
@@ -74,6 +76,7 @@ class FleetController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -85,14 +88,16 @@ class FleetController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $aircraft = Aircraft::findOrFail($id);
 
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
         $acfgroups = AircraftGroup::where('userdefined', true)->get();
+
         return view('admin.fleet.edit', ['aircraft' => $aircraft, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
@@ -101,18 +106,19 @@ class FleetController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $data = array();
-        $data['icao'] = $request->input('icao');
-        $data['name'] = $request->input('name');
+        $data                 = [];
+        $data['icao']         = $request->input('icao');
+        $data['name']         = $request->input('name');
         $data['manufacturer'] = $request->input('manufacturer');
         $data['registration'] = $request->input('registration');
-        $data['range'] = $request->input('range');
-        $data['maxpax'] = $request->input('maxpax');
-        $data['maxgw'] = $request->input('maxgw');
+        $data['range']        = $request->input('range');
+        $data['maxpax']       = $request->input('maxpax');
+        $data['maxgw']        = $request->input('maxgw');
 
         if ($request->input('status') == 1) {
             $data['status'] = $request->input('status');
@@ -120,12 +126,13 @@ class FleetController extends Controller
             $data['status'] = 0;
         }
         $data['airline'] = $request->input('airline');
-        $data['hub'] = null;
-        $data['group'] = null;
+        $data['hub']     = null;
+        $data['group']   = null;
         //dd($data);
 
         if (VAOS_Aircraft::updateAircraft($data, $id)) {
             $request->session()->flash('aircraft_updated', true);
+
             return redirect('admin/fleet');
         } else {
             dd($data);
@@ -136,6 +143,7 @@ class FleetController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

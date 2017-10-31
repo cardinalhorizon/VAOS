@@ -43,20 +43,21 @@ class RegisterController extends Controller
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         // Check if reCAPTCHA credentials set
-        if (!empty(config('recaptcha.public_key') && config('recaptcha.private_key'))) {
-            
+        if (! empty(config('recaptcha.public_key') && config('recaptcha.private_key'))) {
+
             // Return with reCAPTCHA validator
             return Validator::make($data, [
-                'first_name' => 'required|max:255',
-                'last_name' => 'required|max:255',
-                'username' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
-                'password' => 'required|min:6|confirmed',
+                'first_name'           => 'required|max:255',
+                'last_name'            => 'required|max:255',
+                'username'             => 'required|max:255',
+                'email'                => 'required|email|max:255|unique:users',
+                'password'             => 'required|min:6|confirmed',
                 'g-recaptcha-response' => 'recaptcha',
             ]);
         } else {
@@ -64,10 +65,10 @@ class RegisterController extends Controller
             // reCAPTCHA credentials not set
             return Validator::make($data, [
                 'first_name' => 'required|max:255',
-                'last_name' => 'required|max:255',
-                'username' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:users',
-                'password' => 'required|min:6|confirmed',
+                'last_name'  => 'required|max:255',
+                'username'   => 'required|max:255',
+                'email'      => 'required|email|max:255|unique:users',
+                'password'   => 'required|min:6|confirmed',
             ]);
         }
     }
@@ -77,18 +78,19 @@ class RegisterController extends Controller
      *
      * @param  array  $data
      * @param  array  $data
+     *
      * @return User
      */
     protected function create(array $data)
     {
         return User::create([
             'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'username' => $data['username'],
-            'status' => 1,
-            'admin' => false
+            'last_name'  => $data['last_name'],
+            'email'      => $data['email'],
+            'password'   => bcrypt($data['password']),
+            'username'   => $data['username'],
+            'status'     => 1,
+            'admin'      => false,
         ]);
     }
 }

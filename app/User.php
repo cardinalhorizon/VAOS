@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Kodeine\Acl\Traits\HasRole;
 
 class User extends Authenticatable
 {
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'username', 'email', 'password', 'vatsim', 'ivao', 'status', 'admin'
+        'first_name', 'last_name', 'username', 'email', 'password', 'vatsim', 'ivao', 'status', 'admin',
     ];
 
     /**
@@ -32,6 +31,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\PIREP');
     }
+
     public function group()
     {
         return $this->belongsToMany('App\Models\Group');

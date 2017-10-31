@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Bid extends Model
 {
     protected $guarded = [];
-    public $table = 'legacy_create';
+    public $table      = 'legacy_create';
     public $timestamps = false;
 }

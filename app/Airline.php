@@ -11,7 +11,7 @@ class Airline extends Model
         'iata',
         'icao',
         'callsign',
-        'hub_id'
+        'hub_id',
     ];
     public $timestamps = false;
 
