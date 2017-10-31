@@ -3,19 +3,32 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Airline;
+use App\Repositories\AirlineRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 class AirlineController extends Controller
 {
+
+    private $airlineRepo;
+
+    public function __construct(AirlineRepository $airlinesRepo)
+    {
+        $this->airlineRepo = $airlinesRepo;
+    }
+
+
     /**
      * Display a listing of airlines.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $airlines = Airline::all();
+        $this->airlineRepo->pushCriteria(new RequestCriteria($request));
+        $airlines = $this->airlineRepo->all();
 
         //TODO: Add view to this function
         return view('airline.index', compact($airlines));
@@ -41,18 +54,7 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validateWith([
-            'icao'     => 'required|alpha|min:3|max:3|unique:airlines, icao',
-            'fshub_id' => 'nullable',
-            'iata'     => 'required|alpha|min:2|max:2|unique:airlines, iata',
-            'name'     => 'required|max:255|unique:airlines, name',
-            'logo'     => 'nullable|mimes:jpeg,png',
-            'widget'   => 'nullable|mimes:jpeg,png',
-            'callsign' => 'required|max:255|unique:airlines, callsign',
-
-        ]);
-
-        $airline = Airline::create($data);
+        $airline = $this->airlineRepo->create($request->all());
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully created the new '.$airline->name.' airline to the database');
@@ -94,18 +96,7 @@ class AirlineController extends Controller
      */
     public function update(Request $request, Airline $airline)
     {
-        $data = $this->validateWith([
-            'icao'     => "required|alpha|min:3|max:3|unique:airlines, icao, $airline->id",
-            'fshub_id' => 'nullable',
-            'iata'     => "required|alpha|min:2|max:2|unique:airlines, iata, $airline->id",
-            'name'     => "required|max:255|unique:airlines, name, $airline->id",
-            'logo'     => 'nullable|mimes:jpeg,png',
-            'widget'   => 'nullable|mimes:jpeg,png',
-            'callsign' => "required|max:255|unique:airlines, callsign, $airline->id",
-
-        ]);
-
-        $airline->update($data);
+        $airline = $this->airlineRepo->update($request->all(), $airline->id);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully update the '.$airline->name.' airline in the database');
@@ -120,7 +111,7 @@ class AirlineController extends Controller
      */
     public function destroy(Airline $airline)
     {
-        $airline->delete();
+        $this->airlineRepo->delete($airline->id);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully delete the '.$airline->name.' airline from the database');

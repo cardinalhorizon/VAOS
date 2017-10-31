@@ -35,6 +35,16 @@ class Airline extends Model
 
     protected $fillable = ['icao', 'icao', 'fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
 
+    protected $rules = [
+        'icao'     => 'required|alpha|min:3|max:3|unique:airlines, icao',
+        'fshub_id' => 'nullable',
+        'iata'     => 'required|alpha|min:2|max:2|unique:airlines, iata',
+        'name'     => 'required|max:255|unique:airlines, name',
+        'logo'     => 'nullable|mimes:jpeg,png',
+        'widget'   => 'nullable|mimes:jpeg,png',
+        'callsign' => 'required|max:255|unique:airlines, callsign',
+    ];
+
     public function hubs()
     {
         return $this->hasMany('App\Models\Hub');
