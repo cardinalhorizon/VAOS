@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\User;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -19,6 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('admin.users.view', ['users' => $users]);
     }
 
@@ -36,6 +35,7 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -47,6 +47,7 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,6 +61,7 @@ class UsersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,27 +74,28 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
             'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'email' => [
+            'last_name'  => 'required|string',
+            'email'      => [
                 'required',
                 'email',
                 Rule::unique('users')->ignore($id),
             ],
             'vatsim' => 'integer',
-            'ivao' => 'integer',
+            'ivao'   => 'integer',
         ]);
 
         $user = User::find($id);
 
         $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
+        $user->last_name  = $request->last_name;
+        $user->email      = $request->email;
 
         if (strlen($request->cover_url) > 0) {
             $user->cover_url = $request->cover_url;
@@ -129,6 +132,7 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

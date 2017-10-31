@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Classes\VAOS_Aircraft;
-use App\AircraftGroup;
 use App\Airline;
-use App\Models\Aircraft;
-use App\Models\Airport;
+use App\AircraftGroup;
 use GuzzleHttp\Client;
+use App\Models\Airport;
+use App\Models\Aircraft;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class FleetAPI extends Controller
 {
@@ -18,6 +15,7 @@ class FleetAPI extends Controller
     {
         return json_encode(['status' => 200, 'aircraft' => Aircraft::all()]);
     }
+
     public function addAircraft(Request $request)
     {
         // POST http://airline.com/api/1_0/fleet
@@ -26,18 +24,18 @@ class FleetAPI extends Controller
             // This route is to add an aircraft providing ALL local values. This will be fun!!!
 
             // lets steralize the array before sending it to the class. Things can get messy
-            $data = array();
-            $data['icao'] = $request->input('icao');
-            $data['name'] = $request->input('name');
+            $data                 = [];
+            $data['icao']         = $request->input('icao');
+            $data['name']         = $request->input('name');
             $data['manufacturer'] = $request->input('manufacturer');
             $data['registration'] = $request->input('registration');
-            $data['range'] = $request->input('range');
-            $data['maxpax'] = $request->input('maxpax');
-            $data['maxgw'] = $request->input('maxgw');
-            $data['enabled'] = $request->input('enabled');
-            $data['hub'] = $request->input('hub');
-            $data['airline'] = $request->input('airline');
-            $data['group'] = $request->input('group');
+            $data['range']        = $request->input('range');
+            $data['maxpax']       = $request->input('maxpax');
+            $data['maxgw']        = $request->input('maxgw');
+            $data['enabled']      = $request->input('enabled');
+            $data['hub']          = $request->input('hub');
+            $data['airline']      = $request->input('airline');
+            $data['group']        = $request->input('group');
             //dd(AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first());
             // $result = AircraftData::createAircraft($data);
         } else {
@@ -47,40 +45,39 @@ class FleetAPI extends Controller
             $res = $client->request('GET', 'http://fsvaos.net/api/central/aircraft', [
                 'query' => [
                     'icao' => $request->input('icao'),
-                ]
+                ],
             ])->getBody();
 
             if ($res['status'] == 404) {
                 // well the main server is a useless piece of shit so lets inform the user that.
                 return response()->json([
-                    'status' => 501
+                    'status' => 501,
                 ]);
             }
             // lets steralize the array before sending it to the class. Things can get messy
-            $data = array();
-            $data['icao'] = $res['aircraft']['icao'];
-            $data['name'] = $res['aircraft']['name'];
+            $data                 = [];
+            $data['icao']         = $res['aircraft']['icao'];
+            $data['name']         = $res['aircraft']['name'];
             $data['manufacturer'] = $res['aircraft']['manufacturer'];
             $data['registration'] = $request->input('registration');
-            $data['range'] = $res['aircraft']['range'];
-            $data['maxpax'] = $res['aircraft']['maxpax'];
-            $data['maxgw'] = $res['aircraft']['maxgw'];
-            $data['enabled'] = $request->input('enabled');
-
+            $data['range']        = $res['aircraft']['range'];
+            $data['maxpax']       = $res['aircraft']['maxpax'];
+            $data['maxgw']        = $res['aircraft']['maxgw'];
+            $data['enabled']      = $request->input('enabled');
 
             // $result = AircraftData::createAircraft($data);
         }
 
         $acf = new Aircraft();
 
-        $acf->icao = $data['icao'];
-        $acf->name = $data['name'];
+        $acf->icao         = $data['icao'];
+        $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->range = $data['range'];
-        $acf->maxpax = $data['maxpax'];
-        $acf->maxgw = $data['maxgw'];
-        $acf->enabled = $data['enabled'];
+        $acf->range        = $data['range'];
+        $acf->maxpax       = $data['maxpax'];
+        $acf->maxgw        = $data['maxgw'];
+        $acf->enabled      = $data['enabled'];
 
         // time for the optional stuff
 
@@ -107,14 +104,14 @@ class FleetAPI extends Controller
         // Aircraft Groups are both User Defined and System Defined.
         // First, we want to check if there is an aircraft group that already exists for this type.
 
-        $sysgrp = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
+        $sysgrp = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first();
 
         if ($sysgrp === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
-                'name' => $data['name'],
-                'icao' => $data['icao'],
-                'userdefined' => false
+                'name'        => $data['name'],
+                'icao'        => $data['icao'],
+                'userdefined' => false,
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
@@ -129,7 +126,7 @@ class FleetAPI extends Controller
         }
 
         return response()->json([
-            'status' => 200
+            'status' => 200,
         ]);
     }
 }

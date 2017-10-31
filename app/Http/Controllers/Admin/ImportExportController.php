@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\AircraftGroup;
 use App\Airline;
-use App\Classes\AircraftData;
-use App\Classes\VAOS_Schedule;
+use App\AircraftGroup;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Classes\AircraftData;
+use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ImportExportController extends Controller
 {
     public function getSystem(Request $request)
     {
     }
+
     public function postSystem(Request $request)
     {
         if ($request->query('task') == 'import') {
             $progress = new JobProgress([
-                'task' => 'import',
-                'slug' => 'Import VAOS System',
-                'description' => 'Uploading Workbook',
-                'totalitems' => 1,
-                'itemscompleted' => 0
+                'task'           => 'import',
+                'slug'           => 'Import VAOS System',
+                'description'    => 'Uploading Workbook',
+                'totalitems'     => 1,
+                'itemscompleted' => 0,
                 ]);
 
             // Import the File to the file system
@@ -36,18 +37,22 @@ class ImportExportController extends Controller
             });
         }
     }
+
     public function getAirlines(Request $request)
     {
         $path = $request->file('file')->store('data');
     }
+
     public function PostAirlines(Request $request)
     {
         $path = $request->file('file')->store('data');
     }
+
     public function getFleet(Request $request)
     {
         return view('admin.data.import', ['route' => 'fleet']);
     }
+
     public function postFleet(Request $request)
     {
         if ($request->query('action') == 'import') {
@@ -72,15 +77,15 @@ class ImportExportController extends Controller
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => Airline::where('icao', $row['airline'])->first(),
-                    'icao' => $row['icao'],
-                    'name' => $row['name'],
+                    'airline'      => Airline::where('icao', $row['airline'])->first(),
+                    'icao'         => $row['icao'],
+                    'name'         => $row['name'],
                     'manufacturer' => $row['manufacturer'],
                     'registration' => $row['registration'],
-                    'range' => $row['range'],
-                    'maxgw' => $row['maxgw'],
-                    'maxpax' => $row['maxpax'],
-                    'status' => $row['status']
+                    'range'        => $row['range'],
+                    'maxgw'        => $row['maxgw'],
+                    'maxpax'       => $row['maxpax'],
+                    'status'       => $row['status'],
                 ];
                 AircraftData::createAircraft($data);
             }
@@ -90,10 +95,12 @@ class ImportExportController extends Controller
             return redirect('/admin/fleet');
         }
     }
+
     public function getSchedule(Request $request)
     {
         return view('admin.data.import', ['route' => 'schedule']);
     }
+
     public function postSchedule(Request $request)
     {
         if ($request->query('action') == 'import') {
@@ -115,13 +122,13 @@ class ImportExportController extends Controller
             foreach ($data as $d) {
                 $airline = Airline::where('icao', $d['airline'])->first();
                 VAOS_Schedule::newRoute([
-                    'depicao' => $d['depicao'],
-                    'arricao' => $d['arricao'],
-                    'airline' => $airline->id,
-                    'flightnum' => $d['flightnum'],
+                    'depicao'        => $d['depicao'],
+                    'arricao'        => $d['arricao'],
+                    'airline'        => $airline->id,
+                    'flightnum'      => $d['flightnum'],
                     'aircraft_group' => $d['aircraft_group'],
-                    'type' => $d['type'],
-                    'enabled' => $d['enabled']
+                    'type'           => $d['type'],
+                    'enabled'        => $d['enabled'],
                 ]);
             }
             /*
@@ -147,7 +154,7 @@ class ImportExportController extends Controller
             */
 
             $request->session()->flash('success', 'Routes imported successfully.');
-            
+
             return redirect('/admin/schedule');
         }
     }

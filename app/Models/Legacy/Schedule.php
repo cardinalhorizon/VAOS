@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    public $table = 'legacy_schedule';
+    public $table      = 'legacy_schedule';
     protected $guarded = [
-        'id'
+        'id',
     ];
     public $timestamps = false;
 }

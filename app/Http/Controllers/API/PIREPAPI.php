@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Classes\phpVMSLegacy;
-use App\PIREP;
-use App\PIREPComment;
-use App\User;
-use App\Airline;
 use App\Bid;
+use App\User;
+use App\PIREP;
+use App\Airline;
+use App\PIREPComment;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class PIREPAPI extends Controller
 {
     /**
      * File a PIREP into the system.
+     *
      * @param Request $request
      */
     public function filePIREP(Request $request)
     {
         // first lets check to see if we have everything required for the request
         $input = $request->all();
-        $data = array();
+        $data  = [];
 
         // First lets update financial data.
 
@@ -35,7 +33,6 @@ class PIREPAPI extends Controller
 
         // first let's retrieve the original bid from the database and enter in all the values
 
-
         if ($request->query('format') == 'phpVMS') {
             $pirep->user()->associate($request->input('pilotid'));
             // This is a legacy ACARS client. Treat it with respect, they won't be around
@@ -47,9 +44,9 @@ class PIREPAPI extends Controller
             $pirep->aircraft()->associate($flightinfo->aircraft_id);
             $pirep->depapt()->associate($flightinfo->depapt_id);
             $pirep->arrapt()->associate($flightinfo->arrapt_id);
-            $pirep->flightnum = $flightinfo->flightnum;
-            $pirep->route = "NOT SUPPORTED";
-            $pirep->status = 0;
+            $pirep->flightnum   = $flightinfo->flightnum;
+            $pirep->route       = 'NOT SUPPORTED';
+            $pirep->status      = 0;
             $pirep->landingrate = $request->input('landingrate');
 
             // Auto Accept System
@@ -76,19 +73,20 @@ class PIREPAPI extends Controller
             $flightinfo->delete();
 
             return response()->json([
-                'status' => 200
+                'status' => 200,
             ]);
         }
     }
+
     private static function getProperFlightNum($flightnum, $userid)
     {
         if ($flightnum == '') {
             return false;
         }
 
-        $ret = array();
+        $ret       = [];
         $flightnum = strtoupper($flightnum);
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
 
         foreach ($airlines as $a) {
             $a->icao = strtoupper($a->icao);
@@ -97,7 +95,7 @@ class PIREPAPI extends Controller
                 continue;
             }
 
-            $ret['icao'] = $a->icao;
+            $ret['icao']      = $a->icao;
             $ret['flightnum'] = str_ireplace($a->icao, '', $flightnum);
 
             // ok now that we deduced that, let's find the bid.
@@ -105,9 +103,10 @@ class PIREPAPI extends Controller
             return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
-        # Invalid flight number
-        $ret['code'] = '';
+        // Invalid flight number
+        $ret['code']      = '';
         $ret['flightnum'] = $flightnum;
+
         return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
 }

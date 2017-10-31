@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\ACARS_Session;
 use Closure;
+use App\ACARS_Session;
 
 class Auth1_0
 {
@@ -12,6 +12,7 @@ class Auth1_0
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -21,10 +22,11 @@ class Auth1_0
             $res = ACARS_Session::where('userid', $request->userid)->first();
 
             // They failed session authentication.
-            if (!$res) {
+            if (! $res) {
                 return json_encode(['status' => 503]);
             }
         }
+
         return $next($request);
     }
 }

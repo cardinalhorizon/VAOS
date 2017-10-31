@@ -12,6 +12,7 @@ class PIREPComment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     public function pirep()
     {
         return $this->belongsTo('App\PIREP');
