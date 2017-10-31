@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\TypeRating
+ * App\Models\TypeRating.
  *
  * @property int $id
  * @property int $airline_id
@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TypeRating whereAirlineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TypeRating whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TypeRating whereDeletedAt($value)

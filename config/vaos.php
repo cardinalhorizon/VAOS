@@ -1,6 +1,6 @@
 <?php
 /**
- * Virtual Airline Operations System Main Configuration File
+ * Virtual Airline Operations System Main Configuration File.
  *
  * If you are reading this, you should know before modifying anything within this file,
  * it would be a bad idea unless you know what you're doing.
@@ -20,6 +20,5 @@ return [
      * System Version
      */
     'version' => '1.1.0',
-
 
 ];

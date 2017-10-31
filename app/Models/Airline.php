@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Airline
+ * App\Models\Airline.
  *
  * @property int $id
  * @property string $icao
@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $callsign
  * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Hub[] $hubs
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airline whereCallsign($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airline whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airline whereFshubId($value)
@@ -32,12 +33,13 @@ class Airline extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['icao', 'icao','fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
+    protected $fillable = ['icao', 'icao', 'fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
 
     public function hubs()
     {
         return $this->hasMany('App\Models\Hub');
     }
+
     public function typerating()
     {
         //

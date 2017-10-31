@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\BidAlternate
+ * App\Models\BidAlternate.
  *
  * @mixin \Eloquent
+ *
  * @property-read \App\Models\Airport $airport
  * @property-read \App\Models\Bid $bid
  */

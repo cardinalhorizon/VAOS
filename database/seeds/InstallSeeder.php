@@ -13,16 +13,16 @@ class InstallSeeder extends Seeder
     {
         $this->command->info('Truncating User, Role and Permission tables');
 
-        $config = config('laratrust_seeder.role_structure');
+        $config         = config('laratrust_seeder.role_structure');
         $userPermission = config('laratrust_seeder.permission_structure');
-        $mapPermission = collect(config('laratrust_seeder.permissions_map'));
+        $mapPermission  = collect(config('laratrust_seeder.permissions_map'));
 
         foreach ($config as $key => $modules) {
             // Create a new role
             $role = \App\Models\Role::create([
-          'name' => $key,
+          'name'         => $key,
           'display_name' => ucwords(str_replace('_', ' ', $key)),
-          'description' => ucwords(str_replace('_', ' ', $key)),
+          'description'  => ucwords(str_replace('_', ' ', $key)),
         ]);
 
             $this->command->info('Creating Role '.strtoupper($key));
@@ -35,9 +35,9 @@ class InstallSeeder extends Seeder
                     $permissionValue = $mapPermission->get($perm);
 
                     $permission = \App\Models\Permission::firstOrCreate([
-              'name' => $permissionValue.'-'.$module,
+              'name'         => $permissionValue.'-'.$module,
               'display_name' => ucfirst($permissionValue).' '.ucfirst($module),
-              'description' => ucfirst($permissionValue).' '.ucfirst($module),
+              'description'  => ucfirst($permissionValue).' '.ucfirst($module),
             ]);
 
                     $this->command->info('Creating Permission to '.$permissionValue.' for '.$module);

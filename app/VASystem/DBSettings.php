@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 10/29/17
- * Time: 12:44 AM
+ * Time: 12:44 AM.
  */
 
 namespace App\VASystem;
@@ -12,7 +12,7 @@ use App\Models\Setting;
 
 class DBSettings
 {
-    private $settingArray = array();
+    private $settingArray = [];
 
     public function __construct()
     {
@@ -22,16 +22,19 @@ class DBSettings
             $values[$setting->key] = $setting->value;
         }
     }
+
     public function get($key)
     {
         try {
             $output = $this->settingArray[$key];
+
             return $output;
         } catch (Exception $e) {
             if (config('app.debug')) {
                 dd($e);
             } else {
                 report($e);
+
                 return null;
             }
         }

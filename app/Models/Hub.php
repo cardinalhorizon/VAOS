@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Hub
+ * App\Models\Hub.
  *
  * @property int $id
  * @property int $airport_id
@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\Airline $airline
  * @property-read \App\Models\Airport $airport
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Hub whereAirlineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Hub whereAirportId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Hub whereCreatedAt($value)

@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 10/20/17
- * Time: 4:29 PM
+ * Time: 4:29 PM.
  */
 
 namespace App\VASystem;
 
-use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Models\Aircraft;
 use App\Models\Airport;
+use App\Models\Aircraft;
+use App\Models\AircraftGroup;
 
 class VAFleetManagement
 {
@@ -20,14 +20,14 @@ class VAFleetManagement
         $acf = new Aircraft();
         //try
         //{
-        $acf->icao = $data['icao'];
-        $acf->name = $data['name'];
+        $acf->icao         = $data['icao'];
+        $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->range = $data['range'];
-        $acf->maxpax = $data['maxpax'];
-        $acf->maxgw = $data['maxgw'];
-        $acf->status = $data['status'];
+        $acf->range        = $data['range'];
+        $acf->maxpax       = $data['maxpax'];
+        $acf->maxgw        = $data['maxgw'];
+        $acf->status       = $data['status'];
 
         // time for the optional stuff
 
@@ -51,17 +51,17 @@ class VAFleetManagement
         // First, we want to check if there is an aircraft group that already exists for this type.
         //dd($acf);
         $acf->save();
-        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null) {
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
-                'name' => $data['name'],
-                'icao' => $data['icao'],
-                'userdefined' => false
+                'name'        => $data['name'],
+                'icao'        => $data['icao'],
+                'userdefined' => false,
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
         } else {
-            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
+            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first();
         }
         $acf->aircraft_group()->attach($group);
         //
@@ -87,14 +87,14 @@ class VAFleetManagement
         $acf = Aircraft::find($id);
         //try
         //{
-        $acf->icao = $data['icao'];
-        $acf->name = $data['name'];
+        $acf->icao         = $data['icao'];
+        $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->range = $data['range'];
-        $acf->maxpax = $data['maxpax'];
-        $acf->maxgw = $data['maxgw'];
-        $acf->status = $data['status'];
+        $acf->range        = $data['range'];
+        $acf->maxpax       = $data['maxpax'];
+        $acf->maxgw        = $data['maxgw'];
+        $acf->status       = $data['status'];
 
         // time for the optional stuff
 
@@ -117,17 +117,17 @@ class VAFleetManagement
         // Aircraft Groups are both User Defined and System Defined.
         // First, we want to check if there is an aircraft group that already exists for this type.
         $acf->save();
-        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null) {
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
-                'name' => $data['name'],
-                'icao' => $data['icao'],
-                'userdefined' => false
+                'name'        => $data['name'],
+                'icao'        => $data['icao'],
+                'userdefined' => false,
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
         } else {
-            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
+            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first();
         }
 
         // Detach all existing aircraft group associations

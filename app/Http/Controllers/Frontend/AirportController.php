@@ -32,6 +32,7 @@ class AirportController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,6 +44,7 @@ class AirportController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Airport  $airport
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Airport $airport)
@@ -54,6 +56,7 @@ class AirportController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Airport  $airport
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Airport $airport)
@@ -66,6 +69,7 @@ class AirportController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Airport  $airport
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Airport $airport)
@@ -77,6 +81,7 @@ class AirportController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Airport  $airport
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Airport $airport)

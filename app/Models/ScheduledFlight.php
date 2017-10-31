@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\ScheduledFlight
+ * App\Models\ScheduledFlight.
  *
  * @property int $id
  * @property int $airline_id
@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property string|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereAirlineId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereArraptId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereArrtime($value)
@@ -42,6 +43,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ScheduledFlight whereUpdatedAt($value)
  * @mixin \Eloquent
+ *
  * @property-read \App\Models\Airline $airline
  * @property-read \App\Models\Airport $arrapt
  * @property-read \App\Models\Airport $depapt
@@ -56,10 +58,12 @@ class ScheduledFlight extends Model
     {
         return $this->belongsTo('App\Models\Airline');
     }
+
     public function depapt()
     {
         return $this->belongsTo('App\Models\Airport');
     }
+
     public function arrapt()
     {
         return $this->belongsTo('App\Models\Airport');

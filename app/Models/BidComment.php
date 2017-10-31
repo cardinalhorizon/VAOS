@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\BidComment
+ * App\Models\BidComment.
  *
  * @mixin \Eloquent
+ *
  * @property-read \App\Models\Bid $bid
  * @property-read \App\Models\User $user
  */

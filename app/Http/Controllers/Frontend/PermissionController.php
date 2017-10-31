@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Laratrust;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Laratrust;
-use Session;
 
 class PermissionController extends Controller
 {
@@ -43,6 +42,7 @@ class PermissionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,10 +51,10 @@ class PermissionController extends Controller
             return abort(403);
         }
         if ($request->permission_type == 'basic') {
-            $data =$this->validateWith([
+            $data = $this->validateWith([
                 'display_name' => 'required|max:255',
-                'name' => 'required|max:255|alphadash|unique:permissions,name',
-                'description' => 'sometimes|max:255',
+                'name'         => 'required|max:255|alphadash|unique:permissions,name',
+                'description'  => 'sometimes|max:255',
             ]);
             $permission = Permission::create($data);
 
@@ -66,13 +66,13 @@ class PermissionController extends Controller
             $crud = $request->crud_selected;
             if (count($crud) > 0) {
                 foreach ($crud as $x) {
-                    $slug = strtolower($x).'-'.strtolower($request->resource);
+                    $slug         = strtolower($x).'-'.strtolower($request->resource);
                     $display_name = ucwords($x.' '.$request->resource);
-                    $description = 'Allows a user to '.strtoupper($x).' a '.ucwords($request->resource);
-                    $permission = Permission::create([
-                        'name' => $slug,
+                    $description  = 'Allows a user to '.strtoupper($x).' a '.ucwords($request->resource);
+                    $permission   = Permission::create([
+                        'name'         => $slug,
                         'display_name' => $display_name,
-                        'description' => $description
+                        'description'  => $description,
                     ]);
                 }
 
@@ -87,6 +87,7 @@ class PermissionController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Permission  $permission
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Permission $permission)
@@ -98,6 +99,7 @@ class PermissionController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Permission  $permission
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Permission $permission)
@@ -114,6 +116,7 @@ class PermissionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Permission  $permission
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
@@ -123,7 +126,7 @@ class PermissionController extends Controller
         }
         $data = $this->validateWith([
             'display_name' => 'required|max:255',
-            'description' => 'sometimes|max:255',
+            'description'  => 'sometimes|max:255',
         ]);
 
         $permission->update($data);
@@ -135,6 +138,7 @@ class PermissionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Permission  $permission
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Permission $permission)
