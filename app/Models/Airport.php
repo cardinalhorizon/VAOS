@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Airport
+ * App\Models\Airport.
  *
  * @property int $id
  * @property string $name
@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $lon
  * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ScheduledFlight[] $scheduledflight
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereCountry($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereDeletedAt($value)
@@ -27,13 +28,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereLon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Airport whereName($value)
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bid[] $bid
  */
 class Airport extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['id', 'name', 'city', 'county', 'iata','icao', 'lat', 'lon'];
+    protected $fillable = ['id', 'name', 'city', 'county', 'iata', 'icao', 'lat', 'lon'];
 
     public function scheduledflight()
     {

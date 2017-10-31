@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
 
 class ProfileController extends Controller
 {
@@ -33,6 +33,7 @@ class ProfileController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,6 +45,7 @@ class ProfileController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -55,6 +57,7 @@ class ProfileController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -67,6 +70,7 @@ class ProfileController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -75,14 +79,14 @@ class ProfileController extends Controller
             $this->validateWith([
 
             ]);
-            
+
             $user->update([
 
             ]);
 
             return redirect()->route('profile.show', $user->id)->with('success', 'Your user information was successfully updated in the database');
         } else {
-            return redirect()->route('profile.show', $user->id)->with('error', 'You are not allowed to update ' . $user->username . ' user information');
+            return redirect()->route('profile.show', $user->id)->with('error', 'You are not allowed to update '.$user->username.' user information');
         }
     }
 
@@ -90,6 +94,7 @@ class ProfileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)

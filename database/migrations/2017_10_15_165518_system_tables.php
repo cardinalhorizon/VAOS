@@ -1,13 +1,12 @@
 <?php
 /**
- * VAOS 1.1 Updater and Installation Migration
+ * VAOS 1.1 Updater and Installation Migration.
  *
  * This file contains both an update schema for the existing database or the new schema which will be used in the 1.1
  * product line. This update contains new things, including FS Hub integration which will be coming in 1.0.1.
  *
  * For More Information, visit http://fsvaos.net/docs
  */
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -21,7 +20,7 @@ class SystemTables extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('airports')) {
+        if (! Schema::hasTable('airports')) {
 
             /*
              * Virtual Airline Operations System 1.1 Fresh Install Schema
@@ -306,7 +305,6 @@ class SystemTables extends Migration
                 $table->time('scheduled_off')->nullable();
                 $table->time('scheduled_on')->nullable();
                 $table->time('scheduled_in')->nullable();
-
 
                 $table->time('actual_out')->nullable();
                 $table->time('actual_off')->nullable();

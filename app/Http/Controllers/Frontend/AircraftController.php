@@ -35,6 +35,7 @@ class AircraftController extends Controller
      * Store a newly created aircraft in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -46,6 +47,7 @@ class AircraftController extends Controller
      * Display the specified aircraft.
      *
      * @param  \App\Models\Aircraft  $aircraft
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Aircraft $aircraft)
@@ -57,6 +59,7 @@ class AircraftController extends Controller
      * Show the form for editing the specified aircraft.
      *
      * @param  \App\Models\Aircraft  $aircraft
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Aircraft $aircraft)
@@ -69,6 +72,7 @@ class AircraftController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Aircraft  $aircraft
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Aircraft $aircraft)
@@ -80,6 +84,7 @@ class AircraftController extends Controller
      * Remove the specified aircraft from storage.
      *
      * @param  \App\Models\Aircraft  $aircraft
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Aircraft $aircraft)

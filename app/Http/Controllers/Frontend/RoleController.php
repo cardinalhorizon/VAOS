@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Permission;
+use Laratrust;
 use App\Models\Role;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Laratrust;
 
 class RoleController extends Controller
 {
@@ -46,6 +46,7 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,22 +57,23 @@ class RoleController extends Controller
 
         $data = $this->validateWith([
             'display_name' => 'required|max:255',
-            'name' => 'required|max:100|alpha_dash|unique:roles,name',
-            'description' => 'sometimes|max:255',
+            'name'         => 'required|max:100|alpha_dash|unique:roles,name',
+            'description'  => 'sometimes|max:255',
         ]);
-        $role =  Role::create($data);
+        $role = Role::create($data);
 
         if ($request->permissions) {
             $role->syncPermissions($request->permissions);
         }
 
-        return redirect()->route('roles.index')->with('success', 'Successfully created the new '. $role->display_name .' role in the database.');
+        return redirect()->route('roles.index')->with('success', 'Successfully created the new '.$role->display_name.' role in the database.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Role  $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Role $role)
@@ -83,6 +85,7 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Role  $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Role $role)
@@ -90,7 +93,7 @@ class RoleController extends Controller
         if (! Laratrust::can('update-acl')) {
             return abort(403);
         }
-        
+
         $permissions = Permission::all();
 
         return view('admin.roles.edit')->withRole($role)->withPermissions($permissions);
@@ -101,6 +104,7 @@ class RoleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Role  $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Role $role)
@@ -111,7 +115,7 @@ class RoleController extends Controller
 
         $data = $this->validateWith([
             'display_name' => 'required|max:255',
-            'description' => 'sometimes|max:255',
+            'description'  => 'sometimes|max:255',
         ]);
         $role->update($data);
 
@@ -126,6 +130,7 @@ class RoleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Role  $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
