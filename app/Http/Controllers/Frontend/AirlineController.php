@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Http\Requests\StoreAirline;
+use App\Http\Requests\UpdateAirline;
 use App\Models\Airline;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,6 +25,7 @@ class AirlineController extends Controller
      * @param Request $request
      *
      * @return \Illuminate\Http\Response
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function index(Request $request)
     {
@@ -47,11 +50,12 @@ class AirlineController extends Controller
     /**
      * Store a newly created airline in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreAirline $request
      *
      * @return \Illuminate\Http\Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(Request $request)
+    public function store(StoreAirline $request)
     {
         $airline = $this->airlineRepo->create($request->all());
 
@@ -88,12 +92,13 @@ class AirlineController extends Controller
     /**
      * Update the specified airline in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Airline  $airline
+     * @param UpdateAirline $request
+     * @param  \App\Models\Airline $airline
      *
      * @return \Illuminate\Http\Response
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(Request $request, Airline $airline)
+    public function update(UpdateAirline $request, Airline $airline)
     {
         $airline = $this->airlineRepo->update($request->all(), $airline->id);
 
