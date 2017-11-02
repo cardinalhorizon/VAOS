@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Requests\StoreAirline;
-use App\Http\Requests\UpdateAirline;
 use App\Models\Airline;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAirline;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateAirline;
 use App\Repositories\AirlineRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -24,8 +24,9 @@ class AirlineController extends Controller
      *
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -52,8 +53,9 @@ class AirlineController extends Controller
      *
      * @param StoreAirline $request
      *
-     * @return \Illuminate\Http\Response
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreAirline $request)
     {
@@ -95,8 +97,9 @@ class AirlineController extends Controller
      * @param UpdateAirline $request
      * @param  \App\Models\Airline $airline
      *
-     * @return \Illuminate\Http\Response
      * @throws \Prettus\Validator\Exceptions\ValidatorException
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(UpdateAirline $request, Airline $airline)
     {
