@@ -33,7 +33,7 @@ class Airline extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['icao', 'icao', 'fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
+    protected $fillable = ['icao', 'fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
 
     protected $rules = [
         'icao'     => 'required|alpha|min:3|max:3|unique:airlines, icao',
