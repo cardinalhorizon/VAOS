@@ -34,7 +34,7 @@ class AirlineController extends Controller
         $airlines = $this->airlineRepo->all();
 
         //TODO: Add view to this function
-        return view('airline.index', compact($airlines));
+        return view('airline.index', ['airlines' => $airlines]);
     }
 
     /**

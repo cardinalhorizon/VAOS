@@ -16,10 +16,10 @@
                 <tbody>
                 @foreach($airlines as $airline)
                 <tr>
-                    <td>$airline->icao</td>
-                    <td>$airline->iata</td>
-                    <td>$airline->name</td>
-                    <td>$airline->callsign</td>
+                    <td>{{$airline->icao}}</td>
+                    <td>{{$airline->iata}}</td>
+                    <td>{{$airline->name}}</td>
+                    <td>{{$airline->callsign}}</td>
                 </tr>
                 @endforeach
                 </tbody>

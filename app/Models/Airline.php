@@ -35,7 +35,7 @@ class Airline extends Model
 
     protected $fillable = ['icao', 'fshub_id', 'iata', 'name', 'logo', 'widget', 'callsign'];
 
-    protected $rules = [
+    public static $rules = [
         'icao'     => 'required|alpha|min:3|max:3|unique:airlines, icao',
         'fshub_id' => 'nullable',
         'iata'     => 'required|alpha|min:2|max:2|unique:airlines, iata',
