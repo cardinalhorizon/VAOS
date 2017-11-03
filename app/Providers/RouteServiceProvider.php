@@ -3,9 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use RecursiveIteratorIterator as Iterator;
 use RecursiveDirectoryIterator as DirectoryIterator;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -55,9 +55,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'web',
-            'namespace' => $this->namespace,
+            'namespace'  => $this->namespace,
         ], function ($router) {
-
             $iterator = new Iterator(new DirectoryIterator(base_path('routes/web')), Iterator::SELF_FIRST);
 
             foreach ($iterator as $file) {
@@ -78,11 +77,10 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'prefix' => 'api',
+            'prefix'     => 'api',
             'middleware' => 'api',
-            'namespace' => $this->namespace,
+            'namespace'  => $this->namespace,
         ], function ($router) {
-
             $iterator = new Iterator(new DirectoryIterator(base_path('routes/api')), Iterator::SELF_FIRST);
 
             foreach ($iterator as $file) {
