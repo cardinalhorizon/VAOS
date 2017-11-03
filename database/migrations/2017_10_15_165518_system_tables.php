@@ -283,7 +283,7 @@ class SystemTables extends Migration
                 $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('set null');
                 $table->string('flightnum')->nullable();
                 $table->string('sub')->nullable();
-                $table->unsignedInteger('captain_id');
+                $table->unsignedInteger('captain_id')->nullable();
                 $table->foreign('captain_id')->references('id')->on('users')->onDelete('set null');
                 $table->unsignedInteger('fo_id')->nullable();
                 $table->foreign('fo_id')->references('id')->on('users')->onDelete('set null');
