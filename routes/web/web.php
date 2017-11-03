@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('airline', 'Frontend\AirlineController');
+Route::resource('/airline', 'Frontend\AirlineController');
