@@ -10,17 +10,11 @@ class AirlineListTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $airlinerepo;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->airlinerepo = app('App\Repositories\AirlineRepository');
-    }
-
     /** @test */
     function user_can_see_arline_listing()
     {
+        $airlinerepo = app('App\Repositories\AirlineRepository');
+
         $airline = factory(Airline::class)->make([
             'fshub_id' => '001',
             'icao' => 'AUA',
@@ -29,8 +23,8 @@ class AirlineListTest extends TestCase
             'callsign' => 'AUSTRIAN'
         ]);
 
-        $this->airlinerepo->create($airline->toArray());
-            //Works with dd in the controller. At the moment no view is created yet.
+        $airlinerepo->create($airline->toArray());
+
         $this->get('/airline')
             ->assertSee($airline->name)
             ->assertSee($airline->icao)

@@ -173,8 +173,8 @@ class SystemTables extends Migration
             // New in the 1.1 update, You can now assign multiple aircraft groups and aircraft to a single route.
             Schema::create('aircraft_group_scheduled_flight', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('aircraft_group_id')->unsigned();
-                $table->foreign('aircraft_group_id')->references('id')->on('aircraft_group')->onDelete('set null');
+                $table->integer('aircraft_group_id')->unsigned()->nullable();
+                $table->foreign('aircraft_group_id')->references('id')->on('aircraft_groups')->onDelete('set null');
                 $table->integer('scheduled_flight_id')->unsigned();
                 $table->foreign('scheduled_flight_id')->references('id')->on('scheduled_flights')->onDelete('cascade');
                 $table->boolean('primary');
@@ -292,9 +292,9 @@ class SystemTables extends Migration
                 $table->unsignedInteger('aircraft_id')->nullable();
                 $table->foreign('aircraft_id')->references('id')->on('aircraft')->onDelete('set null');
 
-                $table->unsignedInteger('depapt_id');
+                $table->unsignedInteger('depapt_id')->nullable();
                 $table->foreign('depapt_id')->references('id')->on('airports')->onDelete('set null');
-                $table->unsignedInteger('arrapt_id');
+                $table->unsignedInteger('arrapt_id')->nullable();
                 $table->foreign('arrapt_id')->references('id')->on('airports')->onDelete('set null');
 
                 $table->boolean('landedAtAlt');

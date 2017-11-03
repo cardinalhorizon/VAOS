@@ -10,14 +10,6 @@ class AirlineCreateTest extends TestCase
 {
     use DatabaseMigrations;
 
-    protected $airlinerepo;
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->airlinerepo = app('App\Repositories\AirlineRepository');
-    }
-
     /** @test */
     function user_can_create_an_airline()
     {
@@ -29,9 +21,8 @@ class AirlineCreateTest extends TestCase
             'callsign' => 'AUSTRIAN'
         ]);
 
-        $this->post('airline', $airline->toArray());
+        $this->post('/airline', $airline->toArray());
 
-        //Works with dd in the controller. At the moment no view is created yet.
         $this->get('/airline')
             ->assertSee($airline->name)
             ->assertSee($airline->icao)
