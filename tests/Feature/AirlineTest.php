@@ -18,4 +18,16 @@ class AirlineTest extends TestCase
         $this->markTestIncomplete('This test has not been implemented yet.');
 
     }
+
+    /**@test*/
+    function user_can_create_an_airline()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    /**@test*/
+    function user_can_edit_an_airline()
+    {
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
 }
