@@ -15,14 +15,14 @@
 </head>
 
 <body>
-    <div id="app">
-        @include('layouts.partials.navigation') <!-- always -->
+<div id="app">
+@include('layouts.partials.navigation') <!-- always -->
 
-        @yield('content') <!-- depends on which route was called -->
-    </div>
+@yield('content') <!-- depends on which route was called -->
+</div>
 
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
