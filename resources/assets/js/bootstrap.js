@@ -9,8 +9,8 @@ window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
-
-    require('materialize-css/dist/js/materialize');
+    window.Popper = require('popper.js').default;
+    require('bootstrap');
 } catch (e) {}
 
 /**
