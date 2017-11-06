@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class FlightService
+class FlightService extends BaseService
 {
     public static function createNewBid()
     {

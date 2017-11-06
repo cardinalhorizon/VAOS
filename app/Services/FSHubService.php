@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class FSHubService
+class FSHubService extends BaseService
 {
     public static function syncLogbookData($pilot)
     {

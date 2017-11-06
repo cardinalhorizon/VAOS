@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class AirlineService
+class AirlineService extends BaseService
 {
     public static function addAirline($data)
     {

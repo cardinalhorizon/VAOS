@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class SystemService
+class SystemService extends BaseService
 {
     public static function addAirport($icao)
     {

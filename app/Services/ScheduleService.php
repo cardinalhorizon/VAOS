@@ -2,6 +2,6 @@
 
 namespace App\Services;
 
-class ScheduleService
+class ScheduleService extends BaseService
 {
 }

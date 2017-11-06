@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class PilotService
+class PilotService extends BaseService
 {
     public static function addTypeRating($array)
     {

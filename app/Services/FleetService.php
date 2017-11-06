@@ -7,7 +7,7 @@ use App\Models\Airport;
 use App\Models\Aircraft;
 use App\Models\AircraftGroup;
 
-class FleetService
+class FleetService extends BaseService
 {
     public static function createAircraft($data)
     {
