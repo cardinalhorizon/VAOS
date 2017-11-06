@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Airline;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreAirline;
+use App\Http\Requests\StoreAirlineRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateAirline;
+use App\Http\Requests\UpdateAirlineRequest;
 use App\Repositories\AirlineRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -34,7 +34,7 @@ class AirlineController extends Controller
         $airlines = $this->airlineRepo->all();
 
         //TODO: Add view to this function
-        return view('airline.index', ['airlines' => $airlines]);
+        return view('airline.index', compact('airlines'));
     }
 
     /**
@@ -51,13 +51,13 @@ class AirlineController extends Controller
     /**
      * Store a newly created airline in storage.
      *
-     * @param StoreAirline $request
+     * @param StoreAirlineRequest $request
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAirline $request)
+    public function store(StoreAirlineRequest $request)
     {
         $airline = $this->airlineRepo->create($request->all());
 
@@ -94,14 +94,14 @@ class AirlineController extends Controller
     /**
      * Update the specified airline in storage.
      *
-     * @param UpdateAirline $request
+     * @param UpdateAirlineRequest $request
      * @param  \App\Models\Airline $airline
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAirline $request, Airline $airline)
+    public function update(UpdateAirlineRequest $request, Airline $airline)
     {
         $airline = $this->airlineRepo->update($request->all(), $airline->id);
 

@@ -1,19 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taylorbroad
- * Date: 10/20/17
- * Time: 4:29 PM.
- */
 
-namespace App\VASystem;
+namespace App\Services;
 
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\Aircraft;
 use App\Models\AircraftGroup;
 
-class VAFleetManagement
+class FleetService
 {
     public static function createAircraft($data)
     {

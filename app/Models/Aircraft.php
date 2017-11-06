@@ -15,6 +15,19 @@ class Aircraft extends Model
 {
     protected $fillable = ['icao', 'type', 'name', 'manufacturer', 'registration', 'status', 'hub_id', 'location_id', 'airline_id', 'notes'];
 
+    public static $rules = [
+        'icao' => 'required|alpha_num|min:4|max:4',
+        'type' => 'required|integer',
+        'name' => 'required|max:255',
+        'manufacturer' => 'required|max:255',
+        'registration' => 'required|string|max:255',
+        'status' => 'required|integer',
+        'hub_id' => 'nullable',
+        'location_id' => 'nullable',
+        'airline_id' => 'nullable',
+        'notes' => 'nullable'
+    ];
+
     public function hub()
     {
         $this->belongsTo('App\Models\Hub');

@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taylorbroad
- * Date: 10/29/17
- * Time: 12:44 AM.
- */
 
-namespace App\VASystem;
+namespace App\Services;
 
 use App\Models\Setting;
 
-class DBSettings
+class SettingService
 {
     private $settingArray = [];
 

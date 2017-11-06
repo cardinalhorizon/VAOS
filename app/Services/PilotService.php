@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taylorbroad
- * Date: 10/28/17
- * Time: 8:38 PM.
- */
 
-namespace App\VASystem;
+namespace App\Services;
 
-class VAUserManagement
+class PilotService
 {
     public static function addTypeRating($array)
     {

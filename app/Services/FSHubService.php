@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: taylorbroad
- * Date: 10/28/17
- * Time: 10:30 PM.
- */
 
-namespace App\VASystem;
+namespace App\Services;
 
-class FSHubDatalink
+class FSHubService
 {
     public static function syncLogbookData($pilot)
     {

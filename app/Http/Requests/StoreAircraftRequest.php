@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Airline;
+use App\Models\Aircraft;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAirline extends FormRequest
+class StoreAircraftRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class StoreAirline extends FormRequest
      */
     public function rules()
     {
-        return Airline::$rules;
+        return Aircraft::$rules;
     }
 }
