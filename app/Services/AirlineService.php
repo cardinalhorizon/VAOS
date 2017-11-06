@@ -22,35 +22,39 @@ class AirlineService extends BaseService
     /**
      * @param Request $request
      *
-     * @return mixed
      * @throws RepositoryException
+     *
+     * @return mixed
      */
     public function index(Request $request)
     {
-            $this->airlineRepo->pushCriteria(new RequestCriteria($request));
-            return $this->airlineRepo->all();
+        $this->airlineRepo->pushCriteria(new RequestCriteria($request));
+
+        return $this->airlineRepo->all();
     }
 
     /**
      * @param StoreAirlineRequest $request
      *
-     * @return mixed
      * @throws ValidatorException
+     *
+     * @return mixed
      */
     public function create(StoreAirlineRequest $request)
     {
-            return $this->airlineRepo->create($request->all());
+        return $this->airlineRepo->create($request->all());
     }
 
     /**
      * @param UpdateAirlineRequest $request
      * @param Airline $airline
      *
-     * @return mixed
      * @throws ValidatorException
+     *
+     * @return mixed
      */
     public function update(UpdateAirlineRequest $request, Airline $airline)
     {
-            return $this->airlineRepo->update($request->all(), $airline->id);
+        return $this->airlineRepo->update($request->all(), $airline->id);
     }
 }
