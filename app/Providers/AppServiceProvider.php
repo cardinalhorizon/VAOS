@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\AirlineService;
+use App\Services\AirportService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Services\AirlineService', function ($app) {
             return new AirlineService();
+        });
+
+        $this->app->bind('App\Services\AirportService', function ($app) {
+            return new AirportService();
         });
     }
 }
