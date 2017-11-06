@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreAirlineRequest;
-use App\Http\Requests\UpdateAirlineRequest;
 use App\Models\Airline;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAirlineRequest;
+use App\Http\Requests\UpdateAirlineRequest;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Exceptions\RepositoryException;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Prettus\Repository\Exceptions\RepositoryException;
 
 class AirlineService extends BaseService
 {
@@ -21,11 +21,14 @@ class AirlineService extends BaseService
 
     /**
      * @param Request $request
+     *
      * @return mixed
      */
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         try {
             $this->airlineRepo->pushCriteria(new RequestCriteria($request));
+
             return $this->airlineRepo->all();
         } catch (RepositoryException $e) {
             return false;
@@ -34,6 +37,7 @@ class AirlineService extends BaseService
 
     /**
      * @param StoreAirlineRequest $request
+     *
      * @return mixed
      */
     public function create(StoreAirlineRequest $request)
@@ -48,6 +52,7 @@ class AirlineService extends BaseService
     /**
      * @param UpdateAirlineRequest $request
      * @param Airline $airline
+     *
      * @return mixed
      */
     public function update(UpdateAirlineRequest $request, Airline $airline)
