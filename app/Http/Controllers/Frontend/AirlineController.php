@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Airline;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreAirlineRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateAirlineRequest;
 use App\Repositories\AirlineRepository;
+use App\Http\Requests\StoreAirlineRequest;
+use App\Http\Requests\UpdateAirlineRequest;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 class AirlineController extends Controller
