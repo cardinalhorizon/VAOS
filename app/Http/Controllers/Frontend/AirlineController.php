@@ -5,18 +5,16 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Airline;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\AirlineRepository;
 use App\Http\Requests\StoreAirlineRequest;
 use App\Http\Requests\UpdateAirlineRequest;
-use Prettus\Repository\Criteria\RequestCriteria;
 
 class AirlineController extends Controller
 {
-    private $airlineRepo;
+    private $airlineService;
 
-    public function __construct(AirlineRepository $airlinesRepo)
+    public function __construct()
     {
-        $this->airlineRepo = $airlinesRepo;
+        $this->airlineService = app('App\Services\AirlineService');
     }
 
     /**
@@ -30,8 +28,7 @@ class AirlineController extends Controller
      */
     public function index(Request $request)
     {
-        $this->airlineRepo->pushCriteria(new RequestCriteria($request));
-        $airlines = $this->airlineRepo->all();
+        $airlines = $this->airlineService->index($request);
 
         //TODO: Add view to this function
         return view('airline.index', compact('airlines'));
@@ -59,7 +56,7 @@ class AirlineController extends Controller
      */
     public function store(StoreAirlineRequest $request)
     {
-        $airline = $this->airlineRepo->create($request->all());
+        $airline = $this->airlineService->create($request);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully created the new '.$airline->name.' airline to the database');
@@ -103,7 +100,7 @@ class AirlineController extends Controller
      */
     public function update(UpdateAirlineRequest $request, Airline $airline)
     {
-        $airline = $this->airlineRepo->update($request->all(), $airline->id);
+        $airline = $this->airlineService->update($request, $airline);
 
         //TODO: Add view to this function
         return redirect()->route('airline.index')->with('success', 'Successfully update the '.$airline->name.' airline in the database');
@@ -118,9 +115,6 @@ class AirlineController extends Controller
      */
     public function destroy(Airline $airline)
     {
-        $this->airlineRepo->delete($airline->id);
-
-        //TODO: Add view to this function
-        return redirect()->route('airline.index')->with('success', 'Successfully delete the '.$airline->name.' airline from the database');
+        //
     }
 }
