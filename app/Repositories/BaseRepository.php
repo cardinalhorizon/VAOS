@@ -9,8 +9,10 @@ abstract class BaseRepository extends \Prettus\Repository\Eloquent\BaseRepositor
     /**
      * @param $id
      * @param array $columns
-     * @return mixed
+     *
      * @throws \Prettus\Repository\Exceptions\RepositoryException
+     *
+     * @return mixed
      */
     public function findWithoutFail($id, $columns = ['*'])
     {
@@ -22,9 +24,9 @@ abstract class BaseRepository extends \Prettus\Repository\Eloquent\BaseRepositor
         return $this->parserResult($model);
     }
 
-
     /**
      * @param $values
+     *
      * @return bool
      */
     public function validate($values)
