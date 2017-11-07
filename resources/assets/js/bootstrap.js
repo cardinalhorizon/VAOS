@@ -1,6 +1,8 @@
 
 window._ = require('lodash');
 
+window.Popper = require('popper.js/dist/umd/popper');
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -9,7 +11,7 @@ window._ = require('lodash');
 
 try {
     window.$ = window.jQuery = require('jquery');
-    window.Popper = require('popper.js').default;
+
     require('bootstrap');
 } catch (e) {}
 

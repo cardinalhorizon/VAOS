@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f627d7a1497d00cf0c28206d09ee2bd",
+    "content-hash": "5ce0fe20552d28f4b0eab5fa8421f804",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1355,6 +1355,52 @@
                 "psysh"
             ],
             "time": "2017-07-13T13:11:05+00:00"
+        },
+        {
+            "name": "laravelnews/laravel-twbs4",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelnews/laravel-twbs4.git",
+                "reference": "1fc72a49b860e1b1ef93d231312e965b7eeeed5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelnews/laravel-twbs4/zipball/1fc72a49b860e1b1ef93d231312e965b7eeeed5a",
+                "reference": "1fc72a49b860e1b1ef93d231312e965b7eeeed5a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "LaravelNews\\Presets\\BootstrapFour\\BootstrapPresetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelNews\\Presets\\BootstrapFour\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Redmond",
+                    "email": "paulrredmond@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 frontend preset for Twitter Bootstrap 4",
+            "time": "2017-11-07T07:26:23+00:00"
         },
         {
             "name": "lcobucci/jwt",
