@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Airline;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreAirlineRequest;
 use App\Http\Requests\UpdateAirlineRequest;
 
