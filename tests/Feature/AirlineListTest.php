@@ -13,17 +13,14 @@ class AirlineListTest extends TestCase
     /** @test */
     function user_can_see_arline_listing()
     {
-        $airlinerepo = app('App\Repositories\AirlineRepository');
 
-        $airline = factory(Airline::class)->make([
+        $airline = factory(Airline::class)->create([
             'fshub_id' => '001',
             'icao' => 'AUA',
             'iata' => 'OS',
             'name' => 'Austrian Airlines',
             'callsign' => 'AUSTRIAN'
         ]);
-
-        $airlinerepo->create($airline->toArray());
 
         $this->get('/airline')
             ->assertSee($airline->name)
