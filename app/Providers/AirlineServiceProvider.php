@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Providers;
+
+use App\Services\AirlineService;
+use Illuminate\Support\ServiceProvider;
+
+class AirlineServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bind('App\Services\AirlineService', function ($app) {
+            return new AirlineService();
+        });
+    }
+}

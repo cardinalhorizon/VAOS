@@ -177,6 +177,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /*
+         *  VAOS Service Providers...
+         */
+        App\Providers\AirportServiceProvider::class,
+        App\Providers\AirlineServiceProvider::class,
+
     ],
 
     /*
