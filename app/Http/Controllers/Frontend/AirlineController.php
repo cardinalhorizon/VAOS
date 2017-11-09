@@ -20,15 +20,11 @@ class AirlineController extends Controller
     /**
      * Display a listing of airlines.
      *
-     * @param Request $request
-     *
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $airlines = $this->airlineService->index($request);
+        $airlines = $this->airlineService->index();
 
         //TODO: Add view to this function
         return view('airline.index', compact('airlines'));
@@ -49,8 +45,6 @@ class AirlineController extends Controller
      * Store a newly created airline in storage.
      *
      * @param StoreAirlineRequest $request
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,8 +88,6 @@ class AirlineController extends Controller
      * @param UpdateAirlineRequest $request
      * @param  \App\Models\Airline $airline
      *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
-     *
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAirlineRequest $request, Airline $airline)
@@ -109,9 +101,9 @@ class AirlineController extends Controller
     /**
      * Remove the specified airline from storage.
      *
-     * @param  \App\Models\Airline  $airline
+     * @param  \App\Models\Airline $airline
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy(Airline $airline)
     {
