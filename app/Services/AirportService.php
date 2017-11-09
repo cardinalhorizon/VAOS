@@ -3,20 +3,12 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use App\Models\Airport;
 
 class AirportService extends BaseService
 {
-    protected $airportRepo;
-
-    public function __construct()
-    {
-        $this->airportRepo = app('App\Repositories\AirportRepository');
-    }
-
     /**
      * @param $icao
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
     public function create($icao)
     {
@@ -31,7 +23,7 @@ class AirportService extends BaseService
         // Add the airport to the database
         $data = json_decode($res, true);
 
-        $this->airportRepo->create([
+        Airport::create([
             'id'      => $data['airport']['id'],
             'name'    => $data['airport']['name'],
             'icao'    => $data['airport']['gps_code'],
