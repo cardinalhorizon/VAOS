@@ -120,4 +120,8 @@ class AirlineController extends Controller
     {
         //
     }
+    public function addHub(Request $request)
+    {
+
+    }
 }

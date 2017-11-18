@@ -45,7 +45,7 @@ require_once (__DIR__."/../vendor/autoload.php");
 
 define('skip_retired_check', false); //should 'retired' (inactive) pilots be able to log in?
 define('include_pending_flights_in_stats', false); //should flights that haven't been accepted/rejected yet be used to compute pilot stats in the smartCARS client?
-define('interface_version', 'vaos-official-v1-1/21/2017');
+define('interface_version', 'vaos-v1.0.3');
 define('TABLE_PREFIX', $_ENV['DB_PREFIX']);
 define('WEB_URL', $_ENV['APP_URL']);
 

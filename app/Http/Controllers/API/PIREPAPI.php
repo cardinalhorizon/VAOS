@@ -106,4 +106,8 @@ class PIREPAPI extends Controller
         $ret['flightnum'] = $flightnum;
         return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
+    public function getFlight($id)
+    {
+        return PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->first();
+    }
 }

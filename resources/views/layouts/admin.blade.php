@@ -162,7 +162,9 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('admin/migrations') }}"><i class="fa fa-database"></i> Database Migrations </a>
+            </li>
         </ul>
     </nav>
 </div>

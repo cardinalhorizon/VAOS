@@ -6,14 +6,14 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col s12">
             <h1 class="page-header">My Logbook</h1>
         </div>
     </div>
     <div class="row">
-            <div class="col-lg-9 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-body">
+            <div class="col l12">
+                <div class="card">
+                    <div class="card-content">
                         <table id="table_id" class="table table-striped table-bordered table-hover table-responsive">
                             <thead>
                             <tr>

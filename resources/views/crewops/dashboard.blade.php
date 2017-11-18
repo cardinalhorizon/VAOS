@@ -62,7 +62,7 @@
                             <tbody>
                             @foreach(\App\PIREP::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
                                 <tr>
-                                    <td>{{ $p->airline->icao . $p->flightnum }}</td>
+                                    <td><a href="{{ url('crewops/logbook/'.$p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
                                     <td>{{ $p->depapt->icao }}</td>
                                     <td>{{ $p->arrapt->icao }}</td>
                                     <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
@@ -95,6 +95,7 @@
                             <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count(Auth::user()->pirep) }}</div></div></li>
                             <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', Auth::user()->id)->avg('landingrate') }}</div></div></li>
                         </ul>
+                        <a class="btn blue" href="https://tfdidesign.com/smartcars/app.php?action=download&airlineid=482&language=en-US" role="button">Download smartCARS</a>
                     </div>
                 </div>
             </div>

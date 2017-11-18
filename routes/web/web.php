@@ -29,6 +29,7 @@ Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' =
     Route::get('/schedule', 'CrewOpsController@getSchedule');
     Route::get('/schedule/search', 'CrewOpsController@getScheduleSearch');
     Route::get('/logbook', 'CrewOpsController@getLogbook');
+    Route::get('/logbook/{id}', 'CrewOpsController@getLogbookDetailed');
     Route::resource('/bids', 'BiddingController');
     Route::get('/roster', 'CrewOpsController@getRoster');
     Route::post('/filepirep', 'CrewOpsController@postManualPirep');
@@ -45,6 +46,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
     Route::resource('/users', 'UsersController');
     Route::resource('/groups', 'UserGroupsController');
     Route::resource('/pireps', 'PIREPController');
+    Route::get('/migrations', 'InstallController@viewMigrations');
     Route::get('/migrate', 'InstallController@dbMigrate');
     Route::group(['prefix' => '/data'], function () {
         Route::get('/system', 'ImportExportController@getSystem');

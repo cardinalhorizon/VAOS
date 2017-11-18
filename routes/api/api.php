@@ -39,6 +39,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     });
     Route::get('/bids', 'BidsAPI@getBid');
     Route::post('/pireps', 'PIREPAPI@filePIREP');
+    Route::get('/logbook/{id}', 'PIREPAPI@getFlight');
 });
 
 /*

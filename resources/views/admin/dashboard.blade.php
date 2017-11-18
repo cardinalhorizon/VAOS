@@ -2,6 +2,7 @@
 
 
 @section('content')
+    <div id="#updateCheck"></div>
     <div class="col-xs-6 col-lg-3">
         <div class="card">
             <div class="card-block">

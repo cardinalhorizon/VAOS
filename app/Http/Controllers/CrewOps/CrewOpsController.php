@@ -145,4 +145,9 @@ class CrewOpsController extends Controller
         $request->session()->flash('success', 'Manual PIREP submitted for manual approval.');
         return redirect('/flightops');
     }
+    public function getLogbookDetailed($id)
+    {
+        $pirep = PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('user')->first();
+        return view('crewops.logbook.show', ['p' => $pirep]);
+    }
 }

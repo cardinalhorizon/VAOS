@@ -16,7 +16,7 @@
  
  * If you are unsure if you are using an original, unmodified copy of the smartCARS web interface, we recommend obtaining new copies of the files from the TFDi Design website.
   */
-define('version','official-w3052-3/12/2016');
+define('version','vaos-1.0.0');
 define('LOAD_TYPE_RANDOM_EDITABLE','randomopen');
 define('LOAD_TYPE_RANDOM_LOCKED','randomlocked');
 require_once("interface.php");

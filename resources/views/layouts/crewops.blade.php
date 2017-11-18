@@ -140,5 +140,6 @@
     $('.modal').modal();
     $('select').material_select();
 </script>
+@yield('js')
 </body>
 </html>

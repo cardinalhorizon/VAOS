@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 use Brotzka\DotenvEditor\DotenvEditor as Env;
 use App\User;
+use Illuminate\Support\Facades\Session;
 
 
 class InstallController extends Controller {
@@ -148,9 +149,10 @@ class InstallController extends Controller {
     $aircraft = $oldDB->getTable('aircraft')->get();
     $aircraft = $oldDB->getTable('aircraft')->get();
   }
-  public function dbMigrate()
+  public function dbMigrate(Request $request)
   {
       Artisan::call('migrate');
+      $request->session()->flash('success', true);
       return redirect('/admin/migrations');
   }
   public function viewMigrations()
