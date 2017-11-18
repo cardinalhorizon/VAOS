@@ -94,6 +94,8 @@ class UsersController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
 
+        $user->pilotid = $request->pilotid;
+
         if(strlen($request->cover_url) > 0) {
             $user->cover_url = $request->cover_url;
         } else {
