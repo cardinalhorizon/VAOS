@@ -44,6 +44,10 @@
                         <input type="text" class="form-control" name="email" value="{{ $user->email }}">
                     </div>
                     <div class="form-group">
+                        <label>Pilot ID</label>
+                        <input type="text" name="pilotid" class="form-control" value="{{ $user->pilotid }}" placeholder="0001">
+                    </div>
+                    <div class="form-group">
                         <label>VATSIM ID</label>
                         <input type="text" class="form-control" name="vatsim" value="{{ $user->vatsim }}">
                     </div>
@@ -59,6 +63,7 @@
                         <label>Avatar URL</label>
                         <input type="text" class="form-control" name="avatar_url" value="{{ $user->avatar_url }}">
                     </div>
+
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <button type="submit" class="btn btn-primary">Update</button>
