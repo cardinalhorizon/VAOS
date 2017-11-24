@@ -2139,11 +2139,12 @@ input[type="button"].btn-block {
   right: 6px;
   font-size: 9px; }
 
-.fade {
-  opacity: 0;
-  transition: opacity .15s linear; }
-  .fade.in {
-    opacity: 1; }
+fade {
+  opacity:0;
+  -webkit-transition:opacity .15s linear;
+  -o-transition:opacity .15s linear;
+  transition:opacity .15s linear}
+.fade.in{opacity:1}
 
 .collapse {
   display: none; }
@@ -3875,18 +3876,20 @@ button.close {
   border: 1px solid rgba(0, 0, 0, 0.2);
   outline: 0; }
 
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-  background-color: #000; }
-  .modal-backdrop.fade {
-    opacity: 0; }
-  .modal-backdrop.in {
-    opacity: 0.5; }
+.modal-backdrop{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:1040;
+  background-color:#000}
+.modal-backdrop.fade {
+  filter:alpha(opacity=0);
+  opacity:0}
+.modal-backdrop.in {
+  filter:alpha(opacity=50);
+  opacity:.5}
 
 .modal-header {
   padding: 15px;
@@ -4795,20 +4798,28 @@ body {
   animation-duration: 2s; }
 
 @-webkit-keyframes fadeIn {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
 @keyframes fadeIn {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 .fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn; }
+  -webkit-animation: fadeIn; /* Safari 4+ */
+  -moz-animation:    fadeIn; /* Fx 5+ */
+  -o-animation:      fadeIn; /* Opera 12+ */
+  animation:         fadeIn; /* IE 10+, Fx 29+ */
+}
 
 .row.row-equal {
   padding-right: 7.5px;
