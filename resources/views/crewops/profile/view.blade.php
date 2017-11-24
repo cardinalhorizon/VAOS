@@ -29,7 +29,7 @@
                             <tbody>
                             @foreach(\App\PIREP::where('user_id', $user->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
                                 <tr>
-                                    <td>{{ $p->airline->icao . $p->flightnum }}</td>
+                                    <td><a href="{{ url('flightops/logbook/'. $p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
                                     <td>{{ $p->depapt->icao }}</td>
                                     <td>{{ $p->arrapt->icao }}</td>
                                     <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
