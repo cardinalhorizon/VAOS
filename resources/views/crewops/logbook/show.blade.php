@@ -81,10 +81,12 @@
             $.getJSON( "{{ config('app.url') }}api/v1/logbook/{{$p->id}}", function( data ) {
                 console.log(data);
                 if(data.acars_client = "smartCARS") {
-                    var logSplit = data.flight_data.split("*");
-                    $.each(logSplit, function( index, value) {
-                        $("#scLogs").append('<li class="collection-item"><div>'+ value +'</div></li>')
-                    });
+                    if (data.flight_data !== null) {
+                        var logSplit = data.flight_data.split("*");
+                        $.each(logSplit, function (index, value) {
+                            $("#scLogs").append('<li class="collection-item"><div>' + value + '</div></li>')
+                        });
+                    }
                 }
                 // time to apply the flight status.
                 switch(data.status) {
