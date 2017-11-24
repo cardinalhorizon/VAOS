@@ -155,9 +155,6 @@
                         <a class="nav-link" href="{{ url('/admin/users') }}"><i class="fa fa-caret-right"></i> Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/admin/pireps') }}"><i class="fa fa-caret-right"></i> PIREPs</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('/admin/groups') }}"><i class="fa fa-caret-right"></i> Groups</a>
                     </li>
                 </ul>
