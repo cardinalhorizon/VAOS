@@ -24,9 +24,12 @@
                     </div>
                     <div class="card-footer">
                         <span class="pull-right">
-                            <a href="#" class="btn btn-primary" role="button">Details</a>
+                            <a href="{{url('/admin/pireps/'.$s->id)}}" class="btn btn-primary" role="button"><i class="fa fa-info"></i></a>
+                            @if($s->flight_data !== null && $s->acars_client === "smartCARS")
+                                <a href="#" class="btn btn-info" role="button" onclick="loadLog({{$s->id}});"><i class="fa fa-book"></i></a>
+                            @endif
                             <a href="#" class="btn btn-success" role="button" onclick="event.preventDefault();
-                                    document.getElementById('accept{{ $s->id }}').submit();">Accept</a>
+                                    document.getElementById('accept{{ $s->id }}').submit();"><i class="fa fa-check"></i></a>
                             <form id="accept{{ $s->id }}" method="POST" action="{{ url('/admin/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
                                 {{ csrf_field() }}
                                 <input name="flag" type="hidden" value="status">
@@ -35,7 +38,7 @@
                             </form>
 
                             <a href="#" class="btn btn-danger" role="button" onclick="event.preventDefault();
-                                    document.getElementById('reject{{ $s->id }}').submit();">Reject</a>
+                                    document.getElementById('reject{{ $s->id }}').submit();"><i class="fa fa-times"></i></a>
                             <form id="reject{{ $s->id }}" method="POST" action="{{ url('/admin/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
                                 {{ csrf_field() }}
                                 <input name="flag" type="hidden" value="status">
@@ -49,4 +52,46 @@
             </div>
         @endforeach
     </div>
+    <div class="modal fade" id="logModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">smartCARS 2 Logs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" id="scLogs">
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script>
+        function loadLog(logbookID)
+        {
+            $("#scLogs").empty();
+                $.getJSON( "{{ config('app.url') }}api/v1/logbook/" + logbookID, function( data ) {
+                    console.log(data);
+                    if(data.acars_client = "smartCARS") {
+                        if (data.flight_data !== null) {
+                            var logSplit = data.flight_data.split("*");
+                            $.each(logSplit, function (index, value) {
+                                $("#scLogs").append('<li class="list-group-item"><div>' + value + '</div></li>')
+                            });
+                        }
+                    }
+                    // time to apply the flight status.
+                });
+                console.log("data loaded");
+            $('#logModal').modal('show');
+        }
+    </script>
 @endsection

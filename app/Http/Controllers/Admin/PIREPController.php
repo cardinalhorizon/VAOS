@@ -57,7 +57,8 @@ class PIREPController extends Controller
      */
     public function show($id)
     {
-        //
+        $pirep = PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('user')->first();
+        return view('admin.pireps.detailed', ['p' => $pirep]);
     }
 
     /**
@@ -81,14 +82,16 @@ class PIREPController extends Controller
     public function update(Request $request, $id)
     {
         $pirep = PIREP::find($id);
-        $user = $pirep->user;
         // check if we are only changing the status
+        //dd($request);
         if ($request->input('flag') == "status")
         {
             $pirep->status = $request->input('status');
+            //dd($pirep->status);
             $pirep->save();
             //$user->notify(new PirepFiled($pirep));
-            return redirect('/admin/pireps?view=pending');
+            // Ok let's determine where to send the guy. Back to previous I assume
+            return redirect()->back();
         }
     }
 
