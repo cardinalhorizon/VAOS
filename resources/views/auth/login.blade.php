@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta content="IE=edge" http-equiv="X-UA-Compatible">
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description"></meta>
+        <meta content="{{ config('app.name', 'VAOS') }} | Login to your airline" name="description">
         <!-- <link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}"> -->
         <title>
             {{ config('app.name') }} Login
@@ -46,7 +46,7 @@
         .element {
         transform: translateY(165%);
         }
-        
+
         @media (max-width: 770px) {
             
             .element {
@@ -60,7 +60,6 @@
             overflow:hidden;
             }
         }
-
         .element img {
         display: block;
         margin: auto;
@@ -68,7 +67,7 @@
     </style>
 </head>
 
-    <body class="noscroll">
+    <body class="noscroll clearfix">
         <div class="container-fluid" style="height: 100% !important;">
             <div class="row">
                 <div class="col-md-8 element">
@@ -162,13 +161,6 @@
         </script>
         <script>
             $(' body ').css('top ', -(document.documentElement.scrollTop) + 'px ').addClass('noscroll ');
-        </script>
-         <script type="text/javascript">
-            //target the entire page, and listen for touch events
-        $('html, body').on('touchstart touchmove', function(e){ 
-        //prevent native touch activity like scrolling
-        e.preventDefault(); 
-            });
         </script>
     </body>
 </html>
