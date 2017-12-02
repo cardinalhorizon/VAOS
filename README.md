@@ -27,9 +27,14 @@ Head over to the VAOS wiki to get started with the full installation guide for s
 * [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Installation-Guide)
 
 # Donations
-Donations are greatly appreciated and go towards further development of VAOS and hopefully getting us out of beta faster.
+Donations are greatly appreciated and go towards further development of VAOS. As of November 2017, we officially sell MERCH!
+VAOS Limited Edition Powerbank: https://www.ebay.ie/itm/VAOS-2200mAh-Power-bank/192367708834
+VAOS Mug: (Coming Soon)
+VAOS Pen: (Coming Soon)
+VAOS T-Shirt: (Coming Soon)
+VAOS Hoodie: (Coming Soon)
 
 Send donations to taylorbroad@gmail.com via. PayPal
 
 # Current Release Version
-##### version 1.0
+##### version 1.3a
