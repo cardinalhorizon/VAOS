@@ -47,21 +47,7 @@
                                 @else
                                     <td>N/A</td>
                                 @endif
-                                <td>{{$a->icao}}</td>
-                                <td>{{$a->manufacturer}}</td>
-                                <td>{{$a->name}}</td>
-                                <td>{{$a->registration}}</td>
-                                @if($a->hub == null)
-                                    <td>Not Assigned</td>
-                                @else
-                                    <td>{{$a->hub->icao}}</td>
-                                @endif
-                                @if($a->location == null)
-                                    <td>N/A</td>
-                                @else
-                                    <td>{{$a->location->icao}}</td>
-                                @endif
-
+                                <td>{{$a->airport->icao}}</td>
                                 <td>
                                     <a href="{{ url('/admin/fleet/'.$a->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
                                 </td>

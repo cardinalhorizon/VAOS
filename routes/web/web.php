@@ -21,7 +21,7 @@ Auth::routes();
 //
 // Pilot Center
 
-Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' => ['auth', 'App\Http\Middleware\ActiveAccountCheck']], function() {
     Route::get('/', 'CrewOpsController@index');
     Route::post('/settings', 'CrewOpsController@profileUpdate');
     Route::get('/settings', 'CrewOpsController@profileEdit');

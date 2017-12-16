@@ -95,7 +95,6 @@
                             <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count(Auth::user()->pirep) }}</div></div></li>
                             <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', Auth::user()->id)->avg('landingrate') }}</div></div></li>
                         </ul>
-                        <a class="btn blue" href="https://tfdidesign.com/smartcars/app.php?action=download&airlineid=605&language=en-US" role="button">Download smartCARS</a>
                     </div>
                 </div>
             </div>

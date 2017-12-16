@@ -120,6 +120,11 @@ class UsersController extends Controller
             $user->ivao = null;
         }
 
+        if($request->admin)
+            $user->admin = $request->admin;
+        else
+            $user->admin = $request->admin;
+        $user->status = $request->status;
         $user->save();
 
         $request->session()->flash('user_updated', true);

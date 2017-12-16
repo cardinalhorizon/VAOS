@@ -63,7 +63,18 @@
                         <label>Avatar URL</label>
                         <input type="text" class="form-control" name="avatar_url" value="{{ $user->avatar_url }}">
                     </div>
-
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="status" name="status" class="form-control" size="1">
+                            <option value="0" @if($user->status == 0) selected="selected" @endif>Pending</option>
+                            <option value="1" @if($user->status == 1) selected="selected" @endif>Active</option>
+                            <option value="2" @if($user->status == 2) selected="selected" @endif>Retired</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin</label>
+                        <input type="checkbox" id="enabled" name="admin" @if($user->admin) checked="checked" @endif value="1">
+                    </div>
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <button type="submit" class="btn btn-primary">Update</button>
