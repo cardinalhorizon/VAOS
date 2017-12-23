@@ -120,10 +120,11 @@ class UsersController extends Controller
             $user->ivao = null;
         }
 
-        if($request->admin)
-            $user->admin = $request->admin;
+        if($request->admin == 1)
+            $user->admin = $request->true;
         else
-            $user->admin = $request->admin;
+            $user->admin = false;
+        
         $user->status = $request->status;
         $user->save();
 
