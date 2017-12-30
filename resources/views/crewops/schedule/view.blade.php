@@ -68,7 +68,7 @@
     </div>
     <!-- Search Modal -->
     <div id="modalsearch" class="modal">
-        <form action="{{ url('/schedule') }}" method="GET">
+        <form action="{{ url('/flightops/schedule') }}" method="GET">
             <div class="modal-content">
                 <h4>Search Routes</h4>
                 <div class="row" style="margin-bottom: 0;">
