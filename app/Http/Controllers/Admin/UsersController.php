@@ -121,9 +121,9 @@ class UsersController extends Controller
         }
 
         if($request->admin == 1)
-            $user->admin = $request->true;
+            $user->admin = $request->admin;
         else
-            $user->admin = false;
+            $user->admin = 0;
         
         $user->status = $request->status;
         $user->save();
