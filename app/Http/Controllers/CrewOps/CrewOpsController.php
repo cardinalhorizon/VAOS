@@ -137,7 +137,8 @@ class CrewOpsController extends Controller
         $pirep->flightnum = $flightinfo->flightnum;
         $pirep->flighttime = "0";
         $pirep->distance = 0;
-        $pirep->route = "Manually Filed";
+        $pirep->route = "N/A";
+        $pirep->acars_client = "manual";
         $pirep->status = 0;
         $pirep->landingrate = $request->input('landingrate');
 
