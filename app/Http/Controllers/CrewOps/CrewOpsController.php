@@ -135,6 +135,8 @@ class CrewOpsController extends Controller
         $pirep->depapt()->associate($flightinfo->depapt_id);
         $pirep->arrapt()->associate($flightinfo->arrapt_id);
         $pirep->flightnum = $flightinfo->flightnum;
+        $pirep->flighttime = "0";
+        $pirep->distance = 0;
         $pirep->route = "Manually Filed";
         $pirep->status = 0;
         $pirep->landingrate = $request->input('landingrate');
