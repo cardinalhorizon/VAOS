@@ -3,25 +3,26 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 10/24/16
- * Time: 12:58 AM
+ * Time: 12:58 AM.
  */
 
 namespace App\Classes;
 
-use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Models\Aircraft;
 use App\Models\Airport;
+use App\Models\Aircraft;
+use App\Models\AircraftGroup;
 
 /**
- * Aircraft Data Class for system handling
- * @package App\Classes
+ * Aircraft Data Class for system handling.
  */
 class VAOS_Aircraft
 {
     /**
      * Creates a new aircraft within the database. Passes an array.
+     *
      * @param $data
+     *
      * @return bool
      */
     public static function createAircraft($data)
@@ -29,65 +30,61 @@ class VAOS_Aircraft
         $acf = new Aircraft();
         //try
         //{
-            $acf->icao = $data['icao'];
-            $acf->name = $data['name'];
-            $acf->manufacturer = $data['manufacturer'];
-            $acf->registration = $data['registration'];
-            $acf->range = $data['range'];
-            $acf->maxpax = $data['maxpax'];
-            $acf->maxgw = $data['maxgw'];
-            $acf->status = $data['status'];
+        $acf->icao         = $data['icao'];
+        $acf->name         = $data['name'];
+        $acf->manufacturer = $data['manufacturer'];
+        $acf->registration = $data['registration'];
+        $acf->range        = $data['range'];
+        $acf->maxpax       = $data['maxpax'];
+        $acf->maxgw        = $data['maxgw'];
+        $acf->status       = $data['status'];
 
-            // time for the optional stuff
+        // time for the optional stuff
 
-            // If we have a hub, assiciate it.
-            if (array_key_exists('hub', $data)) {
-                $hub = Airport::find($data['hub']);
-                $acf->hub()->associate($hub);
+        // If we have a hub, assiciate it.
+        if (array_key_exists('hub', $data)) {
+            $hub = Airport::find($data['hub']);
+            $acf->hub()->associate($hub);
 
-                // and while we're at it, lets set that as the current location
+            // and while we're at it, lets set that as the current location
 
-                $acf->location()->associate($hub);
-            }
-            if (array_key_exists('airline', $data)) {
-                $air = Airline::where('icao', $data['airline'])->first();
+            $acf->location()->associate($hub);
+        }
+        if (array_key_exists('airline', $data)) {
+            $air = Airline::where('icao', $data['airline'])->first();
 
-                $acf->airline()->associate($air);
-            }
+            $acf->airline()->associate($air);
+        }
 
-            // Now the extremely fun part. Figuring out the aircraft group.
-            // Aircraft Groups are both User Defined and System Defined.
-            // First, we want to check if there is an aircraft group that already exists for this type.
+        // Now the extremely fun part. Figuring out the aircraft group.
+        // Aircraft Groups are both User Defined and System Defined.
+        // First, we want to check if there is an aircraft group that already exists for this type.
         //dd($acf);
-            $acf->save();
-            if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first() === null )
-            {
-                // We didn't find it so lets create one real quick
-                $group = new AircraftGroup([
-                    'name' => $data['name'],
-                    'icao' => $data['icao'],
-                    'userdefined' => false
+        $acf->save();
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first() === null) {
+            // We didn't find it so lets create one real quick
+            $group = new AircraftGroup([
+                    'name'        => $data['name'],
+                    'icao'        => $data['icao'],
+                    'userdefined' => false,
                 ]);
-                // now lets associate the aircraft with the new group.
-                $group->save();
-            }
-            else
-            {
-                $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
-            }
-            $acf->aircraft_group()->attach($group);
-            //
-            // Now that is done, lets check if we want to add it to a user defined group.
-            if (array_key_exists('group', $data))
-            {
-                $acf->aircraft_group()->attach($data['group']);
-            }
+            // now lets associate the aircraft with the new group.
+            $group->save();
+        } else {
+            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first();
+        }
+        $acf->aircraft_group()->attach($group);
+        //
+        // Now that is done, lets check if we want to add it to a user defined group.
+        if (array_key_exists('group', $data)) {
+            $acf->aircraft_group()->attach($data['group']);
+        }
 
-            // finally save the entire stack
+        // finally save the entire stack
 
-            $acf->save();
+        $acf->save();
 
-            return true;
+        return true;
         //}
         //catch (\Exception $e)
         //{
@@ -101,14 +98,14 @@ class VAOS_Aircraft
         //try
         //{
 
-        $acf->icao = $data['icao'];
-        $acf->name = $data['name'];
+        $acf->icao         = $data['icao'];
+        $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->range = $data['range'];
-        $acf->maxpax = $data['maxpax'];
-        $acf->maxgw = $data['maxgw'];
-        $acf->status = $data['status'];
+        $acf->range        = $data['range'];
+        $acf->maxpax       = $data['maxpax'];
+        $acf->maxgw        = $data['maxgw'];
+        $acf->status       = $data['status'];
 
         // time for the optional stuff
         $air = null;
@@ -131,21 +128,18 @@ class VAOS_Aircraft
         // Aircraft Groups are both User Defined and System Defined.
         // First, we want to check if there is an aircraft group that already exists for this type.
         $acf->save();
-        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false, 'airline_id' => $air ])->first() === null )
-        {
+        if (AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false, 'airline_id' => $air])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
-                'name' => $data['name'],
-                'icao' => $data['icao'],
-                'airline_id' => $air->id,
-                'userdefined' => false
+                'name'        => $data['name'],
+                'icao'        => $data['icao'],
+                'airline_id'  => $air->id,
+                'userdefined' => false,
             ]);
             // now lets associate the aircraft with the new group.
             $group->save();
-        }
-        else
-        {
-            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false ])->first();
+        } else {
+            $group = AircraftGroup::where(['icao' => $data['icao'], 'userdefined' => false])->first();
         }
 
         // Detach all existing aircraft group associations
@@ -155,8 +149,7 @@ class VAOS_Aircraft
         $acf->aircraft_group()->attach($group);
         //
         // Now that is done, lets check if we want to add it to a user defined group.
-        if (array_key_exists('group', $data))
-        {
+        if (array_key_exists('group', $data)) {
             $acf->aircraft_group()->attach($data['group']);
         }
 
@@ -171,6 +164,7 @@ class VAOS_Aircraft
         //    return false;
         //}
     }
+
     public function deleteAircraft($id)
     {
         // First remove the aircraft from the aircraft group.

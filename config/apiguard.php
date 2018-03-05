@@ -97,7 +97,7 @@ return [
         | Specify the provider that is used to authenticate users.
         |
         */
-        'auth' => Chrisbjr\ApiGuard\Providers\Auth\Illuminate::class
+        'auth' => Chrisbjr\ApiGuard\Providers\Auth\Illuminate::class,
 
     ],
 

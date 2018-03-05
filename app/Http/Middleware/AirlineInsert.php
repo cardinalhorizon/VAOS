@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Airline;
 use Closure;
+use App\Models\Airline;
 
 class AirlineInsert
 {
@@ -12,6 +12,7 @@ class AirlineInsert
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -20,12 +21,11 @@ class AirlineInsert
 
         try {
             $airline = Airline::where('url_slug', $params['airline'])->firstOrFail();
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return response()->view('error.404');
         }
         $request->attributes->add(['airline' => $airline]);
+
         return $next($request);
     }
 }

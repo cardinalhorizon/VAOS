@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('VAOS_ORG_EMAIL', 'hello@example.com'),
-        'name' => env('VAOS_ORG_NAME', 'Example'),
+        'name'    => env('VAOS_ORG_NAME', 'Example'),
     ],
 
     /*

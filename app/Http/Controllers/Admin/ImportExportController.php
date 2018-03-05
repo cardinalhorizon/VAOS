@@ -2,32 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Classes\AircraftData;
-use App\Classes\VAOS_Schedule;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Classes\AircraftData;
+use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ImportExportController extends Controller
 {
     public function getSystem(Request $request)
     {
-
     }
+
     public function postSystem(Request $request)
     {
-        if ($request->query('task') == 'import')
-        {
+        if ($request->query('task') == 'import') {
             $progress = new JobProgress([
-                'task' => 'import',
-                'slug' => 'Import VAOS System',
-                'description' => 'Uploading Workbook',
-                'totalitems' => 1,
-                'itemscompleted' => 0
+                'task'           => 'import',
+                'slug'           => 'Import VAOS System',
+                'description'    => 'Uploading Workbook',
+                'totalitems'     => 1,
+                'itemscompleted' => 0,
                 ]);
 
             // Import the File to the file system
@@ -35,27 +33,28 @@ class ImportExportController extends Controller
 
             // Load the Excel Import Object
             Excel::load($path, function ($reader) {
-
             });
-
         }
     }
+
     public function getAirlines(Request $request)
     {
         $path = $request->file('file')->store('data');
     }
+
     public function PostAirlines(Request $request)
     {
         $path = $request->file('file')->store('data');
     }
+
     public function getFleet(Request $request)
     {
-        return view('admin.data.import',['route' => 'fleet']);
+        return view('admin.data.import', ['route' => 'fleet']);
     }
+
     public function postFleet(Request $request)
     {
-        if ($request->query('action') == 'import')
-        {
+        if ($request->query('action') == 'import') {
             /*
             $progress = new JobProgress([
                 'task' => 'import',
@@ -73,20 +72,19 @@ class ImportExportController extends Controller
 
             $data = json_decode(Storage::get($path), true);
 
-            foreach ($data as $row)
-            {
+            foreach ($data as $row) {
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => Airline::where('icao', $row['airline'])->first(),
-                    'icao' => $row['icao'],
-                    'name' => $row['name'],
+                    'airline'      => Airline::where('icao', $row['airline'])->first(),
+                    'icao'         => $row['icao'],
+                    'name'         => $row['name'],
                     'manufacturer' => $row['manufacturer'],
                     'registration' => $row['registration'],
-                    'range' => $row['range'],
-                    'maxgw' => $row['maxgw'],
-                    'maxpax' => $row['maxpax'],
-                    'status' => $row['status']
+                    'range'        => $row['range'],
+                    'maxgw'        => $row['maxgw'],
+                    'maxpax'       => $row['maxpax'],
+                    'status'       => $row['status'],
                 ];
                 AircraftData::createAircraft($data);
             }
@@ -96,35 +94,34 @@ class ImportExportController extends Controller
             return redirect('/admin/fleet');
         }
     }
+
     public function getSchedule(Request $request)
     {
-        return view('admin.data.import',['route' => 'schedule']);
+        return view('admin.data.import', ['route' => 'schedule']);
     }
+
     public function postSchedule(Request $request)
     {
-        if ($request->query('action') == 'import')
-        {
-
+        if ($request->query('action') == 'import') {
             $path = $request->file('file')->storeAS('imports', 'schedule.json');
             //dd($path);
             // Load the Excel Import Object
             $data = json_decode(Storage::get($path), true);
-            foreach ($data as $d)
-            {
+            foreach ($data as $d) {
                 $route = [
-                    'depicao' => $d['depicao'],
-                    'arricao' => $d['arricao'],
-                    'airline' => $d['airline'],
-                    'flightnum' => $d['flightnum'],
+                    'depicao'        => $d['depicao'],
+                    'arricao'        => $d['arricao'],
+                    'airline'        => $d['airline'],
+                    'flightnum'      => $d['flightnum'],
                     'aircraft_group' => $d['aircraft_group'],
-                    'type' => $d['type'],
-                    'enabled' => $d['enabled']
+                    'type'           => $d['type'],
+                    'enabled'        => $d['enabled'],
                 ];
                 VAOS_Schedule::newRoute($route);
             }
 
             $request->session()->flash('success', 'Routes imported successfully.');
-            
+
             return redirect('/admin/schedule');
         }
     }

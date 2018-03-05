@@ -13,12 +13,12 @@ class Update104 extends Migration
      */
     public function up()
     {
-        Schema::table('airlines', function(Blueprint $table) {
+        Schema::table('airlines', function (Blueprint $table) {
             $table->boolean('autoAccept');
             $table->boolean('isAccepting');
             $table->boolean('autoAdd');
         });
-        Schema::table('airline_user', function(Blueprint $table) {
+        Schema::table('airline_user', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('airline_id');
@@ -29,14 +29,13 @@ class Update104 extends Migration
             $table->boolean('primary');
             $table->boolean('staff');
         });
-        Schema::table('aircraft_groups', function(Blueprint $table) {
+        Schema::table('aircraft_groups', function (Blueprint $table) {
             $table->unsignedInteger('airline_id');
             $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
         });
-        Schema::table('schedule_complete', function(Blueprint $table) {
+        Schema::table('schedule_complete', function (Blueprint $table) {
             $table->string('wcBidID');
         });
-
     }
 
     /**

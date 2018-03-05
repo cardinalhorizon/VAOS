@@ -3,21 +3,22 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 3/8/17
- * Time: 2:16 AM
+ * Time: 2:16 AM.
  *
  * Original file by Luke Evers
  */
 
 namespace App\Classes;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 
-class OTF_DB {
+class OTF_DB
+{
     /**
      * The name of the database we're connecting to on the fly.
      *
-     * @var string $database
+     * @var string
      */
     protected $database;
     /**
@@ -26,23 +27,24 @@ class OTF_DB {
      * @var \Illuminate\Database\Connection
      */
     protected $connection;
+
     /**
      * Create a new on the fly database connection.
      *
      * @param  array $options
+     *
      * @return void
      */
     public function __construct($options = null)
     {
         // Set the database
-        $database = $options['database'];
+        $database       = $options['database'];
         $this->database = $database;
         // Figure out the driver and get the default configuration for the driver
-        $driver  = isset($options['driver']) ? $options['driver'] : Config::get("database.default");
+        $driver  = isset($options['driver']) ? $options['driver'] : Config::get('database.default');
         $default = Config::get("database.connections.$driver");
         // Loop through our default array and update options if we have non-defaults
-        foreach($default as $item => $value)
-        {
+        foreach ($default as $item => $value) {
             $default[$item] = isset($options[$item]) ? $options[$item] : $default[$item];
         }
         // Set the temporary configuration
@@ -50,6 +52,7 @@ class OTF_DB {
         // Create the connection
         $this->connection = DB::connection($database);
     }
+
     /**
      * Get the on the fly connection.
      *
@@ -59,10 +62,12 @@ class OTF_DB {
     {
         return $this->connection;
     }
+
     /**
      * Get a table from the on the fly connection.
      *
-     * @var    string $table
+     * @var    string
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     public function getTable($table = null)

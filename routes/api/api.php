@@ -18,20 +18,17 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
     Route::post('/auth', 'AuthAPI@acarsLogin');
-    Route::group(['prefix' => '/acars'], function ()
-    {
+    Route::group(['prefix' => '/acars'], function () {
         Route::post('/posrpt', 'AcarsAPI@position');
         Route::get('/wx', 'AcarsAPI@getwx');
         Route::get('/data', 'AcarsAPI@getAcarsData');
     });
     // Airports Database Functions
-    Route::group(['prefix' => '/airports'], function ()
-    {
+    Route::group(['prefix' => '/airports'], function () {
         Route::post('/', 'AirportsAPI@add');
     });
     // Schedule System
-    Route::group(['prefix' => '/schedule'], function ()
-    {
+    Route::group(['prefix' => '/schedule'], function () {
         Route::get('/', 'ScheduleAPI@index');
         Route::get('/bid', 'BidsAPI@getBid');
         Route::post('/bid', 'BidsAPI@fileBid');
@@ -54,7 +51,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
 |
 */
 
-if (!env('VAOS_Setup')) {
+if (! env('VAOS_Setup')) {
     Route::post('/import/phpvms/user', 'Admin\InstallController@importphpVMSUser');
 }
 Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
@@ -68,6 +65,5 @@ Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
 
     // XACARS
     Route::group(['prefix' => 'xacars'], function () {
-
     });
 });

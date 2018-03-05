@@ -13,7 +13,7 @@ class CreateNewsSystem extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $t){
+        Schema::create('news', function (Blueprint $t) {
             $t->increments('id');
             $t->string('title');
             $t->string('url_slug');
