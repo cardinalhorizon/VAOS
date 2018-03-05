@@ -30,7 +30,7 @@
                                             <input placeholder="Any" list="acf" name="aircraft_group" type="text">
                                             <label>Aircraft</label>
                                             <datalist id="acf">
-                                                @foreach(App\AircraftGroup::all() as $a)
+                                                @foreach(App\Models\AircraftGroup::all() as $a)
                                                     <option value="{{ $a->icao }}">{{ $a->name }}</option>
                                                 @endforeach
                                             </datalist>
@@ -60,7 +60,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach(\App\PIREP::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
+                            @foreach(\App\Models\LogbookEntry::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
                                 <tr>
                                     <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
                                     <td>{{ $p->depapt->icao }}</td>
@@ -93,7 +93,7 @@
                         <ul class="collection with-header">
                             <li class="collection-item"><div>Join Date<div class="secondary-content">{{ date('d/m/Y', strtotime(Auth::user()->created_at)) }}</div></div></li>
                             <li class="collection-item"><div>Total Flights<div class="secondary-content">{{ count(Auth::user()->pirep) }}</div></div></li>
-                            <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\PIREP::where('user_id', Auth::user()->id)->avg('landingrate') }}</div></div></li>
+                            <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\Models\LogbookEntry::where('user_id', Auth::user()->id)->avg('landingrate') }}</div></div></li>
                         </ul>
                     </div>
                 </div>
