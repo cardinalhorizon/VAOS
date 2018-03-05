@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PIREPComment extends Model
+class LogbookComment extends Model
 {
     public $table = 'pirep_comments';
 

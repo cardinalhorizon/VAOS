@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class ScheduleTemplate extends Model
 
     public function airline()
     {
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Models\Airline');
     }
     public function depapt()
     {
@@ -22,7 +22,11 @@ class ScheduleTemplate extends Model
     }
     public function aircraft_group()
     {
-        return $this->belongsTo('App\AircraftGroup');
+        return $this->belongsToMany('App\Models\AircraftGroup');
+    }
+    public function aircraft()
+    {
+        return $this->belongsToMany('App\Models\Aircraft');
     }
     // Eloquent Eger Loading Helper
     public static function allFK()

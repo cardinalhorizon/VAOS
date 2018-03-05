@@ -1,13 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PIREP extends Model
+class Bid extends Model
 {
-    protected $guarded = [];
-    public $table = 'pireps';
+    public $table = 'schedule_complete';
+
+    protected $guarded = [
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');

@@ -1,16 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bid extends Model
+class LogbookEntry extends Model
 {
-    public $table = 'schedule_complete';
-
-    protected $guarded = [
-    ];
-
+    protected $guarded = [];
+    public $table = 'pireps';
     public function user()
     {
         return $this->belongsTo('App\User');
