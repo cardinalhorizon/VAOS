@@ -35,7 +35,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
         Route::get('/', 'ScheduleAPI@index');
         Route::get('/bid', 'BidsAPI@getBid');
         Route::post('/bid', 'BidsAPI@fileBid');
-        //Route::post('/', 'ScheduleAPI@add');
+        Route::post('/', 'ScheduleAPI@add');
     });
     Route::get('/bids', 'BidsAPI@getBid');
     Route::post('/pireps', 'PIREPAPI@filePIREP');
@@ -54,6 +54,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
 |
 */
 
+if (!env('VAOS_Setup')) {
+    Route::post('/import/phpvms/user', 'Admin\InstallController@importphpVMSUser');
+}
 Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
 
     // smartCARS 2
