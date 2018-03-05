@@ -10,7 +10,7 @@ class Aircraft extends Model
 
     public function hub()
     {
-        return $this->belongsTo('App\Hub');
+        return $this->belongsTo('App\Models\Hub');
     }
     public function location()
     {
@@ -18,10 +18,10 @@ class Aircraft extends Model
     }
     public function airline()
     {
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Models\Airline');
     }
     public function aircraft_group()
     {
-        return $this->belongsToMany('App\AircraftGroup', 'aircraft_group_pivot');
+        return $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_pivot');
     }
 }

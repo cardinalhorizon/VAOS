@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,5 +14,9 @@ class AircraftGroup extends Model
     public function aircraft()
     {
         return $this->belongsToMany('App\Models\Aircraft', 'aircraft_group_pivot');
+    }
+    public function airline()
+    {
+        return $this->belongsTo('App\Models\Airline');
     }
 }
