@@ -9,11 +9,11 @@
 namespace App\Classes;
 
 
-use App\AircraftGroup;
+use App\Models\AircraftGroup;
 use App\Models\Airport;
-use App\Airline;
-use App\ScheduleComplete;
-use App\ScheduleTemplate;
+use App\Models\Airline;
+use App\Models\Bid as ScheduleComplete;
+use App\Models\ScheduleTemplate;
 use Carbon\Carbon;
 
 class VAOS_Schedule
