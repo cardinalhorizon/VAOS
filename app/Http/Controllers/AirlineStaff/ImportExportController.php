@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AirlineStaff;
 
-use App\Models\AircraftGroup;
-use App\Models\Airline;
+use App\AircraftGroup;
+use App\Airline;
 use App\Classes\AircraftData;
 use App\Classes\VAOS_Schedule;
 use App\Models\JobProgress;

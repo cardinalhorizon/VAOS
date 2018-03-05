@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Config;
-use Brotzka\DotenvEditor\DotenvEditor as Env;
 use App\User;
 use Illuminate\Support\Facades\Session;
 
@@ -27,7 +25,7 @@ class InstallController extends Controller {
         return view('install.settings')->with('data', $data);
       }
       else {
-        return view('install.start');
+        return view('install.welcome');
       }
     }
     else {
@@ -148,6 +146,9 @@ class InstallController extends Controller {
     $aircraft = $oldDB->getTable('aircraft')->get();
     $aircraft = $oldDB->getTable('aircraft')->get();
     $aircraft = $oldDB->getTable('aircraft')->get();
+  }
+  public function importSystem(Request $request) {
+
   }
   public function dbMigrate(Request $request)
   {

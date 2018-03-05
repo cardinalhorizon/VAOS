@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AirlineStaff;
 
 use App\Classes\VAOS_Aircraft;
 use App\Models\Aircraft;
 use Illuminate\Http\Request;
-use App\Models\Airline;
-use App\Models\AircraftGroup;
+use App\Airline;
+use App\AircraftGroup;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 

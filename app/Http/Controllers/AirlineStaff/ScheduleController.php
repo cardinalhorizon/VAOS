@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AirlineStaff;
 
 use App\Models\AircraftGroup;
 use App\Models\Airline;
@@ -19,13 +19,10 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($airline)
     {
         // Load all the schedules within the database
-        $schedules = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
-
-        //$schedules = ScheduleTemplate::all();
-        //dd($schedules);
+        $schedules = ScheduleTemplate::where('airline_id', $airline)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
         // Return the view
         return view('admin.schedules.view', ['schedules' => $schedules]);
         //return $schedules;

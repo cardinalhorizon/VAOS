@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AirlineStaff;
 
-use App\Models\LogbookEntry as PIREP;
+use App\PIREP;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

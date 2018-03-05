@@ -13,9 +13,31 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        'App\Events\PirepFiled' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
         ],
+        'App\Events\BidRequested' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
+        ],
+        'App\Events\BidModified' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
+        ],
+        'App\Events\BidRemoved' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
+        ],
+        'App\Events\AirlineEventPublished' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
+        ],
+        'App\Events\AirineEventDispatched' => [
+            'App\Listeners\DiscordNotification',
+            'App\Listeners\EmailNotification'
+        ],
+
     ];
 
     /**

@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\AirlineStaff;
 
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserGroupsController extends Controller
+class BidsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($airline)
     {
         //
     }
@@ -24,7 +22,7 @@ class UserGroupsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($airline)
     {
         //
     }
@@ -35,7 +33,7 @@ class UserGroupsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($airline, Request $request)
     {
         //
     }
@@ -46,7 +44,7 @@ class UserGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($airline, $id)
     {
         //
     }
@@ -57,7 +55,7 @@ class UserGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($airline, $id)
     {
         //
     }
@@ -69,7 +67,7 @@ class UserGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($airline, Request $request, $id)
     {
         //
     }
@@ -80,7 +78,7 @@ class UserGroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($airline, $id)
     {
         //
     }

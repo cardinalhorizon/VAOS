@@ -30,10 +30,14 @@ class User extends Authenticatable
 
     public function pirep()
     {
-        return $this->hasMany('App\PIREP');
+        return $this->hasMany('App\Models\LogbookEntry');
     }
     public function group()
     {
         return $this->belongsToMany('App\Models\Group');
+    }
+    public function airlines()
+    {
+        return $this->belongsToMany('App\Models\Airline')->withPivot('pilot_id', 'status', 'primary', 'admin');
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\CrewOps;
 
-use App\AircraftGroup;
-use App\Airline;
-use App\Bid;
+use App\Models\AircraftGroup;
+use App\Models\Airline;
+use App\Models\Bid;
 use App\Models\Aircraft;
 use App\Models\Airport;
-use App\PIREP;
-use App\ScheduleTemplate;
+use App\Models\LogbookEntry as PIREP;
+use App\Models\ScheduleTemplate;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
