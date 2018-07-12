@@ -13,7 +13,7 @@ class AddAcarsClientColumn extends Migration
      */
     public function up()
     {
-        Schema::table('pireps', function (Blueprint $table) {
+        Schema::table('flights', function (Blueprint $table) {
             $table->string('acars_client');
             $table->string('fuel_used')->nullable();
         });

@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => env('MAIL_DRIVER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('VAOS_ORG_EMAIL', 'hello@example.com'),
-        'name' => env('VAOS_ORG_NAME', 'Example'),
+        'address' => env('VAOS_ORG_EMAIL', 'noreply@flyspark.org'),
+        'name' => env('VAOS_ORG_NAME', 'Spark Virtual'),
     ],
 
     /*

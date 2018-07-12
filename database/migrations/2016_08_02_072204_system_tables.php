@@ -24,14 +24,7 @@ class SystemTables extends Migration
         	$table->longText('data')->nullable(); //JSON Data for All gate information for the system.
             $table->softDeletes();
         });
-        Schema::create('settings', function (Blueprint $table) {
-        	$table->increments('id');
-        	$table->string('friendlyname');
-        	$table->string('name');
-        	$table->string('value');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+
         Schema::create('airlines', function (Blueprint $table) {
             $table->increments('id');
             $table->string('icao');
@@ -60,15 +53,6 @@ class SystemTables extends Migration
             $table->string('apikey', 64);
             $table->timestamps();
         });
-        // ACARS Global Sessions Table (Unused)
-        Schema::create('acars_sessions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('session', 64);
-            $table->timestamps();
-            $table->softDeletes();
-        });
 
         Schema::create('aircraft_groups', function (Blueprint $table) {
             $table->increments('id');
@@ -84,9 +68,6 @@ class SystemTables extends Migration
             $table->string('name');
             $table->string('manufacturer');
             $table->string('registration');
-            $table->integer('range')->nullable();
-            $table->integer('maxpax')->nullable();
-            $table->integer('maxgw')->nullable();
             $table->integer('status');
             $table->integer('hub_id')->unsigned()->nullable();
             $table->foreign('hub_id')->references('id')->on('airports')->onDelete('set null');
@@ -108,7 +89,7 @@ class SystemTables extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('schedule_templates', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('airline_id')->unsigned();
             $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
@@ -133,12 +114,12 @@ class SystemTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::create('schedule_complete', function (Blueprint $table) {
+        Schema::create('flights', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('fo_id')->unsigned()->nullable();
-            $table->foreign('fo_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('fo_id')->references('id')->on('users')->onDelete('set null');
             $table->integer('airline_id')->unsigned();
             $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
             $table->string('flightnum');
@@ -153,46 +134,24 @@ class SystemTables extends Migration
             $table->text('route')->nullable();
             $table->integer('cruise')->nullable();
             $table->text('route_data')->nullable();
+            $table->integer('landingrate')->nullable();
             $table->text('load');
             $table->time('deptime');
             $table->time('arrtime');
-            $table->timestamps();
-        });
-        Schema::create('pireps', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('airline_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('set null');
-            $table->integer('fo_id')->unsigned()->nullable();
-            $table->foreign('fo_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('flightnum');
-            $table->integer('depapt_id')->unsigned()->nullable();
-            $table->foreign('depapt_id')->references('id')->on('airports')->onDelete('set null');
-            $table->integer('arrapt_id')->unsigned()->nullable();
-            $table->foreign('arrapt_id')->references('id')->on('airports')->onDelete('set null');
-            $table->text('route');
-            $table->integer('aircraft_id')->unsigned()->nullable();
-            $table->foreign('aircraft_id')->references('id')->on('aircraft')->onDelete('set null');
-            $table->integer('finance_id')->unsigned()->nullable();
-            $table->integer('landingrate')->nullable();
-            $table->text('schedule_data')->nullable(); //JSON storage for everything else.
-            $table->text('flight_data')->nullable(); //JSON storage for Flight Telemetry
             $table->time('out')->nullable();
             $table->time('off')->nullable();
             $table->time('on')->nullable();
             $table->time('in')->nullable();
-            $table->integer('status');
             $table->timestamps();
-            $table->softDeletes();
         });
-        Schema::create('pirep_comments', function (Blueprint $table) {
+        Schema::create('flight_comments', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('pirep_id')->unsigned();
-            $table->foreign('pirep_id')->references('id')->on('pireps')->onDelete('cascade');
+            $table->integer('flight_id')->unsigned();
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('comment');
+            $table->integer('type');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -212,6 +171,6 @@ class SystemTables extends Migration
         Schema::drop('aircraft');
         Schema::drop('settings');
         Schema::drop('hubs');
-        Schema::drop('bids');
+        Schema::drop('flights');
     }
 }

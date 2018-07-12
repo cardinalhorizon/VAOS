@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\ACARSData;
 use App\Airline;
-use App\Bid;
+use App\Flight;
 use App\Models\Aircraft;
 use App\Models\Airport;
 use App\ScheduleComplete;
@@ -95,13 +95,13 @@ class AcarsAPI extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
+            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
+        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
     }
 
     /**

@@ -63,10 +63,10 @@
             <div class="card">
                 <div class="card-image" style="height:100px; overflow: hidden;">
                     <img src="http://flyjetconnect.org/img/712_1.png">
-                    <span class="card-title">Bids: {{ \App\Bid::where('user_id', Auth::user()->id)->count() }}</span>
+                    <span class="card-title">Flights: {{ \App\Flight::where('user_id', Auth::user()->id)->count() }}</span>
                 </div>
                 <div class="card-action">
-                    <a href="{{ url('/bids') }}">View Bids</a>
+                    <a href="{{ url('flights') }}">View Flights</a>
                 </div>
             </div>
         </div>
@@ -110,9 +110,9 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <select name="bid">
-                                    <option value="" disabled selected>Select Bid</option>
-                                    @foreach(App\Bid::where('user_id', Auth::user()->id)->get() as $bid)
-                                        <option value="{{ $bid->id }}">{{ $bid->airline->icao }}{{ $bid->flightnum }}</option>
+                                    <option value="" disabled selected>Select Flight</option>
+                                    @foreach(App\Flight::where('user_id', Auth::user()->id)->get() as $flight)
+                                        <option value="{{ $flight->id }}">{{ $flight->airline->icao }}{{ $flight->flightnum }}</option>
                                     @endforeach
                                 </select>
                                 <label>Bid</label>

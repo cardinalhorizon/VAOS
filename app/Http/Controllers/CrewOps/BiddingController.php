@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CrewOps;
 
-use App\Bid;
+use App\Models\Flight;
 use App\Classes\VAOS_Schedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,8 +17,8 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        $bids = Bid::where('user_id', Auth::user()->id)->with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
-        return view('crewops.bids.view', ['bids' => $bids]);
+        $flights = Flight::where('user_id', Auth::user()->id)->with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
+        return view('crewops.flights.view', ['flights' => $flights]);
     }
 
     /**
@@ -42,12 +42,12 @@ class BiddingController extends Controller
         // file the bid within the system.
         if ($request->input('aircraft_id') === null)
             // The schedule filed has a aircraft group assigned. Let the system handle it.
-            $bid = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'));
+            $flight = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'));
         else
             // No group assignment. This means an aircraft nees to be provided. Otherwise it will fail.
-            $bid = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'), $request->input('aircraft_id'));
+            $flight = VAOS_Schedule::fileBid(Auth::user()->id, $request->input('schedule_id'), $request->input('aircraft_id'));
 
-        if ($bid)
+        if ($flight)
         {
             return redirect('/flightops');
         }
@@ -61,7 +61,8 @@ class BiddingController extends Controller
      */
     public function show($id)
     {
-        //
+        $flight = Flight::with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
+        return view('crewops.flights.planning', ['flight' => $flight]);
     }
 
     /**
@@ -96,6 +97,6 @@ class BiddingController extends Controller
     public function destroy($id)
     {
         VAOS_Schedule::deleteBid($id, Auth::user()->id);
-        return redirect('/flightops/bids');
+        return redirect('/flightops/flights');
     }
 }

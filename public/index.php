@@ -6,7 +6,7 @@
  * @package  VAOS
  * @author   Taylor Broad
  */
-
+header("Access-Control-Allow-Origin: *");
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

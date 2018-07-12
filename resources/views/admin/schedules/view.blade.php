@@ -56,7 +56,11 @@
                         @if($s->aircraft_group == null)
                         <td>Not Assigned</td>
                         @else
-                            <td>{{$s->aircraft_group->name}}</td>
+                            <td>
+                                @foreach($s->aircraft_group as $acf)
+                                    {{$s->icao}}
+                                @endforeach
+                            </td>
                         @endif
                         @if($s->seasonal == '1')
                             <td>Yes</td>

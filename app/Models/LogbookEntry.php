@@ -14,7 +14,7 @@ class LogbookEntry extends Model
     }
     public function airline()
     {
-        return $this->belongsTo('App\Airline');
+        return $this->belongsTo('App\Models\Airline');
     }
     public function depapt()
     {
@@ -27,5 +27,9 @@ class LogbookEntry extends Model
     public function aircraft()
     {
         return $this->belongsTo('App\Models\Aircraft');
+    }
+    public function acarsdata()
+    {
+        return $this->hasMany('App\Models\ACARSData');
     }
 }

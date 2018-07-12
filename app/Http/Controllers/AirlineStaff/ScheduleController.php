@@ -5,7 +5,7 @@ namespace App\Http\Controllers\AirlineStaff;
 use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Classes\VAOS_Schedule;
-use App\Models\ScheduleTemplate;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,7 +22,7 @@ class ScheduleController extends Controller
     public function index($airline)
     {
         // Load all the schedules within the database
-        $schedules = ScheduleTemplate::where('airline_id', $airline)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
+        $schedules = Schedule::where('airline_id', $airline)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
         // Return the view
         return view('admin.schedules.view', ['schedules' => $schedules]);
         //return $schedules;
@@ -77,7 +77,7 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        $schedule = ScheduleTemplate::findOrFail($id);
+        $schedule = Schedule::findOrFail($id);
 
         $airlines = Airline::all();
         $acfgroups = AircraftGroup::all();
@@ -109,7 +109,7 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         // Delete the route from the system
-        ScheduleTemplate::destroy($id);
+        Schedule::destroy($id);
         return redirect('/admin/schedule');
     }
 }

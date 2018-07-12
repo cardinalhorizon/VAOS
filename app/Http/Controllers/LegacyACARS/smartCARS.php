@@ -4,13 +4,12 @@ namespace App\Http\Controllers\LegacyACARS;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Airline;
+use App\Models\Airline;
 use App\User;
-use App\Bid;
-use App\PIREP;
-use App\ACARSData;
-use App\PIREPComment;
-use App\Models\Legacy;
+use App\Models\Flight;
+use App\Models\ACARSData;
+use App\Models\FlightComment;
+use Illuminate\Support\Facades\DB;
 
 
 class smartCARS extends Controller
@@ -28,28 +27,18 @@ class smartCARS extends Controller
         // TODO: Check Auto Accept PIREP Values
 
         // TODO: Add PIREP To Database
-        $pirep = new PIREP();
 
         // first let's retrieve the original bid from the database and enter in all the values\
 
-        $pirep->user()->associate($request->input('pilotid'));
         // This is a legacy ACARS client. Treat it with respect, they won't be around
         // for too much longer. All we need is the user data, flight info and we are all set
-        $flightinfo = Bid::find($request->input('legacyroute'));
-        $pirep->airline()->associate($flightinfo->airline_id);
-        $pirep->aircraft()->associate($flightinfo->aircraft_id);
-        $pirep->depapt()->associate($flightinfo->depapt_id);
-        $pirep->arrapt()->associate($flightinfo->arrapt_id);
-        $pirep->flightnum = $flightinfo->flightnum;
-        $pirep->route = "NOT SUPPORTED";
-        $pirep->status = 0;
-        $pirep->distance = 0;
+        $pirep = Flight::find($request->input('legacyroute'));
         $pirep->landingrate = $request->input('landingrate');
         $pirep->flighttime = $request->input('flighttime');
         $pirep->acars_client = $request->input('source');
         $pirep->fuel_used = $request->input('fuelused');
         $pirep->flight_data = $request->input('log');
-
+        $pirep->state = 2;
         // Auto Accept System
         if (env('VAOS_AA_ENABLED')) {
             if ($request->input('landingrate') >= env('VAOS_AA_LR'))
@@ -61,16 +50,12 @@ class smartCARS extends Controller
 
         $pirep->save();
         // now let's take care of comments.
-        $comment = new PIREPComment();
+        $comment = new FlightComment();
 
         $comment->user()->associate($request->input('pilotid'));
-        $comment->pirep()->associate($pirep);
+        $comment->flight()->associate($pirep);
         $comment->comment = $request->input('comment');
         $comment->save();
-
-        // Time to delete the bid from the table.
-
-        $flightinfo->delete();
 
         return response()->json([
             'status' => 200
@@ -116,7 +101,7 @@ class smartCARS extends Controller
             ]);
         }
         // find if the row exists
-        $rpt = ACARSData::firstOrNew(['bid_id' => $report['bid'], 'user_id' => $report['user']]);
+        $rpt = ACARSData::new();
         $rpt->user()->associate($report['user']);
         $rpt->bid()->associate($report['bid']);
         $rpt->lat = $report['lat'];
@@ -136,24 +121,24 @@ class smartCARS extends Controller
     }
     public function getBids($user_id)
     {
-        $bids = Bid::where('user_id', $user_id)->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
+        $flights = Flight::where(['user_id' => $user_id, ['state', '<=', 1]])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
         $export = array();
-        //dd($bids);
+        //dd($flights);
         $c = 0;
-        foreach ($bids as $bid) {
-            $export[$c]['bidid'] = $bid['id'];
-            $export[$c]['routeid'] = $bid['id'];
-            $export[$c]['code'] = $bid['airline']['icao'];
-            $export[$c]['flightnumber'] = $bid['flightnum'];
+        foreach ($flights as $flight) {
+            $export[$c]['bidid'] = $flight['id'];
+            $export[$c]['routeid'] = $flight['id'];
+            $export[$c]['code'] = $flight['airline']['icao'];
+            $export[$c]['flightnumber'] = $flight['flightnum'];
             $export[$c]['type'] = "P";
-            $export[$c]['departureicao'] = $bid['depapt']['icao'];
-            $export[$c]['arrivalicao'] = $bid['arrapt']['icao'];
-            $export[$c]['route'] = $bid['route'];
+            $export[$c]['departureicao'] = $flight['depapt']['icao'];
+            $export[$c]['arrivalicao'] = $flight['arrapt']['icao'];
+            $export[$c]['route'] = $flight['route'];
             $export[$c]['cruisingaltitude'] = "35000";
-            $export[$c]['aircraft'] = $bid['aircraft_id'];
+            $export[$c]['aircraft'] = $flight['aircraft_id'];
             $export[$c]['duration'] = '0.00';
-            $export[$c]['departuretime'] = $bid['deptime'];
-            $export[$c]['arrivaltime'] = $bid['arrtime'];
+            $export[$c]['departuretime'] = $flight['deptime'];
+            $export[$c]['arrivaltime'] = $flight['arrtime'];
             $export[$c]['load'] = '0';
             $export[$c]['daysofweek'] = "0123456";
             // Iterate through the array
@@ -180,13 +165,13 @@ class smartCARS extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
+            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
 
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
+        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
     }
 }

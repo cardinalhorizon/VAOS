@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Bid;
-use App\ScheduleTemplate;
-use App\ScheduleComplete;
+use App\Models\Flight;
+use App\Models\Schedule;
+use App\Models\ScheduleComplete;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\AircraftGroup;
+use App\Models\AircraftGroup;
 use App\Models\Legacy;
 use App\Classes\VAOSHelpers;
-use App\Airline;
+use App\Models\Airline;
 
 use Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher;
 
@@ -21,18 +21,18 @@ class BidsAPI extends Controller
     public function getBid(Request $request)
     {
         // Ok lets find out if we can find the bid
-        $bids = ScheduleComplete::where('user_id', $request->query('userid'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
+        $flights = ScheduleComplete::where('user_id', $request->query('userid'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
         if ($request->query('format') == "xacars")
         {
             $user = User::where('username', $request->query('username'))->first();
-            $bid = self::getProperFlightNum($request->query('flightnum'), $user->id);
+            $flight = self::getProperFlightNum($request->query('flightnum'), $user->id);
 
             return response()->json([
                 'status' => 200,
-                'bid' => $bid
+                'bid' => $flight
             ]);
         }
-        if ($bids === null)
+        if ($flights === null)
         {
             // We didn't find shit for that user. Return a 404
             return json_encode([
@@ -42,13 +42,13 @@ class BidsAPI extends Controller
         // Ok now lets do a general query
         return response()->json([
             'status' => 200,
-            'bids' => $bids
+            'flights' => $flights
         ]);
     }
     public function fileBid(Request $request)
     {
-        $template = ScheduleTemplate::where('id', $request->input('schedule_id'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
-        //$template = ScheduleTemplate::where('id', $request->query('schedule_id'))->first();
+        $template = Schedule::where('id', $request->input('schedule_id'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
+        //$template = Schedule::where('id', $request->query('schedule_id'))->first();
         // Now let's turn the aircraft group into a assigned aircraft.
         // Let's start by getting the group's assigned aircraft list.
         if ($template->aircraft_group_id != null)
@@ -89,47 +89,16 @@ class BidsAPI extends Controller
         $complete->load = 0;
         $complete->save();
 
-        if (env('LEGACY_SUPPORT'))
-        {
-            // Add the schedule template into the legacy table
-            $legacy = Legacy\Schedule::firstOrNew(['code' => $template->airline->icao, 'flightnum' => $template->flightnum]);
-            $legacy->code = $template->airline->icao;
-            $legacy->flightnum = $template->flightnum;
-            $legacy->depicao = $template->depapt->icao;
-            $legacy->arricao = $template->arrapt->icao;
-            if ($template->route = null)
-                $legacy->route = $template->route;
-            else
-                $legacy->route = "NO ROUTE";
-            $legacy->aircraft = $acfgrp->aircraft[0]->id;
-            $legacy->distance = VAOSHelpers::getDistance($template->depapt->lat, $template->depapt->lon, $template->arrapt->lat, $template->arrapt->lon, "M");
-            $legacy->deptime = Carbon::now()->toTimeString();
-            $legacy->arrtime = Carbon::now()->addHours(2)->toTimeString();
-            $legacy->flighttime = "0";
-            $legacy->notes = "VAOS GENERATED ROUTE";
-            $legacy->route_details = "{[]}";
-            $legacy->flightlevel = "35000";
-            $legacy->enabled = 1;
-            $legacy->price = 175;
-            $legacy->flighttype = "P";
-            $legacy->daysofweek = "0123456";
-            $legacy->save();
 
-            // Now let's add the bid appropriately
-
-            $legacybid = new Legacy\Bid();
-            $legacybid->pilotid = $request->input('userid');
-            $legacybid->routeid = $legacy->id;
-            $legacybid->dateadded = Carbon::now();
-            $legacybid->save();
-
-            $legacy->bidid = $legacybid->id;
-            $legacy->save();
-        }
 
         return response()->json([
             'status' => 200
         ]);
+    }
+    public function view($id)
+    {
+        $flight = Flight::with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
+        return response()->json($flight);
     }
     private static function getProperFlightNum($flightnum, $userid) {
         if ($flightnum == '') return false;
@@ -150,12 +119,12 @@ class BidsAPI extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
+            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
+        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
 }

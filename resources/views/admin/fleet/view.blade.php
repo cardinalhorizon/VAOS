@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin2')
 @section('head')
     <link href="{{URL::asset('https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('/crewops/vendor/datatables-responsive/dataTables.responsive.css')}}" rel="stylesheet">
@@ -11,6 +11,91 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Combined All Table
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive-sm table-bordered table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>Registration</th>
+                            <th>Airline</th>
+                            <th>Manufacturer</th>
+                            <th>ICAO</th>
+                            <th>Model</th>
+                            <th>Hub</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($fleet as $a)
+                            <tr>
+                                <td>{{$a->registration}}</td>
+                                @if($a->airline != null)
+                                    <td>{{$a->airline->icao}}</td>
+                                @else
+                                    <td>N/A</td>
+                                @endif
+                                <td>{{$a->manufacturer}}</td>
+                                <td>{{$a->icao}}</td>
+                                <td>{{$a->name}}</td>
+                                @if($a->hub == null)
+                                    <td>Not Assigned</td>
+                                @else
+                                    <td>{{$a->hub->icao}}</td>
+                                @endif
+                                @if($a->location == null)
+                                    <td>N/A</td>
+                                @else
+                                    <td>{{$a->location->icao}}</td>
+                                @endif
+                                <td>@if($a->status == 1)
+                                        <span class="badge badge-success">Active</span>@else{{$a->status}}@endif</td>
+
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Actions">
+                                        <a href="{{ url('/admin/fleet/'.$a->id.'/edit') }}" class="btn btn-primary btn-brand"><i class="fa fa-edit"></i></a>
+                                        <button type="button" class="btn btn-secondary">Middle</button>
+                                        <button type="button" class="btn btn-secondary">Right</button>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#">Prev</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">

@@ -19,4 +19,12 @@ class AircraftGroup extends Model
     {
         return $this->belongsTo('App\Models\Airline');
     }
+    public function schedule()
+    {
+        return $this->belongsToMany('App\Models\Schedule');
+    }
+    public function isAvailable($aircraft_id)
+    {
+
+    }
 }

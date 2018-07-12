@@ -275,7 +275,7 @@ class smartCARS {
 		global $dbConnection;
 		$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_bids WHERE pilotid = ?");
 		$stmt->execute(array($dbid));
-		$bids = $stmt->fetchAll();
+		$flights = $stmt->fetchAll();
 		$stmt->closeCursor();
 		$ret = array();
 		$ret['format'] = array();
@@ -296,13 +296,13 @@ class smartCARS {
 		$ret['format']['type'] = 'flighttype';
 		$ret['format']['daysofweek'] = 'daysofweek';
 		$ret['schedules'] = array();
-		foreach($bids as $bid) {
+		foreach($flights as $flight) {
 			$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_schedule WHERE id = ?");
-			$stmt->execute(array($bid['routeid']));
+			$stmt->execute(array($flight['routeid']));
 			$schedule = $stmt->fetch();
 			$stmt->closeCursor();
 			if($schedule['id'] != "") {
-				$schedule['bidid'] = $bid['bidid'];
+				$schedule['bidid'] = $flight['bidid'];
 				//How the 'load' value works:
 				//You can give a number that will be used as the passenger or cargo number in the client and it will not be editable by the user.
 				//You can specify LOAD_TYPE_RANDOM_LOCKED that will generate a random number on the client side but will not allow editing.
@@ -312,7 +312,7 @@ class smartCARS {
 					$continue = true;
 				else {
 					$stmt = $dbConnection->prepare("SELECT * FROM smartCARS_charteredflights WHERE routeid = ? AND dbid = ?");
-					$stmt->execute(array($bid['routeid'], $dbid));
+					$stmt->execute(array($flight['routeid'], $dbid));
 					$cschedule = $stmt->fetch();
 					$stmt->closeCursor();
 					if($cschedule['routeid'] != "")
@@ -326,7 +326,7 @@ class smartCARS {
 		*/
         $client = new GuzzleHttp\Client();
 
-        $response = $client->request('GET', WEB_URL.'api/acars/smartCARS/bids/'. $dbid)->getBody();
+        $response = $client->request('GET', WEB_URL.'api/acars/smartCARS/flights/'. $dbid)->getBody();
         $jdec = json_decode($response, true);
 		//var_dump($ret);
 		return $jdec;
@@ -342,9 +342,9 @@ class smartCARS {
 			if(DISABLE_BIDS_ON_BID == true) {
 				$stmt = $dbConnection->prepare("SELECT * FROM " . TABLE_PREFIX . "legacy_bids WHERE routeid = ?");
 				$stmt->execute(array($routeid));
-				$bid = $stmt->fetch();
+				$flight = $stmt->fetch();
 				$stmt->closeCursor();
-				if($bid['bidid'] != "")
+				if($flight['bidid'] != "")
 					return 1;
 			}
 			$stmt = $dbConnection->prepare("INSERT INTO " . TABLE_PREFIX . "legacy_bids (pilotid, routeid, dateadded) VALUES (?, ?, NOW())");
@@ -355,19 +355,19 @@ class smartCARS {
 		return 2;
 	}
 	
-	static function deletebidflight($dbid, $bidid) {
+	static function deletebidflight($dbid, $flightid) {
 		global $dbConnection;
 		$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "legacy_bids WHERE bidid = ? LIMIT 1");
-		$stmt->execute(array($bidid));
+		$stmt->execute(array($flightid));
 		$stmt->closeCursor();
 		
 		$stmt = $dbConnection->prepare("SELECT * FROM smartCARS_charteredflights WHERE bidid = ? AND dbid = ?");
-		$stmt->execute(array($bidid, $dbid));
+		$stmt->execute(array($flightid, $dbid));
 		$crow = $stmt->fetch();
 		$stmt->closeCursor();
 		if($crow['routeid'] != "") {
 			$stmt = $dbConnection->prepare("DELETE FROM smartCARS_charteredflights WHERE bidid = ? AND dbid = ?");
-			$stmt->execute(array($bidid, $dbid));
+			$stmt->execute(array($flightid, $dbid));
 			$stmt->closeCursor();
 			
 			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedule WHERE id = ?");
@@ -647,14 +647,14 @@ class smartCARS {
 			$dbid,
 			$routeid
 		));		
-		$bidid = $dbConnection->lastInsertID();
+		$flightid = $dbConnection->lastInsertID();
 		$stmt->closeCursor();
 		
 		$stmt = $dbConnection->prepare("INSERT INTO smartCARS_charteredflights (routeid, dbid, bidid) VALUES (?, ?, ?)");
 		$stmt->execute(array(
 			$routeid,
 			$dbid,
-			$bidid
+			$flightid
 		));		
 		$stmt->closeCursor();
 		
@@ -739,7 +739,7 @@ class smartCARS {
         */
         return true;
 	}	
-	static function filepirep($dbid, $code, $flightnumber, $routeid, $bidid, $departureicao, $arrivalicao, $route, $aircraft, $load, $flighttime, $landingrate, $comments, $fuelused, $log) {
+	static function filepirep($dbid, $code, $flightnumber, $routeid, $flightid, $departureicao, $arrivalicao, $route, $aircraft, $load, $flighttime, $landingrate, $comments, $fuelused, $log) {
 		global $dbConnection;
 		$log = str_replace('[', '*[', $log);
 		$log = str_replace('\\r', '', $log);
@@ -753,7 +753,7 @@ class smartCARS {
             'route' => $route,
             'aircraft' => $aircraft,
 			'legacyroute' => $routeid,
-			'legacybid' => $bidid,
+			'legacybid' => $flightid,
             'load' => $load,
             'flighttime' => $flighttime,
             'landingrate' => $landingrate,
@@ -784,12 +784,12 @@ class smartCARS {
         }
         /*
 		$stmt = $dbConnection->prepare("SELECT * FROM smartCARS_charteredflights WHERE bidid = ? AND dbid = ?");
-		$stmt->execute(array($bidid, $dbid));
+		$stmt->execute(array($flightid, $dbid));
 		$crow = $stmt->fetch();
 		$stmt->closeCursor();
 		if($crow['routeid'] != "") {
 			$stmt = $dbConnection->prepare("DELETE FROM smartCARS_charteredflights WHERE bidid = ? AND dbid = ?");
-			$stmt->execute(array($bidid, $dbid));
+			$stmt->execute(array($flightid, $dbid));
 			$stmt->closeCursor();
 			
 			$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "schedule WHERE id = ?");
@@ -803,8 +803,8 @@ class smartCARS {
 		$stmt = $dbConnection->prepare("UPDATE " . TABLE_PREFIX . "acarsdata SET gs = 0, distremain = 0, timeremaining = '0:00', phasedetail = 'Arrived', arrtime = CURRENT_TIMESTAMP WHERE pilotid = ?");
 		$stmt->execute(array($dbid));		    
 
-		$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "bids WHERE pilotid = ? AND bidid = ?");
-		$stmt->execute(array($dbid, $bidid));
+		$stmt = $dbConnection->prepare("DELETE FROM " . TABLE_PREFIX . "flights WHERE pilotid = ? AND bidid = ?");
+		$stmt->execute(array($dbid, $flightid));
 		return true;
         */
 	}

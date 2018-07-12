@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Classes\VATSIMData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         Commands\InstallphpVMSTables::class,
-        Commands\VAOSNewAirline::class
+        Commands\VAOSNewAirline::class,
+        Commands\VatsimStatus::class
     ];
 
     /**
@@ -28,6 +30,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('vaos:vatsimstatus')->everyFiveMinutes();
     }
 
     /**

@@ -32,13 +32,6 @@ class AddUserGroups extends Migration
             $table->boolean('primary');
             $table->timestamps();
         });
-        Schema::create('user_group_aircraft_groups', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('group_id')->unsigned()->nullable();
-            $table->integer('aircraft_group_id')->unsigned()->nullable();
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('set null');
-            $table->foreign('aircraft_group_id')->references('id')->on('aircraft_groups')->onDelete('set null');
-        });
     }
 
     /**
@@ -48,8 +41,7 @@ class AddUserGroups extends Migration
      */
     public function down()
     {
-        //
-        Schema::drop('user_group_aircraft_groups');
+
         Schema::drop('groups');
         Schema::drop('user_group');
     }

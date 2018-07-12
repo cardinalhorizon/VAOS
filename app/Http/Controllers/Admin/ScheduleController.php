@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Classes\VAOS_Schedule;
-use App\Models\ScheduleTemplate;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,9 +22,9 @@ class ScheduleController extends Controller
     public function index()
     {
         // Load all the schedules within the database
-        $schedules = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
+        $schedules = Schedule::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
 
-        //$schedules = ScheduleTemplate::all();
+        //$schedules = Schedule::all();
         //dd($schedules);
         // Return the view
         return view('admin.schedules.view', ['schedules' => $schedules]);
@@ -39,7 +39,8 @@ class ScheduleController extends Controller
     public function create()
     {
         $airlines = Airline::all();
-        $acfgroups = AircraftGroup::all();
+        $acfgroups = AircraftGroup::with('airline')->get();
+        //return $acfgroups;
         return view('admin.schedules.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
@@ -55,8 +56,20 @@ class ScheduleController extends Controller
         // dd($request);
         // Convert Request into Array
         $data = $request->all();
-        VAOS_Schedule::newRoute($data);
 
+        // ok let's check and set the proper id for aircraf group
+
+        VAOS_Schedule::newRoute($data);
+        if ($data['createReturn'])
+        {
+            // swap the departure and arrival and change the flight number
+            $newDep = $data['arricao'];
+            $newArr = $data['depicao'];
+            $data['depicao'] = $newDep;
+            $data['arricao'] = $newArr;
+            $data['flightnum'] = $data['returnNumber'];
+            VAOS_Schedule::newRoute($data);
+        }
         $request->session()->flash('schedule_created', true);
         return redirect('/admin/schedule');
     }
@@ -80,7 +93,7 @@ class ScheduleController extends Controller
      */
     public function edit($id)
     {
-        $schedule = ScheduleTemplate::findOrFail($id);
+        $schedule = Schedule::findOrFail($id);
 
         $airlines = Airline::all();
         $acfgroups = AircraftGroup::all();
@@ -112,7 +125,7 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         // Delete the route from the system
-        ScheduleTemplate::destroy($id);
+        Schedule::destroy($id);
         return redirect('/admin/schedule');
     }
 }

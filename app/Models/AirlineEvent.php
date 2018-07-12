@@ -8,7 +8,7 @@ class AirlineEvent extends Model
 {
     public function users()
     {
-        return $this->belongsToMany('App\User')->withPivot('status');
+        return $this->belongsToMany('App\User')->withPivot(['status', 'role']);
     }
     public function airline()
     {

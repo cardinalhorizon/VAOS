@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Classes\phpVMSLegacy;
-use App\PIREP;
-use App\PIREPComment;
+use App\Models\LogbookEntry as PIREP;
+use App\Models\LogbookComment as PIREPComment;
 use App\User;
-use App\Airline;
-use App\Bid;
+use App\Models\Airline;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -98,16 +98,18 @@ class PIREPAPI extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Bid::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
+            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
         # Invalid flight number
         $ret['code'] = '';
         $ret['flightnum'] = $flightnum;
-        return Bid::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
+        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
     public function getFlight($id)
     {
-        return PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->first();
+        $flight = PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('acarsdata')->first();
+
+        return $flight;
     }
 }

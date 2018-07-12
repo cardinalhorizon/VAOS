@@ -24,7 +24,7 @@ return [
     | version so it's called Beta 1, 2, 3... etc. !Edit, v1.0 has been released :)
     */
 
-    'version' => '1.0.3a',
+    'version' => '2.0.0b1',
 
     /*
     |--------------------------------------------------------------------------
@@ -196,6 +196,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         // RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class,
+        App\Providers\DBSettingServiceProvider::class,
 
     ],
 

@@ -123,7 +123,7 @@
                 </ul>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book"></i> PIREPs @if(\App\PIREP::where('status', 0)->count() > 0)<span class="tag tag-danger" style="margin-right: 15px; margin-top: 3px;">{{ \App\PIREP::where('status', 0)->count() }}</span>@endif</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book"></i> PIREPs @if(\App\Models\Flight::completed()->where('status', 0)->count() > 0)<span class="tag tag-danger" style="margin-right: 15px; margin-top: 3px;">{{ \App\Models\LogbookEntry::where('status', 0)->count() }}</span>@endif</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/admin/pireps') }}"><i class="fa fa-caret-right"></i> Overview</a>
@@ -140,7 +140,7 @@
                         <a class="nav-link" href="{{ url('/admin/dispatch') }}"><i class="fa fa-caret-right"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/admin/bids') }}"><i class="fa fa-caret-right"></i> Bids</a>
+                        <a class="nav-link" href="{{ url('flights') }}"><i class="fa fa-caret-right"></i> Bids</a>
                     </li>
                 </ul>
             </li>

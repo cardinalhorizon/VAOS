@@ -18,13 +18,12 @@ class AddPositionReportTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('bid_id')->unsigned();
-            $table->foreign('bid_id')->references('id')->on('schedule_complete')->onDelete('cascade');
             $table->double('lat');
             $table->double('lon');
             $table->smallInteger('heading');
             $table->string('altitude');
             $table->integer('groundspeed');
-            $table->text('phase');
+            $table->text('phase')->nullable();
             $table->text('client');
             $table->timestamps();
         });

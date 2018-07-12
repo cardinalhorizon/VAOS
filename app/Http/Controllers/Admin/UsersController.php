@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Airline;
+use App\Models\Hub;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -52,8 +54,9 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-
-        return view('admin.users.show', ['user' => $user]);
+        $airlines = Airline::all();
+        $hubs = Hub::all();
+        return view('admin.users.show', ['user' => $user, 'airlines' => $airlines, 'hubs' => $hubs]);
     }
 
     /**
@@ -94,7 +97,6 @@ class UsersController extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
 
-        $user->pilotid = $request->pilotid;
 
         if(strlen($request->cover_url) > 0) {
             $user->cover_url = $request->cover_url;
@@ -132,7 +134,25 @@ class UsersController extends Controller
 
         return redirect('admin/users/'.$id);
     }
+    public function airlineMod(Request $request, $id)
+    {
+        // first let's check to see what the action is.
+        if ($request->input('action') === "add")
+        {
+            // Ok, now let's get started. Add the user to the foreign key with the supplied info
+            $user = User::find($id);
 
+            $airline = Airline::find($request->input('airline_id'));
+
+            $user->airlines()->attach($airline, [
+                'pilot_id' => $request->input('pilotid'),
+                'hub_id' => Hub::find($id),
+                'status' => 1,
+                'primary' => false,
+                'admin' => false
+                ]);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

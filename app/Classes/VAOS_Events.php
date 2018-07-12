@@ -24,12 +24,21 @@ class VAOS_Events
             $event->max_users = $data['max_users'];
         }
         if(!isNull($data['banner_url'])) {
-            $event->max_users = $data['banner_url'];
+            $event->banner_url = $data['banner_url'];
         }
         $event->access = $data['access'];
         $event->scope = $data['scope'];
         $event->publishToNetwork = false;
 
+        if(!isNull($data['start_time'])) {
+            $event->start = $data['start_time'];
+        }
+        if(!isNull($data['type'])) {
+            $event->type = $data['type'];
+        }
+        if(!isNull($data['end_time'])) {
+            $event->end = $data['end_time'];
+        }
         $event->save();
     }
     public static function joinEvent($event_id, $user)
@@ -53,7 +62,7 @@ class VAOS_Events
     }
     public static function dispatchFlights($event_id, $user_id = null)
     {
-        // TODO: Add event flights to bids. Optional: Individual add bids to flights. Especially when dealing with a larger event.
+        // TODO: Add event flights to flights. Optional: Individual add flights to flights. Especially when dealing with a larger event.
 
     }
     public static function addEventFlight($event_id, $flightInfo)

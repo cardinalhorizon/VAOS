@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function pirep()
     {
-        return $this->hasMany('App\Models\LogbookEntry');
+        return $this->hasMany('App\Models\Flight');
     }
     public function group()
     {
@@ -39,5 +39,8 @@ class User extends Authenticatable
     public function airlines()
     {
         return $this->belongsToMany('App\Models\Airline')->withPivot('pilot_id', 'status', 'primary', 'admin');
+    }
+    public function hasAirline($airline) {
+        return $this->airlines->contains($airline);
     }
 }

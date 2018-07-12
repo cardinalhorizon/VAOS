@@ -14,23 +14,28 @@
     <div class="container">
         <div class="row">
             @foreach($airlines as $a)
-                <div class="col m6 s12">
-                    <div class="card horizontal">
-                        <div class="card-image">
-                            <img src="{!! $a->icon_url !!}">
+                <div class="col m12 s12">
+                    <div class="card">
+                        <div class="card-image" style="background-color: grey">
+                            <img src="{!! $a->logo !!}">
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
                                 <h4>{{ $a->name }}</h4>
                             </div>
-                            <form action="{{ url('/flightops/bids') }}" method="POST">
+                            <form action="{{ route('flightops.airlines.join', ['id' => $a->id]) }}" method="POST">
                                 {{ csrf_field() }}
                                 <input hidden name="schedule_id" value="{{ $a->id }}"/>
                                 <div class="card-action">
                                     @if(Auth::guest())
-                                        <b>PLEASE LOGIN TO BID ON FLIGHT</b>
+                                        <b>PLEASE LOGIN TO JOIN AIRLINE</b>
                                     @else
-                                        <button type="submit" class="btn green">Join</button>
+                                        @if($a->inAirline)
+                                            <a href="{{ route('flightops.airlines.view', ['id' => $a->id]) }}" class="btn blue">Info</a>
+                                        @else
+                                            <a href="{{ route('flightops.airlines.view', ['id' => $a->id]) }}" class="btn blue">Info</a>
+                                            <button type="submit" class="btn green">Join</button>
+                                        @endif
                                     @endif
                                 </div>
                             </form>

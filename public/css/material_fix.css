@@ -1,0 +1,20 @@
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+        padding-left: 0;
+    }
+}
+.black-card {
+    background-color: rgba(25,25,25,.75);padding:2rem;margin-top:1rem;
+}
+.black-card > .divide {
+    height: 3px; width: 75%; background-color: white;
+}
+.black-card > .hero-icon {
+    padding: 2rem;
+    margin-right: 2rem;
+
+}

@@ -18,7 +18,7 @@ function returnData($result)
 }
 // If Bid is placed, get the first for the user
 
-    $res = $client->request('GET', VAOS_URL . 'api/v1/bids', [
+    $res = $client->request('GET', VAOS_URL . 'api/v1/flights', [
         'query' => [
             'format' => 'xacars',
             'username' => $_REQUEST['DATA4'],

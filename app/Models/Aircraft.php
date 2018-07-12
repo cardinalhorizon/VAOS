@@ -24,4 +24,21 @@ class Aircraft extends Model
     {
         return $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_pivot');
     }
+    public function type_rating()
+    {
+        return $this->belongsTo('App\Models\TypeRating');
+    }
+    public function flights()
+    {
+        return $this->hasMany('App\Models\Flight');
+    }
+    public function isAvailable()
+    {
+        $active = $this->flights()->filed()->active()->get();
+        if ($active->isEmpty())
+        {
+            return true;
+        }
+        return false;
+    }
 }

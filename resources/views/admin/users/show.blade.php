@@ -121,6 +121,59 @@
 
             </div>
         </div>
+        <div style="margin-top: 2rem;" class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Airline Information
+            </div>
+            <div class="card-block">
+                @foreach($user->airlines as $airline)
+                    <h3>{{ $airline->name }}</h3>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addAirlineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User to Airline</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('admin.users.airlinemod', ['id' => $user->id]) }}">
+                        <select id="airline" name="airline" class="form-control" size="1">
+                            @if($airlines == "[]")
+                                <option value="0">No Airlines Found</option>
+                            @else
+                                @foreach($airlines as $a)
+                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                        <div class="form-group">
+                            <label>Pilot ID</label>
+                            <input type="text" name="pilotid" class="form-control" placeholder="0001">
+                        </div>
+                        <select id="airline" name="hub" class="form-control" size="1">
+                            @if($hubs == "[]")
+                                <option value="0">No Hubs Found</option>
+                            @else
+                                @foreach($hubs as $a)
+                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Change Status</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('js')

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\CrewOps;
 
 use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Models\Bid;
+use App\Models\Flight;
 use App\Models\Aircraft;
 use App\Models\Airport;
 use App\Models\LogbookEntry as PIREP;
-use App\Models\ScheduleTemplate;
+use App\Models\Schedule;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -19,10 +19,10 @@ class CrewOpsController extends Controller
 {
     public function index()
     {
-        // Get the total number of bids for the user
-        $totalbids = Bid::where('user_id', Auth::user()->id)->get();
-        $totalLogs = PIREP::where('user_id', Auth::user()->id)->get();
-        return view('crewops.dashboard', ['bids' => $totalbids, 'logs' => $totalLogs]);
+        // Get the total number of flights for the user
+        $totalbids = Flight::where('user_id', Auth::user()->id)->get();
+        $totalLogs = Flight::where(['user_id' => Auth::user()->id, 'status' => 10])->get();
+        return view('crewops.dashboard', ['flights' => $totalbids, 'logs' => $totalLogs]);
     }
     public function profileUpdate(Request $request)
     {
@@ -56,7 +56,7 @@ class CrewOpsController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $pireps = PIREP::where('user_id', $id)
+        $pireps = Flight::where(['user_id' => $id, 'status' => 10])
             ->orderBy('id', 'desc')
             ->limit(10)
             ->get();
@@ -71,40 +71,61 @@ class CrewOpsController extends Controller
     }
     public function getSchedule(Request $request)
     {
-
-        $query = array();
-
-        // Check the request for specific info??
-        if ($request->has('airline'))
-            $query['airline_id'] = Airline::where('icao', $request->query('airline'))->first()->id;
-
-        if ($request->has('depapt'))
-            $query['depapt_id'] = Airport::where('icao', $request->query('depapt'))->first()->id;
-
-        if ($request->has('arrapt'))
-            $query['arrapt_id'] = Airport::where('icao', $request->query('arrapt'))->first()->id;
-
-        if ($request->has('aircraft'))
-            $query['aircraft_group_id'] = AircraftGroup::where('icao', $request->query('aircraft'))->first()->id;
-        //dd($query);
-        // Load all the schedules within the database
-        if (empty($query)) {
-            $schedules = ScheduleTemplate::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('airline_id', 'desc')->paginate(9);
-            //dd($schedules);
+        if ($request->query('individual') == 'true')
+        {
+            dd($request);
         }
-        else
-            $schedules = ScheduleTemplate::where($query)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('arrapt_id', 'desc')->paginate(9);
-        $aircraft = Aircraft::all();
-        //$schedules = ScheduleTemplate::all();
-        //dd($schedules);
-        // Return the view
-        //return $schedules;
-        return view('crewops.schedule.view', ['schedules' => $schedules, 'aircraft' => $aircraft]);
+        else {
+            $query = array();
+
+            // Check the request for specific info??
+            if ($request->has('airline'))
+                $query['airline_id'] = Airline::where('icao', $request->query('airline'))->first()->id;
+
+            if ($request->has('depapt'))
+                $query['depapt_id'] = Airport::where('icao', $request->query('depapt'))->first()->id;
+
+            if ($request->has('arrapt'))
+                $query['arrapt_id'] = Airport::where('icao', $request->query('arrapt'))->first()->id;
+
+            if ($request->has('aircraft'))
+                $query['aircraft_group_id'] = AircraftGroup::where('icao', $request->query('aircraft'))->first()->id;
+            //dd($query);
+            // Load all the schedules within the database
+            if (empty($query)) {
+                $schedules = Schedule::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('airline_id', 'desc')->paginate(8);
+                //dd($schedules);
+            } else
+                $schedules = Schedule::where($query)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->orderBy('arrapt_id', 'desc')->paginate(8);
+            $aircraft = Aircraft::all();
+            //$schedules = Schedule::all();
+            //dd($schedules);
+            // Return the view
+            foreach ($schedules as $s)
+            {
+                $s->primary_aircraft = null;
+                if (is_null($s->deptime)) {
+                    $s->deptime = "N/A";
+                }
+                if (is_null($s->arrtime)) {
+                    $s->arrtime = "N/A";
+                }
+                foreach($s->aircraft_group as $a)
+                {
+                    if ($a['pivot']['primary'])
+                    {
+                        $s->primary_aircraft = $a->icao;
+                    }
+                }
+            }
+            //return $schedules;
+            return view('crewops.schedule.view', ['schedules' => $schedules, 'aircraft' => $aircraft]);
+        }
     }
     public function getScheduleAJAX(Request $request)
     {
         // Find out what we are searching for.
-        $schedules = new ScheduleTemplate;
+        $schedules = new Schedule;
     }
     public function getLogbook()
     {
@@ -127,7 +148,7 @@ class CrewOpsController extends Controller
     public function postManualPirep(Request $request)
     {
 
-        $flightinfo = Bid::find($request->bid);
+        $flightinfo = Flight::find($request->bid);
         $pirep = new PIREP();
         $pirep->user()->associate(Auth::user()->id);
         $pirep->airline()->associate($flightinfo->airline_id);
@@ -135,6 +156,9 @@ class CrewOpsController extends Controller
         $pirep->depapt()->associate($flightinfo->depapt_id);
         $pirep->arrapt()->associate($flightinfo->arrapt_id);
         $pirep->flightnum = $flightinfo->flightnum;
+        $pirep->flighttime = 0;
+        $pirep->distance = 0;
+        $pirep->acars_client = 'manual';
         $pirep->route = "Manually Filed";
         $pirep->status = 0;
         $pirep->landingrate = $request->input('landingrate');

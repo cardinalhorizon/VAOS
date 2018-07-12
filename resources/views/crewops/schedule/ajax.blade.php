@@ -18,7 +18,7 @@
                     <img id="airline-icon" src="{{ url('/img/AirlineLogos/LogoIcon.png') }}"/>
                 </div>
             </div>
-            <form action="{{ url('/flightops/bids') }}" method="POST">
+            <form action="{{ url('flights') }}" method="POST">
                 <div class="panel-footer">
                         <span class="pull-left">
 
@@ -34,8 +34,8 @@
                             @endif
                         </span>
                     <span class="pull-right">
-                            <button type="submit" class="btn btn-primary">Quick Bid</button>
-                            <a href="#" class="btn btn-info" role="button">Adv. Bid</a>
+                            <button type="submit" class="btn btn-primary">Quick Flight</button>
+                            <a href="#" class="btn btn-info" role="button">Adv. Flight</a>
                         </span>
                     <div class="clearfix"></div>
                 </div>

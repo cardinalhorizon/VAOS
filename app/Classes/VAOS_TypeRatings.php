@@ -9,11 +9,19 @@
 namespace App\Classes;
 
 
+use App\Models\Airline;
+use App\Models\TypeRating;
+
 class VAOS_TypeRatings
 {
-    public static function AddTypeRating()
+    public static function AddTypeRating($data)
     {
-        //
+        $tr = new TypeRating();
+        $airline = Airline::find($data['airline']);
+        $tr->code = $data['code'];
+        $tr->name = $data['name'];
+        $tr->airline()->associate($airline);
+        $tr->save();
     }
     public static function ModifyTypeRating($rating_id, $data)
     {

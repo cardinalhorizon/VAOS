@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LogbookComment extends Model
+class FlightComment extends Model
 {
-    public $table = 'pirep_comments';
 
     public function user()
     {
         return $this->belongsTo('App\User');
     }
-    public function pirep()
+    public function flight()
     {
-        return $this->belongsTo('App\PIREP');
+        return $this->belongsTo('App\Models\Flight');
     }
 }

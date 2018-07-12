@@ -37,7 +37,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API'], function () {
         Route::post('/bid', 'BidsAPI@fileBid');
         Route::post('/', 'ScheduleAPI@add');
     });
-    Route::get('/bids', 'BidsAPI@getBid');
+    Route::get('/flights', 'BidsAPI@getBid');
+    Route::get('/flights/{id}', 'BidsAPI@view');
     Route::post('/pireps', 'PIREPAPI@filePIREP');
     Route::get('/logbook/{id}', 'PIREPAPI@getFlight');
 });
@@ -63,7 +64,7 @@ Route::group(['prefix' => 'acars', 'namespace' => 'LegacyACARS'], function () {
     Route::group(['prefix' => 'smartCARS'], function () {
         Route::post('/positionreport', 'smartCARS@positionreport');
         Route::post('/filepirep', 'smartCARS@filepirep');
-        Route::get('/bids/{user_id}', 'smartCARS@getbids');
+        Route::get('/flights/{user_id}', 'smartCARS@getbids');
     });
 
     // XACARS

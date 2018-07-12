@@ -14,6 +14,6 @@ class ACARSData extends Model
     }
     public function bid()
     {
-        return $this->belongsTo('App\Bid');
+        return $this->belongsTo('App\Models\Flight');
     }
 }

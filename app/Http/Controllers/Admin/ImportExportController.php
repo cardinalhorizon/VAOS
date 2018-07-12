@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Classes\AircraftData;
+use App\Classes\VAOS_Aircraft as AircraftData;
 use App\Classes\VAOS_Schedule;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
@@ -78,7 +78,7 @@ class ImportExportController extends Controller
                 //$airline_id = Airline::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
-                    'airline' => Airline::where('icao', $row['airline'])->first(),
+                    'airline' => $row['airline'],
                     'icao' => $row['icao'],
                     'name' => $row['name'],
                     'manufacturer' => $row['manufacturer'],

@@ -45,6 +45,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="select">Aircraft Group</label>
+                        <div class="col-md-9">
+                            <select id="aircraft_group" name="aircraft_group" class="form-control" size="1">
+                                @foreach($acfgroups as $acf)
+                                    <option value="{{ $acf->id }}">{{ $acf->airline->icao }} - {{ $acf->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-3 form-control-label"></label>
                         <div class="col-md-9">
                             <div class="checkbox">
@@ -52,6 +62,22 @@
                                     <input type="checkbox" id="enabled" name="enabled" value="1"> Enabled
                                 </label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label"></label>
+                        <div class="col-md-9">
+                            <div class="checkbox">
+                                <label for="checkbox1">
+                                    <input type="checkbox" id="return" name="createReturn" value="true"> Create Return Leg
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 form-control-label" for="text-input">Return Flight Number</label>
+                        <div class="col-md-9">
+                            <input type="text" id="route" name="returnNumber" class="form-control" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -63,16 +89,7 @@
                     <i class="fa fa-align-justify"></i> Route Defaults
                 </div>
                 <div class="card-block">
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="select">Aircraft Group</label>
-                        <div class="col-md-9">
-                            <select id="aircraft_group" name="aircraft_group" class="form-control" size="1">
-                                @foreach($acfgroups as $acf)
-                                    <option value="{{ $acf->icao }}">{{ $acf->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+
                     <!--
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="text-input">Route</label>
@@ -80,12 +97,7 @@
                             <input type="text" id="route" name="route" class="form-control" placeholder="eg. CASTA6 GMN DUCKE BORDY BTG HAWKZ5">
                         </div>
                     </div> -->
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">Cruise Alt</label>
-                        <div class="col-md-9">
-                            <input type="text" id="route" name="cruise" class="form-control" placeholder="35000">
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <label class="col-md-3 form-control-label" for="select">Type</label>
                         <div class="col-md-9">
