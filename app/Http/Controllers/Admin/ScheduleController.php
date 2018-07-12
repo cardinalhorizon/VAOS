@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\AircraftGroup;
 use App\Models\Airline;
-use App\Classes\VAOS_Schedule;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\AircraftGroup;
+use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
@@ -38,7 +35,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
         $acfgroups = AircraftGroup::with('airline')->get();
         //return $acfgroups;
         return view('admin.schedules.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
@@ -48,6 +45,7 @@ class ScheduleController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,17 +58,17 @@ class ScheduleController extends Controller
         // ok let's check and set the proper id for aircraf group
 
         VAOS_Schedule::newRoute($data);
-        if ($data['createReturn'])
-        {
+        if ($data['createReturn']) {
             // swap the departure and arrival and change the flight number
-            $newDep = $data['arricao'];
-            $newArr = $data['depicao'];
-            $data['depicao'] = $newDep;
-            $data['arricao'] = $newArr;
+            $newDep            = $data['arricao'];
+            $newArr            = $data['depicao'];
+            $data['depicao']   = $newDep;
+            $data['arricao']   = $newArr;
             $data['flightnum'] = $data['returnNumber'];
             VAOS_Schedule::newRoute($data);
         }
         $request->session()->flash('schedule_created', true);
+
         return redirect('/admin/schedule');
     }
 
@@ -78,6 +76,7 @@ class ScheduleController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -89,14 +88,16 @@ class ScheduleController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $schedule = Schedule::findOrFail($id);
 
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
         $acfgroups = AircraftGroup::all();
+
         return view('admin.schedules.edit', ['schedule' => $schedule, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
@@ -105,6 +106,7 @@ class ScheduleController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -113,6 +115,7 @@ class ScheduleController extends Controller
         VAOS_Schedule::updateRoute($data, $id);
 
         $request->session()->flash('schedule_updated', true);
+
         return redirect('/admin/schedule');
     }
 
@@ -120,12 +123,14 @@ class ScheduleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         // Delete the route from the system
         Schedule::destroy($id);
+
         return redirect('/admin/schedule');
     }
 }

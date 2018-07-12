@@ -13,9 +13,9 @@ class Airport extends Model
     {
         return $this->hasMany('App\ScheduleTemplate');
     }
+
     public function users()
     {
         return $this->hasMany('App\User');
     }
-
 }

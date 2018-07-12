@@ -3,18 +3,16 @@
  * Created by PhpStorm.
  * User: taylorbroad
  * Date: 10/23/16
- * Time: 8:55 PM
+ * Time: 8:55 PM.
  */
 
 namespace App\Classes;
 
-
-use App\Models\AircraftGroup;
-use App\Models\Airport;
 use App\Models\Airline;
-use App\Models\Flight as ScheduleComplete;
+use App\Models\Airport;
 use App\Models\Schedule;
-use Carbon\Carbon;
+use App\Models\AircraftGroup;
+use App\Models\Flight as ScheduleComplete;
 
 class VAOS_Schedule
 {
@@ -24,7 +22,7 @@ class VAOS_Schedule
         $template = Schedule::where('id', $schedule_id)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
         // $template = Schedule::where('id', $request->query('schedule_id'))->first();
         // Now let's turn the aircraft group into a assigned aircraft.
-        /**
+        /*
          * New in 2.0 We now have multiple aircraft groups and aircraft assigned to a single object. Let's do ourselves
          * a favor and let's get priorities straight.
          *
@@ -33,34 +31,26 @@ class VAOS_Schedule
          * Aircraft will first be checked to see if they are available. This will be done via the Model directly.
          */
 
-        if ($template->aircraft_group != null)
-        {
-            foreach($template->aircraft_group as $a)
-            {
-                if ($a['pivot']['primary'])
-                {
+        if ($template->aircraft_group != null) {
+            foreach ($template->aircraft_group as $a) {
+                if ($a['pivot']['primary']) {
                     $acfgrp = AircraftGroup::where('id', $a->id)->with('aircraft')->first();
 
                     // ok, run an availability check.
-                    foreach ($acfgrp->aircraft as $acf)
-                    {
-                        if($acf->isAvailable())
-                        {
+                    foreach ($acfgrp->aircraft as $acf) {
+                        if ($acf->isAvailable()) {
                             $complete->aircraft()->associate($acf);
-
                         }
                     }
                 }
             }
         }
-            //$acfgrp = AircraftGroup::where('id', $template->aircraft_group->pivot->primary)->with('aircraft')->first();
-        else
+        //$acfgrp = AircraftGroup::where('id', $template->aircraft_group->pivot->primary)->with('aircraft')->first();
+        else {
             $acfgrp = AircraftGroup::with('aircraft')->first();
+        }
 
         // ok lets assign the first aircraft on the list
-
-
-
 
         // First let's bring all the foreign keys from the previous table into this one.
 
@@ -68,10 +58,11 @@ class VAOS_Schedule
         $complete->depapt()->associate($template->depapt);
         $complete->arrapt()->associate($template->arrapt);
         //dd($acfgrp);
-        if ($aircraft_id === null)
+        if ($aircraft_id === null) {
             $complete->aircraft()->associate($acfgrp->aircraft[0]);
-        else
+        } else {
             $complete->aircraft()->associate($aircraft_id);
+        }
 
         $complete->user()->associate($user_id);
 
@@ -80,9 +71,9 @@ class VAOS_Schedule
         $defaults = json_decode($template->defaults);
 
         $complete->flightnum = $template->flightnum;
-        $complete->route = $defaults['route'];
+        $complete->route     = $defaults['route'];
         // Now lets encode the cruise altitude in the JSON
-        $rte_data = array();
+        $rte_data = [];
 
         $rte_data['cruise'] = $defaults['cruise'];
         // store it
@@ -91,29 +82,27 @@ class VAOS_Schedule
 
         $complete->deptime = null;
         $complete->arrtime = null;
-        $complete->load = 0;
-        $complete->state = 0;
+        $complete->load    = 0;
+        $complete->state   = 0;
         $complete->save();
 
         return true;
     }
+
     public static function newRoute($data)
     {
         // Declare a new instance of the Schedule Model
         $entry = new Schedule();
         //dd($request);
         // Before we add the route, lets check to see if the airport exists.
-        if (Airport::where('icao', $data['depicao'])->first() === null)
-        {
+        if (Airport::where('icao', $data['depicao'])->first() === null) {
             VAOS_Airports::AddAirport($data['depicao']);
         }
-        if (Airport::where('icao', $data['arricao'])->first() === null)
-        {
+        if (Airport::where('icao', $data['arricao'])->first() === null) {
             VAOS_Airports::AddAirport($data['arricao']);
         }
         // add the form elements
         // Search for the airline in the database
-
 
         $entry->flightnum = $data['flightnum'];
 
@@ -126,12 +115,10 @@ class VAOS_Schedule
         $airline = Airline::where('icao', $data['airline'])->first();
         $entry->airline()->associate($airline);
 
-        if (array_key_exists('alticao', $data))
-        {
+        if (array_key_exists('alticao', $data)) {
             $entry->alticao = $data['alticao'];
         }
-        if (array_key_exists('route', $data))
-        {
+        if (array_key_exists('route', $data)) {
             $entry->route = $data['route'];
         }
         //dd($data);
@@ -139,40 +126,34 @@ class VAOS_Schedule
         $entry->seasonal = false;
         //$entry->daysofweek = "0123456";
         $entry->type = $data['type'];
-        if (array_key_exists('enabled', $data))
-        {
+        if (array_key_exists('enabled', $data)) {
             $entry->enabled = $data['enabled'];
-        }
-        else
-        {
+        } else {
             $entry->enabled = 1;
         }
         $entry->save();
-        if (array_key_exists('aircraft_group', $data))
-        {
+        if (array_key_exists('aircraft_group', $data)) {
             //dd($data);
             // $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
             $entry->aircraft_group()->attach($data['aircraft_group'], ['primary' => true]);
         }
         $entry->save();
     }
+
     public static function updateRoute($data, $id)
     {
         // Declare a new instance of the Schedule Model
         $entry = Schedule::find($id);
         //dd($request);
         // Before we add the route, lets check to see if the airport exists.
-        if (Airport::where('icao', $data['depicao'])->first() === null)
-        {
+        if (Airport::where('icao', $data['depicao'])->first() === null) {
             VAOS_Airports::AddAirport($data['depicao']);
         }
-        if (Airport::where('icao', $data['arricao'])->first() === null)
-        {
+        if (Airport::where('icao', $data['arricao'])->first() === null) {
             VAOS_Airports::AddAirport($data['arricao']);
         }
         // add the form elements
         // Search for the airline in the database
-
 
         $entry->flightnum = $data['flightnum'];
 
@@ -185,17 +166,14 @@ class VAOS_Schedule
         $airline = Airline::where('icao', $data['airline'])->first();
         $entry->airline()->associate($airline);
 
-        if (array_key_exists('alticao', $data))
-        {
+        if (array_key_exists('alticao', $data)) {
             $entry->alticao = $data['alticao'];
         }
-        if (array_key_exists('route', $data))
-        {
+        if (array_key_exists('route', $data)) {
             $entry->route = $data['route'];
         }
         //dd($data);
-        if (array_key_exists('aircraft_group', $data))
-        {
+        if (array_key_exists('aircraft_group', $data)) {
             //dd($data);
             $acfgrp = $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
             $entry->aircraft_group()->associate($acfgrp);
@@ -203,22 +181,21 @@ class VAOS_Schedule
         $entry->seasonal = true;
         //$entry->daysofweek = "0123456";
         $entry->type = $data['type'];
-        if (array_key_exists('enabled', $data))
-        {
+        if (array_key_exists('enabled', $data)) {
             $entry->enabled = $data['enabled'];
-        }
-        else
-        {
+        } else {
             $entry->enabled = 1;
         }
         $entry->save();
     }
+
     public static function deleteBid($flight_id, $user_id = null)
     {
-        if (is_null($user_id))
+        if (is_null($user_id)) {
             $flight = ScheduleComplete::find($flight_id);
-        else
+        } else {
             $flight = ScheduleComplete::where(['user_id' => $user_id, 'id' => $flight_id])->firstOrFail();
+        }
 
         $flight->delete();
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\VAOS_TypeRatings;
 use Illuminate\Http\Request;
+use App\Classes\VAOS_TypeRatings;
 use App\Http\Controllers\Controller;
 
 class TypeRatingsController extends Controller
@@ -32,16 +32,18 @@ class TypeRatingsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         VAOS_TypeRatings::AddTypeRating([
             'airline' => $request->input('airline'),
-            'code' => $request->input('code'),
-            'name' => $request->input('name')
+            'code'    => $request->input('code'),
+            'name'    => $request->input('name'),
 
         ]);
+
         return route('admin.typeratings.index');
     }
 
@@ -49,6 +51,7 @@ class TypeRatingsController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,6 +63,7 @@ class TypeRatingsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,6 +76,7 @@ class TypeRatingsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,6 +88,7 @@ class TypeRatingsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

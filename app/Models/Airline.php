@@ -19,7 +19,7 @@ class Airline extends Model
         'isAccepting',
         'autoAdd',
         'aaEnabled',
-        'aaLandingRate'
+        'aaLandingRate',
     ];
     public $timestamps = false;
 

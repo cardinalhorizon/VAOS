@@ -13,8 +13,7 @@ class MajorUpdate extends Migration
      */
     public function up()
     {
-
-        Schema::table('airlines', function(Blueprint $table) {
+        Schema::table('airlines', function (Blueprint $table) {
             $table->boolean('autoAccept')->nullable();
             $table->boolean('isAccepting')->nullable();
             $table->boolean('autoAdd')->nullable();
@@ -29,7 +28,7 @@ class MajorUpdate extends Migration
             $table->unsignedInteger('user_id')->nullable();
         });
 
-        Schema::create('airline_user', function(Blueprint $table) {
+        Schema::create('airline_user', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('airline_id');
@@ -42,11 +41,11 @@ class MajorUpdate extends Migration
             $table->boolean('admin');
         });
 
-        Schema::table('aircraft_groups', function(Blueprint $table) {
+        Schema::table('aircraft_groups', function (Blueprint $table) {
             $table->unsignedInteger('airline_id')->nullable();
             $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
         });
-        Schema::table('flights', function(Blueprint $table) {
+        Schema::table('flights', function (Blueprint $table) {
             $table->string('wcBidID')->nullable();
             $table->integer('status')->nullable();
             $table->string('network')->nullable();
@@ -59,7 +58,7 @@ class MajorUpdate extends Migration
             $table->integer('aircraft_id')->unsigned()->nullable()->change();
             $table->integer('type')->nullable();
         });
-        Schema::create('system_settings', function(Blueprint $table) {
+        Schema::create('system_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key');
             $table->string('value');
@@ -68,14 +67,14 @@ class MajorUpdate extends Migration
             $table->string('page');
             $table->text('description')->nullable();
         });
-        Schema::create('aircraft_schedule', function (Blueprint $t){
+        Schema::create('aircraft_schedule', function (Blueprint $t) {
             $t->increments('id');
             $t->unsignedInteger('aircraft_id');
             $t->unsignedInteger('schedule_id');
             $t->foreign('aircraft_id')->references('id')->on('aircraft')->onDelete('cascade');
             $t->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
         });
-        Schema::create('aircraft_group_schedule', function (Blueprint $t){
+        Schema::create('aircraft_group_schedule', function (Blueprint $t) {
             $t->increments('id');
             $t->unsignedInteger('aircraft_group_id');
             $t->unsignedInteger('schedule_id');

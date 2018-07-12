@@ -10,10 +10,12 @@ class AirlineEvent extends Model
     {
         return $this->belongsToMany('App\User')->withPivot(['status', 'role']);
     }
+
     public function airline()
     {
         return $this->belongsTo('App\Models\Airline');
     }
+
     public function flights()
     {
         return $this->hasMany('App\Models\AirlineEventFlight');
