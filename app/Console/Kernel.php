@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Classes\VATSIMData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,13 +16,14 @@ class Kernel extends ConsoleKernel
         //
         Commands\InstallphpVMSTables::class,
         Commands\VAOSNewAirline::class,
-        Commands\VatsimStatus::class
+        Commands\VatsimStatus::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
