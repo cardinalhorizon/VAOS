@@ -58,6 +58,7 @@ class MajorUpdate extends Migration
             $table->integer('airline_id')->unsigned()->nullable()->change();
             $table->integer('aircraft_id')->unsigned()->nullable()->change();
             $table->integer('type')->nullable();
+            $table->integer('state');
         });
         Schema::create('system_settings', function(Blueprint $table) {
             $table->increments('id');
