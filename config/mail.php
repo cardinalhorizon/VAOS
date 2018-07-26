@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('VAOS_ORG_EMAIL', 'noreply@flyspark.org'),
-        'name' => env('VAOS_ORG_NAME', 'Spark Virtual'),
+        'name'    => env('VAOS_ORG_NAME', 'Spark Virtual'),
     ],
 
     /*
