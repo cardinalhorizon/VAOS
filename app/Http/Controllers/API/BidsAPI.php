@@ -2,63 +2,57 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Flight;
-use App\Models\Schedule;
-use App\Models\ScheduleComplete;
 use App\User;
 use Carbon\Carbon;
+use App\Models\Flight;
+use App\Models\Airline;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\AircraftGroup;
-use App\Models\Legacy;
-use App\Classes\VAOSHelpers;
-use App\Models\Airline;
-
-use Symfony\Component\Routing\Tests\Fixtures\RedirectableUrlMatcher;
+use App\Models\ScheduleComplete;
 
 class BidsAPI extends Controller
 {
-
     public function getBid(Request $request)
     {
         // Ok lets find out if we can find the bid
         $flights = ScheduleComplete::where('user_id', $request->query('userid'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
-        if ($request->query('format') == "xacars")
-        {
-            $user = User::where('username', $request->query('username'))->first();
+        if ($request->query('format') == 'xacars') {
+            $user   = User::where('username', $request->query('username'))->first();
             $flight = self::getProperFlightNum($request->query('flightnum'), $user->id);
 
             return response()->json([
                 'status' => 200,
-                'bid' => $flight
+                'bid'    => $flight,
             ]);
         }
-        if ($flights === null)
-        {
+        if ($flights === null) {
             // We didn't find shit for that user. Return a 404
             return json_encode([
-                'status' => 404
+                'status' => 404,
             ]);
         }
         // Ok now lets do a general query
         return response()->json([
-            'status' => 200,
-            'flights' => $flights
+            'status'  => 200,
+            'flights' => $flights,
         ]);
     }
+
     public function fileBid(Request $request)
     {
         $template = Schedule::where('id', $request->input('schedule_id'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
         //$template = Schedule::where('id', $request->query('schedule_id'))->first();
         // Now let's turn the aircraft group into a assigned aircraft.
         // Let's start by getting the group's assigned aircraft list.
-        if ($template->aircraft_group_id != null)
+        if ($template->aircraft_group_id != null) {
             $acfgrp = AircraftGroup::where('id', $template->aircraft_group->id)->with('aircraft')->first();
-        else
+        } else {
             $acfgrp = AircraftGroup::with('aircraft')->first();
+        }
 
         // ok lets assign the first aircraft on the list
         // TODO Change aircraft selection behavior. Current: First on list
-
 
         $complete = new ScheduleComplete();
 
@@ -75,9 +69,9 @@ class BidsAPI extends Controller
         $defaults = json_decode($template->defaults);
 
         $complete->flightnum = $template->flightnum;
-        $complete->route = $defaults['route'];
+        $complete->route     = $defaults['route'];
         // Now lets encode the cruise altitude in the JSON
-        $rte_data = array();
+        $rte_data = [];
 
         $rte_data['cruise'] = $defaults['cruise'];
         // store it
@@ -86,26 +80,30 @@ class BidsAPI extends Controller
 
         $complete->deptime = Carbon::now();
         $complete->arrtime = Carbon::now();
-        $complete->load = 0;
+        $complete->load    = 0;
         $complete->save();
 
-
-
         return response()->json([
-            'status' => 200
+            'status' => 200,
         ]);
     }
+
     public function view($id)
     {
         $flight = Flight::with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
+
         return response()->json($flight);
     }
-    private static function getProperFlightNum($flightnum, $userid) {
-        if ($flightnum == '') return false;
 
-        $ret = array();
+    private static function getProperFlightNum($flightnum, $userid)
+    {
+        if ($flightnum == '') {
+            return false;
+        }
+
+        $ret       = [];
         $flightnum = strtoupper($flightnum);
-        $airlines = Airline::all();
+        $airlines  = Airline::all();
 
         foreach ($airlines as $a) {
             $a->icao = strtoupper($a->icao);
@@ -114,7 +112,7 @@ class BidsAPI extends Controller
                 continue;
             }
 
-            $ret['icao'] = $a->icao;
+            $ret['icao']      = $a->icao;
             $ret['flightnum'] = str_ireplace($a->icao, '', $flightnum);
 
             // ok now that we deduced that, let's find the bid.
@@ -122,9 +120,10 @@ class BidsAPI extends Controller
             return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
         }
 
-        # Invalid flight number
-        $ret['code'] = '';
+        // Invalid flight number
+        $ret['code']      = '';
         $ret['flightnum'] = $flightnum;
+
         return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->first();
     }
 }

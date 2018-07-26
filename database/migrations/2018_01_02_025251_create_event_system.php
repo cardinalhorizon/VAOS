@@ -52,7 +52,7 @@ class CreateEventSystem extends Migration
             $table->foreign('depapt_id')->references('id')->on('airports')->onDelete('cascade');
             $table->foreign('arrapt_id')->references('id')->on('airports')->onDelete('cascade');
         });
-        /**
+        /*
          * Pivot Tables Below
          */
         Schema::create('airline_event_user', function (Blueprint $table) {

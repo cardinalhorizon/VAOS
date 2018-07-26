@@ -23,7 +23,6 @@ class CreatePermissionSystem extends Migration
             $t->unsignedInteger('airline_id')->nullable();
             $t->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
             $t->text('description')->nullable();
-
         });
         Schema::create('permission_groups', function (Blueprint $t) {
             $t->increments('id');
@@ -33,7 +32,7 @@ class CreatePermissionSystem extends Migration
             $t->text('description')->nullable();
         });
 
-        /**
+        /*
          * Pivot Tables
          */
         Schema::create('permission_permission_group', function (Blueprint $t) {
