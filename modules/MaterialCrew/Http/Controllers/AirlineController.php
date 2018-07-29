@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\MaterialCrew\Http\Controllers;;
+namespace Modules\MaterialCrew\Http\Controllers;
 
 use App\Models\Airline;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,19 +16,14 @@ class AirlineController extends Controller
 
         // Ok now figure out if the user logged in is in the airline. If so, throw his info up and center.
 
-        foreach ($airlines as $airline)
-        {
+        foreach ($airlines as $airline) {
             // Check the relationship to see if the user has the above airline.
 
-            if ($user->hasAirline($airline))
-            {
+            if ($user->hasAirline($airline)) {
                 $airline->inAirline = true;
-            }
-            else
-            {
+            } else {
                 $airline->inAirline = false;
             }
-
         }
 
         //return $airlines;

@@ -25,7 +25,7 @@ class MaterialCrewServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 
     /**
@@ -65,11 +65,11 @@ class MaterialCrewServiceProvider extends ServiceProvider
         $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
-        ],'views');
+            $sourcePath => $viewPath,
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/materialcrew';
+            return $path.'/modules/materialcrew';
         }, \Config::get('view.paths')), [$sourcePath]), 'materialcrew');
     }
 
@@ -85,19 +85,19 @@ class MaterialCrewServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'materialcrew');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'materialcrew');
+            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'materialcrew');
         }
     }
 
     /**
      * Register an additional directory of factories.
-     * 
+     *
      * @return void
      */
     public function registerFactories()
     {
         if (! app()->environment('production')) {
-            app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            app(Factory::class)->load(__DIR__.'/../Database/factories');
         }
     }
 
