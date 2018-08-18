@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CrewOps;
+namespace Modules\MaterialCrew\Http\Controllers;
 
 use App\Models\Airline;
 use App\Http\Controllers\Controller;
@@ -28,5 +28,16 @@ class AirlineController extends Controller
 
         //return $airlines;
         return view('crewops.airlines.index', ['airlines' => $airlines]);
+    }
+    public function joinAirline($airline_id)
+    {
+        // Join the airline.
+        $a = Airline::find($airline_id);
+        $a->users()->attach(Auth::user(), [
+            'status' => 1,
+            'primary' => false,
+            'admin' => 0,
+            'pilot_id' => rand(100000,999999)
+        ]);
     }
 }
