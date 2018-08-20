@@ -27,6 +27,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
         Route::group(['prefix' => '/events', 'as' => 'events.'], function () {
             Route::get('/', 'EventsController@index')->name('index');
             Route::get('/create', 'EventsController@create')->name('create');
+            Route::post('/group_flight', 'EventsController@createGroupFlight')->name('storeGroupFlight');
             Route::get('/{slug}', 'EventsController@viewEvent')->name('view');
             Route::get('/{slug}/flights', 'EventsController@viewEventFlights')->name('view.flights');
             Route::post('/{slug}', 'EventsController@eventAction')->name('action');
@@ -34,3 +35,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
     });
 });
 
+Route::group(['middleware' => 'api', 'namespace' => 'Modules\MaterialCrew\Http\Controllers'], function()
+{
+    Route::post('group_flight_check', 'EventsController@createGroupFlight');
+});

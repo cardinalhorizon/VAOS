@@ -4,6 +4,7 @@ namespace Modules\MaterialCrew\Http\Controllers;
 
 use App\Models\AirlineEvent;
 use App\Models\AirlineEventFlight;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -37,24 +38,39 @@ class EventsController extends Controller
     public function createGroupFlight(Request $request)
     {
         $event = new AirlineEvent();
-        $event->name = Auth::user()->username."'s Group Flight";
+        $event->name = "'s Group Flight";
         $event->url_slug = Uuid::uuid1()->toString();
         $event->type = 1;
         $event->access = 1;
         $event->scope = 1;
+        $event->status = 0;
+        $event->ignoreTypeRatings = true;
+        $event->publishToNetwork = false;
         $event->save();
 
-        if($request->has('flight_sequence'))
+        if($request->has('flights'))
         {
             // Pull that flight sequence
-
+            $flights = Flight::find($request->input('flights'));
+            //dd($request->input('flights'));
+            $fa = array();
+            $i = 0;
+            foreach ($flights as $flight)
+            {
+                // run it up
+                $fa[$i]['isGroupFlight'] = true;
+                $fa[$i]['depapt_id'] = $flight['depapt_id'];
+                $fa[$i]['arrapt_id'] = $flight['arrapt_id'];
+                if(!is_null($flight['route']))
+                {
+                    $fa[$i]['route'] = $flight['route'];
+                }
+                $i++;
+            }
+            //dd($fa);
+            $event->flights()->createMany($fa);
         }
-
-        // Add the flights
-        if(is_array($flights)) {
-            // Ok it's an array, we need to add all the fights into the array from here.
-
-        }
+        return $event;
     }
     public function store()
     {
