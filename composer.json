@@ -1,11 +1,11 @@
 {
     "name": "fsvaos/vaos",
-    "description": "Virtual Airline Operations System",
+    "description": "Virtual Aviation Operations System",
     "keywords": ["framework", "laravel"],
     "license": "GNU",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.0.0",
         "laravel/framework": "5.5.*",
         "guzzlehttp/guzzle": "~6.0",
         "kodeine/laravel-acl": "~1.0@dev",
@@ -29,7 +29,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Modules\\": "modules/"
+            "Modules\\": "Modules/"
         }
     },
     "autoload-dev": {

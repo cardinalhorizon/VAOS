@@ -1,8 +1,10 @@
-![alt text](https://i.imgur.com/53yyaeT.png)
+![alt text](https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/34504448_1051727904981394_3792026264861147136_o.png?_nc_cat=0&oh=91c3e19aeb45201ca43bc7e4ecd47160&oe=5C0971C5)
 
 # About
 
-The Virtual Airline Operations System project is an open source and modern Virtual Airline Content Management System developed for use in flight simulators such as Microsoft Flight Simulator, Prepar3D and X-Plane. Development of the system started in late 2014.
+The Virtual Aviation Operations System project is an open source and modern Virtual Community Management System developed for use in flight simulators such as Microsoft Flight Simulator, Prepar3D and X-Plane. Development of the system started in late 2014.
+
+Formerly known as the Virtual Airline Operations System.
 
 
 # License
@@ -17,7 +19,7 @@ The Virtual Airline Operations System project is an open source and modern Virtu
 
 - **PHP**: 7.0 or newer
 
-- **MySQL**: MySQL Community Server 5.3.x or newer
+- **MySQL**: MySQL Community Server 5.7.x or newer
 
 - **Apache 2.2+** or latest **nginx** version
 
@@ -26,16 +28,4 @@ The Virtual Airline Operations System project is an open source and modern Virtu
 Head over to the VAOS wiki to get started with the full installation guide for shared and dedicated hosting:
 * [VAOS Wiki](https://github.com/FSVAOS/VAOS/wiki/Installation-Guide)
 
-# Donations
-Donations are greatly appreciated and go towards further development of VAOS. As of November 2017, we officially sell MERCH!
-
-- VAOS Limited Edition Powerbank: https://www.ebay.ie/itm/VAOS-2200mAh-Power-bank/192367708834
-- VAOS Mug: (Coming Soon)
-- VAOS Pen: (Coming Soon)
-- VAOS T-Shirt: (Coming Soon)
-- VAOS Hoodie: (Coming Soon)
-
-Send donations to taylorbroad@gmail.com via. PayPal
-
-# Current Release Version
-##### version 1.3a
+##### version 2.0.0b2
