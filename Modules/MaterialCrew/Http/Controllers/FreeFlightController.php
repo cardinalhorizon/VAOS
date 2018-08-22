@@ -10,7 +10,6 @@ class FreeFlightController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      * @return Response
      */
     public function index()
@@ -20,7 +19,6 @@ class FreeFlightController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
      * @return Response
      */
     public function create()
@@ -30,9 +28,7 @@ class FreeFlightController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  Request $request
-     *
      * @return Response
      */
     public function store(Request $request)
@@ -41,7 +37,6 @@ class FreeFlightController extends Controller
 
     /**
      * Show the specified resource.
-     *
      * @return Response
      */
     public function show()
@@ -51,7 +46,6 @@ class FreeFlightController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
      * @return Response
      */
     public function edit()
@@ -61,9 +55,7 @@ class FreeFlightController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  Request $request
-     *
      * @return Response
      */
     public function update(Request $request)
@@ -72,7 +64,6 @@ class FreeFlightController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
      * @return Response
      */
     public function destroy()
