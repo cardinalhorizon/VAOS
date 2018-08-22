@@ -1,8 +1,7 @@
 <?php
 
-Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\Controllers'], function()
-{
-    Route::group(['prefix' => '/flightops', 'middleware' => ['auth', 'App\Http\Middleware\ActiveAccountCheck'], 'as' => 'flightops.'], function() {
+Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\Controllers'], function () {
+    Route::group(['prefix' => '/flightops', 'middleware' => ['auth', 'App\Http\Middleware\ActiveAccountCheck'], 'as' => 'flightops.'], function () {
         Route::get('/', 'CrewOpsController@index')->name('index');
         Route::post('/settings', 'CrewOpsController@profileUpdate')->name('profile.update');
         Route::get('/settings', 'CrewOpsController@profileEdit')->name('profile.edit');
@@ -35,7 +34,6 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
     });
 });
 
-Route::group(['middleware' => 'api', 'namespace' => 'Modules\MaterialCrew\Http\Controllers'], function()
-{
+Route::group(['middleware' => 'api', 'namespace' => 'Modules\MaterialCrew\Http\Controllers'], function () {
     Route::post('group_flight_check', 'EventsController@createGroupFlight');
 });

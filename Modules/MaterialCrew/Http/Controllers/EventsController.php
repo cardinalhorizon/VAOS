@@ -2,13 +2,12 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
-use App\Models\AirlineEvent;
-use App\Models\AirlineEventFlight;
+use Ramsey\Uuid\Uuid;
 use App\Models\Flight;
+use App\Models\AirlineEvent;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Ramsey\Uuid\Uuid;
 
 class EventsController extends Controller
 {
@@ -16,53 +15,51 @@ class EventsController extends Controller
     {
         // get all the events in the system that are published and are public status.
         $events = AirlineEvent::where(['status' => 1, 'access' => 2])->where(['owner_id' => Auth::user()->id])->get();
+
         return view('crewops.events.view', ['events' => $events]);
     }
+
     public function view($url_slug)
     {
-        try
-        {
+        try {
             $event = AirlineEvent::firstOrFail('url_slug', $url_slug)->with('flights');
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             return view('errors.404');
         }
-        return view('crewops.events.show', ['event', $event]);
 
+        return view('crewops.events.show', ['event', $event]);
     }
+
     public function create()
     {
         //
     }
+
     public function createGroupFlight(Request $request)
     {
-        $event = new AirlineEvent();
-        $event->name = "'s Group Flight";
-        $event->url_slug = Uuid::uuid1()->toString();
-        $event->type = 1;
-        $event->access = 1;
-        $event->scope = 1;
-        $event->status = 0;
+        $event                    = new AirlineEvent();
+        $event->name              = "'s Group Flight";
+        $event->url_slug          = Uuid::uuid1()->toString();
+        $event->type              = 1;
+        $event->access            = 1;
+        $event->scope             = 1;
+        $event->status            = 0;
         $event->ignoreTypeRatings = true;
-        $event->publishToNetwork = false;
+        $event->publishToNetwork  = false;
         $event->save();
 
-        if($request->has('flights'))
-        {
+        if ($request->has('flights')) {
             // Pull that flight sequence
             $flights = Flight::find($request->input('flights'));
             //dd($request->input('flights'));
-            $fa = array();
-            $i = 0;
-            foreach ($flights as $flight)
-            {
+            $fa = [];
+            $i  = 0;
+            foreach ($flights as $flight) {
                 // run it up
                 $fa[$i]['isGroupFlight'] = true;
-                $fa[$i]['depapt_id'] = $flight['depapt_id'];
-                $fa[$i]['arrapt_id'] = $flight['arrapt_id'];
-                if(!is_null($flight['route']))
-                {
+                $fa[$i]['depapt_id']     = $flight['depapt_id'];
+                $fa[$i]['arrapt_id']     = $flight['arrapt_id'];
+                if (! is_null($flight['route'])) {
                     $fa[$i]['route'] = $flight['route'];
                 }
                 $i++;
@@ -70,8 +67,10 @@ class EventsController extends Controller
             //dd($fa);
             $event->flights()->createMany($fa);
         }
+
         return $event;
     }
+
     public function store()
     {
         //
