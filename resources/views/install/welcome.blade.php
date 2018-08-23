@@ -82,7 +82,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            <div>WELCOME TO YOUR NEW VIRTUAL AIRLINE EXPERIENCE</div>
+            <div>WELCOME TO YOUR NEW VIRTUAL AVIATION EXPERIENCE</div>
         </div>
 
         <div style="color: white; margin: 0px; padding: 0px;">

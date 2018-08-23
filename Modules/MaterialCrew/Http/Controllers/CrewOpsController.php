@@ -22,7 +22,7 @@ class CrewOpsController extends Controller
         // Get the total number of flights for the user
         $totalbids = Flight::where('user_id', Auth::user()->id)->get();
         $totalLogs = Flight::where(['user_id' => Auth::user()->id, 'status' => 10])->get();
-        return view('crewops.dashboard', ['flights' => $totalbids, 'logs' => $totalLogs]);
+        return view('materialcrew::dashboard', ['flights' => $totalbids, 'logs' => $totalLogs]);
     }
     public function profileUpdate(Request $request)
     {
@@ -61,13 +61,13 @@ class CrewOpsController extends Controller
             ->limit(10)
             ->get();
 
-        return view('crewops.profile.view', ['user' => $user, 'pireps' => $pireps]);
+        return view('materialcrew::profile.view', ['user' => $user, 'pireps' => $pireps]);
     }
     public function profileEdit()
     {
         // Check if the user is the right user. We don't want someone modifying other people's profile.
         $user = User::find(Auth::user()->id);
-        return view('crewops.profile.edit', ['user' => $user]);
+        return view('materialcrew::profile.edit', ['user' => $user]);
     }
     public function getSchedule(Request $request)
     {
@@ -123,7 +123,7 @@ class CrewOpsController extends Controller
                 }
             }
             //return $schedules;
-            return view('crewops.schedule.view', ['schedules' => $schedules, 'aircraft' => $aircraft]);
+            return view('materialcrew::schedule.view', ['schedules' => $schedules, 'aircraft' => $aircraft]);
         }
     }
     public function getScheduleAJAX(Request $request)
@@ -134,20 +134,20 @@ class CrewOpsController extends Controller
     public function getLogbook()
     {
         $pireps = PIREP::where('user_id', Auth::user()->id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
-        return view('crewops.logbook.view', ['pireps' => $pireps]);
+        return view('materialcrew::logbook.view', ['pireps' => $pireps]);
     }
     public function getScheduleSearch()
     {
         $airports = Airport::all();
         $airlines = Airline::all();
         $aircraft = AircraftGroup::all();
-        return view('crewops.schedule.search', ['airports' => $airports, 'airlines' => $airlines, 'aircraft' => $aircraft]);
+        return view('materialcrew::schedule.search', ['airports' => $airports, 'airlines' => $airlines, 'aircraft' => $aircraft]);
     }
     public function getRoster()
     {
         $users = User::all();
 
-        return view('crewops.roster.view', ['users' => $users]);
+        return view('materialcrew::roster.view', ['users' => $users]);
     }
     public function postManualPirep(Request $request)
     {
@@ -176,7 +176,7 @@ class CrewOpsController extends Controller
     public function getLogbookDetailed($id)
     {
         $pirep = PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('user')->first();
-        return view('crewops.logbook.show', ['p' => $pirep]);
+        return view('materialcrew::logbook.show', ['p' => $pirep]);
     }
 
      function convertTime($dec)

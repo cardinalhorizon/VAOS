@@ -8,6 +8,7 @@ use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Ramsey\Uuid\Uuid;
 
 class EventsController extends Controller
@@ -16,7 +17,7 @@ class EventsController extends Controller
     {
         // get all the events in the system that are published and are public status.
         $events = AirlineEvent::where(['status' => 1, 'access' => 2])->where(['owner_id' => Auth::user()->id])->get();
-        return view('crewops.events.view', ['events' => $events]);
+        return view('materialcrew::events.view', ['events' => $events]);
     }
     public function view($url_slug)
     {
@@ -26,9 +27,10 @@ class EventsController extends Controller
         }
         catch (Exception $e)
         {
+            Log::error('Event "'.$url_slug.'" was not found.');
             return view('errors.404');
         }
-        return view('crewops.events.show', ['event', $event]);
+        return view('materialcrew::events.show', ['event', $event]);
 
     }
     public function create()
@@ -70,7 +72,7 @@ class EventsController extends Controller
             //dd($fa);
             $event->flights()->createMany($fa);
         }
-        return $event;
+        return redirect()->action('EventsController@view', ['slug' => $event->url_slug]);
     }
     public function store()
     {

@@ -32,8 +32,8 @@ class MajorUpdate extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('airline_id');
-            $table->unsignedInteger('hub_id');
-            $table->integer('pilot_id')->nullable();
+            $table->unsignedInteger('hub_id')->nullable();
+            $table->string('pilot_id')->nullable();
             $table->foreign('airline_id')->references('id')->on('airlines')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('status');

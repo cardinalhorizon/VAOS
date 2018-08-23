@@ -10,6 +10,7 @@ namespace App\Classes;
 
 use App\Models\Airline;
 use App\Models\TypeRating;
+use MongoDB\BSON\Type;
 
 class VAOS_TypeRatings
 {
@@ -21,6 +22,7 @@ class VAOS_TypeRatings
         $tr->name = $data['name'];
         $tr->airline()->associate($airline);
         $tr->save();
+        return true;
     }
 
     public static function ModifyTypeRating($rating_id, $data)
@@ -30,7 +32,11 @@ class VAOS_TypeRatings
 
     public static function AddUserToTypeRating($rating_id, $user_id)
     {
-        //
+        // find the type rating
+        $rating = TypeRating::find($rating_id);
+        $rating->user()->attach($user_id);
+        $rating->save();
+        return true;
     }
 
     public static function VerifyRating($rating_id, $user_id)

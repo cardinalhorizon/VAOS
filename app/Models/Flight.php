@@ -15,7 +15,10 @@ class Flight extends Model
     {
         return $this->belongsTo('App\User');
     }
-
+    public function fo()
+    {
+        return $this->belongsTo('App\User');
+    }
     public function airline()
     {
         return $this->belongsTo('App\Models\Airline');

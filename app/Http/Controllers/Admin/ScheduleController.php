@@ -59,11 +59,13 @@ class ScheduleController extends Controller
 
         VAOS_Schedule::newRoute($data);
         if ($data['createReturn']) {
-            // swap the departure and arrival and change the flight number
+            // Create new variables to store the values
             $newDep            = $data['arricao'];
             $newArr            = $data['depicao'];
+            // write the values to the array
             $data['depicao']   = $newDep;
             $data['arricao']   = $newArr;
+            // add the flight num
             $data['flightnum'] = $data['returnNumber'];
             VAOS_Schedule::newRoute($data);
         }

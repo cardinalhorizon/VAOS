@@ -1,4 +1,4 @@
-@extends('layouts.crewops')
+@extends('materialcrew::layouts.crewops')
 @section('head')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <link href="https://raw.githubusercontent.com/cesarve77/select2-materialize/master/select2-materialize.css" type="text/css" rel="stylesheet" >

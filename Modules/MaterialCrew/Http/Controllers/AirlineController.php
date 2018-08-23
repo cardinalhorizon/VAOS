@@ -27,7 +27,7 @@ class AirlineController extends Controller
         }
 
         //return $airlines;
-        return view('crewops.airlines.index', ['airlines' => $airlines]);
+        return view('materialcrew::airlines.index', ['airlines' => $airlines]);
     }
     public function joinAirline($airline_id)
     {

@@ -18,7 +18,7 @@ class BiddingController extends Controller
     public function index()
     {
         $flights = Flight::where('user_id', Auth::user()->id)->with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
-        return view('crewops.flights.view', ['flights' => $flights]);
+        return view('materialcrew::flights.view', ['flights' => $flights]);
     }
 
     /**
@@ -61,8 +61,8 @@ class BiddingController extends Controller
      */
     public function show($id)
     {
-        $flight = Flight::with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
-        return view('crewops.flights.planning', ['flight' => $flight]);
+        $flight = Flight::with('user', 'fo')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
+        return view('materialcrew::flights.planning', ['flight' => $flight]);
     }
 
     /**

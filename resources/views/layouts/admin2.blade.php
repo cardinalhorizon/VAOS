@@ -565,7 +565,7 @@
 </div>
 <footer class="app-footer">
     <div>
-        <a href="https://fsvaos.net">Virtual Airline Operations System</a>
+        <a href="https://fsvaos.net">Virtual Aviation Operations System</a>
         <span>&copy; 2015-2018 Cardinal Horizon Inc.</span>
     </div>
     <div class="ml-auto">

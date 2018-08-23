@@ -1,4 +1,4 @@
-@extends('layouts.crewops')
+@extends('Modules.MaterialCrew.Resources.views.layouts.crewops')
 
 @section('content')
 
