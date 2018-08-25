@@ -246,7 +246,7 @@ return [
         'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
         'Recaptcha'    => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-        'Module' => Nwidart\Modules\Facades\Module::class,
+        'Module'       => Nwidart\Modules\Facades\Module::class,
     ],
 
 ];
