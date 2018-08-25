@@ -34,7 +34,7 @@ class VAOS_Aircraft
         $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->status = $data['status'];
+        $acf->status       = $data['status'];
 
         // time for the optional stuff
 
