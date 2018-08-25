@@ -110,9 +110,6 @@ class VAOS_Aircraft
         $acf->name         = $data['name'];
         $acf->manufacturer = $data['manufacturer'];
         $acf->registration = $data['registration'];
-        $acf->range        = $data['range'];
-        $acf->maxpax       = $data['maxpax'];
-        $acf->maxgw        = $data['maxgw'];
         $acf->status       = $data['status'];
 
         // time for the optional stuff
