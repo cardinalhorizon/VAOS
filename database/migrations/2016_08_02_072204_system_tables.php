@@ -17,7 +17,7 @@ class SystemTables extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('country');
-            $table->string('iata');
+            $table->string('iata')->nullable();
             $table->string('icao');
             $table->double('lat');
             $table->double('lon');
