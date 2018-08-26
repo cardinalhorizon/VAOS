@@ -20,7 +20,7 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="http://fsvaos.net/bower_components/materialize/dist/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="http://flyspark.org/bower_components/materialize/dist/css/materialize.css"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -106,7 +106,7 @@
     </div>
 </footer>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="http://fsvaos.net/bower_components/materialize/dist/js/materialize.js"></script>
+<script type="text/javascript" src="http://flyspark.org/bower_components/materialize/dist/js/materialize.js"></script>
 <script>
     $(document).ready(function () {
         @if(!env('VAOS_Setup'))
