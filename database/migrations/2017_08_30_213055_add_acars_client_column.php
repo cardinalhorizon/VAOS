@@ -14,7 +14,7 @@ class AddAcarsClientColumn extends Migration
     public function up()
     {
         Schema::table('flights', function (Blueprint $table) {
-            $table->string('acars_client');
+            $table->string('acars_client')->nullable();
             $table->string('fuel_used')->nullable();
         });
     }
