@@ -51,7 +51,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(\App\Models\Flight::where(['user_id' => Auth::user()->id, 'status' => 10])->orderBy('id', 'desc')->limit(10)->get() as $p)
+                        @foreach(\App\Models\Flight::where(['user_id' => Auth::user()->id, 'state' => 2])->orderBy('id', 'desc')->limit(10)->get() as $p)
                             <tr>
                                 <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
                                 <td>{{ $p->depapt->icao }}</td>

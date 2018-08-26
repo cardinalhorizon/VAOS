@@ -135,9 +135,9 @@ class SystemTables extends Migration
             $table->integer('cruise')->nullable();
             $table->text('route_data')->nullable();
             $table->integer('landingrate')->nullable();
-            $table->text('load');
-            $table->time('deptime');
-            $table->time('arrtime');
+            $table->text('load')->nullable();
+            $table->time('deptime')->nullable();
+            $table->time('arrtime')->nullable();
             $table->time('out')->nullable();
             $table->time('off')->nullable();
             $table->time('on')->nullable();
