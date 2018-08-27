@@ -4,13 +4,13 @@ namespace App\Http\Controllers\LegacyACARS;
 
 use App\User;
 use App\Models\Flight;
+use GuzzleHttp\Client;
 use App\Models\Airline;
 use App\Models\ACARSData;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Models\FlightComment;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class smartCARS extends Controller
 {
@@ -74,7 +74,7 @@ class smartCARS extends Controller
             // split the flight string the phpVMS way into Airline Code and Flight Number.
             // Why they did this is beyond me. Foreign keys are another story.....
             // phpVMS is a pretty little princess
-            $flight = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'));
+            $flight        = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'));
             $report['bid'] = $flight['id'];
             //dd($report['bid']);
             // phpVMS sends the aircraft ID from database. Let's use it to our advantage.
