@@ -17,7 +17,7 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        $flights = Flight::where('user_id', Auth::user()->id)->with('user')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->get();
+        $flights = Flight::where('user_id', Auth::user()->id)->with('user', 'airline', 'depapt', 'arrapt', 'aircraft')->filed()->get();
 
         return view('materialcrew::flights.view', ['flights' => $flights]);
     }
