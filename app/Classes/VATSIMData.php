@@ -18,10 +18,7 @@ class VATSIMData
     {
         $allFlights = Flight::where('state', '<=', 1)->with('airline')->get();
         //dd($allFlights->count());
-        foreach ($allFlights as $flight) {
-            $flight->combi = $flight->airline->icao.$flight->flightnum;
-            //dd($flight);
-        }
+
         // get the VATSIM data text file.
         $client = new Client();
         $res    = $client->request('GET', 'http://info.vroute.net/vatsim-data.txt', [
@@ -35,7 +32,7 @@ class VATSIMData
 
         foreach ($allFlights as $flight) {
             foreach ($data_lines as $line) {
-                if (strpos($line, $flight->combi) !== false) {
+                if (strpos($line, $flight->airline->icao.$flight->flightnum) !== false) {
                     // Awesome, we found the flight. Now we need to split the array out and store the data.
                     $data = explode(':', $line);
                     // double check if it's a pre-file or not. If so, don't do anything.
@@ -58,13 +55,11 @@ class VATSIMData
                     $rpt->altitude      = $data[7];
                     $rpt->groundspeed   = $data[8];
                     $rpt->phase         = 'N/A';
-                    $rpt->online        = true;
+                    $rpt->online        = 'VATSIM';
                     $rpt->timeremaining = '0';
                     $rpt->client        = 'vatsim';
                     $rpt->save();
-
                     // update the flight with the current tracking information.
-                    unset($flight['combi']);
                     $flight->lat = $data[5];
                     $flight->lon = $data[6];
                     //$flight->heading = $data[38];
