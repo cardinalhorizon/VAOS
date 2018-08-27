@@ -16,6 +16,7 @@ class FlightsTableFix extends Migration
         Schema::table('flights', function (Blueprint $t) {
             $t->string('flighttime')->nullable();
             $t->string('flight_data')->nullable();
+            $t->boolean('sharing')->nullable();
         });
     }
 
