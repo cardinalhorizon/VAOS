@@ -695,7 +695,7 @@ class smartCARS {
             
         if($lat < 0.005 && $lat > -0.005)
             $lat = 0;        
-        /*
+
         $fields = array(
             'pilotid' =>$dbid,
             'flightnum' =>$flightnumber,
@@ -736,7 +736,7 @@ class smartCARS {
         {
             return false;
         }
-        */
+
         return true;
 	}	
 	static function filepirep($dbid, $code, $flightnumber, $routeid, $flightid, $departureicao, $arrivalicao, $route, $aircraft, $load, $flighttime, $landingrate, $comments, $fuelused, $log) {

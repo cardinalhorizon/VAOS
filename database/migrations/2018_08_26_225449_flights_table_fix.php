@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAcarsClientColumn extends Migration
+class FlightsTableFix extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddAcarsClientColumn extends Migration
      */
     public function up()
     {
-        Schema::table('flights', function (Blueprint $table) {
-            $table->string('acars_client')->nullable();
-            $table->string('fuel_used')->nullable();
+        Schema::table('flights', function (Blueprint $t) {
+            $t->string('flighttime')->nullable();
+            $t->string('flight_data')->nullable();
         });
     }
 

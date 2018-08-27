@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="{{ mix('/css/materialcrew.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('/css/materialcrew.css') }}"  media="screen,projection"/>
     <link rel="stylesheet" href="{{ asset('/css/material_fix.css') }}">
     <!--Let browser know website is optimized for mobile-->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->

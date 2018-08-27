@@ -173,11 +173,12 @@ class VAOS_Schedule
             $entry->route = $data['route'];
         }
         //dd($data);
+        /*
         if (array_key_exists('aircraft_group', $data)) {
             //dd($data);
             $acfgrp = $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
-            $entry->aircraft_group()->associate($acfgrp);
-        }
+            $entry->aircraft_group()->attach($data['aircraft_group'], ['primary' => true]);
+        }*/
         $entry->seasonal = true;
         //$entry->daysofweek = "0123456";
         $entry->type = $data['type'];

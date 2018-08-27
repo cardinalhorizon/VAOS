@@ -183,7 +183,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         //Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
-
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -246,7 +246,7 @@ return [
         'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
         'Recaptcha'    => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-
+        'Module'       => Nwidart\Modules\Facades\Module::class,
     ],
 
 ];
