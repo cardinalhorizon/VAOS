@@ -6,9 +6,11 @@ use App\User;
 use App\Models\Flight;
 use App\Models\Airline;
 use App\Models\ACARSData;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Models\FlightComment;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class smartCARS extends Controller
 {
@@ -72,7 +74,8 @@ class smartCARS extends Controller
             // split the flight string the phpVMS way into Airline Code and Flight Number.
             // Why they did this is beyond me. Foreign keys are another story.....
             // phpVMS is a pretty little princess
-            $report['bid'] = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'))->id;
+            $flight = self::getProperFlightNum($request->input('flightnum'), $request->input('pilotid'));
+            $report['bid'] = $flight['id'];
             //dd($report['bid']);
             // phpVMS sends the aircraft ID from database. Let's use it to our advantage.
             //$report['aircraft'] = Aircraft::where('registration', $request->input('registration'))->first();
@@ -97,8 +100,14 @@ class smartCARS extends Controller
                 'status' => 800,
             ]);
         }
+        // if the flight is not activated, activate it!
+        if ($flight['state'] === 0) {
+            $flight->state = 1;
+            $flight->save();
+        }
         // find if the row exists
-        $rpt = ACARSData::new();
+
+        $rpt = new ACARSData();
         $rpt->user()->associate($report['user']);
         $rpt->bid()->associate($report['bid']);
         $rpt->lat           = $report['lat'];
@@ -108,11 +117,18 @@ class smartCARS extends Controller
         $rpt->groundspeed   = $report['groundspeed'];
         $rpt->phase         = $report['phase'];
         $rpt->client        = $report['client'];
-        $rpt->distremain    =  $report['distremain'];
+        //$rpt->distremain    =  $report['distremain'];
         $rpt->timeremaining = $report['timeremaining'];
         $rpt->online        =  $report['online'];
         $rpt->save();
-
+        /*
+        $client = new Client();
+        $client->request('POST', 'https://discordapp.com/api/webhooks/463090163002638346/RUSA8CiVZynwGjqs59lRTc1u4l3sFlI0oQOjjbaUREPCOkFQNr7Tj2D38dkXoq8TMsMU', [
+            'form_params' => [
+                'content' => "**DEBUG**: Position Report: ".$report['user']." Flight ID: ".$report['bid']
+            ]
+        ]);
+        */
         return response()->json([
             'status' => 200,
         ]);
@@ -169,13 +185,13 @@ class smartCARS extends Controller
 
             // ok now that we deduced that, let's find the bid.
             //dd($userid);
-            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->first();
+            return Flight::where(['user_id' => $userid, 'airline_id' => $a->id, 'flightnum' => $ret['flightnum']])->where('state', '<=', '1')->first();
         }
 
         // Invalid flight number
         $ret['code']      = '';
         $ret['flightnum'] = $flightnum;
 
-        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->first();
+        return Flight::where(['user_id' => $userid, 'flightnum' => $ret['flightnum']])->where('state', '<=', '1')->first();
     }
 }
