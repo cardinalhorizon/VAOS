@@ -26,15 +26,25 @@ class VAOS_Airports
         $data    = json_decode($res, true);
         $airport = new Airport();
         // return dd($icao);
+        if ($data['status'] !== 200)
+        {
+            abourt(404, 'Airport Was Not Found in Master Database. Please Contact Support');
+        }
         try {
-            $airport->id      = $data['airport']['id'];
-            $airport->name    = $data['airport']['name'];
-            $airport->icao    = $data['airport']['gps_code'];
-            $airport->iata    = $data['airport']['iata_code'];
-            $airport->lat     = $data['airport']['latitude_deg'];
-            $airport->lon     = $data['airport']['longitude_deg'];
-            $airport->city    = $data['airport']['municipality'];
-            $airport->country = $data['airport']['iso_country'];
+            $airport->id         = $data['airport']['id'];
+            $airport->name       = $data['airport']['name'];
+            $airport->icao       = $data['airport']['gps_code'];
+            $airport->iata       = $data['airport']['iata_code'];
+            $airport->lat        = $data['airport']['latitude_deg'];
+            $airport->lon        = $data['airport']['longitude_deg'];
+            $airport->city       = $data['airport']['municipality'];
+            $airport->country    = $data['airport']['iso_country'];
+
+            // Add the Banner URL if we got it
+            if (!is_null($data['airport']['banner_url'])) {
+                $airport->banner_url = $data['airport']['banner_url'];
+            }
+
         } catch (Exception $e) {
             return dd($data);
         }
