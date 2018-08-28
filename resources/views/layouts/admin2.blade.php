@@ -39,15 +39,7 @@
     </button>
     <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-            <select id="select1" name="select1" class="form-control">
-                <option value="0">Global Administrator</option>
-                <option value="1">JCO - Jet Connect</option>
-                <option value="2">SPK - Spark Virtual</option>
-                <option value="3">DAL - Delta Virtual</option>
-            </select>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="{{ route('flightops.index') }}">Pilot Interface</a>
         </li>
         <li class="nav-item px-3">
             <a class="nav-link" href="#">Users</a>
@@ -81,12 +73,6 @@
                 <div class="dropdown-header text-center">
                     <strong>Account</strong>
                 </div>
-                <select id="select1" name="select1" class="dropdown-item">
-                    <option value="0">Global Administrator</option>
-                    <option value="1">JCO - Jet Connect</option>
-                    <option value="2">SPK - Spark Virtual</option>
-                    <option value="3">DAL - Delta Virtual</option>
-                </select>
                 <a class="dropdown-item" href="#">
                     <i class="fa fa-envelope-o"></i> Messages
                     <span class="badge badge-success">42</span>
