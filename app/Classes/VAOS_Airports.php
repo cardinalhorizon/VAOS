@@ -26,8 +26,7 @@ class VAOS_Airports
         $data    = json_decode($res, true);
         $airport = new Airport();
         // return dd($icao);
-        if ($data['status'] !== 200)
-        {
+        if ($data['status'] !== 200) {
             abourt(404, 'Airport Was Not Found in Master Database. Please Contact Support');
         }
         try {
@@ -41,10 +40,9 @@ class VAOS_Airports
             $airport->country    = $data['airport']['iso_country'];
 
             // Add the Banner URL if we got it
-            if (!is_null($data['airport']['banner_url'])) {
+            if (! is_null($data['airport']['banner_url'])) {
                 $airport->banner_url = $data['airport']['banner_url'];
             }
-
         } catch (Exception $e) {
             return dd($data);
         }
