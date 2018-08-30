@@ -110,6 +110,8 @@
 
 <body class="grey darken-4" style="position: relative;">
 <div class="hide-on-med-and-down" style="position: fixed; z-index: -99; height: 100vh; width: 100vw; background: url('{{ asset('/img/vaos_df_bg-01.svg') }}') black no-repeat center; background-size: cover;"></div>
+<div style="background: #9C222E;color: white; text-align: center; padding: 5px; position: fixed; bottom: 0; z-index: 1000; width: 100vw;">Welcome to the VAOS {{config('app.version')}} Beta. Please be aware of all bugs and report them to the <a href="https://github.com/FSVAOS/VAOS/issues">GitHub Issues Page</a>. Questions? Head over to <a href="https://discord.gg/xWFPf4W">our Discord server</a>.
+</div>
 <div class="navbar-fixed">
 <nav class="grey darken-3 z-depth-2 hide-on-large-only">
     <div>
@@ -179,7 +181,8 @@
     </form>
 </ul>
 <!-- Main Sidebar Static -->
-<main style="">
+<main style="" id="app">
+    
     <div class="hide-on-med-and-down" style="width: 100%; height: 150px; margin-bottom: 2rem;">
         <img src="{{ asset('/img/MainLogo.svg') }}" style="height: 60%; display: block;
     margin-left: auto;
@@ -202,9 +205,22 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Dismiss</a>
         </div>
     </div>
+    <div id="betaDisclaimer" class="modal">
+        <div class="modal-content">
+            <h4>Welcome to the VAOS 2.0 Beta</h4>
+            <h5>Current Release{{config('app.version')}}</h5>
+            <p>Please note that you're testing beta software. Expect bugs and display glitches here and there. If you find a bug, please report it along with your Laravel.log file and your hosting configuration to the <a href="https://github.com/FSVAOS/VAOS/issues">GitHub Issues Page</a>
+                Thank you for participating in the beta. For updated information regarding what's fixed/broken, please head over to <a href="https://discord.gg/xWFPf4W">our Discord server</a></p>
+            <h5>Taylor Broad</h5>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Dismiss</a>
+        </div>
+    </div>
 </main>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('materialize/js/materialize.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/materialcrew.js') }}"></script>
 <script>
     $('.sidenav').sidenav();
     $('.modal').modal();

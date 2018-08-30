@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <div class="row">
+    <div class="row" style="margin-top 2rem;">
         <div class="col m6 s12">
             <div class="card-offset-title">Start New Flight</div>
             <div class="card grey darken-2">
