@@ -126,18 +126,8 @@
         </div>
         <div class="col m5 s12">
             <div class="card-offset-title">Weather</div>
-            <div class="card grey darken-2">
-                <div class="card-content white-text">
-                    <ul class="collection with-header">
-                        <li class="collection-item"><div>Airline<div class="secondary-content">{{ $flight->airline->name }}</div></div></li>
-                        <li class="collection-item"><div>Flight Number<div class="secondary-content">{{ $flight->flightnum }}</div></div></li>
-                        <li class="collection-item"><div>Departure<div class="secondary-content">{{ $flight->depapt->name }}</div></div></li>
-                        <li class="collection-item"><div>Arrival<div class="secondary-content">{{ $flight->arrapt->name }}</div></div></li>
-                        <li class="collection-item"><div>Equipment Type<div class="secondary-content">{{ $flight->aircraft->icao }}</div></div></li>
-                        <li class="collection-item"><div>Registration<div class="secondary-content">{{ $flight->aircraft->registration }}</div></div></li>
-                    </ul>
-                </div>
-            </div>
+            <airport-wx icao="{{ $flight->depapt->icao }}"></airport-wx>
+            <airport-wx icao="{{ $flight->arrapt->icao }}"></airport-wx>
         </div>
     </div>
     <div class="row">

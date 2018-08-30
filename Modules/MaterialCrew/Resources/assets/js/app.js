@@ -14,3 +14,8 @@ Vue.http.interceptors.push((request, next) => {
 });
 
 Vue.component('AirlineList', require('./components/AirlineList.vue'));
+Vue.component('airport-wx', require('./components/AirportWX.vue'));
+
+const app = new Vue({
+    el: '#app'
+});
