@@ -2,14 +2,13 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
+use App\Models\Flight;
+use App\Models\Aircraft;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Classes\VAOS_Airports as APC;
-use App\Models\Flight;
-use App\Models\Airport;
-use App\Models\Aircraft;
 use Illuminate\Support\Facades\Auth;
+use App\Classes\VAOS_Airports as APC;
 
 class FreeFlightController extends Controller
 {
@@ -49,7 +48,7 @@ class FreeFlightController extends Controller
         $acf = Aircraft::find($request->input('aircraft'));
         // Create the flight
         $flight = new Flight();
-        
+
         $flight->flightnum = $acf->registration;
 
         $flight->depapt()->associate($dep);
@@ -58,11 +57,12 @@ class FreeFlightController extends Controller
         $flight->aircraft()->associate($acf->id);
 
         $flight->state = 0;
-        
+
         $flight->save();
+
         return action('BiddingController@show', ['id' => $flight->id]);
     }
-    
+
     /**
      * Show the specified resource.
      *
