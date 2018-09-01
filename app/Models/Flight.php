@@ -43,7 +43,7 @@ class Flight extends Model
 
     public function flight_data()
     {
-        return $this->hasMany('App\Models\ACARSData');
+        return $this->hasMany('App\Models\FlightData');
     }
 
     public function scopeFiled($query)

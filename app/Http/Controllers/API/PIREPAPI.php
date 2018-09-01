@@ -112,7 +112,7 @@ class PIREPAPI extends Controller
 
     public function getFlight($id)
     {
-        $flight = PIREP::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('acarsdata')->first();
+        $flight = Flight::where('id', $id)->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->with('flight_data')->first();
 
         return $flight;
     }

@@ -5,6 +5,11 @@ namespace Modules\MaterialCrew\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Classes\VAOS_Airports as APC;
+use App\Models\Flight;
+use App\Models\Airport;
+use App\Models\Aircraft;
+use Illuminate\Support\Facades\Auth;
 
 class FreeFlightController extends Controller
 {
@@ -37,8 +42,27 @@ class FreeFlightController extends Controller
      */
     public function store(Request $request)
     {
-    }
+        //dd($request);
+        // Check if the airports are added. If not, we need to add them.
+        $dep = APC::checkOrAdd($request->input('depicao'));
+        $arr = APC::checkOrAdd($request->input('arricao'));
+        $acf = Aircraft::find($request->input('aircraft'));
+        // Create the flight
+        $flight = new Flight();
+        
+        $flight->flightnum = $acf->registration;
 
+        $flight->depapt()->associate($dep);
+        $flight->arrapt()->associate($arr);
+        $flight->user()->associate(Auth::user()->id);
+        $flight->aircraft()->associate($acf->id);
+
+        $flight->state = 0;
+        
+        $flight->save();
+        return action('BiddingController@show', ['id' => $flight->id]);
+    }
+    
     /**
      * Show the specified resource.
      *

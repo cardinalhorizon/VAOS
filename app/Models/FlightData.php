@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ACARSData extends Model
+class FlightData extends Model
 {
-    protected $table   = 'acarsdata';
+    protected $table   = 'flight_data';
     protected $guarded = [];
 
     public function user()
@@ -14,7 +14,7 @@ class ACARSData extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function bid()
+    public function flight()
     {
         return $this->belongsTo('App\Models\Flight');
     }

@@ -124,7 +124,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">
                         <i class="nav-icon icon-speedometer"></i> Dashboard
-                        <span class="badge badge-primary">NEW</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -140,8 +139,8 @@
                             <a class="nav-link" href="{{ route('admin.fleet.index') }}" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Management</a>
                         </li>
-                        <li class="nav-item"
-                            <a class="nav-link" href="register.html" target="_top">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Groups</a>
                         </li>
                         <li class="nav-item">
@@ -159,7 +158,7 @@
                                 <i class="nav-icon fa fa-caret-right"></i> Route Management</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="404.html" target="_top">
+                            <a class="nav-link" href="{{ route('admin.data.schedule') }}" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Import/Export</a>
                         </li>
                     </ul>
@@ -169,11 +168,11 @@
                         <i class="nav-icon far fa-building"></i> Airports</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html" target="_top">
+                            <a class="nav-link" href="#" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Airport Management</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="register.html" target="_top">
+                            <a class="nav-link" href="#" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Hub Management</a>
                         </li>
                     </ul>
@@ -184,7 +183,7 @@
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
                             <a class="nav-link" href="login.html" target="_top">
-                                <i class="nav-icon fa fa-caret-right"></i> Active Bids</a>
+                                <i class="nav-icon fa fa-caret-right"></i> Active Flights</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="register.html" target="_top">
@@ -197,28 +196,32 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="typography.html">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon far fas fa-certificate"></i> Type Ratings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="typography.html">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon far far fa-id-badge"></i> Pilots</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="typography.html">
+                    <a class="nav-link" href="#">
                         <i class="nav-icon far fa-calendar-alt"></i> Events</a>
                 </li>
                 <li class="nav-title">Administration</li>
+                <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.airlines.index' )}}">
+                            <i class="nav-icon fa fa-globe"></i> Airlines</a>
+                    </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#">
                         <i class="nav-icon far fa-user"></i> Users</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html" target="_top">
+                            <a class="nav-link" href="{{ route('admin.users.index') }}" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Manage Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="register.html" target="_top">
+                            <a class="nav-link" href="#" target="_top">
                                 <i class="nav-icon fa fa-caret-right"></i> Permissions</a>
                         </li>
                     </ul>
@@ -227,6 +230,10 @@
                     <a class="nav-link" href="charts.html">
                         <i class="nav-icon fa fa-cog"></i> Settings</a>
                 </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="charts.html">
+                            <i class="nav-icon fa fa-puzzle-piece"></i> Modules</a>
+                    </li>
                 <li class="nav-item">
                     <a class="nav-link" href="charts.html">
                         <i class="nav-icon fa fa-info"></i> About</a>

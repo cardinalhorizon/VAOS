@@ -113,21 +113,58 @@
         </div>
         <div id="tabAircraft" class="col m10 s12 offset-m1 tab-panel">
             <div class="row">
+                @foreach(\App\Models\Aircraft::where('user_id', Auth::user()->id)->get() as $a)
                 <div class="col xl6 l12 m12 s12">
-                    <a class="text-white modal-trigger" style="color: white;" href="">
+                    <a class="text-white modal-trigger" style="color: white;" href="#">
                         <div class="card hoverable" style="height: 175px; background: url('https://airfactsjournal.com/files/2013/11/172-sales.jpg') black no-repeat center; background-size: cover; border-right: #6aff9a 20px solid; border-radius: 2px 5px 5px 2px">
                             <div style="position: absolute; height: 100%; width: 100%; background-color: rgba(25,25,25,.65);z-index: 0"></div>
                             <div class="card-content" style="position: relative; z-index: 5;height:175px;display:block;">
-                                <div style="font-size: 2.4rem; font-weight: bold; line-height: 3rem;">N5290V</div>
+                                <div style="font-size: 2.4rem; font-weight: bold; line-height: 3rem;">{{$a->registration}}</div>
                                 <div style="color: #ddd; font-size: 1.4rem; position: relative; margin-top: 65px; bottom: 0; width: 100%; font-weight: normal; display: flex;justify-content: space-between;">
-                                    <span><i class="material-icons" style="font-size: 1.4rem;">flight</i> 172R</span>
+                                    <span><i class="material-icons" style="font-size: 1.4rem;">flight</i> {{$a->icao}}</span>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
+                @endforeach
             </div>
-            <div style="position: fixed; z-index: 10; right: 4rem; bottom: 4rem;"><a id="addAircraft" class="btn-floating btn-large waves-effect waves-light" style="background-color: #61c7ff;"><i class="material-icons">add</i></a></div></div>
+            <div style="position: fixed; z-index: 10; right: 4rem; bottom: 4rem;"><a id="addAircraft" class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modalAddAircraft" style="background-color: #61c7ff;"><i class="material-icons">add</i></a></div></div>
+            <div id="modalAddAircraft" class="modal">
+                    <form action="{{ route('flightops.profile.addAircraft') }}" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-content">
+                            <h4>Add Personal Aircraft</h4>
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="input-field col s12">
+                                    <input id="icao" name="icao" type="text" class="validate">
+                                    <label for="icao">ICAO</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="name" name="name" type="text" class="validate">
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="manufacturer" name="manufacturer" type="text" class="validate">
+                                    <label for="manufacturer">Manufacturer</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="registration" name="registration" type="text" class="validate">
+                                    <label for="registration">Registration</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-flat green darken-3 white-text" type="submit">Search</button>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Cancel</a>
+                        </div>
+                    </form>
+            </div>
         <div id="tabAirlines" class="col s12 tab-panel">
             <div class="row">
                 <div class="col xl12 l12 m12 s12">

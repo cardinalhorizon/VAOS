@@ -1,14 +1,9 @@
 @extends('layouts.admin2')
-
-
 @section('content')
     <div id="#updateCheck"></div>
     <div class="alert alert-danger" role="alert">
         <b>Admin Panel:</b> The Admin section of VAOS is currently in a overhaul. Some elements of the old admin panel are
-        mixed in with the new. The overhaul will be addressed in Beta IV when the Material Crew interface is release
-        candidate. If there are "game breaking" bugs, please don't hesitate to submit an issue on
-        <a href="https://github.com/FSVAOS/VAOS/issues">GitHub</a>. Know however, anything that's not critical will not be
-        addressed until the later releases. For more information regarding public beta releases, <a href="http://fsvaos.net/publicbeta">head to our public info page</a>. ~ Taylor Broad
+        mixed in with the new. The overhaul will be addressed in the <b>NEXT</b> release. ~ Taylor Broad
     </div>
     <div class="row">
         <div class="col-12">

@@ -6,6 +6,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
         Route::post('/settings', 'CrewOpsController@profileUpdate')->name('profile.update');
         Route::get('/settings', 'CrewOpsController@profileEdit')->name('profile.edit');
         Route::get('/profile/{id}', 'CrewOpsController@profileShow')->name('profile.view');
+        Route::post('/profile', 'CrewOpsController@addAircraft')->name('profile.addAircraft');
         Route::get('/schedule', 'CrewOpsController@getSchedule')->name('schedule');
         Route::get('/schedule/search', 'CrewOpsController@getScheduleSearch')->name('schedule.search');
         Route::get('/schedule/{id}/advbid', 'CrewOpsController@getScheduleAdvBid')->name('schedule.advbid');

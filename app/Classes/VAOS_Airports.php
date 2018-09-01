@@ -13,6 +13,19 @@ use App\Models\Airport;
 
 class VAOS_Airports
 {
+    public static function checkOrAdd($icao)
+    {
+        try 
+        {
+            //dd($icao);
+            $id = Airport::where('icao', $icao)->firstOrFail();
+        }
+        catch (Exception $e) 
+        {
+            $id = VAOS_Airports::AddAirport($icao);
+        }
+        return $id;
+    }
     public static function AddAirport($icao)
     {
         // lets request the airport identifier from the central database
@@ -49,5 +62,6 @@ class VAOS_Airports
             return dd($data);
         }
         $airport->save();
+        return $airport->id;
     }
 }

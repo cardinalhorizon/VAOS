@@ -50,7 +50,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
         Route::post('/airlines', 'ImportExportController@postAirlines');
         Route::get('/fleet', 'ImportExportController@getFleet')->name('fleet');
         Route::post('/fleet', 'ImportExportController@postFleet');
-        Route::get('/schedule', 'ImportExportController@getSchedule');
+        Route::get('/schedule', 'ImportExportController@getSchedule')->name('schedule');
         Route::post('/schedule', 'ImportExportController@postSchedule');
     });
 });

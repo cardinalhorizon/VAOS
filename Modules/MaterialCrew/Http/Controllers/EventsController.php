@@ -41,7 +41,7 @@ class EventsController extends Controller
     public function createGroupFlight(Request $request)
     {
         $event                    = new AirlineEvent();
-        $event->name              = "'s Group Flight";
+        $event->name              = Auth::user()->username."'s Group Flight";
         $event->url_slug          = Uuid::uuid1()->toString();
         $event->type              = 1;
         $event->access            = 1;

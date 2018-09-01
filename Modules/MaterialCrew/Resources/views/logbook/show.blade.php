@@ -32,9 +32,8 @@
                                 <li class="collection-item"><div>Pilot ID<div class="secondary-content">{{ $p->user->pilotid }}</div></div></li>
                                 <li class="collection-item"><div>Full Name<div class="secondary-content">{{ $p->user->first_name }} {{ $p->user->last_name }}</div></div></li>
                                 <li class="collection-item"><div>Join Date<div class="secondary-content">{{ date('d/m/Y', strtotime($p->user->created_at)) }}</div></div></li>
-                                <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\Models\LogbookEntry::where('user_id', $p->user->id)->avg('landingrate') }}</div></div></li>
-                                <li class="collection-item"><div>Total Hours<div class="secondary-content">{{ \App\Models\LogbookEntry::where('user_id', $p->user->id)->sum('flighttime') }}</div></div></li>
-
+                                <li class="collection-item"><div>Avg Landing Rate<div class="secondary-content">{{ \App\Models\Flight::where('user_id', $p->user->id)->avg('landingrate') }}</div></div></li>
+                                <li class="collection-item"><div>Total Hours<div class="secondary-content">{{ \App\Models\Flight::where('user_id', $p->user->id)->sum('flighttime') }}</div></div></li>
                             </ul>
                         </div>
                     </div>
