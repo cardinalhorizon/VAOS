@@ -22,10 +22,12 @@ class Aircraft extends Model
     {
         return $this->belongsTo('App\Models\Airline');
     }
+
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+
     public function aircraft_group()
     {
         return $this->belongsToMany('App\Models\AircraftGroup', 'aircraft_group_pivot');

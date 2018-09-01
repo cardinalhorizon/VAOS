@@ -146,7 +146,7 @@ class CrewOpsController extends Controller
 
         return view('materialcrew::logbook.view', ['pireps' => $pireps]);
     }
-    
+
     public function getScheduleSearch()
     {
         $airports = Airport::all();
@@ -211,9 +211,10 @@ class CrewOpsController extends Controller
         //return lz($hours).":".lz($minutes).":".lz($seconds);
         return $hours;
     }
+
     public function addAircraft(Request $request)
     {
-        $acf = new Aircraft();
+        $acf  = new Aircraft();
         $data = $request->all();
         //try
         $acf->icao         = $data['icao'];
@@ -224,8 +225,10 @@ class CrewOpsController extends Controller
         $acf->user()->associate(Auth::user());
 
         $acf->save();
+
         return redirect(route('flightops.profile', ['id' => Auth::user()->id]));
     }
+
     // lz = leading zero
     public function lz($num)
     {
