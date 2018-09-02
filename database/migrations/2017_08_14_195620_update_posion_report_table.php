@@ -13,7 +13,7 @@ class UpdatePosionReportTable extends Migration
      */
     public function up()
     {
-        Schema::table('acarsdata', function (Blueprint $table) {
+        Schema::table('flight_data', function (Blueprint $table) {
             $table->string('online', 10);
             $table->string('timeremaining', 6);
         });
