@@ -18,9 +18,9 @@ class BiddingController extends Controller
     public function index()
     {
         $flights = Flight::where('user_id', Auth::user()->id)->with('user', 'airline', 'depapt', 'arrapt', 'aircraft')->filed()->get();
-        
+
         foreach ($flights as $f) {
-            if (!is_null($f['airline_id'])) {
+            if (! is_null($f['airline_id'])) {
                 $f->flight = $f->airline->icao.$f->flightnum;
             } else {
                 $f->flight = $f->flightnum;
