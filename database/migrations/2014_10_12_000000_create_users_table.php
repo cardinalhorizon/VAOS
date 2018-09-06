@@ -18,11 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('username')->unique();
-            $table->string('pilotid')->unique()->nullable(); // Legacy Carryover for VAs
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('vatsim')->unique()->nullable();
-            $table->string('ivao')->unique()->nullable();
+            $table->string('vatsim')->nullable();
+            $table->string('ivao')->nullable();
             $table->integer('status');
             $table->boolean('admin');
             $table->rememberToken();
