@@ -58,7 +58,7 @@ class ScheduleController extends Controller
         // ok let's check and set the proper id for aircraf group
 
         VAOS_Schedule::newRoute($data);
-        if (! is_null($data['createReturn'])) {
+        if (isset($data['createReturn'])) {
             // Create new variables to store the values
             $newDep            = $data['arricao'];
             $newArr            = $data['depicao'];
