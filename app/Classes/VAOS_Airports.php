@@ -52,7 +52,7 @@ class VAOS_Airports
             $airport->country    = $data['airport']['iso_country'];
 
             // Add the Banner URL if we got it
-            if (! isset($data['airport']['banner_url'])) {
+            if (isset($data['airport']['banner_url'])) {
                 $airport->banner_url = $data['airport']['banner_url'];
             }
         } catch (Exception $e) {
