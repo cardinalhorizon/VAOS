@@ -13,7 +13,7 @@ class AddBannerUrlToAirport extends Migration
      */
     public function up()
     {
-        Schema::table('airports', function(Blueprint $table) {
+        Schema::table('airports', function (Blueprint $table) {
             $table->string('banner_url')->nullable();
         });
     }
