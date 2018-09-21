@@ -15,7 +15,11 @@ Vue.http.interceptors.push((request, next) => {
 
 Vue.component('AirlineList', require('./components/AirlineList.vue'));
 Vue.component('airport-wx', require('./components/AirportWX.vue'));
+Vue.component('flight-widget', require('./components/FlightWidget.vue'));
 
 const app = new Vue({
     el: '#app'
+});
+const nav = new Vue({
+    el: '.sidenav'
 });

@@ -87,6 +87,9 @@
     <div class="row">
         <div class="col m10 s12 offset-m1" style="display: flex;justify-content: space-between;position: relative; z-index: 5;">
             <a class="waves-effect waves-light btn"><i class="material-icons left">flight_takeoff</i>activate flight</a>
+            @if($flight->state === 1)
+                <a href="{{route('flightops.flights.manualfile', ['id' => $flight->id])}}" class="waves-effect waves-light btn brand b-red"><i class="material-icons left">save</i>close flight</a>
+            @endif
             <input type="text" id="shareLink" value="{{ url('/share/'.$flight->id) }}" style="display: none;">
             <a class="waves-effect waves-light btn modal-trigger" href="#shareLinkModal" id="shareLinkButton"><i class="material-icons left">share</i>Generate Invite Link</a>
         </div>
@@ -127,7 +130,7 @@
         <div class="col m5 s12">
             <div class="card-offset-title">Weather</div>
             <airport-wx icao="{{ $flight->depapt->icao }}"></airport-wx>
-            <airport-wx icao="{{ $flight->arrapt->icao }}"></airport-wx>
+            <airport-wx icao="{{ $flight->arrapt->icao }}" taf></airport-wx>
         </div>
     </div>
     <div class="row">

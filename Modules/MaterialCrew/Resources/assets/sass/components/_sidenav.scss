@@ -11,10 +11,11 @@
   padding-bottom: 60px;
   background-color: $sidenav-bg-color;
   z-index: 999;
-  overflow-y: auto;
   will-change: transform;
   backface-visibility: hidden;
   transform: translateX(-105%);
+  overflow-x: hidden;
+  overflow-y: auto;
 
   @extend .z-depth-1;
 

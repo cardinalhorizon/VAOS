@@ -23,6 +23,12 @@
     <link rel="stylesheet" href="{{ asset('/css/material_fix.css') }}">
     <!--Let browser know website is optimized for mobile-->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+            'baseUrl' => config('app.url')
+        ]); ?>
+    </script>
     <style>
         body {
             font-family: 'Cabin', 'Raleway', sans-serif;
@@ -132,7 +138,7 @@
     </div>
 </nav>
 </div>
-<ul id="slide-out" class="sidenav sidenav-fixed white-text" style="background-color: rgba(25,25,25,.75)">
+<ul id="slide-out" class="sidenav sidenav-fixed white-text" style="background-color: rgba(25,25,25,.75);">
     <li>
         <div class="user-view" style="height: 176px; padding-top: 50px;">
             <div class="background" style="background: url('https://i.imgur.com/qOXmrci.png') black no-repeat center; background-size: cover;">
@@ -151,7 +157,14 @@
     <div class="row">
         <div class="col s12">
             <div class="grey darken-3" style="border-radius: 10px;padding: 5px;text-align: center;">
-                <div style="font-size: 24px; ">Flights</div>
+                <div style="font-size: 24px; margin-bottom: .5rem;">Flights</div>
+                <?php
+                $flight = \App\Models\Flight::where('user_id', Auth::user()->id)->active()->first();
+                ?>
+                @if(!is_null($flight))
+                    <a href="{{route('flightops.flights.show', ['id' => $flight->id])}}"><div class="brand-primary white-text" style="padding: .5rem;margin-bottom: .5rem; border-radius: 10px;">GO TO ACTIVE FLIGHT</div></a>
+                    <flight-widget flight="{{ $flight->id }}"></flight-widget>
+                @endif
                 <a href="{{ route('flightops.flights.index') }}" style="color: white;">
                     <span class="ibox">Upcoming <div style="font-size: 40px;padding-top:10px;">{{ \App\Models\Flight::where('user_id', Auth::user()->id)->filed()->count() }}</div></span>
                 </a>
@@ -222,6 +235,7 @@
 <script type="text/javascript" src="{{ URL::asset('materialize/js/materialize.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/materialcrew.js') }}"></script>
 <script>
+
     $('.sidenav').sidenav();
     $('.modal').modal();
 </script>

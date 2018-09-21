@@ -3,6 +3,7 @@
 namespace Modules\MaterialCrew\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\FlightData;
 use Illuminate\Http\Request;
 use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
@@ -76,6 +77,18 @@ class BiddingController extends Controller
         return view('materialcrew::flights.planning', ['flight' => $flight]);
     }
 
+    public function telemetry($id)
+    {
+        $flight = Flight::with('user', 'fo')->with('airline')->with('depapt')->with('arrapt')->with('aircraft')->find($id);
+        if (! is_null($flight['airline_id'])) {
+            $flight->flight = $flight->airline->icao.$flight->flightnum;
+        } else {
+            $flight->flight = $flight->flightnum;
+        }
+
+        return $flight;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -86,6 +99,31 @@ class BiddingController extends Controller
     public function edit($id)
     {
         //
+    }
+    public function manualFile($id, Request $request)
+    {
+        // Get the flight
+        $flight = Flight::with('depapt', 'arrapt', 'flight_data')->find($id);
+
+        $vatsim_data = FlightData::where(['flight_id'=> $id, 'client' => 'vatsim'])->get();
+        $end = $vatsim_data->last();
+
+        //dd($vatsim_data);
+        // Run the distance check.
+        $dep = sqrt(pow($flight->depapt->lat - $vatsim_data[0]['lat'], 2) + pow($flight->depapt->lon - $vatsim_data[0]['lon'], 2));
+        $arr = sqrt(pow($flight->arrapt->lat - $end['lat'], 2) + pow($flight->arrapt->lon - $end['lon'], 2));
+
+        if ($dep <= .5 && $arr <= .5)
+        {
+            $flight->state = 2;
+            $flight->status = 1;
+        }
+        else {
+            $flight->state = 2;
+            $flight->status = 0;
+        }
+        $flight->save();
+        return action('BiddingController@show', ['id' => $flight->id]);
     }
 
     /**

@@ -14,7 +14,8 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
         Route::get('/logbook/{id}', 'CrewOpsController@getLogbookDetailed')->name('logbook.show');
         Route::resource('/flights', 'BiddingController');
         Route::get('/roster', 'CrewOpsController@getRoster')->name('roster');
-        Route::post('/filepirep', 'CrewOpsController@postManualPirep')->name('filepirep');
+        Route::get('/flights/{id}/close', 'BiddingController@manualFile')->name('flights.manualfile');
+        Route::get('/flights/{id}/telemetry', 'BiddingController@telemetry')->name('flights.telemetry');
         Route::get('/freeflight', 'FreeFlightController@create')->name('freeflight.create');
         Route::post('/freeflight', 'FreeFlightController@store')->name('freeflight.store');
         Route::group(['prefix' => '/airlines', 'as' => 'airlines.'], function () {
