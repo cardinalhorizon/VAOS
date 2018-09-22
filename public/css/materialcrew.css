@@ -7902,12 +7902,13 @@ input[type=range].focused:focus:not(.active)::-ms-thumb {
   padding-bottom: 60px;
   background-color: #fff;
   z-index: 999;
-  overflow-y: auto;
   will-change: transform;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   -webkit-transform: translateX(-105%);
           transform: translateX(-105%);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .sidenav.right-aligned {
