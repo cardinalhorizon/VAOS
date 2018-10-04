@@ -22,8 +22,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link href="{{ asset('coreui/vendors/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
     <!-- Main styles for this application-->
-    <link href="{{ asset('coreui/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css')}}" rel="stylesheet">
     <link href="{{ asset('coreui/vendors/pace-progress/css/pace.min.css')}}" rel="stylesheet">
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+            'baseUrl' => url('/'),
+            'user' => \App\User::with('airlines', 'airlines.hubs')->find(Auth::user()->id),
+            'airlines' => \App\Models\Airline::with('hubs')->get()
+        ]); ?>
+    </script>
+
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 <header class="app-header navbar">
@@ -31,7 +41,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{ asset('img/VAOSLogo.png') }}" height="40" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="{{ asset('img/MainLogo.svg') }}" height="40" alt="CoreUI Logo">
         <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
@@ -115,14 +125,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 </header>
-<div class="app-body">
+<div class="app-body" id="app">
 
-    <div class="sidebar">
+    <div class="sidebar" style="overflow-y: auto">
+        <side-nav-controls></side-nav-controls>
+        {{--
         <nav class="sidebar-nav">
             <ul class="nav">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="{{ route('admin.index') }}">
                         <i class="nav-icon icon-speedometer"></i> Dashboard
                     </a>
                 </li>
@@ -241,10 +253,15 @@
 
                 <li class="nav-item mt-auto">
                     <a class="nav-link nav-link-info" style="background-color: darkorange" href="https://www.patreon.com/bonanzaboss" target="_top">
-                        <i class="nav-icon fab fa-patreon"></i> Support my Patreon</a>
+                        <i class="nav-icon fab fa-patreon"></i> Support VAOS</a>
                 </li>
             </ul>
         </nav>
+        --}}
+        <div class="nav-item mt-auto">
+            <a class="nav-link nav-link-info" style="background-color: darkorange" href="https://www.patreon.com/bonanzaboss" target="_top">
+                <i class="nav-icon fab fa-patreon"></i> Support VAOS</a>
+        </div>
         <!-- <button class="sidebar-minimizer brand-minimizer" type="button"></button> -->
     </div>
     <main class="main">
@@ -555,6 +572,8 @@
             </div>
         </div>
     </aside>
+
+    <nav-airline-selector></nav-airline-selector>
 </div>
 <footer class="app-footer">
     <div>
@@ -565,35 +584,20 @@
         <span>Version: {{ config('app.version') }}</span>
     </div>
 </footer>
-<div class="modal fade" id="changeScope" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- Bootstrap and necessary plugins-->
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 <script src="{{ asset('coreui/vendors/jquery/js/jquery.min.js')}}"></script>
 <script src="{{ asset('coreui/vendors/popper.js/js/popper.min.js')}}"></script>
 <script src="{{ asset('coreui/vendors/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('coreui/vendors/pace-progress/js/pace.min.js')}}"></script>
 <script src="{{ asset('coreui/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js')}}"></script>
 <script src="{{ asset('coreui/vendors/@coreui/coreui/js/coreui.min.js')}}"></script>
-<script src="{{ asset('coreui/vendors/chart.js/js/Chart.min.js') }}"></script>
 <script src="{{ asset('coreui/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js') }}"></script>
-<script src="{{ asset('coreui/js/main.js') }}"></script>
 @yield('js')
 </body>
 </html>

@@ -23,9 +23,9 @@ class Airline extends Model
     ];
     public $timestamps = false;
 
-    public function hub()
+    public function hubs()
     {
-        return $this->hasMany('App\Models\Hub');
+        return $this->belongsToMany('App\Models\Airport', 'hubs')->withPivot('id');
     }
 
     public function users()

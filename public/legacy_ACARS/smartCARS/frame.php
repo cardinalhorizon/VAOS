@@ -80,6 +80,7 @@ switch($action) {
 		table_structure();
 		clear_old_sessions();
 		$res = smartCARS::manuallogin($_GET['userid'],$_POST['password'],$_GET['sessionid']);
+		//echo var_dump($res);
 		if($res['result'] == "ok") {
 			write_sessid($res['dbid'], $_GET['sessionid']);
 			$res = str_replace(",","",$res);

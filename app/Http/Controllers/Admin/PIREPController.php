@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Notifications\PirepFiled;
 use App\Http\Controllers\Controller;
-use App\Models\LogbookEntry as PIREP;
+use App\Models\Flight;
 
 class PIREPController extends Controller
 {
@@ -17,11 +17,11 @@ class PIREPController extends Controller
     public function index(Request $request)
     {
         if ($request->query('view') == 'pending') {
-            $pireps = PIREP::where('status', 0)->with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
+            $pireps = Flight::where('status', 0)->with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
 
             return view('admin.pireps.pending', ['pireps' => $pireps]);
         }
-        $pireps = PIREP::with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
+        $pireps = Flight::with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
         //return response()->json($pireps);
         return view('admin.pireps.view', ['pireps' => $pireps]);
     }

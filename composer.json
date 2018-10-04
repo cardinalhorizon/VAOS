@@ -9,7 +9,7 @@
         "laravel/framework": "5.5.*",
         "guzzlehttp/guzzle": "~6.0",
         "kodeine/laravel-acl": "~1.0@dev",
-        "chrisbjr/api-guard": "3.1.*",
+        "chrisbjr/api-guard": "~4",
         "doctrine/dbal": "^2.5",
         "greggilbert/recaptcha": "dev-master",
         "nwidart/laravel-modules": "^3.2",

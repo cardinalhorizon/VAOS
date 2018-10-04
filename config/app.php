@@ -242,7 +242,6 @@ return [
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
         'ApiGuardAuth' => \Chrisbjr\ApiGuard\Facades\ApiGuardAuth::class,
-        'Excel'        => Maatwebsite\Excel\Facades\Excel::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
         'Recaptcha'    => Greggilbert\Recaptcha\Facades\Recaptcha::class,
         'Module'       => Nwidart\Modules\Facades\Module::class,

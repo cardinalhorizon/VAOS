@@ -14641,19 +14641,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('http://avwx.rest/api/metar/' + this.icao).then(function (result) {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://avwx.rest/api/metar/' + this.icao).then(function (result) {
             console.log(result);
             _this.metar_raw = result['data']['Raw-Report'];
             _this.flight_rules = result['data']['Flight-Rules'];
         }).catch(function (error) {
-            console.log('Error Retrieving Airport: ' + _this.icao);
+            console.log('Error Retrieving Airport METAR: ' + _this.icao + "." + error);
             _this.error = true;
         });
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('http://avwx.rest/api/taf/' + this.icao).then(function (result) {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://avwx.rest/api/taf/' + this.icao).then(function (result) {
             console.log(result);
             _this.taf_reports = result['data']['Forecast'];
         }).catch(function (error) {
-            console.log('Error Retrieving Airport: ' + _this.icao);
+            console.log('Error Retrieving Airport TAF: ' + _this.icao + "." + error);
             _this.error = true;
         });
     },

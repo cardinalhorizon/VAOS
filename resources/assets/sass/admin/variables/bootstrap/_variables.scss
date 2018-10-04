@@ -1,0 +1,79 @@
+// stylelint-disable
+// Bootstrap overrides
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-transitions:              true !default;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg:                         #222 !default;
+$body-color:                      white !default;
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+$border-color:                    $gray-700 !default;
+
+// Typography
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-size-base:                  .875rem !default;
+
+// Breadcrumbs
+
+$breadcrumb-bg:                   $gray-900 !default;
+$breadcrumb-margin-bottom:        1.5rem !default;
+$breadcrumb-border-radius:        0 !default;
+
+// Cards
+
+$card-border-color:               $gray-700 !default;
+$card-cap-bg:                     $gray-900 !default;
+$card-bg:                         $gray-800 !default;
+
+// Dropdowns
+
+$dropdown-padding-y:              0 !default;
+$dropdown-border-color:           $gray-300 !default;
+$dropdown-divider-bg:             $gray-200 !default;
+
+// Buttons
+
+$btn-secondary-border:            $gray-300 !default;
+
+// Progress bars
+
+$progress-bg:                     $gray-100 !default;
+
+// Tables
+
+$table-bg-accent:                 $gray-100 !default;
+$table-bg-hover:                  $gray-100 !default;
+
+// Forms
+
+$input-group-addon-bg:            $gray-100 !default;
+$input-border-color:              $gray-200 !default;
+$input-group-addon-border-color:  $gray-200 !default;
+
+$input-color:                           $white !default;
+$input-bg:                              transparent !default;
+$input-disabled-bg:                     $gray-800 !default;
+
+// Alerts
+//
+// Define alert colors, border radius, and padding.
+
+$alert-bg-level:                    10 !default;
+$alert-border-level:                0 !default;
+$alert-color-level:                 0 !default;
+
+$modal-content-bg:                  $gray-900 !default;
+$modal-content-border-color:        rgba($black, .2) !default;

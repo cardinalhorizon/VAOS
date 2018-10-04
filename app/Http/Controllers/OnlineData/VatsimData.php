@@ -4,7 +4,7 @@ namespace App\Http\Controllers\OnlineData;
 
 use App\Models\Flight;
 use GuzzleHttp\Client;
-use App\Models\ACARSData;
+use App\Models\FlightData as ACARSData;
 use App\Http\Controllers\Controller;
 
 class VatsimData extends Controller
@@ -43,10 +43,12 @@ class VatsimData extends Controller
                         $flight->state = 1;
                     }
 
-                    // Ok looks like we're getting valid data.
+                    // Ok looks like we're getting
+                    //valid data.
                     $rpt = new ACARSData();
+                    dd(true);
                     $rpt->user()->associate($flight->user->id);
-                    $rpt->bid()->associate($flight);
+                    $rpt->flight()->associate($flight);
                     $rpt->lat           = $data[5];
                     $rpt->lon           = $data[6];
                     $rpt->heading       = $data[38];

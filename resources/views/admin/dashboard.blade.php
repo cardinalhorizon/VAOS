@@ -1,10 +1,11 @@
 @extends('layouts.admin2')
 @section('content')
     <div id="#updateCheck"></div>
-    <div class="alert alert-danger" role="alert">
-        <b>Admin Panel:</b> The Admin section of VAOS is currently in a overhaul. Some elements of the old admin panel are
-        mixed in with the new. The overhaul will be addressed in the <b>NEXT</b> release. ~ Taylor Broad
+    <div class="alert alert-primary" role="alert">
+        <h1>Welcome to the New and Improved Admin Panel</h1>
+        <p>The Dashboard will be released in the <b>2.0 Release Candidate.</b> Otherwise, everything else works.</p>
     </div>
+    {{--
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -150,5 +151,5 @@
             </div>
         </div>
     </div>
-
+    --}}
 @endsection

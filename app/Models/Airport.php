@@ -9,9 +9,9 @@ class Airport extends Model
     //
     public $timestamps = false;
 
-    public function schedules()
+    public function schedule_dep()
     {
-        return $this->hasMany('App\ScheduleTemplate');
+        return $this->hasMany('App\Schedule', 'depapt_id');
     }
 
     public function users()

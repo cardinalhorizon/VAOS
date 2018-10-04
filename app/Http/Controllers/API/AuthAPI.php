@@ -19,10 +19,12 @@ class AuthAPI extends Controller
      */
     public function acarsLogin(Request $request)
     {
+        // dd($request->input('email'));
         if ($request->query('format') == 'email') {
             $credentials = [
                 'email'    => $request->input('email'),
                 'password' => $request->input('password'), ];
+            //dd($credentials);
         }
         if ($request->query('format') == 'username') {
             // do some extra work.

@@ -30,7 +30,7 @@ class Schedule extends Model
 
     public function aircraft()
     {
-        return $this->belongsToMany('App\Models\Aircraft')->withPivot('primary');
+        return $this->belongsToMany('App\Models\Aircraft');
     }
 
     // Eloquent Eger Loading Helper

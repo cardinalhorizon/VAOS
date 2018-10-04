@@ -8,7 +8,7 @@ class Hub extends Model
 {
     public function airport()
     {
-        return $this->hasOne('App\Models\Airport');
+        return $this->belongsTo('App\Models\Airport');
     }
 
     public function airline()

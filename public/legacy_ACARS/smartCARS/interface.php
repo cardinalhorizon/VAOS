@@ -111,6 +111,7 @@ class smartCARS {
 			else
 				$ret['result'] = "failed";
 		return $ret;
+
 	}
 	
 	static function automaticlogin($dbid, $oldsessionid, $sessionid) {
@@ -271,7 +272,7 @@ class smartCARS {
 	}
 	
 	static function getbidflights($dbid) {
-		/*
+
 		global $dbConnection;
 		$stmt = $dbConnection->prepare("SELECT * FROM ".TABLE_PREFIX."legacy_bids WHERE pilotid = ?");
 		$stmt->execute(array($dbid));
@@ -323,7 +324,7 @@ class smartCARS {
 				array_push($ret['schedules'],$schedule);
 			}
 		}
-		*/
+
         $client = new GuzzleHttp\Client();
 
         $response = $client->request('GET', WEB_URL.'api/acars/smartCARS/flights/'. $dbid)->getBody();

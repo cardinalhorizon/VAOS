@@ -28,19 +28,17 @@ import axios from 'axios';
             taf: Boolean
         },
         mounted() {
-            axios.get('http://avwx.rest/api/metar/' + this.icao).then((result) => {
-                console.log(result);
+            axios.get('https://avwx.rest/api/metar/' + this.icao).then((result) => {
                 this.metar_raw = result['data']['Raw-Report'];
                 this.flight_rules = result['data']['Flight-Rules'];
             }).catch(error => {
-                console.log('Error Retrieving Airport: ' + this.icao);
+                console.log('Error Retrieving Airport METAR: ' + this.icao + ". " + error);
                 this.error = true;
             });
-            axios.get('http://avwx.rest/api/taf/' + this.icao).then((result) => {
-                console.log(result);
+            axios.get('https://avwx.rest/api/taf/' + this.icao).then((result) => {
                 this.taf_reports = result['data']['Forecast'];
             }).catch(error => {
-                console.log('Error Retrieving Airport: ' + this.icao);
+                console.log('Error Retrieving Airport TAF: ' + this.icao + ". " + error);
                 this.error = true;
             });
         },

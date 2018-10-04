@@ -6,7 +6,7 @@ use App\User;
 use App\Models\Flight;
 use GuzzleHttp\Client;
 use App\Models\Airline;
-use App\Models\ACARSData;
+use App\Models\FlightData as ACARSData;
 use Illuminate\Http\Request;
 use App\Models\FlightComment;
 use Illuminate\Support\Facades\Log;
@@ -109,7 +109,7 @@ class smartCARS extends Controller
 
         $rpt = new ACARSData();
         $rpt->user()->associate($report['user']);
-        $rpt->bid()->associate($report['bid']);
+        $rpt->flight()->associate($report['bid']);
         $rpt->lat           = $report['lat'];
         $rpt->lon           = $report['lon'];
         $rpt->heading       = $report['heading'];
@@ -121,6 +121,13 @@ class smartCARS extends Controller
         $rpt->timeremaining = $report['timeremaining'];
         $rpt->online        =  $report['online'];
         $rpt->save();
+
+        $flight->lat = $report['lat'];
+        $flight->lon = $report['lon'];
+        //$flight->heading = $data[38];
+        $flight->altitude = $report['altitude'];
+        $flight->gs = $report['groundspeed'];
+        $flight->save();
         /*
         $client = new Client();
         $client->request('POST', 'https://discordapp.com/api/webhooks/463090163002638346/RUSA8CiVZynwGjqs59lRTc1u4l3sFlI0oQOjjbaUREPCOkFQNr7Tj2D38dkXoq8TMsMU', [

@@ -19,12 +19,14 @@ class ScheduleController extends Controller
     public function index()
     {
         // Load all the schedules within the database
-        $schedules = Schedule::with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->get();
+        $schedules = Schedule::with('depapt', 'arrapt', 'airline', 'aircraft_group', 'aircraft')->get();
 
+        $output = groupArray($schedules, 'depapt', true, true);
         //$schedules = Schedule::all();
         //dd($schedules);
         // Return the view
-        return view('admin.schedules.view', ['schedules' => $schedules]);
+        // return response()->json($output);
+        return view('admin.schedules.view', ['schedules' => json_encode($output)]);
         //return $schedules;
     }
 
