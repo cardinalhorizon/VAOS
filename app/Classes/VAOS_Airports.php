@@ -10,21 +10,40 @@ namespace App\Classes;
 
 use GuzzleHttp\Client;
 use App\Models\Airport;
+use Illuminate\Support\Facades\Log;
 
 class VAOS_Airports
 {
-    public static function checkOrAdd($icao)
+    public static function checkOrAdd($input)
     {
-        try {
-            //dd($icao);
-            $id = Airport::where('icao', $icao)->firstOrFail();
-        } catch (Exception $e) {
-            $id = VAOS_Airports::AddAirport($icao);
+        Log::debug('Calling checkOrAdd');
+        $apt = Airport::where('id', $input->id)->first();
+        if ($apt === null) {
+            $id = VAOS_Airports::addWithObject($input);
+            return $id;
+        }
+        else {
+            return $apt;
         }
 
-        return $id;
     }
+    public static function addWithObject($apt)
+    {
+        //dd($apt);
+        $airport = new Airport();
+        $airport->id         = $apt->id;
+        $airport->name       = $apt->name;
+        $airport->icao       = $apt->gps_code;
+        $airport->iata       = $apt->iata_code;
+        $airport->lat        = $apt->latitude_deg;
+        $airport->lon        = $apt->longitude_deg;
+        $airport->city       = $apt->municipality;
+        $airport->country    = $apt->iso_country;
 
+        $airport->save();
+        Log::debug('Created Airport: '.$airport->icao);
+        return $airport;
+    }
     public static function AddAirport($icao)
     {
         // lets request the airport identifier from the central database

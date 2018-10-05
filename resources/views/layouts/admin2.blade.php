@@ -33,6 +33,7 @@
             'airlines' => \App\Models\Airline::with('hubs')->get()
         ]); ?>
     </script>
+    @yield('head')
 
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">

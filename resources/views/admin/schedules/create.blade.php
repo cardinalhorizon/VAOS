@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.admin2')
 
 @section('breadcrumb')
     <li class="breadcrumb-item">Home</li>
@@ -8,6 +8,8 @@
 @endsection
 
 @section('content')
+    <create-route acfgrp="{{$acfgrps}}"></create-route>
+    {{--
     <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/schedule') }}">
         {{csrf_field()}}
         <div class="col-lg-4">
@@ -120,4 +122,5 @@
             </div>
         </div>
     </form>
+    --}}
 @endsection

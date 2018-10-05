@@ -51,9 +51,11 @@
                                 <td>{{route.flightnum}}</td>
                                 <td>{{route.depapt.icao}}</td>
                                 <td>{{route.arrapt.icao}}</td>
-                                <td v-for="acf in route.aircraft_group" v-bind:key="acf.id">
-                                    <span v-if="acf.pivot.primary === 1" class="text-primary"><b>{{ acf.icao }}</b> </span>
-                                    <span v-else>{{ acf.icao }} </span>
+                                <td>
+                                    <span v-for="acf in route.aircraft_group" v-bind:key="acf.id">
+                                        <span v-if="acf.pivot.primary === 1" class="text-primary"><b>{{ acf.icao }}</b></span>
+                                        <span v-else>{{ acf.icao }} </span>
+                                    </span>
                                 </td>
                                 <td>NONE</td>
                                 <td>{{ route.deptime }}</td>

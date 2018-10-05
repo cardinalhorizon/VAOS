@@ -35,12 +35,18 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($agrp)
     {
-        $airlines  = Airline::all();
+        if ($agrp === 'all') {
+            $airline = Airline::all();
+        }
+        else
+        {
+            $airline = Airline::with('aircraft_groups')->find($agrp);
+        }
         $acfgroups = AircraftGroup::with('airline')->get();
         //return $acfgroups;
-        return view('admin.schedules.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
+        return view('admin.schedules.create', ['acfgrps' => $airline->aircraft_groups]);
     }
 
     /**
@@ -50,30 +56,23 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($agrp, Request $request)
     {
         // For now, just send the input to the controller.
         // dd($request);
         // Convert Request into Array
-        $data = $request->all();
+        $data = json_decode($request->input('data'));
 
-        // ok let's check and set the proper id for aircraf group
-
-        VAOS_Schedule::newRoute($data);
-        if (isset($data['createReturn'])) {
-            // Create new variables to store the values
-            $newDep            = $data['arricao'];
-            $newArr            = $data['depicao'];
-            // write the values to the array
-            $data['depicao']   = $newDep;
-            $data['arricao']   = $newArr;
-            // add the flight num
-            $data['flightnum'] = $data['returnNumber'];
-            VAOS_Schedule::newRoute($data);
+        foreach ($data->routes as $route)
+        {
+            $route->airline = $data->airline;
+            //dd($route);
+            VAOS_Schedule::newRoute($route);
         }
+
         $request->session()->flash('schedule_created', true);
 
-        return redirect('/admin/schedule');
+        return redirect()->route('admin.schedule.index', ['agrp' => $agrp]);
     }
 
     /**
