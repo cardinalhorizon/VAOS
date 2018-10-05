@@ -20,15 +20,6 @@ Auth::routes();
 //
 // Pilot Center
 
-Route::group(['prefix' => '/staff', 'namespace' => 'AirlineStaff', 'middleware' => ['auth', 'App\Http\Middleware\AirlineStaffCheck'], 'as' => 'staff.'], function () {
-    Route::group(['prefix' => '{airline}'], function () {
-        Route::resource('/schedule', 'ScheduleController');
-        Route::resource('/fleet', 'FleetController');
-        Route::resource('/flights', 'BidsController');
-        Route::resource('/users', 'UsersController');
-        Route::resource('/logbook', 'PIREPController');
-    });
-});
 // System Admin
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'App\Http\Middleware\AdminPerms'], 'as' => 'admin.'], function () {
     Route::get('/', 'AdminController@index')->name('index');
