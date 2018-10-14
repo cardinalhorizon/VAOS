@@ -9,6 +9,7 @@
 namespace App\Classes;
 
 use App\Models\Flight as Flight;
+use App\Models\FlightComment;
 
 class VAOS_Flights
 {
@@ -25,5 +26,35 @@ class VAOS_Flights
     public static function duplicateFlight($user, $flight, $flightnum = null)
     {
         // first get the flight.
+    }
+    public static function fileReport($data)
+    {
+        $flight               = Flight::find($data['legacyroute']);
+        $flight->landingrate  = $data['landingrate'];
+        $flight->flighttime   = $data['flighttime'];
+        $flight->acars_client = $data['source'];
+        $flight->fuel_used    = $data['fuelused'];
+        $flight->flight_data  = $data['log'];
+        $flight->state        = 2;
+        // Auto Accept System
+        if (env('VAOS_AA_ENABLED')) {
+            if ($data['landingrate'] >= env('VAOS_AA_LR')) {
+                $flight->status = 1;
+            }
+        }
+        if (env('VAOS_AA_ALL')) {
+            $flight->status = 1;
+        }
+
+        $flight->save();
+        // now let's take care of comments.
+        $comment = new FlightComment();
+
+        $comment->user()->associate($data['user_id']);
+        $comment->flight()->associate($flight);
+        $comment->type = 1;
+        $comment->comment = $data['comment'];
+        $comment->save();
+
     }
 }

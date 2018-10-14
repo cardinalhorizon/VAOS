@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function pirep()
+    public function flights()
     {
         return $this->hasMany('App\Models\Flight');
     }
@@ -35,6 +35,64 @@ class User extends Authenticatable
     public function group()
     {
         return $this->belongsToMany('App\Models\Group');
+    }
+
+    /*
+     * COMPUTED PROPERTIES
+     */
+
+    public function avgLandingRate()
+    {
+        return $this->flights()
+            ->selectRaw('avg(landingrate) as aggregate, user_id')
+            ->groupBy('user_id');
+    }
+
+    public function getAvgLandingRateAttribute()
+    {
+        if ( ! array_key_exists('avgLandingRate', $this->relations)) {
+            $this->load('avgLandingRate');
+        }
+
+        $relation = $this->getRelation('avgLandingRate')->first();
+
+        return ($relation) ? $relation->aggregate : null;
+    }
+
+    public function totalFlightTime()
+    {
+        return $this->flights()
+            ->selectRaw('sum(flighttime) as aggregate, user_id')
+            ->groupBy('user_id');
+    }
+
+    public function getTotalFlightTimeAttribute()
+    {
+        if ( ! array_key_exists('totalFlightTime', $this->relations)) {
+            $this->load('totalFlightTime');
+        }
+
+        $relation = $this->getRelation('totalFlightTime')->first();
+
+        return ($relation) ? $relation->aggregate : null;
+    }
+
+    public function totalFlights()
+    {
+        return $this->flights()
+            ->selectRaw('count(*) as aggregate, user_id')
+            ->groupBy('user_id');
+    }
+
+    public function getTotalFlightsAttribute()
+    {
+        if ( ! array_key_exists('totalFlights', $this->relations)) {
+            $this->load('totalFlights');
+        }
+
+        $relation = $this->getRelation('totalFlights')->first();
+
+        return ($relation) ? $relation->aggregate : null;
     }
 
     public function airlines()
@@ -46,4 +104,5 @@ class User extends Authenticatable
     {
         return $this->airlines->contains($airline);
     }
+
 }
