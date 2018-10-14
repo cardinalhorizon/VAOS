@@ -142,7 +142,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('admin.users.airlinemod', ['id' => $user->id]) }}">
+                    <form method="POST" action="">
                         <select id="airline" name="airline" class="form-control" size="1">
                             @if($airlines == "[]")
                                 <option value="0">No Airlines Found</option>

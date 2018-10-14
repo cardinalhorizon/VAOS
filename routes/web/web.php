@@ -23,13 +23,13 @@ Auth::routes();
 // System Admin
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'App\Http\Middleware\AdminPerms'], 'as' => 'admin.'], function () {
     Route::get('/', 'AdminController@index')->name('index');
+    Route::resource('/users', 'UsersController');
     Route::group(['prefix' => '/{agrp}'], function() {
         Route::resource('/schedule', 'ScheduleController');
         Route::resource('/fleet', 'FleetController');
         Route::get('/api/fleet/{id}', 'FleetController@apiGet');
         Route::resource('/flights', 'BidsController');
         Route::resource('/airports', 'AirportController');
-        Route::resource('/users', 'UsersController');
         Route::post('/users/{id}/airlinemod', 'UsersController@airlinemod')->name('users.airlinemod');
         Route::resource('/typeratings', 'TypeRatingsController');
         Route::resource('/pireps', 'PIREPController');

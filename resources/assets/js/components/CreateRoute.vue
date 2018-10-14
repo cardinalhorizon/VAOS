@@ -45,7 +45,7 @@
                                     <input type="text" v-model="route.flightnum" class="form-control" id="inputEmail4" placeholder="1152">
                                 </div>
                                 <div style="text-overflow: ellipsis !important;" class="form-group col-sm-6 col-md-4">
-                                    <label>Groups: <span v-for="e in route.aircraft_groups">{{ e.icao + " "}}</span></label><br>
+                                    <label>Primary: {{ route.primary_group }} | Secondary: <span v-for="e in route.aircraft_groups">{{ e.icao + " "}}</span></label><br>
                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Aircraft Groups
                                     </button>

@@ -52196,7 +52196,11 @@ var render = function() {
                         _c(
                           "label",
                           [
-                            _vm._v("Groups: "),
+                            _vm._v(
+                              "Primary: " +
+                                _vm._s(route.primary_group) +
+                                " | Secondary: "
+                            ),
                             _vm._l(route.aircraft_groups, function(e) {
                               return _c("span", [_vm._v(_vm._s(e.icao + " "))])
                             })
