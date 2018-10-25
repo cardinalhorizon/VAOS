@@ -28,7 +28,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
         Route::resource('/schedule', 'ScheduleController');
         Route::resource('/fleet', 'FleetController');
         Route::get('/api/fleet/{id}', 'FleetController@apiGet');
-        Route::resource('/flights', 'BidsController');
+        Route::resource('/flights', 'FlightsController');
         Route::resource('/airports', 'AirportController');
         Route::post('/users/{id}/airlinemod', 'UsersController@airlinemod')->name('users.airlinemod');
         Route::resource('/typeratings', 'TypeRatingsController');

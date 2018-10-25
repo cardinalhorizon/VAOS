@@ -22,6 +22,7 @@ Vue.component('nav-airline-selector', require('./components/NavAirlineSelector')
 Vue.component('create-aircraft', require('./components/CreateAircraft'));
 Vue.component('create-route', require('./components/CreateRoute'));
 Vue.component('schedule-list', require('./components/ScheduleList'));
+Vue.component('active-flight-list', require('./components/ActiveFlightList'));
 
 import activeAirline from './store/activeAirline';
 

@@ -123,7 +123,7 @@ class BiddingController extends Controller
             $flight->status = 0;
         }
         $flight->save();
-        return action('BiddingController@show', ['id' => $flight->id]);
+        return redirect()->action('\Modules\MaterialCrew\Http\Controllers\BiddingController@show', ['id' => $flight->id]);
     }
 
     /**

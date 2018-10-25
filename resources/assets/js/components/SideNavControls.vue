@@ -54,16 +54,12 @@
                     <i class="nav-icon far fa-map"></i> Flights</a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html" target="_top">
-                            <i class="nav-icon fa fa-caret-right"></i> Active Flights</a>
+                        <a class="nav-link" v-bind:href="base_url + '/admin/'+ activeAirline.id +'/map'" target="_top">
+                            <i class="nav-icon fa fa-caret-right"></i> Live Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html" target="_top">
-                            <i class="nav-icon fa fa-caret-right"></i> Pending Reports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="404.html" target="_top">
-                            <i class="nav-icon fa fa-caret-right"></i> Import/Export</a>
+                        <a class="nav-link" v-bind:href="base_url + '/admin/'+ activeAirline.id +'/flights'" target="_top">
+                            <i class="nav-icon fa fa-caret-right"></i> Flight Management</a>
                     </li>
                 </ul>
             </li>

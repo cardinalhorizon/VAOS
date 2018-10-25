@@ -823,6 +823,12 @@ module.exports = g;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(35);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
@@ -917,10 +923,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -948,7 +954,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11914,7 +11920,7 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(22).setImmediate))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12104,7 +12110,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13050,12 +13056,6 @@ var index_esm = {
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(35);
-
-/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13328,8 +13328,8 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(17);
-__webpack_require__(83);
-module.exports = __webpack_require__(84);
+__webpack_require__(98);
+module.exports = __webpack_require__(99);
 
 
 /***/ }),
@@ -13338,7 +13338,7 @@ module.exports = __webpack_require__(84);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_activeAirline__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__store_activeAirline__ = __webpack_require__(94);
 
 
 /**
@@ -13361,8 +13361,9 @@ Vue.component('aircraft-list-item', __webpack_require__(54));
 Vue.component('side-nav-controls', __webpack_require__(59));
 Vue.component('nav-airline-selector', __webpack_require__(64));
 Vue.component('create-aircraft', __webpack_require__(69));
-Vue.component('create-route', __webpack_require__(95));
-Vue.component('schedule-list', __webpack_require__(74));
+Vue.component('create-route', __webpack_require__(74));
+Vue.component('schedule-list', __webpack_require__(79));
+Vue.component('active-flight-list', __webpack_require__(84));
 
 
 
@@ -13394,8 +13395,8 @@ __webpack_require__(21);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(7);
-window.Vuex = __webpack_require__(9);
+window.Vue = __webpack_require__(8);
+window.Vuex = __webpack_require__(10);
 window.VuePersist = __webpack_require__(24);
 __webpack_require__(25);
 
@@ -30535,7 +30536,7 @@ Vue.http.interceptors.push(function (request, next) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(6)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)(module)))
 
 /***/ }),
 /* 20 */
@@ -43552,7 +43553,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(9)))
 
 /***/ }),
 /* 24 */
@@ -45465,7 +45466,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -45610,7 +45611,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(11);
 var Axios = __webpack_require__(37);
-var defaults = __webpack_require__(5);
+var defaults = __webpack_require__(6);
 
 /**
  * Create an instance of Axios
@@ -45693,7 +45694,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(5);
+var defaults = __webpack_require__(6);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(46);
 var dispatchRequest = __webpack_require__(47);
@@ -46234,7 +46235,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(48);
 var isCancel = __webpack_require__(14);
-var defaults = __webpack_require__(5);
+var defaults = __webpack_require__(6);
 var isAbsoluteURL = __webpack_require__(49);
 var combineURLs = __webpack_require__(50);
 
@@ -47126,7 +47127,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47137,10 +47138,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
 //
 //
 //
@@ -47429,7 +47426,50 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(4),
+        _c("li", { staticClass: "nav-item nav-dropdown" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("ul", { staticClass: "nav-dropdown-items" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: {
+                    href:
+                      _vm.base_url + "/admin/" + _vm.activeAirline.id + "/map",
+                    target: "_top"
+                  }
+                },
+                [
+                  _c("i", { staticClass: "nav-icon fa fa-caret-right" }),
+                  _vm._v(" Live Map")
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: {
+                    href:
+                      _vm.base_url +
+                      "/admin/" +
+                      _vm.activeAirline.id +
+                      "/flights",
+                    target: "_top"
+                  }
+                },
+                [
+                  _c("i", { staticClass: "nav-icon fa fa-caret-right" }),
+                  _vm._v(" Flight Management")
+                ]
+              )
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item" }, [
           _c(
@@ -47583,57 +47623,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item nav-dropdown" }, [
-      _c(
-        "a",
-        { staticClass: "nav-link nav-dropdown-toggle", attrs: { href: "#" } },
-        [_c("i", { staticClass: "nav-icon far fa-map" }), _vm._v(" Flights")]
-      ),
-      _vm._v(" "),
-      _c("ul", { staticClass: "nav-dropdown-items" }, [
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: { href: "login.html", target: "_top" }
-            },
-            [
-              _c("i", { staticClass: "nav-icon fa fa-caret-right" }),
-              _vm._v(" Active Flights")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: { href: "register.html", target: "_top" }
-            },
-            [
-              _c("i", { staticClass: "nav-icon fa fa-caret-right" }),
-              _vm._v(" Pending Reports")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            {
-              staticClass: "nav-link",
-              attrs: { href: "404.html", target: "_top" }
-            },
-            [
-              _c("i", { staticClass: "nav-icon fa fa-caret-right" }),
-              _vm._v(" Import/Export")
-            ]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "a",
+      { staticClass: "nav-link nav-dropdown-toggle", attrs: { href: "#" } },
+      [_c("i", { staticClass: "nav-icon far fa-map" }), _vm._v(" Flights")]
+    )
   },
   function() {
     var _vm = this
@@ -48117,7 +48111,7 @@ exports.push([module.i, "\n.ls-column[data-v-26b5cd29] {\n    grid-template-colu
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -48600,6 +48594,788 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
+var __vue_scopeId__ = "data-v-3f2db3c6"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/CreateRoute.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f2db3c6", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f2db3c6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("6ecf9bcd", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f2db3c6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateRoute.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f2db3c6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateRoute.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.ls-column[data-v-3f2db3c6] {\n    grid-template-columns: auto auto auto;\n    display: grid;\n    grid-column-gap: 20px;\n    grid-row-gap: 0;\n    justify-items: stretch;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "CreateRoute",
+    data: function data() {
+        return {
+            routes: [],
+            depicao: null,
+            arricao: null,
+            depapt: null,
+            arrapt: null,
+            base_url: Laravel.baseUrl,
+            token: Laravel.csrfToken,
+            aircraft_groups: null,
+            httpError: null,
+            loading: false
+        };
+    },
+
+    props: {
+        acfgrp: String
+    },
+    mounted: function mounted() {
+        this.aircraft_groups = JSON.parse(this.acfgrp);
+    },
+
+    methods: {
+        depAptPull: function depAptPull() {
+            var _this = this;
+
+            this.loading = true;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://fsvaos.net/api/data/airports', {
+                params: {
+                    icao: this.depicao
+                }
+            }).then(function (response) {
+                _this.loading = false;
+                _this.depapt = response.data;
+            }).catch(function (error) {
+                _this.loading = false;
+                _this.httpError = error.response;
+            });
+        },
+        arrAptPull: function arrAptPull() {
+            var _this2 = this;
+
+            this.loading = true;
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://fsvaos.net/api/data/airports', {
+                params: {
+                    icao: this.arricao
+                }
+            }).then(function (response) {
+                _this2.loading = false;
+                _this2.arrapt = response.data;
+            }).catch(function (error) {
+                _this2.loading = false;
+                _this2.httpError = error.response;
+            });
+        },
+        addRoute: function addRoute() {
+            this.routes.push({
+                flightnum: null,
+                depapt: this.depapt,
+                arrapt: this.arrapt,
+                primary_group: null,
+                aircraft_groups: [],
+                route: null,
+                deptime: null,
+                arrtime: null
+            });
+        },
+        removeRoute: function removeRoute(reg) {
+            this.routes.splice(reg, 1);
+        },
+        createReturn: function createReturn(reg) {
+            this.routes.push({
+                flightnum: null,
+                depapt: reg.arrapt,
+                arrapt: reg.depapt,
+                primary_group: reg.primary_group,
+                aircraft_groups: reg.aircraft_groups,
+                route: null,
+                deptime: null,
+                arrtime: null
+            });
+        }
+    },
+    computed: {
+        hubs: function hubs() {
+            return this.$store.getters.airline.hubs;
+        },
+        airline: function airline() {
+            return this.$store.getters.airline;
+        },
+        airports: function airports() {
+            if (this.depapt && this.arrapt) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-6 col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("h1", [
+              _vm._v("Airport "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticClass: "fa fa-spinner fa-spin float-right"
+              })
+            ]),
+            _vm._v(" "),
+            _vm.httpError
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v("ERROR: " + _vm._s(_vm.httpError.data.message))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "dicao" } }, [
+                _vm._v("Departure Airport ICAO")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.depicao,
+                    expression: "depicao"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "dicao", type: "text" },
+                domProps: { value: _vm.depicao },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.depicao = $event.target.value
+                    },
+                    function($event) {
+                      _vm.httpError = null
+                    }
+                  ],
+                  keyup: [
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "tab", 9, $event.key, "Tab")
+                      ) {
+                        return null
+                      }
+                      return _vm.depAptPull($event)
+                    },
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.depAptPull($event)
+                    }
+                  ]
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "aicao" } }, [
+                _vm._v("Arrival Airport ICAO")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.arricao,
+                    expression: "arricao"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "aicao", type: "text" },
+                domProps: { value: _vm.arricao },
+                on: {
+                  input: [
+                    function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.arricao = $event.target.value
+                    },
+                    function($event) {
+                      _vm.httpError = null
+                    }
+                  ],
+                  keyup: [
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "tab", 9, $event.key, "Tab")
+                      ) {
+                        return null
+                      }
+                      return _vm.arrAptPull($event)
+                    },
+                    function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.arrAptPull($event)
+                    }
+                  ]
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6 col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _vm.depapt ? _c("h3", [_vm._v(_vm._s(_vm.depapt.name))]) : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.depapt) +
+                  "\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _vm.arrapt ? _c("h3", [_vm._v(_vm._s(_vm.arrapt.name))]) : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.arrapt) +
+                  "\n                    "
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12 col-md-12" }, [
+        _c("h1", [
+          _vm._v("Routes"),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success",
+              staticStyle: { float: "right" },
+              attrs: { disabled: _vm.airports },
+              on: { click: _vm.addRoute }
+            },
+            [_c("i", { staticClass: "fa fa-plus" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c(
+            "div",
+            { staticClass: "card-body" },
+            [
+              _vm.routes.length === 0
+                ? _c("div", { staticClass: "alert alert-info" }, [
+                    _vm._v("To Add Aircraft, Click "),
+                    _c("i", { staticClass: "fa fa-plus" })
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.routes, function(route, index) {
+                return _c("div", { key: index }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-sm-12 col-md-2" },
+                      [
+                        _c("label", { attrs: { for: "inputEmail4" } }, [
+                          _vm._v("Flight Number")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: route.flightnum,
+                              expression: "route.flightnum"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "inputEmail4",
+                            placeholder: "1152"
+                          },
+                          domProps: { value: route.flightnum },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(route, "flightnum", $event.target.value)
+                            }
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "form-group col-sm-6 col-md-4",
+                        staticStyle: { "text-overflow": "ellipsis !important" }
+                      },
+                      [
+                        _c(
+                          "label",
+                          [
+                            _vm._v(
+                              "Primary: " +
+                                _vm._s(route.primary_group) +
+                                " | Secondary: "
+                            ),
+                            _vm._l(route.aircraft_groups, function(e) {
+                              return _c("span", [_vm._v(_vm._s(e.icao + " "))])
+                            })
+                          ],
+                          2
+                        ),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary dropdown-toggle",
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "dropdown",
+                              "aria-haspopup": "true",
+                              "aria-expanded": "false"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Aircraft Groups\n                                "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown-menu",
+                            staticStyle: { background: "#333", padding: "5px" },
+                            attrs: { "aria-labelledby": "dropdownMenu" }
+                          },
+                          _vm._l(_vm.aircraft_groups, function(acf) {
+                            return _c("div", { key: acf.id }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: route.primary_group,
+                                    expression: "route.primary_group"
+                                  }
+                                ],
+                                attrs: { type: "radio" },
+                                domProps: {
+                                  value: acf,
+                                  checked: _vm._q(route.primary_group, acf)
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.$set(route, "primary_group", acf)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: route.aircraft_groups,
+                                    expression: "route.aircraft_groups"
+                                  }
+                                ],
+                                attrs: { id: "#" + acf.id, type: "checkbox" },
+                                domProps: {
+                                  value: acf,
+                                  checked: Array.isArray(route.aircraft_groups)
+                                    ? _vm._i(route.aircraft_groups, acf) > -1
+                                    : route.aircraft_groups
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = route.aircraft_groups,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = acf,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          _vm.$set(
+                                            route,
+                                            "aircraft_groups",
+                                            $$a.concat([$$v])
+                                          )
+                                      } else {
+                                        $$i > -1 &&
+                                          _vm.$set(
+                                            route,
+                                            "aircraft_groups",
+                                            $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1))
+                                          )
+                                      }
+                                    } else {
+                                      _vm.$set(route, "aircraft_groups", $$c)
+                                    }
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", { attrs: { for: "#" + acf.id } }, [
+                                _vm._v(
+                                  _vm._s(acf.icao) + " | " + _vm._s(acf.name)
+                                )
+                              ])
+                            ])
+                          })
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-sm-12 col-md-2" },
+                      [
+                        _c("label", [_vm._v("Departure Airport")]),
+                        _vm._v(" "),
+                        _c("h2", [_vm._v(_vm._s(route.depapt.ident))])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-sm-12 col-md-2" },
+                      [
+                        _c("label", [_vm._v("Arrival Airport")]),
+                        _vm._v(" "),
+                        _c("h2", [_vm._v(_vm._s(route.arrapt.ident))])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "form-group col-sm-12 col-md-2" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: { role: "group", "aria-label": "Actions" }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-brand",
+                                attrs: {
+                                  "data-toggle": "tooltip",
+                                  "data-placement": "bottom",
+                                  title: "Create Return"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.createReturn(route)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-arrow-left" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-brand",
+                                attrs: {
+                                  "data-toggle": "tooltip",
+                                  "data-placement": "bottom",
+                                  title: "Remove"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.removeRoute(index)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fa fa-times" })]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "form",
+          {
+            attrs: {
+              method: "post",
+              action: _vm.base_url + "/admin/" + _vm.airline.id + "/schedule/"
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.token }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "data" },
+              domProps: {
+                value: JSON.stringify({
+                  airline: _vm.airline,
+                  depapt: _vm.depapt,
+                  arrapt: _vm.arrapt,
+                  routes: _vm.routes
+                })
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [_vm._v("Add Routes")]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3f2db3c6", module.exports)
+  }
+}
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(80)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
 var __vue_scopeId__ = "data-v-33d899e8"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
@@ -48633,13 +49409,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 75 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(76);
+var content = __webpack_require__(81);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -48659,7 +49435,7 @@ if(false) {
 }
 
 /***/ }),
-/* 76 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -48673,7 +49449,7 @@ exports.push([module.i, "\ntd[data-v-33d899e8] {\n    vertical-align: middle;\n}
 
 
 /***/ }),
-/* 77 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -48811,7 +49587,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 78 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49140,14 +49916,505 @@ if (false) {
 }
 
 /***/ }),
-/* 79 */
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(85)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(87)
+/* template */
+var __vue_template__ = __webpack_require__(93)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-c544c5ea"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ActiveFlightList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c544c5ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-c544c5ea", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(86);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("474e6e98", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c544c5ea\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActiveFlightList.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c544c5ea\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ActiveFlightList.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sub_Components_FlightCard__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Sub_Components_FlightCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Sub_Components_FlightCard__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "ActiveFlightList",
+    components: { FlightCard: __WEBPACK_IMPORTED_MODULE_1__Sub_Components_FlightCard___default.a },
+    data: function data() {
+        return {
+            activeFlights: null,
+            base_url: Laravel.baseUrl
+        };
+    },
+
+    methods: {
+        GetUpdate: function GetUpdate() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.base_url + "/api/v1/flights", {
+                params: {
+                    filter: "active"
+                }
+            }).then(function (response) {
+                _this.activeFlights = response.data;
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        // Retrieve all active flights
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(this.base_url + "/api/v1/flights", {
+            params: {
+                filter: "active"
+            }
+        }).then(function (response) {
+            _this2.activeFlights = response.data;
+        });
+        setInterval(function () {
+            this.GetUpdate();
+        }.bind(this), 15000);
+    }
+});
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(89)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(91)
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-68c01f76"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Sub-Components/FlightCard.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68c01f76", Component.options)
+  } else {
+    hotAPI.reload("data-v-68c01f76", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(90);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("2dbd9ad2", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68c01f76\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FlightCard.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68c01f76\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FlightCard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.optiongroup[data-v-68c01f76] {\n    position: absolute;\n    z-index: 20;\n    height: 100%;\n    width: 100%;\n    padding: 1rem;\n    background: rgba(97, 199, 255, .6);\n    display: block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+    var radlat1 = Math.PI * lat1 / 180;
+    var radlat2 = Math.PI * lat2 / 180;
+    var theta = lon1 - lon2;
+    var radtheta = Math.PI * theta / 180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+        dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180 / Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit === "K") {
+        dist = dist * 1.609344;
+    }
+    if (unit === "N") {
+        dist = dist * 0.8684;
+    }
+    return dist;
+}
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "FlightCard",
+    data: function data() {
+        return {
+            showOptions: false
+        };
+    },
+
+    props: {
+        flight: Object
+    },
+    methods: {
+        flipState: function flipState() {
+            if (this.showOptions) {
+                this.showOptions = false;
+            } else {
+                this.showOptions = true;
+            }
+        }
+    },
+    computed: {
+        calcProgress: function calcProgress() {
+            var leg = distance(this.flight.depapt.lat, this.flight.depapt.lon, this.flight.lat, this.flight.lon, "N");
+            var total = distance(this.flight.depapt.lat, this.flight.depapt.lon, this.flight.arrapt.lat, this.flight.arrapt.lon, "N");
+
+            var a = leg / total;
+            var total_p = Math.round(a * 100);
+            return {
+                width: total_p + "%"
+            };
+        },
+        calcCompleted: function calcCompleted() {
+            var leg = distance(this.flight.depapt.lat, this.flight.depapt.lon, this.flight.lat, this.flight.lon, "N");
+            var total = distance(this.flight.depapt.lat, this.flight.depapt.lon, this.flight.arrapt.lat, this.flight.arrapt.lon, "N");
+            var a = leg / total;
+            return Math.round(a * 100);
+        },
+        activeAirline: function activeAirline() {
+            return this.$store.getters.airline;
+        }
+    }
+});
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "a",
+    { on: { mouseenter: _vm.flipState, mouseleave: _vm.flipState } },
+    [
+      _c("div", { staticClass: "card" }, [
+        _vm.showOptions ? _c("div", { staticClass: "optiongroup" }) : _vm._e(),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _vm.flight
+            ? _c("div", [
+                _c("h3", [_vm._v(_vm._s(_vm.flight.callsign))]),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v(
+                    _vm._s(_vm.flight.depapt.icao) +
+                      "-" +
+                      _vm._s(_vm.flight.arrapt.icao)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "progress-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "progress-group-header align-items-end" },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-arrow-right progress-group-icon"
+                      }),
+                      _vm._v(" "),
+                      _c("div", [_vm._v("Progress")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "ml-auto font-weight-bold mr-2" },
+                        [_vm._v("Phase")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-muted small" }, [
+                        _vm._v("(" + _vm._s(_vm.calcCompleted) + "%)")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "progress-group-bars" }, [
+                    _c("div", { staticClass: "progress progress-xs" }, [
+                      _c("div", {
+                        staticClass: "progress-bar bg-primary",
+                        style: _vm.calcProgress,
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": _vm.calcProgress,
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            : _c("div", { staticStyle: { "text-align": "center" } }, [
+                _c("h2", [_vm._v("Retrieving Flight Info")]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h1", [_c("i", { staticClass: "fa fa-spinner fa-spin" })])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-68c01f76", module.exports)
+  }
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "row" },
+    [
+      !_vm.activeFlights
+        ? _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("h2", [_vm._v("Retrieving Flight Info")]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.activeFlights, function(flight) {
+        return _c(
+          "div",
+          { key: flight.id, staticClass: "col-lg-6 col-md-6 col-sm-12" },
+          [_c("FlightCard", { attrs: { flight: flight } })],
+          1
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h1", [_c("i", { staticClass: "fa fa-spinner fa-spin" })])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c544c5ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex_persist__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex_persist__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex_persist___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuex_persist__);
 
 
@@ -49185,11 +50452,11 @@ var activeAirline = new __WEBPACK_IMPORTED_MODULE_1_vuex__["default"].Store({
 /* harmony default export */ __webpack_exports__["a"] = (activeAirline);
 
 /***/ }),
-/* 80 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(81)) :
+   true ? factory(exports, __webpack_require__(96)) :
   typeof define === 'function' && define.amd ? define(['exports', 'lodash.merge'], factory) :
   (factory((global.VuexPersistence = {}),global._.merge));
 }(this, (function (exports,merge) { 'use strict';
@@ -49290,7 +50557,7 @@ var activeAirline = new __WEBPACK_IMPORTED_MODULE_1_vuex__["default"].Store({
           this.subscribed = false;
           this.supportCircular = options.supportCircular || false;
           if (this.supportCircular) {
-              CircularJSON = __webpack_require__(82);
+              CircularJSON = __webpack_require__(97);
           }
           this.storage =
               ((options.storage != null)
@@ -49455,7 +50722,7 @@ var activeAirline = new __WEBPACK_IMPORTED_MODULE_1_vuex__["default"].Store({
 
 
 /***/ }),
-/* 81 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -51422,10 +52689,10 @@ function stubFalse() {
 
 module.exports = merge;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(6)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)(module)))
 
 /***/ }),
-/* 82 */
+/* 97 */
 /***/ (function(module, exports) {
 
 /*!
@@ -51638,808 +52905,16 @@ module.exports = CircularJSON;
 
 
 /***/ }),
-/* 83 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(96)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(98)
-/* template */
-var __vue_template__ = __webpack_require__(99)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-3f2db3c6"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/CreateRoute.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3f2db3c6", Component.options)
-  } else {
-    hotAPI.reload("data-v-3f2db3c6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(97);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("6ecf9bcd", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f2db3c6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateRoute.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f2db3c6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateRoute.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.ls-column[data-v-3f2db3c6] {\n    grid-template-columns: auto auto auto;\n    display: grid;\n    grid-column-gap: 20px;\n    grid-row-gap: 0;\n    justify-items: stretch;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
 /* 98 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: "CreateRoute",
-    data: function data() {
-        return {
-            routes: [],
-            depicao: null,
-            arricao: null,
-            depapt: null,
-            arrapt: null,
-            base_url: Laravel.baseUrl,
-            token: Laravel.csrfToken,
-            aircraft_groups: null,
-            httpError: null,
-            loading: false
-        };
-    },
-
-    props: {
-        acfgrp: String
-    },
-    mounted: function mounted() {
-        this.aircraft_groups = JSON.parse(this.acfgrp);
-    },
-
-    methods: {
-        depAptPull: function depAptPull() {
-            var _this = this;
-
-            this.loading = true;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://fsvaos.net/api/data/airports', {
-                params: {
-                    icao: this.depicao
-                }
-            }).then(function (response) {
-                _this.loading = false;
-                _this.depapt = response.data;
-            }).catch(function (error) {
-                _this.loading = false;
-                _this.httpError = error.response;
-            });
-        },
-        arrAptPull: function arrAptPull() {
-            var _this2 = this;
-
-            this.loading = true;
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://fsvaos.net/api/data/airports', {
-                params: {
-                    icao: this.arricao
-                }
-            }).then(function (response) {
-                _this2.loading = false;
-                _this2.arrapt = response.data;
-            }).catch(function (error) {
-                _this2.loading = false;
-                _this2.httpError = error.response;
-            });
-        },
-        addRoute: function addRoute() {
-            this.routes.push({
-                flightnum: null,
-                depapt: this.depapt,
-                arrapt: this.arrapt,
-                primary_group: null,
-                aircraft_groups: [],
-                route: null,
-                deptime: null,
-                arrtime: null
-            });
-        },
-        removeRoute: function removeRoute(reg) {
-            this.routes.splice(reg, 1);
-        },
-        createReturn: function createReturn(reg) {
-            this.routes.push({
-                flightnum: null,
-                depapt: reg.arrapt,
-                arrapt: reg.depapt,
-                primary_group: reg.primary_group,
-                aircraft_groups: reg.aircraft_groups,
-                route: null,
-                deptime: null,
-                arrtime: null
-            });
-        }
-    },
-    computed: {
-        hubs: function hubs() {
-            return this.$store.getters.airline.hubs;
-        },
-        airline: function airline() {
-            return this.$store.getters.airline;
-        },
-        airports: function airports() {
-            if (this.depapt && this.arrapt) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-});
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 99 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-6 col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _c("h1", [
-              _vm._v("Airport "),
-              _c("i", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.loading,
-                    expression: "loading"
-                  }
-                ],
-                staticClass: "fa fa-spinner fa-spin float-right"
-              })
-            ]),
-            _vm._v(" "),
-            _vm.httpError
-              ? _c("div", { staticClass: "alert alert-danger" }, [
-                  _vm._v("ERROR: " + _vm._s(_vm.httpError.data.message))
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "dicao" } }, [
-                _vm._v("Departure Airport ICAO")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.depicao,
-                    expression: "depicao"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "dicao", type: "text" },
-                domProps: { value: _vm.depicao },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.depicao = $event.target.value
-                    },
-                    function($event) {
-                      _vm.httpError = null
-                    }
-                  ],
-                  keyup: [
-                    function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "tab", 9, $event.key, "Tab")
-                      ) {
-                        return null
-                      }
-                      return _vm.depAptPull($event)
-                    },
-                    function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.depAptPull($event)
-                    }
-                  ]
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "aicao" } }, [
-                _vm._v("Arrival Airport ICAO")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.arricao,
-                    expression: "arricao"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "aicao", type: "text" },
-                domProps: { value: _vm.arricao },
-                on: {
-                  input: [
-                    function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.arricao = $event.target.value
-                    },
-                    function($event) {
-                      _vm.httpError = null
-                    }
-                  ],
-                  keyup: [
-                    function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "tab", 9, $event.key, "Tab")
-                      ) {
-                        return null
-                      }
-                      return _vm.arrAptPull($event)
-                    },
-                    function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.arrAptPull($event)
-                    }
-                  ]
-                }
-              })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-6 col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-body" }, [
-            _vm.depapt ? _c("h3", [_vm._v(_vm._s(_vm.depapt.name))]) : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(_vm.depapt) +
-                  "\n                    "
-              )
-            ]),
-            _vm._v(" "),
-            _vm.arrapt ? _c("h3", [_vm._v(_vm._s(_vm.arrapt.name))]) : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(_vm.arrapt) +
-                  "\n                    "
-              )
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12 col-md-12" }, [
-        _c("h1", [
-          _vm._v("Routes"),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              staticStyle: { float: "right" },
-              attrs: { disabled: _vm.airports },
-              on: { click: _vm.addRoute }
-            },
-            [_c("i", { staticClass: "fa fa-plus" })]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card" }, [
-          _c(
-            "div",
-            { staticClass: "card-body" },
-            [
-              _vm.routes.length === 0
-                ? _c("div", { staticClass: "alert alert-info" }, [
-                    _vm._v("To Add Aircraft, Click "),
-                    _c("i", { staticClass: "fa fa-plus" })
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.routes, function(route, index) {
-                return _c("div", { key: index }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group col-sm-12 col-md-2" },
-                      [
-                        _c("label", { attrs: { for: "inputEmail4" } }, [
-                          _vm._v("Flight Number")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: route.flightnum,
-                              expression: "route.flightnum"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "inputEmail4",
-                            placeholder: "1152"
-                          },
-                          domProps: { value: route.flightnum },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(route, "flightnum", $event.target.value)
-                            }
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "form-group col-sm-6 col-md-4",
-                        staticStyle: { "text-overflow": "ellipsis !important" }
-                      },
-                      [
-                        _c(
-                          "label",
-                          [
-                            _vm._v(
-                              "Primary: " +
-                                _vm._s(route.primary_group) +
-                                " | Secondary: "
-                            ),
-                            _vm._l(route.aircraft_groups, function(e) {
-                              return _c("span", [_vm._v(_vm._s(e.icao + " "))])
-                            })
-                          ],
-                          2
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary dropdown-toggle",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    Aircraft Groups\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "dropdown-menu",
-                            staticStyle: { background: "#333", padding: "5px" },
-                            attrs: { "aria-labelledby": "dropdownMenu" }
-                          },
-                          _vm._l(_vm.aircraft_groups, function(acf) {
-                            return _c("div", { key: acf.id }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: route.primary_group,
-                                    expression: "route.primary_group"
-                                  }
-                                ],
-                                attrs: { type: "radio" },
-                                domProps: {
-                                  value: acf,
-                                  checked: _vm._q(route.primary_group, acf)
-                                },
-                                on: {
-                                  change: function($event) {
-                                    _vm.$set(route, "primary_group", acf)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: route.aircraft_groups,
-                                    expression: "route.aircraft_groups"
-                                  }
-                                ],
-                                attrs: { id: "#" + acf.id, type: "checkbox" },
-                                domProps: {
-                                  value: acf,
-                                  checked: Array.isArray(route.aircraft_groups)
-                                    ? _vm._i(route.aircraft_groups, acf) > -1
-                                    : route.aircraft_groups
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$a = route.aircraft_groups,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = acf,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          _vm.$set(
-                                            route,
-                                            "aircraft_groups",
-                                            $$a.concat([$$v])
-                                          )
-                                      } else {
-                                        $$i > -1 &&
-                                          _vm.$set(
-                                            route,
-                                            "aircraft_groups",
-                                            $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1))
-                                          )
-                                      }
-                                    } else {
-                                      _vm.$set(route, "aircraft_groups", $$c)
-                                    }
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("label", { attrs: { for: "#" + acf.id } }, [
-                                _vm._v(
-                                  _vm._s(acf.icao) + " | " + _vm._s(acf.name)
-                                )
-                              ])
-                            ])
-                          })
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group col-sm-12 col-md-2" },
-                      [
-                        _c("label", [_vm._v("Departure Airport")]),
-                        _vm._v(" "),
-                        _c("h2", [_vm._v(_vm._s(route.depapt.ident))])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group col-sm-12 col-md-2" },
-                      [
-                        _c("label", [_vm._v("Arrival Airport")]),
-                        _vm._v(" "),
-                        _c("h2", [_vm._v(_vm._s(route.arrapt.ident))])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group col-sm-12 col-md-2" },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "btn-group",
-                            attrs: { role: "group", "aria-label": "Actions" }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary btn-brand",
-                                attrs: {
-                                  "data-toggle": "tooltip",
-                                  "data-placement": "bottom",
-                                  title: "Create Return"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.createReturn(route)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-arrow-left" })]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-brand",
-                                attrs: {
-                                  "data-toggle": "tooltip",
-                                  "data-placement": "bottom",
-                                  title: "Remove"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.removeRoute(index)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "fa fa-times" })]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              })
-            ],
-            2
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            attrs: {
-              method: "post",
-              action: _vm.base_url + "/admin/" + _vm.airline.id + "/schedule/"
-            }
-          },
-          [
-            _c("input", {
-              attrs: { type: "hidden", name: "_token" },
-              domProps: { value: _vm.token }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", name: "data" },
-              domProps: {
-                value: JSON.stringify({
-                  airline: _vm.airline,
-                  depapt: _vm.depapt,
-                  arrapt: _vm.arrapt,
-                  routes: _vm.routes
-                })
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Add Routes")]
-            )
-          ]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3f2db3c6", module.exports)
-  }
-}
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

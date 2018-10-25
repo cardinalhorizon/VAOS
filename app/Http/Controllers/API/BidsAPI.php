@@ -16,7 +16,7 @@ class BidsAPI extends Controller
     public function getBid(Request $request)
     {
         // Ok lets find out if we can find the bid
-        $flights = ScheduleComplete::where('user_id', $request->query('userid'))->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
+        $flights = Flight::where('state', 1)->with('depapt')->with('arrapt')->with('airline')->with('aircraft')->get();
         if ($request->query('format') == 'xacars') {
             $user   = User::where('username', $request->query('username'))->first();
             $flight = self::getProperFlightNum($request->query('flightnum'), $user->id);
@@ -32,11 +32,15 @@ class BidsAPI extends Controller
                 'status' => 404,
             ]);
         }
+        foreach($flights as $f)
+        {
+            if (is_null($f->callsign))
+            {
+                $f->callsign = $f->airline->icao.$f->flightnum;
+            }
+        }
         // Ok now lets do a general query
-        return response()->json([
-            'status'  => 200,
-            'flights' => $flights,
-        ]);
+        return response()->json($flights);
     }
 
     public function fileBid(Request $request)

@@ -22,9 +22,6 @@
                     <div class="alert alert-danger">
                         <strong>The following error(s) occurred:</strong>
                         <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
                         </ul>
                     </div>
                 @elseif(session('user_updated'))
@@ -100,7 +97,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($user->pirep as $p)
+                    @foreach($user->flights as $p)
                         <tr>
                             <td>{{ $p->airline->icao }}</td>
                             <td>{{ $p->flightnum }}</td>
@@ -126,9 +123,6 @@
                 <i class="fa fa-align-justify"></i> Airline Information
             </div>
             <div class="card-block">
-                @foreach($user->airlines as $airline)
-                    <h3>{{ $airline->name }}</h3>
-                @endforeach
             </div>
         </div>
     </div>
@@ -142,31 +136,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="">
-                        <select id="airline" name="airline" class="form-control" size="1">
-                            @if($airlines == "[]")
-                                <option value="0">No Airlines Found</option>
-                            @else
-                                @foreach($airlines as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <div class="form-group">
-                            <label>Pilot ID</label>
-                            <input type="text" name="pilotid" class="form-control" placeholder="0001">
-                        </div>
-                        <select id="airline" name="hub" class="form-control" size="1">
-                            @if($hubs == "[]")
-                                <option value="0">No Hubs Found</option>
-                            @else
-                                @foreach($hubs as $a)
-                                    <option value="{{ $a->id }}">{{ $a->icao }} - {{ $a->name }}</option>
-                                @endforeach
-                            @endif
-                        </select>
 
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

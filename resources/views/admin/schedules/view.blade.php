@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <h1>Aircraft</h1>
+    <h1>Schedule</h1>
     <schedule-list list_data="{{$schedules}}"></schedule-list>
 @endsection
 @section('js')

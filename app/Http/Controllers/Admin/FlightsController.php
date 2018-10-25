@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BidsController extends Controller
+class FlightsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class BidsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.flights.view');
     }
 
     /**
