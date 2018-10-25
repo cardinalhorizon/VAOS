@@ -23,7 +23,7 @@ return [
     | version so it's called Beta 1, 2, 3... etc. !Edit, v1.0 has been released :)
     */
 
-    'version' => '2.0-1810w3',
+    'version' => '2.0-1810w3a',
 
     /*
     |--------------------------------------------------------------------------
