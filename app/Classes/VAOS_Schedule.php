@@ -20,20 +20,39 @@ class VAOS_Schedule
 {
     public static function fileBid($user_id, $schedule_id, $aircraft_id = null)
     {
+        $complete = new ScheduleComplete();
         $template = ScheduleTemplate::where('id', $schedule_id)->with('depapt')->with('arrapt')->with('airline')->with('aircraft_group')->first();
         //$template = ScheduleTemplate::where('id', $request->query('schedule_id'))->first();
         // Now let's turn the aircraft group into a assigned aircraft.
         // Let's start by getting the group's assigned aircraft list.
         if ($template->aircraft_group_id != null)
-            $acfgrp = AircraftGroup::where('id', $template->aircraft_group->id)->with('aircraft')->first();
+        {
+            $acfgrp = AircraftGroup::where('id', $template->aircraft_group->id)->with('aircraft', 'aircraft.airline')->first();
+            $airline_aircraft = [];
+            foreach($acfgrp->aircraft as $a)
+            {
+                if ($a->airline->id === $template->airline_id)
+                {
+                    $airline_aircraft[] = $a;
+                }
+            }
+            
+            $complete->aircraft()->associate($airline_aircraft[0]);
+        }
         else
-            $acfgrp = AircraftGroup::with('aircraft')->first();
+        {
 
-        // ok lets assign the first aircraft on the list
-        // TODO Change aircraft selection behavior. Current: First on list
+            if (is_null($aircraft_id))
+            {
+                throw new Exception('Aircraft is null. Aircraft group is not assigned.');
+            }
+            else {
+                $complete->aircraft()->associate($aircraft_id);
+            }
+        }
+            
 
-
-        $complete = new ScheduleComplete();
+        
 
         // First let's bring all the foreign keys from the previous table into this one.
 
@@ -41,11 +60,7 @@ class VAOS_Schedule
         $complete->depapt()->associate($template->depapt);
         $complete->arrapt()->associate($template->arrapt);
         //dd($acfgrp);
-        if ($aircraft_id === null)
-            $complete->aircraft()->associate($acfgrp->aircraft[0]);
-        else
-            $complete->aircraft()->associate($aircraft_id);
-
+        
         $complete->user()->associate($user_id);
 
         // Lets JSON decode the defaults so we can place the route correctly within the system.
