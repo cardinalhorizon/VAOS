@@ -93,13 +93,6 @@
 </script>
 
 <style scoped>
-    .optiongroup {
-        position: absolute;
-        z-index: 20;
-        height: 100%;
-        width: 100%;
-        padding: 1rem;
-        background: rgba(97, 199, 255, .6);
-        display: block;
-    }
+
+
 </style>

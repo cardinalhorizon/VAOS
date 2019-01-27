@@ -11,6 +11,11 @@
 @endsection
 
 @section('content')
+    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admin/data/users?action=import') }}">
+        {{ csrf_field() }}
+        <input type="file" name="file" id="file">
+        <button type="submit" class="btn btn-success pull-right" role="button">Import Users</button>
+    </form>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header">

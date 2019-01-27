@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -46,9 +47,16 @@ class FlightsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($agrp, $id)
     {
-        //
+        $flight = Flight::with('airline', 'user', 'fo', 'aircraft', 'depapt', 'arrapt')->where('id', $id)->first();
+
+        if (is_null($flight->callsign))
+        {
+            $flight->callsign = $flight->getCallsign();
+            $flight->save();
+        }
+        return view('admin.flights.detailed', ['flight' => $flight]);
     }
 
     /**

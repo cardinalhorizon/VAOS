@@ -19,14 +19,12 @@ class ActiveAccountCheck
     {
         if (Auth::user()->status == 0) {
             $request->session()->flash('AppInProgress', true);
-            Auth::logout();
 
-            return redirect('/login');
+            return redirect('/status');
         } elseif (Auth::user()->status == 2) {
             $request->session()->flash('AccountDisabled', true);
-            Auth::logout();
 
-            return redirect('/login');
+            return redirect('/status');
         }
 
         return $next($request);

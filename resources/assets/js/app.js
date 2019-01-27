@@ -23,6 +23,9 @@ Vue.component('create-aircraft', require('./components/CreateAircraft'));
 Vue.component('create-route', require('./components/CreateRoute'));
 Vue.component('schedule-list', require('./components/ScheduleList'));
 Vue.component('active-flight-list', require('./components/ActiveFlightList'));
+Vue.component('pub-register-pilot', require('./components/Registration/PubRegisterPilot'));
+Vue.component('flight-view', require('./components/FlightView'));
+Vue.use('vue2-leaflet');
 
 import activeAirline from './store/activeAirline';
 
@@ -31,4 +34,8 @@ const app = new Vue({
     store:
         activeAirline
 
+});
+
+const reg = new Vue({
+    el: '#appReg',
 });

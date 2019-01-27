@@ -16,6 +16,21 @@ use App\Models\Flight as ScheduleComplete;
 
 class VAOS_Schedule
 {
+    private static function assignAircraft($aircraftGroup = null)
+    {
+        foreach ($aircraftGroup as $a) {
+            if ($a['pivot']['primary']) {
+                $acfgrp = AircraftGroup::where('id', $a->id)->with('aircraft')->first();
+
+                // ok, run an availability check.
+                foreach ($acfgrp->aircraft as $acf) {
+                    if ($acf->isAvailable()) {
+                        return $acf;
+                    }
+                }
+            }
+        }
+    }
     public static function fileBid($user_id, $schedule_id, $aircraft_id = null)
     {
         $complete = new ScheduleComplete();
@@ -58,11 +73,6 @@ class VAOS_Schedule
         $complete->depapt()->associate($template->depapt);
         $complete->arrapt()->associate($template->arrapt);
         //dd($acfgrp);
-        if ($aircraft_id === null) {
-            $complete->aircraft()->associate($acfgrp->aircraft[0]);
-        } else {
-            $complete->aircraft()->associate($aircraft_id);
-        }
 
         $complete->user()->associate($user_id);
 
@@ -79,7 +89,10 @@ class VAOS_Schedule
         // store it
 
         $complete->route_data = json_encode($rte_data);
-
+        if ($template->callsign === null)
+        {
+            $complete->callsign = $template->airline->icao.$template->flightnum;
+        }
         $complete->deptime = null;
         $complete->arrtime = null;
         $complete->load    = 0;

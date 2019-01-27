@@ -3,7 +3,7 @@
     <head>
         <title>Maintenance Mode</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -14,10 +14,12 @@
                 margin: 0;
                 padding: 0;
                 width: 100%;
-                color: #B0BEC5;
+                color: white;
                 display: table;
                 font-weight: 100;
-                font-family: 'Lato', sans-serif;
+                font-family: 'Cabin', sans-serif;
+                background: url({{ asset('/img/vaos_df_bg-01.svg') }}) center no-repeat;
+                background-size: cover;
             }
 
             .container {
@@ -40,11 +42,9 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Maintenance mode.</div>
+                <img src="{{asset('/img/MainLogo.svg')}}" style="min-width: 300px; width: 30vw;">
+                <div class="title">We're Doing Database Maintenance!<br>Be back in a short bit.</div>
             </div>
-        </div>
-        <div style="position: absolute; bottom: 0; right: 0; width: 100px; text-align:right; padding-bottom: 12px; padding-right: 12px;">
-            <img src="http://i.imgur.com/Ksnw6Ue.png" style="max-width: 100px;">
         </div>
     </body>
 </html>

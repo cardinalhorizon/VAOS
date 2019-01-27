@@ -21,12 +21,18 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 v-if="depapt">{{ depapt.name }}</h3>
-                        <div class="form-group">
-                            {{ depapt }}
+                        <div v-if="depapt" class="form-group">
+                            <div><span class="ls-title">ICAO:</span>{{ depapt.gps_code }}</div>
+                            <div><span class="ls-title">IATA:</span>{{ depapt.iata_code }}</div>
+                            <div><span class="ls-title">City:</span>{{ depapt.municipality }}</div>
+                            <div><span class="ls-title">Country:</span>{{ depapt.iso_country }}</div>
                         </div>
                         <h3 v-if="arrapt">{{ arrapt.name }}</h3>
-                        <div class="form-group">
-                            {{ arrapt }}
+                        <div v-if="arrapt" class="form-group">
+                            <div><span class="ls-title">ICAO:</span>{{ arrapt.gps_code }}</div>
+                            <div><span class="ls-title">IATA:</span>{{ arrapt.iata_code }}</div>
+                            <div><span class="ls-title">City:</span>{{ arrapt.municipality }}</div>
+                            <div><span class="ls-title">Country:</span>{{ arrapt.iso_country }}</div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +51,7 @@
                                     <input type="text" v-model="route.flightnum" class="form-control" id="inputEmail4" placeholder="1152">
                                 </div>
                                 <div style="text-overflow: ellipsis !important;" class="form-group col-sm-6 col-md-4">
-                                    <label>Primary: {{ route.primary_group }} | Secondary: <span v-for="e in route.aircraft_groups">{{ e.icao + " "}}</span></label><br>
+                                    <label><template v-if="route.primary_group">Primary: {{ route.primary_group.icao }}</template> | Secondary: <span v-for="e in route.aircraft_groups">{{ e.icao + " "}}</span></label><br>
                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Aircraft Groups
                                     </button>
@@ -75,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" v-bind:action="base_url + '/admin/' + airline.id + '/schedule/'">
+                <form method="post" v-bind:action="base_url + '/admin/' + airline.id + '/schedule'">
                     <input type="hidden" name="_token" v-bind:value="token"/>
                     <input type="hidden" name="data" v-bind:value="JSON.stringify({ airline, depapt, arrapt, routes })"/>
                     <button class="btn btn-primary" type="submit">Add Routes</button>
@@ -195,5 +201,8 @@
         grid-column-gap: 20px;
         grid-row-gap: 0;
         justify-items: stretch;
+    }
+    .ls-title {
+        font-weight: bold;
     }
 </style>

@@ -23,14 +23,14 @@ class EventsController extends Controller
     public function view($url_slug)
     {
         try {
-            $event = AirlineEvent::firstOrFail('url_slug', $url_slug)->with('flights');
+            $info = AirlineEvent::where('url_slug', $url_slug)->with('flights')->first();
         } catch (Exception $e) {
             Log::error('Event "'.$url_slug.'" was not found.');
 
             return view('errors.404');
         }
-
-        return view('materialcrew::events.show', ['event', $event]);
+        //dd($event);
+        return view('materialcrew::events.show', ['info' => $info]);
     }
 
     public function create()

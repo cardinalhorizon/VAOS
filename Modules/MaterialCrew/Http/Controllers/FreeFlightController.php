@@ -48,8 +48,14 @@ class FreeFlightController extends Controller
         $acf = Aircraft::find($request->input('aircraft'));
         // Create the flight
         $flight = new Flight();
-
-        $flight->flightnum = $acf->registration;
+        if(isEmpty($request->input('callsign')))
+        {
+            $flight->callsign = $acf->registration;
+        }
+        else
+        {
+            $flight->callsign = $request->input('callsign');
+        }
 
         $flight->depapt()->associate($dep);
         $flight->arrapt()->associate($arr);

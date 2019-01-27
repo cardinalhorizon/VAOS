@@ -12660,7 +12660,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Http", function() { return Http; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Resource", function() { return Resource; });
 /*!
- * vue-resource v1.5.0
+ * vue-resource v1.5.1
  * https://github.com/pagekit/vue-resource
  * Released under the MIT License.
  */
@@ -14642,18 +14642,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://avwx.rest/api/metar/' + this.icao).then(function (result) {
-            console.log(result);
             _this.metar_raw = result['data']['Raw-Report'];
             _this.flight_rules = result['data']['Flight-Rules'];
         }).catch(function (error) {
-            console.log('Error Retrieving Airport METAR: ' + _this.icao + "." + error);
+            console.log('Error Retrieving Airport METAR: ' + _this.icao + ". " + error);
             _this.error = true;
         });
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('https://avwx.rest/api/taf/' + this.icao).then(function (result) {
-            console.log(result);
             _this.taf_reports = result['data']['Forecast'];
         }).catch(function (error) {
-            console.log('Error Retrieving Airport TAF: ' + _this.icao + "." + error);
+            console.log('Error Retrieving Airport TAF: ' + _this.icao + ". " + error);
             _this.error = true;
         });
     },

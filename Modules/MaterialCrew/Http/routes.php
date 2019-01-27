@@ -29,7 +29,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
             Route::get('/', 'EventsController@index')->name('index');
             Route::get('/create', 'EventsController@create')->name('create');
             Route::post('/group_flight', 'EventsController@createGroupFlight')->name('storeGroupFlight');
-            Route::get('/{slug}', 'EventsController@viewEvent')->name('view');
+            Route::get('/{slug}', 'EventsController@view')->name('view');
             Route::get('/{slug}/flights', 'EventsController@viewEventFlights')->name('view.flights');
             Route::post('/{slug}', 'EventsController@eventAction')->name('action');
         });

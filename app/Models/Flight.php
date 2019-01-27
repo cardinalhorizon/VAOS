@@ -60,4 +60,11 @@ class Flight extends Model
     {
         return $query->where('state', 2);
     }
+
+    public function getCallsign()
+    {
+        if (is_null($this->callsign))
+            return $this->airline->icao.$this->flightnum;
+        return $this->callsign;
+    }
 }

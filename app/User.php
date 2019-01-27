@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Group');
     }
 
+    public function aircraft()
+    {
+        return $this->hasMany('App\Models\Aircraft');
+    }
+
     /*
      * COMPUTED PROPERTIES
      */

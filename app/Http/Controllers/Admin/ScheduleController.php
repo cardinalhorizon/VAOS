@@ -62,7 +62,7 @@ class ScheduleController extends Controller
         // dd($request);
         // Convert Request into Array
         $data = json_decode($request->input('data'));
-
+        //dd($data);
         foreach ($data->routes as $route)
         {
             $route->airline = $data->airline;

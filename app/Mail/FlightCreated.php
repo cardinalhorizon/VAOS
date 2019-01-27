@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Flight;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,14 +11,11 @@ class FlightCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $flight;
+
+    public function __construct(Flight $flight)
     {
-        //
+
     }
 
     /**

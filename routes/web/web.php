@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
+
+Route::get('/status', function () {
+    return view('auth.status');
+})->middleware(['auth'])->name('status');
 
 //
 // Pilot Center
@@ -46,6 +47,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['au
         Route::post('/fleet', 'ImportExportController@postFleet');
         Route::get('/schedule', 'ImportExportController@getSchedule')->name('schedule');
         Route::post('/schedule', 'ImportExportController@postSchedule');
+        Route::post('/users', 'UsersController@importUsers');
     });
 });
 Route::get('/vatsim/update', 'OnlineData\VatsimData@updateAll');

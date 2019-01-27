@@ -8,57 +8,75 @@
         <div class="row">
             <form action="{{ route('flightops.freeflight.store') }}" method="POST">
                 {{ csrf_field() }}
-            <div class="col m6 s12">
-                <div class="card-offset-title">Departure Airport</div>
-                <div class="card grey darken-2">
-                    <div class="card-content white-text">
-                        <span class="card-title"></span>
-                        <div class="row">
-                            <div class="input-field col s12 text-white">
-                                <input placeholder="KLAX" id="arricao" type="text" name="depicao" style="color: white;" class="validate">
-                                <label for="first_name">Departure Airport</label>
+                <div class="col m6 s12">
+                    <div class="card-offset-title">Departure Airport</div>
+                    <div class="card grey darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title"></span>
+                            <div class="row">
+                                <div class="input-field col s12 text-white">
+                                    <input placeholder="KLAX" id="arricao" type="text" name="depicao" style="color: white;" class="validate">
+                                    <label for="first_name">Departure Airport</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col m6 s12">
-                <div class="card-offset-title">Arrival Airport</div>
-                <div class="card grey darken-2">
-                    <div class="card-content white-text">
-                        <span class="card-title"></span>
-                        <div class="row">
-                            <div class="input-field col s12 text-white">
-                                <input placeholder="KSFO" id="arricao" type="text" name="arricao" style="color: white;" class="validate">
-                                <label for="first_name">Arrival Airport</label>
+                <div class="col m6 s12">
+                    <div class="card-offset-title">Arrival Airport</div>
+                    <div class="card grey darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title"></span>
+                            <div class="row">
+                                <div class="input-field col s12 text-white">
+                                    <input placeholder="KSFO" id="arricao" type="text" name="arricao" style="color: white;" class="validate">
+                                    <label for="first_name">Arrival Airport</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col m6 s12">
-                <div class="card-offset-title">Aircraft</div>
-                <div class="card grey darken-2">
-                    <div class="card-content white-text">
-                        <span class="card-title"></span>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <select name="aircraft">
-                                    <option value="" disabled selected>Choose your aircraft</option>
-                                    @foreach(\App\Models\Aircraft::where('user_id', Auth::user()->id)->get() as $a)
-                                        <option value="{{$a->id}}">{{ $a->registration }} - {{ $a->icao}}</option>
-                                    @endforeach
+                <div class="col m6 s12">
+                    <div class="card-offset-title">Aircraft</div>
+                    <div class="card grey darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title"></span>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select name="aircraft">
+                                        <option value="" disabled selected>Choose your aircraft</option>
+                                        @foreach(\App\Models\Aircraft::all() as $a)
+                                            <option value="{{$a->id}}">{{ $a->registration }} - {{ $a->icao}}</option>
+                                        @endforeach
                                     </select>
-                                <label>Personal Aircraft</label>
+                                    <label>Available Aircraft</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                    <i class="material-icons right">send</i>
-                </button>
-            </div>
-        </form>
+                <div class="col m6 s12">
+                    <div class="card-offset-title">Callsign</div>
+                    <div class="card grey darken-2">
+                        <div class="card-content white-text">
+                            <span class="card-title"></span>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12 text-white">
+                                            <input placeholder="N1234T" id="callsign" type="text" name="callsign" style="color: white;" class="validate">
+                                            <label for="callsign">Callsign</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
     <!-- Search Modal -->

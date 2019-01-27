@@ -45,14 +45,22 @@
                     </div>
                     <div class="info-block">
                         <div class="info-block-title">Total Flights</div>
-                        <div class="info-block-item">0</div>
+                        <div class="info-block-item">{{ \App\Models\Flight::where('user_id', $user->id)->completed()->count() }}</div>
                     </div>
                     <div class="info-block">
                         <div class="info-block-title">Avg Landing Rate</div>
-                        <div class="info-block-item">0</div>
+                        <div class="info-block-item"><?php
+                            $avg = \App\Models\Flight::where('user_id', $user->id)->filed()->avg('landingrate');
+                            if(is_null($avg))
+                                {
+                                    echo "N/A";
+                                }
+                                else
+                                    echo $avg
+                            ?></div>
                     </div>
                     <div class="info-block" style="text-align: right;margin-top: auto;">
-                        <div>Joined: 12/22/2018</div>
+                        <div>Joined: {{ $user->created_at }}</div>
                     </div>
                 </div>
             </div>
@@ -69,7 +77,7 @@
             </ul>
         </div>
         <div id="tabFlights" class="col s12 tab-panel">
-            <div class="col m10 s12 offset-m1">
+            <div class="col m9 s12">
                 <div class="card-offset-title">Recent Flights</div>
                 <div class="card grey darken-2">
                     <div class="card-content white-text">
@@ -84,9 +92,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach(\App\Models\Flight::completed()->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
+                            @foreach(\App\Models\Flight::completed()->where('user_id', $user->id)->orderBy('id', 'desc')->limit(10)->get() as $p)
                                 <tr>
-                                    <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
+                                    <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->getCallsign() }}</a></td>
                                     <td>{{ $p->depapt->icao }}</td>
                                     <td>{{ $p->arrapt->icao }}</td>
                                     <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
@@ -110,6 +118,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col m3 s12">
+                <div class="card-offset-title">Total Hours</div>
+                <div class="card grey darken-2">
+                    <div class="card-content white-text">
+                        <div>External Hours</div>
+                        <ul class="collection with-header">
+                            @foreach(\App\Models\ExtHour::where('user_id', $user->id)->get() as $exthours)
+                                <li class="collection-item"><div>{{ $exthours->name }}<div class="secondary-content">{{ $exthours->total }}</div></div></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="tabAircraft" class="col m10 s12 offset-m1 tab-panel">
             <div class="row">
@@ -130,7 +151,7 @@
                 @endforeach
             </div>
             <div style="position: fixed; z-index: 10; right: 4rem; bottom: 4rem;"><a id="addAircraft" class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modalAddAircraft" style="background-color: #61c7ff;"><i class="material-icons">add</i></a></div></div>
-            <div id="modalAddAircraft" class="modal">
+            <div id="modalAddAircraft" class="modal grey darken-4">
                     <form action="{{ route('flightops.profile.addAircraft') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-content">

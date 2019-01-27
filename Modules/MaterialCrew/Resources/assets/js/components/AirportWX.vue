@@ -10,7 +10,7 @@
     </div>
 </template>
 
-<script>
+<script>z
 import axios from 'axios';
     export default {
         name: "AirportWX",

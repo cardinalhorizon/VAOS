@@ -13,7 +13,8 @@
         "doctrine/dbal": "^2.5",
         "greggilbert/recaptcha": "dev-master",
         "nwidart/laravel-modules": "^3.2",
-        "pusher/pusher-php-server": "^3.0"
+        "pusher/pusher-php-server": "^3.0",
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

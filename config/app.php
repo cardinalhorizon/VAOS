@@ -12,18 +12,17 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('VAOS_ORG_NAME', 'VAOS'),
+    'name' => env('VAOS_ORG_NAME', 'Aviation Organization'),
 
     /*
     |--------------------------------------------------------------------------
     | VAOS Version
     |--------------------------------------------------------------------------
     |
-    | This is the VAOS version number. Currently Taylor has not decided on a
-    | version so it's called Beta 1, 2, 3... etc. !Edit, v1.0 has been released :)
+    | This is the VAOS version number.
     */
 
-    'version' => '2.0-1810w3a',
+    'version' => '19w04a',
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +48,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

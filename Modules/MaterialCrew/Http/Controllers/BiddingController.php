@@ -136,9 +136,15 @@ class BiddingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+    }
+    public function createFromLink(Request $request, $id)
+    {
+        // First find the flight by the slug
+        $flight = Flight::findOrFail($id);
+
+        // Now let's duplicate it but change now
+    }
     /**
      * Remove the specified resource from storage.
      *

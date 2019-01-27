@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-
+    @if(View::exists('allpagescripts'))
+        @include('allpagescripts')
+    @endif
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,8 +118,6 @@
 
 <body class="grey darken-4" style="position: relative;">
 <div class="hide-on-med-and-down" style="position: fixed; z-index: -99; height: 100vh; width: 100vw; background: url('{{ asset('/img/vaos_df_bg-01.svg') }}') black no-repeat center; background-size: cover;"></div>
-<div style="background: #9C222E;color: white; text-align: center; padding: 5px; position: fixed; bottom: 0; z-index: 1000; width: 100vw;">Welcome to the VAOS {{config('app.version')}} Beta. Please be aware of all bugs and report them to the <a href="https://github.com/FSVAOS/VAOS/issues">GitHub Issues Page</a>. Questions? Head over to <a href="https://discord.gg/xWFPf4W">our Discord server</a>.
-</div>
 <div class="navbar-fixed">
 <nav class="grey darken-3 z-depth-2 hide-on-large-only">
     <div>
@@ -168,7 +168,7 @@
                 <a href="{{ route('flightops.flights.index') }}" style="color: white;">
                     <span class="ibox">Upcoming <div style="font-size: 40px;padding-top:10px;">{{ \App\Models\Flight::where('user_id', Auth::user()->id)->filed()->count() }}</div></span>
                 </a>
-                <a href="{{ route('flightops.logbook.view') }}" style="color: white;">
+                <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}" style="color: white;">
                     <span class="ibox">Completed <div style="font-size: 40px;padding-top:10px;">{{ \App\Models\Flight::where('user_id', Auth::user()->id)->completed()->count() }}</div></span>
                 </a>
             </div>
@@ -176,11 +176,16 @@
     </div>
     <li><a href="{{ url('/flightops') }}"><i class="material-icons">home</i> Home</a></li>
 <!--<li><a href="{{ url('/flightops/community/') }}">Community Center</a></li>-->
-    <li><a href="{{ url('/flightops/map/') }}"><i class="material-icons">map</i> Flight Map</a></li>
-    <li><a href=""><i class="material-icons">format_list_numbered</i> Tours</a></li>
+    {{--<li><a href="{{ url('/flightops/map/') }}"><i class="material-icons">map</i> Flight Map</a></li>--}}
+    {{--<li><a href=""><i class="material-icons">format_list_numbered</i> Tours</a></li>--}}
     <li><a href="{{ url('/flightops/freeflight') }}"><i class="material-icons">airplanemode_active</i> Free Flight</a></li>
     <li><a href="{{ url('/flightops/schedule') }}"><i class="material-icons">schedule</i> Schedule</a></li>
     <li><a href="{{ url('/flightops') }}"><i class="material-icons">event</i> Events</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="waves-effect" href="ts3server://flyspark.org"><i class="material-icons">keyboard_voice</i> Teamspeak</a></li>
+    <!--<li><a class="waves-effect" href="https://discord.gg/YdqDeZu"><i class="material-icons">textsms</i> Discord Invite</a></li>-->
+    <li><a href="https://tfdidesign.com/smartcars/app.php?action=download&airlineid=576&language=en-US"><i class="material-icons">file_download</i> Download smartCARS 2</a></li>
+    <li><a href="https://www.dropbox.com/sh/b9f5gu9tmvg8pgi/AAAISD987dkOfmsI_eYzvTgoa?dl=0"><i class="material-icons">file_download</i> Liveries</a></li>
     <li><div class="divider"></div></li>
     <li><a class="waves-effect" href="{{ url('/flightops/settings') }}"><i class="material-icons">settings</i> Settings</a></li>
     @if(Auth::user()->admin)

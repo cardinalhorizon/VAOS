@@ -22,6 +22,8 @@
             <div class="card grey darken-2">
                 <div class="card-content white-text">
                     <div class="row">
+                        <div style="text-align: center; font-size: 2.5rem">No Upcoming Events</div>
+                        {{--
                         <div class="col s12">
                             <a class="text-white" style="color: white;" href="#">
                                 <div class="card" style="height: 125px; background: url('http://www.airports-worldwide.com/img/w/dfwairportoverview.jpg') black no-repeat center; background-size: cover; border-right: #6aff9a 20px solid; border-radius: 2px 5px 5px 2px">
@@ -32,6 +34,7 @@
                                 </div>
                             </a>
                         </div>
+                        --}}
                     </div>
                 </div>
             </div>
@@ -53,10 +56,10 @@
                         <tbody>
                         @foreach(\App\Models\Flight::where(['user_id' => Auth::user()->id, 'state' => 2])->orderBy('id', 'desc')->limit(10)->get() as $p)
                             <tr>
-                                <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
+                                <td><a href="{{ url('flightops/logbook/'.$p->id) }}">{{ $p->getCallsign() }}</a></td>
                                 <td>{{ $p->depapt->icao }}</td>
                                 <td>{{ $p->arrapt->icao }}</td>
-                                <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
+                                <td>{{ date('d/m/Y', strtotime($p->updated_at)) }}</td>
                                 @if($p->status == 0)
                                     <td>
                                         <div class="yellow-text">Pending</div>
@@ -93,10 +96,10 @@
                         <tbody>
                         @foreach(\App\Models\Flight::where('state', '>=', 1)->orderBy('id', 'desc')->limit(10)->get() as $p)
                             <tr>
-                                <td><a href="{{ route('flightops.flights.show', ['id' => $p->id]) }}">{{ $p->airline->icao . $p->flightnum }}</a></td>
+                                <td><a href="{{ route('flightops.flights.show', ['id' => $p->id]) }}">{{ $p->getCallsign() }}</a></td>
                                 <td>{{ $p->depapt->icao }}</td>
                                 <td>{{ $p->arrapt->icao }}</td>
-                                <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
+                                <td>{{ date('d/m/Y', strtotime($p->updated_at)) }}</td>
                                 @if($p->state == 1)
                                     <td>
                                         <div class="yellow-text">Active</div>

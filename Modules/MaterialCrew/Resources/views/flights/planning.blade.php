@@ -42,8 +42,8 @@
                 <div style="position: absolute; height: 100%; width: 100%; background-color: rgba(25,25,25,.75);z-index: 0"></div>
                 <div class="card-content" style="display: flex;justify-content: space-between;position: relative; z-index: 5;">
                     <div class="info-block">
-                        <div class="info-block-title">{{ $flight->airline->name }}</div>
-                        <div class="info-block-item">{{ $flight->airline->icao }}{{ $flight->flightnum }}</div>
+                        <div class="info-block-title">Callsign</div>
+                        <div class="info-block-item">{{ $flight->getCallsign() }}</div>
                     </div>
                     <div class="info-block">
                         <div class="info-block-title">Departure</div>
@@ -87,8 +87,17 @@
     <div class="row">
         <div class="col m10 s12 offset-m1" style="display: flex;justify-content: space-between;position: relative; z-index: 5;">
             <a class="waves-effect waves-light btn"><i class="material-icons left">flight_takeoff</i>activate flight</a>
-            @if($flight->state === 1)
+            @if($flight->state === 1 && Auth::user()->id === $flight->user_id)
                 <a href="{{route('flightops.flights.manualfile', ['id' => $flight->id])}}" class="waves-effect waves-light btn brand b-red"><i class="material-icons left">save</i>close flight</a>
+            @endif
+            @if($flight->state === 0 && Auth::user()->id === $flight->user_id)
+                <a href="{{route('flightops.flights.manualfile', ['id' => $flight->id])}}" onclick="event.preventDefault();
+                        document.getElementById('delete-bid').submit();"
+                   class="waves-effect waves-light btn brand b-red"><i class="material-icons left">cancel</i>Cancel Flight</a>
+                <form id="delete-bid" method="POST" action="{{ route('flightops.flights.destroy', ['id' => $flight->id]) }}" accept-charset="UTF-8" hidden>
+                    {{ csrf_field() }}
+                    <input name="_method" type="hidden" value="DELETE">
+                </form>
             @endif
             <input type="text" id="shareLink" value="{{ url('/share/'.$flight->id) }}" style="display: none;">
             <a class="waves-effect waves-light btn modal-trigger" href="#shareLinkModal" id="shareLinkButton"><i class="material-icons left">share</i>Generate Invite Link</a>
@@ -147,10 +156,6 @@
             <div class="card grey darken-2">
                 <div class="card-content white-text">
                     <ul class="collection with-header">
-                        <li class="collection-item"><div>Airline<div class="secondary-content">{{ $flight->airline->name }}</div></div></li>
-                        <li class="collection-item"><div>Flight Number<div class="secondary-content">{{ $flight->flightnum }}</div></div></li>
-                        <li class="collection-item"><div>Departure<div class="secondary-content">{{ $flight->depapt->name }}</div></div></li>
-                        <li class="collection-item"><div>Arrival<div class="secondary-content">{{ $flight->arrapt->name }}</div></div></li>
                         <li class="collection-item"><div>Equipment Type<div class="secondary-content">{{ $flight->aircraft->icao }}</div></div></li>
                         <li class="collection-item"><div>Registration<div class="secondary-content">{{ $flight->aircraft->registration }}</div></div></li>
                     </ul>
