@@ -13,7 +13,7 @@ RedirectMatch 403 ^/.git/.*?$
 RedirectMatch 403 ^/app/.*?$
 RedirectMatch 403 ^/bootstrap/.*?$
 RedirectMatch 403 ^/config/.*?$
-RedirectMatch 403 ^/modules/.*?$
+RedirectMatch 403 ^/Modules/.*?$
 RedirectMatch 403 ^/node_modules/.*?$
 RedirectMatch 403 ^/resources/.*?$
 RedirectMatch 403 ^/storage/.*?$
