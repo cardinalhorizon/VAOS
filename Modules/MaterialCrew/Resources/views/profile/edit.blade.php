@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
         <div class="col l6 s12">
-            <div class="card">
+            <div class="card grey darken-3 white-text">
                 <form action="" method="post">
                     <div class="card-content">
                         <span class="card-title">Profile Settings</span>
