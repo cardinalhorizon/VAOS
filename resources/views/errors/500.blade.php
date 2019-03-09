@@ -44,9 +44,7 @@
     <div class="content">
         <img src="{{asset('/img/MainLogo.svg')}}" style="min-width: 300px; width: 30vw;">
         <div class="title">That's not supposed to happen.</div>
-        @if(Auth::user()->admin)
-            <div>This is a generic 500 error. check your <span style="font-family: monospace; background: #666; border-radius: 3px; padding: 3px;">storage/logs/laravel.log</span> file for details about the error.</div>
-        @endif
+        <div>This is a generic 500 error. check your <span style="font-family: monospace; background: #666; border-radius: 3px; padding: 3px;">storage/logs/</span> folder for details about the error.</div>
     </div>
 </div>
 </body>
