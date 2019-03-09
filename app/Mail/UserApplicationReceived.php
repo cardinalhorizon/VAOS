@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,14 +11,16 @@ class UserApplicationReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user, $admin;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user, User $admin)
     {
-        //
+        $this->user = $user;
+        $this->admin = $admin;
     }
 
     /**
@@ -27,6 +30,6 @@ class UserApplicationReceived extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $this->subject('New User Application: '.$this->user->username)->markdown('mail.account.admin_pending');
     }
 }
