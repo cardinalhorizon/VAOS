@@ -23,7 +23,7 @@
     <link href="{{ asset('coreui/vendors/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
     <!-- Main styles for this application-->
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
-    <link href="{{ asset('css/admin.css')}}" rel="stylesheet">
+    <link href="{{ mix('css/admin.css')}}" rel="stylesheet">
     <link href="{{ asset('coreui/vendors/pace-progress/css/pace.min.css')}}" rel="stylesheet">
     <script>
         window.Laravel = <?php echo json_encode([
@@ -63,7 +63,6 @@
         <li class="nav-item d-md-down-none">
             <a class="nav-link" href="#">
                 <i class="icon-bell"></i>
-                <span class="badge badge-pill badge-danger">5</span>
             </a>
         </li>
         <li class="nav-item d-md-down-none">
@@ -585,7 +584,7 @@
         <span>Version: {{ config('app.version') }}</span>
     </div>
 </footer>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 <!-- Bootstrap and necessary plugins-->
 <script>
     $(function () {
