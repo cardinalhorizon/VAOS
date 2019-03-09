@@ -28,11 +28,12 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/flightops';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
+    protected function authenticated(Request $request, $user)
+    {
+        // See if we need to update anything specific
+        return redirect('/flightops');
+    }
 
     /**
      * Override the trait method to allow login using either email or username.
