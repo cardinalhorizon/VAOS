@@ -7,7 +7,7 @@
                     <div style="display: flex;justify-content: space-between;">
                         <div class="form-group">
                             <label for="registrationInput">Destination</label>
-                            <input v-model="filterRegistration" class="form-control" id="registrationInput">
+                            <input v-model="filterDestination" class="form-control" id="registrationInput">
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,7 @@
                         <table class="table table-responsive-sm table-bordered table-striped table-sm">
                             <thead>
                             <tr>
+                                <th>Airline</th>
                                 <th>Flight Number</th>
                                 <th>Departure</th>
                                 <th>Arrival</th>
@@ -48,6 +49,7 @@
                             </thead>
                             <tbody v-for="route in group.data">
                             <tr>
+                                <td>{{route.airline.icao}}</td>
                                 <td>{{route.flightnum}}</td>
                                 <td>{{route.depapt.icao}}</td>
                                 <td>{{route.arrapt.icao}}</td>
@@ -62,12 +64,10 @@
                                 <td>{{ route.arrtime }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Actions">
-                                        <a v-bind:href="base_url + 'admin/schedule/'+ route.id + '/edit'" class="btn btn-primary btn-brand"><i class="fa fa-edit"></i></a>
-                                        <a v-bind:href="base_url + 'admin/schedule/'+ route.id + '/edit'" class="btn btn-danger btn-brand"><i class="fa fa-times"></i></a>
+                                        <a v-bind:href="base_url + '/admin/'+ activeAirline.id+'/schedule/'+ route.id + '/edit'" class="btn btn-primary btn-brand"><i class="fa fa-edit"></i></a>
+                                        <a v-bind:href="base_url + '/admin/schedule/'+ route.id + '/edit'" class="btn btn-danger btn-brand"><i class="fa fa-times"></i></a>
                                     </div>
-
                                 </td>
-
                             </tr>
                             </tbody>
                         </table>
@@ -87,11 +87,8 @@
                 base_url: Laravel.baseUrl,
                 airline: Laravel.airline_id,
                 /* Search Objects */
-                filterRegistration: "",
-                filterLocation: "",
-                isAvailable: true,
-                isActive: true,
-                isDisabled: true
+                filterDestination: "",
+                filterLocation: ""
             }
         },
         props: {
@@ -102,21 +99,24 @@
         },
         computed: {
             filterList: function () {
-                let reg = this.filterRegistration;
-                if (this.filterRegistration !== "") {
+                let destination = this.filterDestination;
+                if (destination !== "") {
                     let output = [];
+                    console.log(this.groups);
                     this.groups.forEach(function (e) {
-                        let acf = e.aircraft.filter(x => x.registration.toLowerCase().includes(reg.toLowerCase()));
+                        let acf = e.data.filter(x => x.arrapt.icao.toLowerCase().includes(destination.toLowerCase()));
                         if (acf.length !== 0) {
                             output.push({
+                                id: e.id,
                                 name: e.name,
                                 icao: e.icao,
-                                aircraft: acf
+                                data: acf
                             });
                         }
                     });
                     return output;
                 }
+
                 else
                 {
                     return this.groups;

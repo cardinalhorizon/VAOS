@@ -46,7 +46,7 @@
                 </div>
             </div>
         <div style="width: 100%; height: 5px; background: #61c7ff;"></div>
-        <form method="post" v-bind:action="base_url + '/register'">
+        <form method="post" v-bind:action="'/register'">
             <input type="hidden" name="_token" v-bind:value="token"/>
             <input type="hidden" name="data" v-bind:value="JSON.stringify({ userData, externalHours })"/>
             <div style="margin: 1rem auto; text-align: center;">
@@ -76,7 +76,7 @@
                     ivao: null
                 },
                 externalHours: [],
-                base_url: Laravel.baseUrl,
+                base_url: window.location.hostname,
                 token: Laravel.csrfToken
             }
         },
