@@ -22,7 +22,7 @@ return [
     | This is the VAOS version number.
     */
 
-    'version' => '19w04a',
+    'version' => 'beta-1903a',
 
     /*
     |--------------------------------------------------------------------------
