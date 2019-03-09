@@ -22,6 +22,7 @@ class ScheduleController extends Controller
         $schedules = Schedule::with('depapt', 'arrapt', 'airline', 'aircraft_group', 'aircraft')->get();
 
         $output = groupArray($schedules, 'depapt', true, true);
+        //return response()->json($output);
         //$schedules = Schedule::all();
         //dd($schedules);
         // Return the view
@@ -94,14 +95,17 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($agrp, $id)
     {
-        $schedule = Schedule::findOrFail($id);
-
-        $airlines  = Airline::all();
-        $acfgroups = AircraftGroup::all();
-
-        return view('admin.schedules.edit', ['schedule' => $schedule, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);
+        $schedule = Schedule::with('airline','aircraft_group','aircraft','depapt','arrapt')->findOrFail($id);
+        $airline = Airline::with('aircraft_groups')->find($agrp);
+        foreach ($schedule->aircraft_group as $a) {
+            if ($a['pivot']['primary']) {
+                $schedule->primary_group = $a;
+                break;
+            }
+        }
+        return view('admin.schedules.edit', ['schedule' => $schedule, 'acfgrps' => $airline->aircraft_groups]);
     }
 
     /**
@@ -112,14 +116,14 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$agrp, $id)
     {
-        $data = $request->all();
+        $data = json_decode($request->input('data'), true);
         VAOS_Schedule::updateRoute($data, $id);
 
         $request->session()->flash('schedule_updated', true);
 
-        return redirect('/admin/schedule');
+        return redirect()->route('admin.schedule.index', ['agrp' => $agrp]);
     }
 
     /**
@@ -129,11 +133,11 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($agrp, $id)
     {
         // Delete the route from the system
         Schedule::destroy($id);
 
-        return redirect('/admin/schedule');
+        return redirect()->route('admin.schedule.index', ['agrp' => $agrp]);
     }
 }
