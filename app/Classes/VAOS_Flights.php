@@ -36,6 +36,7 @@ class VAOS_Flights
         $flight->fuel_used    = $data['fuelused'];
         $flight->flight_data  = $data['log'];
         $flight->state        = 2;
+        $flight->status       = 0;
         // Auto Accept System
         if (env('VAOS_AA_ENABLED')) {
             if ($data['landingrate'] >= env('VAOS_AA_LR')) {
