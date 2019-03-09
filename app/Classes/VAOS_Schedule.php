@@ -45,20 +45,29 @@ class VAOS_Schedule
          *
          * Aircraft will first be checked to see if they are available. This will be done via the Model directly.
          */
-
+        $assigned = false;
         if ($template->aircraft_group != null) {
             foreach ($template->aircraft_group as $a) {
                 if ($a['pivot']['primary']) {
                     $acfgrp = AircraftGroup::where('id', $a->id)->with('aircraft')->first();
-
                     // ok, run an availability check.
                     foreach ($acfgrp->aircraft as $acf) {
                         if ($acf->isAvailable()) {
                             $complete->aircraft()->associate($acf);
+                            $assigned = true;
+                            break;
                         }
                     }
                 }
+                if ($assigned)
+                {
+                    break;
+                }
             }
+        }
+        if (!$assigned)
+        {
+            throwException(new \Exception("No Available Aircraft in Assigned Aircraft Groups", 500));
         }
         //$acfgrp = AircraftGroup::where('id', $template->aircraft_group->pivot->primary)->with('aircraft')->first();
         else {
@@ -165,31 +174,14 @@ class VAOS_Schedule
         }
     }
 
-    public static function updateRoute($data, $id)
+    public static function updateRoute($obj, $id)
     {
         // Declare a new instance of the Schedule Model
         $entry = Schedule::find($id);
+        $data = $obj['route_info'];
         //dd($request);
-        // Before we add the route, lets check to see if the airport exists.
-        if (Airport::where('icao', $data['depicao'])->first() === null) {
-            VAOS_Airports::AddAirport($data['depicao']);
-        }
-        if (Airport::where('icao', $data['arricao'])->first() === null) {
-            VAOS_Airports::AddAirport($data['arricao']);
-        }
-        // add the form elements
-        // Search for the airline in the database
 
         $entry->flightnum = $data['flightnum'];
-
-        // Setup the foreign keys. Lets now find the new airports
-
-        $dep = Airport::where('icao', $data['depicao'])->first();
-        $arr = Airport::where('icao', $data['arricao'])->first();
-        $entry->depapt()->associate($dep);
-        $entry->arrapt()->associate($arr);
-        $airline = Airline::where('icao', $data['airline'])->first();
-        $entry->airline()->associate($airline);
 
         if (array_key_exists('alticao', $data)) {
             $entry->alticao = $data['alticao'];
@@ -198,13 +190,13 @@ class VAOS_Schedule
             $entry->route = $data['route'];
         }
         //dd($data);
-        /*
-        if (array_key_exists('aircraft_group', $data)) {
-            //dd($data);
-            $acfgrp = $acfgrp = AircraftGroup::where('icao', ($data['aircraft_group']))->first();
-            $entry->aircraft_group()->attach($data['aircraft_group'], ['primary' => true]);
-        }*/
-        $entry->seasonal = true;
+        // clear all aircraft groups and update them.
+        $entry->aircraft_group()->detach();
+
+        $entry->aircraft_group()->attach($data['primary_group']['id'], ['primary' => true]);
+        // aircraft group assignment
+
+        $entry->seasonal = false;
         //$entry->daysofweek = "0123456";
         $entry->type = $data['type'];
         if (array_key_exists('enabled', $data)) {
