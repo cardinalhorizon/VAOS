@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\PirepFiled' => [
+        'App\Events\FlightCompleted' => [
             'App\Listeners\DiscordNotification',
             'App\Listeners\EmailNotification',
         ],
@@ -51,4 +51,7 @@ class EventServiceProvider extends ServiceProvider
 
         //
     }
+    protected $subscribe = [
+        'App\Listeners\AdminEmailSubscriber',
+    ];
 }
