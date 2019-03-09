@@ -23,7 +23,7 @@ function permCheck($user, $key, $airline)
 }
 
 function groupArray($arr, $group, $preserveGroupKey = false, $preserveSubArrays = false) {
-    $temp = array();
+    $temp = [];
     foreach($arr as $key => $value) {
         //dd($value[$group]);
         $groupValue = $value[$group];
@@ -50,8 +50,22 @@ function groupArray($arr, $group, $preserveGroupKey = false, $preserveSubArrays 
             } else {
                 $data = $arr[$key];
             }
-            $temp[$groupValue][] = $data;
+            $temp[$groupValue] = $data;
         }
     }
-    return $temp;
+    // now convert it to an actual array
+    $output = [];
+
+    foreach ($temp as $var)
+    {
+        array_push($output, $var);
+    }
+
+    // sort the array by icao
+    usort($output, function($a, $b)
+    {
+        return strcmp($a['icao'], $b['icao']);
+    });
+    //dd($temp);
+    return $output;
 }
