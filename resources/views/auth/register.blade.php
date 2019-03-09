@@ -17,7 +17,7 @@
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
-            'baseUrl' => config('app.url')
+            'baseUrl' => url('/')
         ]); ?>
     </script>
     <!-- Icons -->
