@@ -10,6 +10,7 @@
     @if(session('aircraft_created'))
         <div class="alert alert-success"><b>Aircraft Successfully Added:</b> {{session('aircraft_created')}}</div>
     @endif
+    <a href="{{route('admin.pireps.index', [ 'agrp' => 1 ])}}" class="btn btn-primary">View Pending Reports</a>
     <h1>Active Flights
         <div class="btn-group float-right" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i></button>
@@ -53,6 +54,7 @@
     </div>
     <active-flight-list></active-flight-list>
     <h1>Logged Flights</h1>
+
 @endsection
 @section('js')
 

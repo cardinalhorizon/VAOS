@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-block" style="padding: 10px;">
                         <div class="flightpanel">
-                            <div class="airline-text">{{ $s->airline->icao }}{{ $s->flightnum }}</div>
+                            <div class="airline-text">{{ $s->getCallsign() }}</div>
                             <div class="arrdep">{{ $s->depapt->icao }} - {{ $s->arrapt->icao }}</div>
                             <div class="flightpanel-details">
                                 <div>{{$s->user->first_name}} {{$s->user->last_name}} :<i class="fa fa-user fa-fw"></i></div>
@@ -24,13 +24,13 @@
                     </div>
                     <div class="card-footer">
                         <span class="pull-right">
-                            <a href="{{url('/admin/pireps/'.$s->id)}}" class="btn btn-primary" role="button"><i class="fa fa-info"></i></a>
+                            <a href="{{url('/admin/1/pireps/'.$s->id)}}" class="btn btn-primary" role="button"><i class="fa fa-info"></i></a>
                             @if($s->flight_data !== null && $s->acars_client === "smartCARS")
                                 <a href="#" class="btn btn-info" role="button" onclick="loadLog({{$s->id}});"><i class="fa fa-book"></i></a>
                             @endif
                             <a href="#" class="btn btn-success" role="button" onclick="event.preventDefault();
                                     document.getElementById('accept{{ $s->id }}').submit();"><i class="fa fa-check"></i></a>
-                            <form id="accept{{ $s->id }}" method="POST" action="{{ url('/admin/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
+                            <form id="accept{{ $s->id }}" method="POST" action="{{ url('/admin/1/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
                                 {{ csrf_field() }}
                                 <input name="flag" type="hidden" value="status">
                                 <input name="status" type="hidden" value="1">
@@ -39,7 +39,7 @@
 
                             <a href="#" class="btn btn-danger" role="button" onclick="event.preventDefault();
                                     document.getElementById('reject{{ $s->id }}').submit();"><i class="fa fa-times"></i></a>
-                            <form id="reject{{ $s->id }}" method="POST" action="{{ url('/admin/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
+                            <form id="reject{{ $s->id }}" method="POST" action="{{ url('/admin/1/pireps/'.$s->id) }}" accept-charset="UTF-8" hidden>
                                 {{ csrf_field() }}
                                 <input name="flag" type="hidden" value="status">
                                 <input name="status" type="hidden" value="2">
@@ -78,7 +78,7 @@
         function loadLog(logbookID)
         {
             $("#scLogs").empty();
-                $.getJSON( "{{ config('app.url') }}api/v1/logbook/" + logbookID, function( data ) {
+                $.getJSON(window.location.hostname+"/api/v1/logbook/" + logbookID, function( data ) {
                     console.log(data);
                     if(data.acars_client = "smartCARS") {
                         if (data.flight_data !== null) {
