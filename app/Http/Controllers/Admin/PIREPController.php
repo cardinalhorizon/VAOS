@@ -14,16 +14,11 @@ class PIREPController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($airline, Request $request)
     {
-        if ($request->query('view') == 'pending') {
-            $pireps = Flight::where('status', 0)->with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
-
-            return view('admin.pireps.pending', ['pireps' => $pireps]);
-        }
-        $pireps = Flight::with('user')->with('depapt')->with('arrapt')->with('aircraft')->get();
+        $pireps = Flight::where(['status' => 0, 'state' => 2])->with('user','depapt','arrapt','aircraft')->get();
+        return view('admin.pireps.pending', ['pireps' => $pireps]);
         //return response()->json($pireps);
-        return view('admin.pireps.view', ['pireps' => $pireps]);
     }
 
     /**
@@ -82,9 +77,9 @@ class PIREPController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($airline, $id, Request $request)
     {
-        $pirep = PIREP::find($id);
+        $pirep = Flight::find($id);
         // check if we are only changing the status
         //dd($request);
         if ($request->input('flag') == 'status') {
