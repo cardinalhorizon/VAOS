@@ -65,6 +65,9 @@ class Flight extends Model
     {
         if (is_null($this->callsign))
             return $this->airline->icao.$this->flightnum;
+        if (is_null($this->airline_id))
+            return $this->flightnum;
+
         return $this->callsign;
     }
 }
