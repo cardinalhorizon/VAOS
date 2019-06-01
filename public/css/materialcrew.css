@@ -6434,7 +6434,7 @@ label {
   color: #d1d1d1;
 }
 
-:-ms-input-placeholder {
+::-moz-placeholder {
   color: #d1d1d1;
 }
 

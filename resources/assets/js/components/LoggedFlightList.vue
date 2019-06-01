@@ -32,13 +32,13 @@
           <td>
             <div class="btn-group" role="group" aria-label="Actions">
               <a
-                v-bind:href="base_url + 'admin/schedule/'+ route.id + '/edit'"
+                v-bind:href="'admin/schedule/'+ route.id + '/edit'"
                 class="btn btn-primary btn-brand"
               >
                 <i class="fa fa-edit"></i>
               </a>
               <a
-                v-bind:href="base_url + 'admin/schedule/'+ route.id + '/edit'"
+                v-bind:href="'/admin/schedule/'+ route.id + '/edit'"
                 class="btn btn-danger btn-brand"
               >
                 <i class="fa fa-times"></i>

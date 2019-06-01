@@ -176,7 +176,7 @@
             </div>
           </div>
         </div>
-        <form method="post" v-bind:action="base_url + '/admin/' + airline.id + '/schedule'">
+        <form method="post" v-bind:action="'/admin/' + airline.id + '/schedule'">
           <input type="hidden" name="_token" v-bind:value="token">
           <input
             type="hidden"

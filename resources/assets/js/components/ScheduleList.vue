@@ -14,9 +14,9 @@
                 <div style="margin-left: auto; margin-top: auto; margin-bottom: 1rem;">
                     <h3 style="text-align: right">Actions</h3>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a v-bind:href="base_url + '/admin/' + activeAirline.id + '/schedule/create'" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Add New Route"><i class="fa fa-plus"></i></a>
-                        <a v-bind:href="base_url + '/admin/fleet/create'" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></a>
-                        <a v-bind:href="base_url + '/admin/fleet/create'" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></a>
+                        <a v-bind:href="'/admin/' + activeAirline.id + '/schedule/create'" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Add New Route"><i class="fa fa-plus"></i></a>
+                        <a v-bind:href="'/admin/fleet/create'" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></a>
+                        <a v-bind:href="'/admin/fleet/create'" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></a>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,11 @@
                                 <td>{{ route.arrtime }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Actions">
-                                        <a v-bind:href="base_url + '/admin/'+ activeAirline.id+'/schedule/'+ route.id + '/edit'" class="btn btn-primary btn-brand"><i class="fa fa-edit"></i></a>
-                                        <a v-bind:href="base_url + '/admin/schedule/'+ route.id + '/edit'" class="btn btn-danger btn-brand"><i class="fa fa-times"></i></a>
+                                        <a v-bind:href="'/admin/'+ activeAirline.id+'/schedule/'+ route.id + '/edit'" class="btn btn-primary btn-brand"><i class="fa fa-edit"></i></a>
+                                        <form method="post" :action="'/admin/schedule/'+ route.id">
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button v-bind:href="'/admin/schedule/'+ route.id + '/edit'" type="submit" class="btn btn-danger btn-brand"><i class="fa fa-times"></i></button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

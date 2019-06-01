@@ -130,7 +130,7 @@ class UsersController extends Controller
         } else {
             $user->ivao = null;
         }
-
+        $user->username = $request->username;
         if ($request->admin == 1) {
             $user->admin = $request->admin;
         } else {

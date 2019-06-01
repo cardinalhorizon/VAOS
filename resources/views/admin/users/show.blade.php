@@ -103,11 +103,7 @@
                             <td>{{ $p->flightnum }}</td>
                             <td>{{ $p->depapt->icao }}</td>
                             <td>{{ $p->arrapt->icao }}</td>
-                            @if(isset($p->aircraft->name))
-                                <td>{{ $p->aircraft->name }} ({{ $p->aircraft->registration }})</td>
-                            @else
-                                <td>N/A</td>
-                            @endif
+                            <td>{{ $p->aircraft->name }} ({{ $p->aircraft->registration }})</td>
                             @if($p->status === 1)
                                 <td>Approved</td>
                             @elseif($p->status === 2)

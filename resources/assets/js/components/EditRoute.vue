@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="post" v-bind:action="base_url + '/admin/' + route_info.airline.id + '/schedule/'+route_info.id">
+                <form method="post" v-bind:action="'/admin/' + route_info.airline.id + '/schedule/'+route_info.id">
                     <input type="hidden" name="_token" v-bind:value="token"/>
                     <input type="hidden" name="_method" value="PATCH"/>
                     <input type="hidden" name="data" v-bind:value="JSON.stringify({ route_info })"/>

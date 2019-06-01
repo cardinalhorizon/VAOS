@@ -50,10 +50,6 @@
             <input type="hidden" name="_token" v-bind:value="token"/>
             <input type="hidden" name="data" v-bind:value="JSON.stringify({ userData, externalHours })"/>
             <div style="margin: 1rem auto; text-align: center;">
-                By creating an account, you accept our<br>
-                <a v-bind:href="base_url + 'tos'" target="_blank">Terms Of Service</a> and <a v-bind:href="base_url + 'privacy'" target="_blank">Privacy Policy</a>.
-            </div>
-            <div style="margin: 1rem auto; text-align: center;">
                 <button class="btn" type="submit">Create Account</button>
             </div>
         </form>

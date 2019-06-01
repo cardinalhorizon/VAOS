@@ -6,26 +6,12 @@
 @endsection
 
 @section('content')
-    <div class="z-depth-2" style="position: relative; width: 100%; height: 300px; overflow: hidden; background: url('{{ Auth::user()->cover_url }}'), url(http://i.imgur.com/3UZDNCM.png);     background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;">
-        <div style="height: 100%; background: linear-gradient(rgba(255,0,0,0), rgba(255,0,0,0), rgba(69,69,69,0.9))">
-        </div>
-        <div class="container" style="position: inherit;">
-            <div style="position: absolute; right: 0; bottom: 1rem;">
-                <div id="status" class="card">
-                    <div id="status-text" class="card-content white-text"></div>
-                </div>
-            </div>
-        </div>
-        <h3 class="white-text" style="position: absolute; bottom: 0; left: 2rem;">{{ $p->airline->icao }}{{ $p->flightnum }} Details</h3>
-    </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col l6 s12">
-                <div class="card">
+                <div class="card grey darken-3 white-text">
                     <div class="card-content">
-                        <h4>Crew Information</h4>
+                        <h4>Crew</h4>
                         <div id="captain">
                             <ul class="collection with-header">
                                 <li class="collection-item"><div>Username<div class="secondary-content">{{ $p->user->username }}</div></div></li>
@@ -38,7 +24,9 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 2rem;" class="card">
+            </div>
+            <div class="col l6 s12">
+                <div class="card grey darken-3 white-text">
                     <div class="card-content">
                         <h4>Flight Information</h4>
                         <ul class="tabs tabs-fixed-width">
@@ -71,19 +59,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col l6 s12">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Flight Details</span>
-                        <div id="map" style="width: auto; height: 40vh;"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col l6 s12">
-
-            </div>
-
         </div>
+        <pacx-flight-log url="{!! $p->pacx_url !!}" flight="{{$p->id}}"></pacx-flight-log>
     </div>
 @endsection
 
@@ -108,9 +85,9 @@
                         $("#status-text").append('STATUS: <b>DENIED</b>');
                         break;
                 }
-                if(data.acars_client = "smartCARS") {
-                    if (data.flight_data !== null) {
-                        var logSplit = data.flight_data.split("*");
+                if(data.acars_client === "smartCARS") {
+                    if (data.sc_log !== null) {
+                        var logSplit = data.sc_log.split("*");
                         $.each(logSplit, function (index, value) {
                             $("#scLogs").append('<li class="collection-item"><div>' + value + '</div></li>')
                         });

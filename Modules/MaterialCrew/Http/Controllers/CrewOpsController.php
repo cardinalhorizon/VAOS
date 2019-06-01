@@ -234,4 +234,14 @@ class CrewOpsController extends Controller
     {
         return (strlen($num) < 2) ? "0{$num}" : $num;
     }
+    public function storePacx(Request $request) {
+        $data = json_decode($request->input('data'));
+        //dd($data);
+        $flight = Flight::find(intval($data->flight));
+        $flight->pacx_url = $data->report_url;
+
+        $flight->save();
+
+        return redirect()->action('\Modules\MaterialCrew\Http\Controllers\CrewOpsController@getLogbookDetailed', ['id' => $flight->id]);
+    }
 }

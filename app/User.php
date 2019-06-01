@@ -110,4 +110,9 @@ class User extends Authenticatable
         return $this->airlines->contains($airline);
     }
 
+    public function ext_hours()
+    {
+        return $this->hasMany('App\Models\ExtHour');
+    }
+
 }

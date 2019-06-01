@@ -24,7 +24,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\MaterialCrew\Http\C
         });
 
         // Events System
-
+        Route::post('/pacx', 'CrewOpsController@storePacx');
         Route::group(['prefix' => '/events', 'as' => 'events.'], function () {
             Route::get('/', 'EventsController@index')->name('index');
             Route::get('/create', 'EventsController@create')->name('create');
