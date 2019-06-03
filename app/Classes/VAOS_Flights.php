@@ -34,7 +34,7 @@ class VAOS_Flights
         $flight->flighttime   = $data['flighttime'];
         $flight->acars_client = $data['source'];
         $flight->fuel_used    = $data['fuelused'];
-        $flight->flight_data  = $data['log'];
+        $flight->sc_log  = $data['log'];
         $flight->state        = 2;
         $flight->status       = 0;
         // Auto Accept System
