@@ -41,8 +41,8 @@
                         <input type="text" class="form-control" name="email" value="{{ $user->email }}">
                     </div>
                     <div class="form-group">
-                        <label>Pilot ID</label>
-                        <input type="text" name="pilotid" class="form-control" value="{{ $user->pilotid }}" placeholder="0001">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" value="{{ $user->username }}" placeholder="0001">
                     </div>
                     <div class="form-group">
                         <label>VATSIM ID</label>
@@ -99,11 +99,20 @@
                     <tbody>
                     @foreach($user->flights as $p)
                         <tr>
-                            <td>{{ $p->airline->icao }}</td>
-                            <td>{{ $p->flightnum }}</td>
+                            @if(isset($p->airline))
+                                <td>{{ $p->airline->icao }}</td>
+                            @else
+                                <td>Private Flight</td>
+                            @endif
+
+                            <td>{{ $p->getCallsign() }}</td>
                             <td>{{ $p->depapt->icao }}</td>
                             <td>{{ $p->arrapt->icao }}</td>
-                            <td>{{ $p->aircraft->name }} ({{ $p->aircraft->registration }})</td>
+                            @if(isset($p->aircraft))
+                                <td>{{ $p->aircraft->name }} ({{ $p->aircraft->registration }})</td>
+                            @else
+                                <td>Aircraft Assignment Error</td>
+                            @endif
                             @if($p->status === 1)
                                 <td>Approved</td>
                             @elseif($p->status === 2)

@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label" for="text-input">Pilot ID</label>
+                        <label class="col-md-3 form-control-label" for="text-input">Username</label>
                         <div class="col-md-9">
                             <input type="text" id="depicao" name="username" class="form-control" placeholder="eg. KLAX">
                         </div>
