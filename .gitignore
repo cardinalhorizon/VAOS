@@ -1,12 +1,16 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
+### JetBrains template
+/.idea/
+
+### Laravel template
+/vendor/
+node_modules/
 npm-debug.log
 yarn-error.log
-.idea
+public/storage
+public/hot
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
