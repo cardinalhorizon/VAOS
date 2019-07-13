@@ -21,5 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Dynamic Aviation Group Module Loader
 if (env('VAOS_AG_DYN_ML')) {
-
 }
