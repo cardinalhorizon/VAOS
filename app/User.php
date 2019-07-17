@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        'admin' => 'boolean'
+    ];
+
     public function flights()
     {
         return $this->hasMany('App\Models\Flight');

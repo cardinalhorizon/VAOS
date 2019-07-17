@@ -8,6 +8,14 @@ class Flight extends Model
 {
     public $table = 'flights';
 
+    protected $casts = [
+        'state' => 'integer',
+        'status' => 'integer',
+        'lat' => 'double',
+        'lon' => 'double',
+        'heading' => 'integer'
+    ];
+
     protected $guarded = [
     ];
 

@@ -28,6 +28,17 @@ class VAOS_Airports
             }
             return $apt;
         }
+        else if(is_int($input)) {
+            try {
+                $apt = Airport::where('id', $input)->firstOrFail();
+            }
+            catch (\Exception $e)
+            {
+                $id = self::AddAirport($input, true);
+                return $id;
+            }
+            return $apt;
+        }
         else {
             $apt = Airport::where('id', $input->id)->first();
             if ($apt === null) {
@@ -54,19 +65,28 @@ class VAOS_Airports
         Log::debug('Created Airport: '.$airport->icao);
         return $airport;
     }
-    public static function AddAirport($icao)
+    public static function AddAirport($icao, $id = false)
     {
         // lets request the airport identifier from the central database
         try {
             $client = new Client();
-            $res    = $client->request('GET', 'http://fsvaos.net/api/data/airports', [
-                'query' => [
-                    'icao' => $icao,
-                ],
-            ])->getBody();
+            if(!$id) {
+                $res    = $client->request('GET', 'http://fsvaos.net/api/data/airports', [
+                    'query' => [
+                        'icao' => $icao,
+                    ],
+                ])->getBody();
+            } else {
+                $res    = $client->request('GET', 'http://fsvaos.net/api/data/airports', [
+                    'query' => [
+                        'id' => $icao,
+                    ],
+                ])->getBody();
+            }
 
             // Add the airport to the database
             $data    = json_decode($res, true);
+            //dd($icao);
             $airport = Airport::firstOrNew(['id' => $data['id']]);
             // return dd($icao);
 

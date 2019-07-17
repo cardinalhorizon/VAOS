@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Airport extends Model
 {
-    protected $fillable = ['id', 'name', 'city', 'country', 'iata', 'icao', 'lat', 'lon', 'data'];
+    protected $fillable = ['id', 'name', 'city', 'country', 'iata', 'icao', 'lat', 'lon', 'data', 'img_irl'];
+
+    protected $casts = [
+        'lat' => 'double',
+        'lon' => 'double'
+    ];
     public $timestamps = false;
 
     public function schedule_dep()
