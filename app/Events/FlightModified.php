@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Flight;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -14,14 +15,12 @@ class FlightModified
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $flight;
+
+
+    public function __construct(Flight $flight)
     {
-        //
+        $this->flight = $flight;
     }
 
     /**
