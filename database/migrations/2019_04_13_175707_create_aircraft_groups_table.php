@@ -16,6 +16,8 @@ class CreateAircraftGroupsTable extends Migration
         Schema::create('aircraft_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('icao');
+            $table->text('description');
             $table->unsignedBigInteger('aviation_group_id');
             $table->timestamps();
         });

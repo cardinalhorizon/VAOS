@@ -16,6 +16,8 @@ class CreateParkingLocationsTable extends Migration
         Schema::create('parking_locations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('airport_id');
+            $table->integer('type');
+            $table->json('data');
             $table->timestamps();
         });
     }
