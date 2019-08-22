@@ -146,7 +146,7 @@
             </div>
                 <div style="display: inline;">
                     <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}">
-                        <img class="circle" style="margin: auto 0;border: white 4px solid;position:absolute;" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'">
+                        <img class="circle" style="margin: auto 0;border: white 4px solid;position:absolute;" src="{{ Auth::user()->avatar_url }}" onerror="this.src='/img/VAOS_ICON.png'">
                         <div style="position: relative;left: 70px;line-height: 30px;color:white; padding-top: 0px;font-size: 18px;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
                         <div style="position: relative;left: 64px; height: 1px; width: 60%; background: white; border: 2px white solid; border-radius: 0 2px 2px 0;"></div>
                         <div style="position: relative;left: 70px;line-height: 30px;color:#61C7FF;font-size: 16px;">{{ Auth::user()->username }}</div>

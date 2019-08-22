@@ -36,7 +36,7 @@
                 <div style="position: absolute; height: 100%; width: 100%; background-color: rgba(25,25,25,.75);z-index: 0"></div>
                 <div class="card-content" style="display: flex;justify-content: space-between;position: relative; z-index: 5;">
                     <div style="display: inline-flex; margin-top: auto; margin-bottom: auto;">
-                        <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $user->avatar_url !!}'), url('http://identicon.org?t={{$user->username}}&amp;s=400') black no-repeat center; background-size: cover;"></div>
+                        <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $user->avatar_url !!}'), url('/img/VAOS_ICON.png') black no-repeat center; background-size: cover;"></div>
                         <div style="position: relative; margin-top: auto; margin-bottom: auto; margin-right: 0;">
                             <div style="padding-left: 10px; color:white; font-size: 30px;">{{ $user->first_name }} {{ $user->last_name }}</div>
                             <div style="height: 1px; width: 110%; background: white; border: 2px white solid; border-radius: 0 2px 2px 0;"></div>

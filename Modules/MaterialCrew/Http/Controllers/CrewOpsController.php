@@ -2,6 +2,7 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
+use App\Classes\VAOS_Airports;
 use App\User;
 use App\Models\Flight;
 use App\Models\Airline;
@@ -127,6 +128,12 @@ class CrewOpsController extends Controller
                     if ($a['pivot']['primary']) {
                         $s->primary_aircraft = $a->icao;
                     }
+                }
+                if (!isset($s->depapt)) {
+                    VAOS_Airports::checkOrAdd(intval($s->depapt_id));
+                }
+                if (!isset($s->arrapt)) {
+                    VAOS_Airports::checkOrAdd(intval($s->arrapt_id));
                 }
             }
             //return $schedules;

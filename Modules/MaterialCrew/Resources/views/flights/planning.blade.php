@@ -61,36 +61,13 @@
             </div>
         </div>
     </div>
-    {{--
-    <div class="row">
-        <div class="col m10 s12 offset-m1">
-            <div class="card grey darken-3">
-                <div class="card-content status-strip-container">
-                    <div class="white-text">
-                        <div style="font-size: 3rem; font-weight: bold;">{{ $flight->depapt->icao }}</div>
-                        <div style="font-size: 2.5rem;">N/A</div>
-                    </div>
-                    <div style="display: flex">
-                        <div class="progress" style="margin-top: auto; height: 10px; margin-bottom: 0;">
-                            <div class="determinate" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div class="white-text right-align">
-                        <div style="font-size: 3rem; font-weight: bold;">{{ $flight->arrapt->icao }}</div>
-                        <div style="font-size: 2.5rem;">N/A</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    --}}
     <div class="row">
         <div class="col m10 s12 offset-m1" style="display: flex;justify-content: space-between;position: relative; z-index: 5;">
             <a class="waves-effect waves-light btn"><i class="material-icons left">flight_takeoff</i>activate flight</a>
-            @if($flight->state === 1 && Auth::user()->id === $flight->user_id)
+            @if(intval($flight->state) == 1 && Auth::user()->id == intval($flight->user_id))
                 <a href="{{route('flightops.flights.manualfile', ['id' => $flight->id])}}" class="waves-effect waves-light btn brand b-red"><i class="material-icons left">save</i>close flight</a>
             @endif
-            @if($flight->state === 0 && Auth::user()->id === $flight->user_id)
+            @if(intval($flight->state) == 0 && Auth::user()->id == intval($flight->user_id))
                 <a href="{{route('flightops.flights.manualfile', ['id' => $flight->id])}}" onclick="event.preventDefault();
                         document.getElementById('delete-bid').submit();"
                    class="waves-effect waves-light btn brand b-red"><i class="material-icons left">cancel</i>Cancel Flight</a>
@@ -118,7 +95,7 @@
             <div class="card grey darken-2">
                 <div class="card-content white-text" style="display: flex;justify-content: space-between;position: relative; z-index: 5; text-align: center; align-items: center;">
                     <div class="info-block">
-                        <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $flight->user->avatar_url !!}'), url('http://identicon.org?t={{$flight->user->username}}&amp;s=400') black no-repeat center; background-size: cover; margin: 0 auto;"></div>
+                        <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $flight->user->avatar_url !!}'), url('/img/VAOS_ICON.png') black no-repeat center; background-size: cover; margin: 0 auto;"></div>
                         <div style="position: relative; margin-top: auto; margin-bottom: auto; margin-right: 0;">
                             <div style="padding-left: 10px; color:white; font-size: 30px;">{{ $flight->user->first_name }} {{ $flight->user->last_name }}</div>
                             <div style="padding-left: 10px; color:#61C7FF;font-size: 28px;">Captain</div>
@@ -126,7 +103,7 @@
                     </div>
                     @if(!is_null($flight->fo))
                         <div class="info-block">
-                            <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $flight->fo->avatar_url !!}'), url('http://identicon.org?t={{$flight->fo->username}}&amp;s=400') black no-repeat center; background-size: cover; margin: 0 auto;"></div>
+                            <div class="circle" style="border: solid; border-color: white; width: 150px; height: 150px;background: url('{!! $flight->fo->avatar_url !!}'), url('/img/VAOS_ICON.png') black no-repeat center; background-size: cover; margin: 0 auto;"></div>
                             <div style="position: relative; margin-top: auto; margin-bottom: auto; margin-right: 0;">
                                 <div style="padding-left: 10px; color:white; font-size: 30px;">{{ $flight->fo->first_name }} {{ $flight->fo->last_name }}</div>
                                 <div style="padding-left: 10px; color:#61C7FF;font-size: 28px;">First Officer</div>

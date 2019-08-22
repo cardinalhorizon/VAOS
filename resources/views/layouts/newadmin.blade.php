@@ -45,7 +45,7 @@
             <div class="background">
                 <img src="{{ Auth::user()->cover_url }}" onerror="this.src='{{ url('/img/cover_default.png') }}'" style="width:100%;">
             </div>
-            <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><img class="circle" src="{{ Auth::user()->avatar_url }}" onerror="this.src='http://identicon.org?t={{ Auth::user()->username }}&s=400'"></a>
+            <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><img class="circle" src="{{ Auth::user()->avatar_url }}" onerror="this.src='/img/VAOS_ICON.png'"></a>
             <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><span class="white-text name">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span></a>
             <a href="{{ url('/flightops/profile/'.Auth::user()->id) }}"><span class="white-text email">{{ Auth::user()->username }}</span></a>
         </div>
