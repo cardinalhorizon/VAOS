@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Classes;
-
 
 class VAOS_Flights
 {
@@ -10,6 +8,7 @@ class VAOS_Flights
     {
         //
     }
+
     public function updateFlight()
     {
         //
