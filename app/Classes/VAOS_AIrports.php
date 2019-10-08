@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Classes;
-
 
 class VAOS_AIrports
 {
@@ -10,6 +8,7 @@ class VAOS_AIrports
     {
         //
     }
+
     public function addParkingRef()
     {
         //

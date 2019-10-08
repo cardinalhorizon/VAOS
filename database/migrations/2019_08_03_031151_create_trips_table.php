@@ -18,7 +18,7 @@ class CreateTripsTable extends Migration
             $table->unsignedBigInteger('aviation_group_id')->nullable();
             $table->timestamps();
         });
-        Schema::create('flight_trip', function(Blueprint $table) {
+        Schema::create('flight_trip', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('flight_id');
