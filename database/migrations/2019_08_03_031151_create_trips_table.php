@@ -20,6 +20,7 @@ class CreateTripsTable extends Migration
         });
         Schema::create('flight_trip', function(Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->unsignedBigInteger('flight_id');
             $table->unsignedBigInteger('trip_id');
             $table->integer('order');
