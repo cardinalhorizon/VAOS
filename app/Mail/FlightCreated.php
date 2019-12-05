@@ -15,7 +15,6 @@ class FlightCreated extends Mailable
 
     public function __construct(Flight $flight)
     {
-
     }
 
     /**

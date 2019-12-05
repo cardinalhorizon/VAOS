@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\OnlineData;
 
-use App\Models\Flight;
-use GuzzleHttp\Client;
-use App\Models\FlightData as ACARSData;
 use App\Http\Controllers\Controller;
+use App\Models\Flight;
+use App\Models\FlightData as ACARSData;
+use GuzzleHttp\Client;
 
 class VatsimData extends Controller
 {

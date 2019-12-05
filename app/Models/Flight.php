@@ -9,11 +9,11 @@ class Flight extends Model
     public $table = 'flights';
 
     protected $casts = [
-        'state' => 'integer',
-        'status' => 'integer',
-        'lat' => 'double',
-        'lon' => 'double',
-        'heading' => 'integer'
+        'state'   => 'integer',
+        'status'  => 'integer',
+        'lat'     => 'double',
+        'lon'     => 'double',
+        'heading' => 'integer',
     ];
 
     protected $guarded = [
@@ -71,15 +71,16 @@ class Flight extends Model
 
     public function getCallsign()
     {
-        if (is_null($this->airline_id) && is_null($this->callsign))
+        if (is_null($this->airline_id) && is_null($this->callsign)) {
             return $this->flightnum;
-        if (is_null($this->callsign))
+        }
+        if (is_null($this->callsign)) {
             return $this->airline->icao.$this->flightnum;
-        if (is_null($this->callsign) && is_null($this->flightnum))
-            return "N/A";
-        else
+        }
+        if (is_null($this->callsign) && is_null($this->flightnum)) {
+            return 'N/A';
+        } else {
             return $this->callsign;
-
-
+        }
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Airline;
 use App\AircraftGroup;
-use GuzzleHttp\Client;
-use App\Models\Airport;
+use App\Airline;
 use App\Models\Aircraft;
+use App\Models\Airport;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class FleetAPI extends Controller

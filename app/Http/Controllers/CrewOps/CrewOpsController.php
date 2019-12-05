@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\CrewOps;
 
-use App\User;
-use App\Models\Flight;
+use App\Http\Controllers\Controller;
+use App\Models\Aircraft;
+use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Models\Airport;
-use App\Models\Aircraft;
-use App\Models\Schedule;
-use Illuminate\Http\Request;
-use App\Models\AircraftGroup;
-use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Flight;
 use App\Models\LogbookEntry as PIREP;
+use App\Models\Schedule;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CrewOpsController extends Controller
 {

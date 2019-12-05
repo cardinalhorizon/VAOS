@@ -3,18 +3,18 @@
 namespace Modules\MaterialCrew\Http\Controllers;
 
 use App\Classes\VAOS_Airports;
-use App\User;
-use App\Models\Flight;
+use App\Http\Controllers\Controller;
+use App\Models\Aircraft;
+use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Models\Airport;
-use App\Models\Aircraft;
-use App\Models\Schedule;
-use Illuminate\Http\Request;
-use App\Models\AircraftGroup;
-use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Flight;
 use App\Models\LogbookEntry as PIREP;
+use App\Models\Schedule;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class CrewOpsController extends Controller
 {
@@ -129,10 +129,10 @@ class CrewOpsController extends Controller
                         $s->primary_aircraft = $a->icao;
                     }
                 }
-                if (!isset($s->depapt)) {
+                if (! isset($s->depapt)) {
                     VAOS_Airports::checkOrAdd(intval($s->depapt_id));
                 }
-                if (!isset($s->arrapt)) {
+                if (! isset($s->arrapt)) {
                     VAOS_Airports::checkOrAdd(intval($s->arrapt_id));
                 }
             }
@@ -241,10 +241,12 @@ class CrewOpsController extends Controller
     {
         return (strlen($num) < 2) ? "0{$num}" : $num;
     }
-    public function storePacx(Request $request) {
+
+    public function storePacx(Request $request)
+    {
         $data = json_decode($request->input('data'));
         //dd($data);
-        $flight = Flight::find(intval($data->flight));
+        $flight           = Flight::find(intval($data->flight));
         $flight->pacx_url = $data->report_url;
 
         $flight->save();

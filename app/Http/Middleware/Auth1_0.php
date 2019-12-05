@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\ACARS_Session;
+use Closure;
 
 class APIAuth1_0
 {

@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\AirineEventDispatched;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EmailNotification
 {
@@ -22,6 +20,7 @@ class EmailNotification
      * Handle the event.
      *
      * @param  AirineEventDispatched  $event
+     *
      * @return void
      */
     public function handle(AirineEventDispatched $event)

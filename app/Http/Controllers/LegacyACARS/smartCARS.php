@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\LegacyACARS;
 
-use App\User;
-use App\Models\Flight;
-use GuzzleHttp\Client;
-use App\Models\Airline;
-use App\Models\FlightData as ACARSData;
-use Illuminate\Http\Request;
-use App\Models\FlightComment;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Airline;
+use App\Models\Flight;
+use App\Models\FlightComment;
+use App\Models\FlightData as ACARSData;
+use App\User;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 class smartCARS extends Controller
 {
@@ -126,7 +125,7 @@ class smartCARS extends Controller
         $flight->lon = $report['lon'];
         //$flight->heading = $data[38];
         $flight->altitude = $report['altitude'];
-        $flight->gs = $report['groundspeed'];
+        $flight->gs       = $report['groundspeed'];
         $flight->save();
         /*
         $client = new Client();

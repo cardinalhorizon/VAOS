@@ -2,13 +2,13 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
-use Ramsey\Uuid\Uuid;
-use App\Models\Flight;
-use App\Models\AirlineEvent;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\AirlineEvent;
+use App\Models\Flight;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Ramsey\Uuid\Uuid;
 
 class EventsController extends Controller
 {

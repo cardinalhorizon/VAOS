@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         Commands\VatsimStatus::class,
-        Commands\ImportPhpVMS::class
+        Commands\ImportPhpVMS::class,
     ];
 
     /**

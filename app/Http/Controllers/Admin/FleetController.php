@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Airline;
-use App\Models\Aircraft;
-use Illuminate\Http\Request;
-use App\Models\AircraftGroup;
 use App\Classes\VAOS_Aircraft;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Models\Aircraft;
+use App\Models\AircraftGroup;
+use App\Models\Airline;
+use Illuminate\Http\Request;
 
 class FleetController extends Controller
 {
@@ -19,12 +18,9 @@ class FleetController extends Controller
      */
     public function index($agrp)
     {
-        if ($agrp === 'all')
-        {
+        if ($agrp === 'all') {
             $groups = AircraftGroup::with('aircraft', 'aircraft.airline', 'aircraft.location', 'aircraft.hub')->get();
-        }
-        else
-        {
+        } else {
             $groups = AircraftGroup::where('airline_id', $agrp)->with('aircraft', 'aircraft.airline', 'aircraft.location', 'aircraft.hub', 'aircraft.hub.airport')->get();
         }
         //return $fleet;
@@ -38,16 +34,14 @@ class FleetController extends Controller
      */
     public function create($agrp)
     {
-        if ($agrp === 'all')
-        {
+        if ($agrp === 'all') {
             $airlines  = Airline::all();
             $acfgroups = AircraftGroup::where('userdefined', true)->get();
-        }
-        else
-        {
+        } else {
             $airlines  = Airline::find($agrp);
             $acfgroups = AircraftGroup::where(['userdefined' => true, 'airline_id' => $agrp])->get();
         }
+
         return view('admin.fleet.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
     }
 
@@ -66,25 +60,24 @@ class FleetController extends Controller
         $data['icao']         = $input->aircraftData->icao;
         $data['name']         = $input->aircraftData->name;
         $data['manufacturer'] = $input->aircraftData->manufacturer;
-        $data['status'] = 1;
-        $data['airline'] = $input->airline->icao;
-        $res = array();
-        foreach ($input->registrations as $reg)
-        {
+        $data['status']       = 1;
+        $data['airline']      = $input->airline->icao;
+        $res                  = [];
+        foreach ($input->registrations as $reg) {
             $data['registration'] = $reg->registration;
-            $data['hub'] = $reg->hub_id;
+            $data['hub']          = $reg->hub_id;
             if (VAOS_Aircraft::createAircraft($data)) {
                 $res[] = $data['registration'];
             }
         }
-        $out = "";
+        $out = '';
 
-        foreach ($res as $a)
-        {
-            $out .= $a.", ";
+        foreach ($res as $a) {
+            $out .= $a.', ';
         }
         substr($out, 0, -2);
         $request->session()->flash('aircraft_created', $out);
+
         return redirect()->route('admin.fleet.index', ['agrp' => $agrp]);
         //dd($data);
     }
@@ -100,13 +93,14 @@ class FleetController extends Controller
     {
         return redirect('admin/fleet');
     }
+
     public function apiGet($id)
     {
-        if ($id == 0)
-        {
+        if ($id == 0) {
             AircraftGroup::with('aircraft', 'airline')->get();
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -11,7 +11,6 @@
 |
 */
 
-
 Auth::routes();
 
 Route::get('/status', function () {
@@ -25,7 +24,7 @@ Route::get('/status', function () {
 Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'App\Http\Middleware\AdminPerms'], 'as' => 'admin.'], function () {
     Route::get('/', 'AdminController@index')->name('index');
     Route::resource('/users', 'UsersController');
-    Route::group(['prefix' => '/{agrp}'], function() {
+    Route::group(['prefix' => '/{agrp}'], function () {
         Route::resource('/schedule', 'ScheduleController');
         Route::resource('/fleet', 'FleetController');
         Route::get('/api/fleet/{id}', 'FleetController@apiGet');
