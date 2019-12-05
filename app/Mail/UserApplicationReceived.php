@@ -11,7 +11,9 @@ class UserApplicationReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user, $admin;
+    public $user;
+    public $admin;
+
     /**
      * Create a new message instance.
      *
@@ -19,7 +21,7 @@ class UserApplicationReceived extends Mailable
      */
     public function __construct(User $user, User $admin)
     {
-        $this->user = $user;
+        $this->user  = $user;
         $this->admin = $admin;
     }
 

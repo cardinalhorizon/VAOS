@@ -8,10 +8,10 @@
 
 namespace App\Classes;
 
-use App\Models\Airline;
-use App\Models\Airport;
 use App\Models\Aircraft;
 use App\Models\AircraftGroup;
+use App\Models\Airline;
+use App\Models\Airport;
 use Illuminate\Support\Facades\DB;
 
 /**

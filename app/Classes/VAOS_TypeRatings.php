@@ -8,9 +8,9 @@
 
 namespace App\Classes;
 
-use MongoDB\BSON\Type;
 use App\Models\Airline;
 use App\Models\TypeRating;
+use MongoDB\BSON\Type;
 
 class VAOS_TypeRatings
 {

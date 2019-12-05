@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\ExtHour;
 use App\User;
-use Validator;
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Validator;
 
 class RegisterController extends Controller
 {
@@ -49,12 +49,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $input)
     {
-        $array = json_decode($input['data']);
+        $array              = json_decode($input['data']);
         $data['first_name'] = $array->userData->first_name;
-        $data['last_name'] = $array->userData->last_name;
-        $data['username'] = $array->userData->username;
-        $data['email'] = $array->userData->email;
-        $data['password'] = $array->userData->password;
+        $data['last_name']  = $array->userData->last_name;
+        $data['username']   = $array->userData->username;
+        $data['email']      = $array->userData->email;
+        $data['password']   = $array->userData->password;
         // reCAPTCHA credentials not set
         return Validator::make($data, [
             'first_name' => 'required|max:255',
@@ -89,16 +89,15 @@ class RegisterController extends Controller
         ]);
         // Ok folks, time to get those external hours thrown in.
 
-        foreach($data->externalHours as $hrs)
-        {
+        foreach ($data->externalHours as $hrs) {
             $ext = new ExtHour();
 
             $ext->user()->associate($user);
-            $ext->name = $hrs->name;
-            $ext->total = $hrs->total;
+            $ext->name       = $hrs->name;
+            $ext->total      = $hrs->total;
             $ext->source_url = $hrs->source_url;
-
         }
+
         return $user;
     }
 }

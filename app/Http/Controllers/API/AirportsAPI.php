@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use GuzzleHttp\Client;
 use App\Models\Airport;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class AirportsAPI extends Controller

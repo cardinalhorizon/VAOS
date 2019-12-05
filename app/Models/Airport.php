@@ -10,7 +10,7 @@ class Airport extends Model
 
     protected $casts = [
         'lat' => 'double',
-        'lon' => 'double'
+        'lon' => 'double',
     ];
     public $timestamps = false;
 

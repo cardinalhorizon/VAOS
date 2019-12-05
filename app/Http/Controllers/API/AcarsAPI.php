@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
-use App\User;
-use stdClass;
-use App\Flight;
-use App\Airline;
 use App\ACARSData;
+use App\Airline;
+use App\Flight;
 use App\Models\Aircraft;
+use App\User;
 use Illuminate\Http\Request;
+use stdClass;
 
 class AcarsAPI extends Controller
 {

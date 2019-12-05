@@ -2,8 +2,8 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
-use App\Models\Airline;
 use App\Http\Controllers\Controller;
+use App\Models\Airline;
 use Illuminate\Support\Facades\Auth;
 
 class AirlineController extends Controller

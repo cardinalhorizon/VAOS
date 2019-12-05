@@ -6,12 +6,12 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class AccountAccepted extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+
     /**
      * Create a new message instance.
      *

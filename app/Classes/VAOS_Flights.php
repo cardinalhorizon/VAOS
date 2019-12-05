@@ -27,6 +27,7 @@ class VAOS_Flights
     {
         // first get the flight.
     }
+
     public static function fileReport($data)
     {
         $flight               = Flight::find($data['legacyroute']);
@@ -34,7 +35,7 @@ class VAOS_Flights
         $flight->flighttime   = $data['flighttime'];
         $flight->acars_client = $data['source'];
         $flight->fuel_used    = $data['fuelused'];
-        $flight->sc_log  = $data['log'];
+        $flight->sc_log       = $data['log'];
         $flight->state        = 2;
         $flight->status       = 0;
         // Auto Accept System
@@ -53,9 +54,8 @@ class VAOS_Flights
 
         $comment->user()->associate($data['user_id']);
         $comment->flight()->associate($flight);
-        $comment->type = 1;
+        $comment->type    = 1;
         $comment->comment = $data['comment'];
         $comment->save();
-
     }
 }

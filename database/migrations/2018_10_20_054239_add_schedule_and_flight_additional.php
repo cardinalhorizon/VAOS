@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddScheduleAndFlightAdditional extends Migration
 {
@@ -13,20 +13,20 @@ class AddScheduleAndFlightAdditional extends Migration
      */
     public function up()
     {
-        Schema::table('flights', function(Blueprint $t) {
+        Schema::table('flights', function (Blueprint $t) {
             $t->string('rules')->nullable();
             $t->string('callsign')->nullable();
         });
-        Schema::table('schedules', function(Blueprint $t) {
+        Schema::table('schedules', function (Blueprint $t) {
             $t->string('callsign')->nullable();
         });
-        Schema::table('airlines', function(Blueprint $t) {
+        Schema::table('airlines', function (Blueprint $t) {
             $t->integer('type')->nullable()->default(0);
         });
-        Schema::table('airports', function(Blueprint $t){
+        Schema::table('airports', function (Blueprint $t) {
             $t->string('image_url')->nullable();
         });
-        Schema::create('ext_hours', function(Blueprint $t) {
+        Schema::create('ext_hours', function (Blueprint $t) {
             $t->increments('id');
             $t->unsignedInteger('user_id');
             $t->integer('type')->default(0);
