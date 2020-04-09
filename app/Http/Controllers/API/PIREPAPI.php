@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\User;
-use App\Models\Flight;
 use App\Models\Airline;
-use Illuminate\Http\Request;
-use App\Models\LogbookEntry as PIREP;
+use App\Models\Flight;
 use App\Models\LogbookComment as PIREPComment;
+use App\Models\LogbookEntry as PIREP;
+use App\User;
+use Illuminate\Http\Request;
 
 class PIREPAPI extends Controller
 {

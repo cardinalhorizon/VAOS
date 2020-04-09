@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\AircraftGroup;
+use App\Models\Airline;
+use App\Models\Flight;
+use App\Models\Schedule;
+use App\Models\ScheduleComplete;
 use App\User;
 use Carbon\Carbon;
-use App\Models\Flight;
-use App\Models\Airline;
-use App\Models\Schedule;
 use Illuminate\Http\Request;
-use App\Models\AircraftGroup;
-use App\Models\ScheduleComplete;
 
 class BidsAPI extends Controller
 {
@@ -32,10 +32,8 @@ class BidsAPI extends Controller
                 'status' => 404,
             ]);
         }
-        foreach($flights as $f)
-        {
-            if (is_null($f->callsign))
-            {
+        foreach ($flights as $f) {
+            if (is_null($f->callsign)) {
                 $f->callsign = $f->airline->icao.$f->flightnum;
             }
         }

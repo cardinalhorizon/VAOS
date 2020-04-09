@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\CrewOps;
 
-use App\Models\AirlineEvent;
 use App\Http\Controllers\Controller;
+use App\Models\AirlineEvent;
 use Illuminate\Support\Facades\Auth;
 
 class EventsController extends Controller

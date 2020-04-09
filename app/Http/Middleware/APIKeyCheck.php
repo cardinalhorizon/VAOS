@@ -12,14 +12,16 @@ class APIKeyCheck
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $dbKey = DB::table('api_keys')->where('key', $request->query('key'))->first();
-        if(!empty($dbKey))
+        if (! empty($dbKey)) {
             return $next($request);
-        else
+        } else {
             return response('Invalid Key', 403);
+        }
     }
 }

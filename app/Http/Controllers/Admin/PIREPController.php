@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Notifications\PirepFiled;
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
+use App\Notifications\PirepFiled;
+use Illuminate\Http\Request;
 
 class PIREPController extends Controller
 {
@@ -16,7 +16,8 @@ class PIREPController extends Controller
      */
     public function index($airline, Request $request)
     {
-        $pireps = Flight::where(['status' => 0, 'state' => 2])->with('user','depapt','arrapt','aircraft')->get();
+        $pireps = Flight::where(['status' => 0, 'state' => 2])->with('user', 'depapt', 'arrapt', 'aircraft')->get();
+
         return view('admin.pireps.pending', ['pireps' => $pireps]);
         //return response()->json($pireps);
     }

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Airline;
 use App\AircraftGroup;
+use App\Airline;
+use App\Classes\VAOS_Airports;
+use App\Classes\VAOS_Schedule;
 use App\Models\Airport;
 use App\Models\Schedule;
 use App\ScheduleTemplate;
 use Illuminate\Http\Request;
-use App\Classes\VAOS_Airports;
-use App\Classes\VAOS_Schedule;
 
 class ScheduleAPI extends Controller
 {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\CrewOps;
 
-use App\Models\Flight;
-use Illuminate\Http\Request;
 use App\Classes\VAOS_Schedule;
 use App\Http\Controllers\Controller;
+use App\Models\Flight;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BiddingController extends Controller

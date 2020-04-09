@@ -2,13 +2,13 @@
 
 namespace Modules\MaterialCrew\Http\Controllers;
 
-use App\Models\Flight;
+use App\Classes\VAOS_Airports as APC;
 use App\Models\Aircraft;
+use App\Models\Flight;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Classes\VAOS_Airports as APC;
 
 class FreeFlightController extends Controller
 {
