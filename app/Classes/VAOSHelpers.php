@@ -11,11 +11,12 @@ namespace App\Classes;
 class VAOSHelpers
 {
     /**
+     * Gets the distance between two points
      * @param $lat1
      * @param $lon1
      * @param $lat2
      * @param $lon2
-     * @param $unit
+     * @param $unit - K = Kilometers, N = Nautical Miles, Default Miles
      *
      * @return float
      */

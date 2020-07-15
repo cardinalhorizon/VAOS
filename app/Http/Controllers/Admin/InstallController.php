@@ -31,23 +31,42 @@ class InstallController extends Controller
         }
     }
 
-    public function doInstall(Request $request)
+    public function install(Request $request)
     {
+        // Run the installer migration logic
+        try {
+            Artisan::call('key:generate');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => "Unable to generate encryption key. Full details: {$e}"
+            ]);
+        }
+        // Run the database migration
+        try {
+            Artisan::call('migrate');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => "Unable to run database migration. Full details: {$e}"
+            ]);
+        }
+
         if (! Schema::hasTable('users')) {
             Artisan::call('key:generate');
             // Run the database migration
             Artisan::call('migrate');
             User::create([
-        'first_name' => $request->input('first_name'),
-        'last_name'  => $request->input('last_name'),
-        'email'      => $request->input('email'),
-        'password'   => bcrypt($request->input('password')),
-        'username'   => $request->input('username'),
-        'status'     => 1,
-        'admin'      => true,
-      ]);
+                'first_name' => $request->input('first_name'),
+                'last_name'  => $request->input('last_name'),
+                'email'      => $request->input('email'),
+                'password'   => bcrypt($request->input('password')),
+                'username'   => $request->input('username'),
+                'status'     => 1,
+                'admin'      => true,
+            ]);
 
-            $this->changeEnvironmentVariable('VAOS_Setup', true);
+            $this->changeEnvironmentVariable('VAOS_INSTALLED', true);
 
             //Removed in the view for the moment
             /*if (App::environment('production')) {
@@ -73,16 +92,16 @@ class InstallController extends Controller
             if ($key != '_token') {
                 if ($key == 'VAOS_ORG_NAME' || $key == 'VAOS_ORG_EMAIL') {
                     $this->changeEnvironmentVariableSpecial($key, $value);
-                /*}
-                #Removed in the view for the moment
-                elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
-                    if ($key == "APP_ENV_Development"){
-                        $value = 'local';
+                    /*}
+                    #Removed in the view for the moment
+                    elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
+                        if ($key == "APP_ENV_Development"){
+                            $value = 'local';
 
-                    }else{
-                        $value = 'production';
-                    }
-                  $this->changeEnvironmentVariable('APP_ENV', $value);*/
+                        }else{
+                            $value = 'production';
+                        }
+                      $this->changeEnvironmentVariable('APP_ENV', $value);*/
                 } else {
                     $this->changeEnvironmentVariable($key, $value);
                 }
@@ -92,7 +111,7 @@ class InstallController extends Controller
         return redirect('/setup?mode=fresh');
     }
 
-    public function changeEnvironmentVariable($key, $value)
+    private function changeEnvironmentVariable($key, $value)
     {
         $path = base_path('.env');
 
@@ -105,12 +124,12 @@ class InstallController extends Controller
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-        $key.'='.$old, $key.'='.$value, file_get_contents($path)
-      ));
+                $key.'='.$old, $key.'='.$value, file_get_contents($path)
+            ));
         }
     }
 
-    public function changeEnvironmentVariableSpecial($key, $value)
+    private function changeEnvironmentVariableSpecial($key, $value)
     {
         $path = base_path('.env');
 
@@ -118,9 +137,9 @@ class InstallController extends Controller
 
         if (file_exists($path)) {
             file_put_contents($path, str_replace(
-        $key.'='.'"'.$old.'"', $key.'='.'"'.$value.'"',
-        file_get_contents($path)
-      ));
+                $key.'='.'"'.$old.'"', $key.'='.'"'.$value.'"',
+                file_get_contents($path)
+            ));
         }
     }
 
@@ -128,11 +147,11 @@ class InstallController extends Controller
     {
         // Set the database
         $oldDB = new OTF_DB([
-      'database' => $request->input('database'),
-      'username' => $request->input('username'),
-      'password' => $request->input('password'),
-      'prefix'   => $request->input('prefix'),
-    ]);
+            'database' => $request->input('database'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'prefix'   => $request->input('prefix'),
+        ]);
         $aircraft = $oldDB->getTable('aircraft')->get();
         $users    = $oldDB->getTable('pilots')->get();
         $pireps   = $oldDB->getTable('pireps')->get();
@@ -141,7 +160,31 @@ class InstallController extends Controller
         $aircraft = $oldDB->getTable('aircraft')->get();
         $aircraft = $oldDB->getTable('aircraft')->get();
     }
+    private function doDatabaseConnectionCheck() {
+        try {
+            DB::connection()->getPdo();
+            return [
+                'success' => true,
+                'error' => null
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'error' => $e
+            ];
+        }
+    }
+    private function doWriteCheck() {
 
+    }
+    public function integrityCheck(Request $request) {
+        switch ($request->get('type')) {
+            case 'dbConnection':
+                return response()->json($this->doDatabaseConnectionCheck());
+                break;
+            default:
+        }
+    }
     public function importSystem(Request $request)
     {
     }

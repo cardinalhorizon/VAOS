@@ -11,11 +11,15 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
-        "laravel/tinker": "^2.0"
+        "laravel/passport": "^8.4",
+        "laravel/tinker": "^2.0",
+        "nwidart/laravel-modules": "^7.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
+        "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0"
@@ -32,7 +36,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Modules\\": "Modules/"
         },
         "classmap": [
             "database/seeds",
