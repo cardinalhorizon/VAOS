@@ -32,6 +32,7 @@ class Airline extends Model
     {
         return $this->belongsToMany('App\User')->withPivot('pilot_id', 'status', 'primary', 'admin');
     }
+
     public function aircraft_groups()
     {
         return $this->hasMany('App\Models\AircraftGroup');

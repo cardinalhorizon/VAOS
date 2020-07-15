@@ -8,11 +8,11 @@
 
 namespace App\Classes;
 
+use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Models\Airport;
-use App\Models\Schedule;
-use App\Models\AircraftGroup;
 use App\Models\Flight as ScheduleComplete;
+use App\Models\Schedule;
 
 class VAOS_Schedule
 {
@@ -31,6 +31,7 @@ class VAOS_Schedule
             }
         }
     }
+
     public static function fileBid($user_id, $schedule_id, $aircraft_id = null)
     {
         $complete = new ScheduleComplete();
@@ -59,15 +60,13 @@ class VAOS_Schedule
                         }
                     }
                 }
-                if ($assigned)
-                {
+                if ($assigned) {
                     break;
                 }
             }
         }
-        if (!$assigned)
-        {
-            throwException(new \Exception("No Available Aircraft in Assigned Aircraft Groups", 500));
+        if (! $assigned) {
+            throwException(new \Exception('No Available Aircraft in Assigned Aircraft Groups', 500));
         }
         //$acfgrp = AircraftGroup::where('id', $template->aircraft_group->pivot->primary)->with('aircraft')->first();
         else {
@@ -98,8 +97,7 @@ class VAOS_Schedule
         // store it
 
         $complete->route_data = json_encode($rte_data);
-        if ($template->callsign === null)
-        {
+        if ($template->callsign === null) {
             $complete->callsign = $template->airline->icao.$template->flightnum;
         }
         $complete->deptime = null;
@@ -142,14 +140,12 @@ class VAOS_Schedule
         }
         try {
             $entry->save();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             dd([
                 $data,
                 $dep,
                 $arr,
-                $entry
+                $entry,
             ]);
         }
 
@@ -162,14 +158,12 @@ class VAOS_Schedule
         }
         try {
             $entry->save();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             dd([
                 $data,
                 $dep,
                 $arr,
-                $entry
+                $entry,
             ]);
         }
     }
@@ -178,7 +172,7 @@ class VAOS_Schedule
     {
         // Declare a new instance of the Schedule Model
         $entry = Schedule::find($id);
-        $data = $obj['route_info'];
+        $data  = $obj['route_info'];
         //dd($request);
 
         $entry->flightnum = $data['flightnum'];

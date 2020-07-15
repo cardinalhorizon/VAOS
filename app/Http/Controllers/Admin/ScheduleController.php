@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Classes\VAOS_Schedule;
+use App\Http\Controllers\Controller;
+use App\Models\AircraftGroup;
 use App\Models\Airline;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
-use App\Models\AircraftGroup;
-use App\Classes\VAOS_Schedule;
-use App\Http\Controllers\Controller;
 
 class ScheduleController extends Controller
 {
@@ -40,9 +40,7 @@ class ScheduleController extends Controller
     {
         if ($agrp === 'all') {
             $airline = Airline::all();
-        }
-        else
-        {
+        } else {
             $airline = Airline::with('aircraft_groups')->find($agrp);
         }
         $acfgroups = AircraftGroup::with('airline')->get();
@@ -64,8 +62,7 @@ class ScheduleController extends Controller
         // Convert Request into Array
         $data = json_decode($request->input('data'));
         //dd($data);
-        foreach ($data->routes as $route)
-        {
+        foreach ($data->routes as $route) {
             $route->airline = $data->airline;
             //dd($route);
             VAOS_Schedule::newRoute($route);
@@ -97,14 +94,15 @@ class ScheduleController extends Controller
      */
     public function edit($agrp, $id)
     {
-        $schedule = Schedule::with('airline','aircraft_group','aircraft','depapt','arrapt')->findOrFail($id);
-        $airline = Airline::with('aircraft_groups')->find($agrp);
+        $schedule = Schedule::with('airline', 'aircraft_group', 'aircraft', 'depapt', 'arrapt')->findOrFail($id);
+        $airline  = Airline::with('aircraft_groups')->find($agrp);
         foreach ($schedule->aircraft_group as $a) {
             if ($a['pivot']['primary']) {
                 $schedule->primary_group = $a;
                 break;
             }
         }
+
         return view('admin.schedules.edit', ['schedule' => $schedule, 'acfgrps' => $airline->aircraft_groups]);
     }
 
@@ -116,7 +114,7 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$agrp, $id)
+    public function update(Request $request, $agrp, $id)
     {
         $data = json_decode($request->input('data'), true);
         VAOS_Schedule::updateRoute($data, $id);

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'admin' => 'boolean'
+        'admin' => 'boolean',
     ];
 
     public function flights()
@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function getAvgLandingRateAttribute()
     {
-        if ( ! array_key_exists('avgLandingRate', $this->relations)) {
+        if (! array_key_exists('avgLandingRate', $this->relations)) {
             $this->load('avgLandingRate');
         }
 
@@ -77,7 +77,7 @@ class User extends Authenticatable
 
     public function getTotalFlightTimeAttribute()
     {
-        if ( ! array_key_exists('totalFlightTime', $this->relations)) {
+        if (! array_key_exists('totalFlightTime', $this->relations)) {
             $this->load('totalFlightTime');
         }
 
@@ -95,7 +95,7 @@ class User extends Authenticatable
 
     public function getTotalFlightsAttribute()
     {
-        if ( ! array_key_exists('totalFlights', $this->relations)) {
+        if (! array_key_exists('totalFlights', $this->relations)) {
             $this->load('totalFlights');
         }
 
@@ -118,5 +118,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\ExtHour');
     }
-
 }
