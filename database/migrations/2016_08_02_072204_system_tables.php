@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class SystemTables extends Migration
 {
@@ -13,22 +13,22 @@ class SystemTables extends Migration
     public function up()
     {
         Schema::create('airports', function (Blueprint $table) {
-        	$table->increments('id');
-        	$table->string('name');
-        	$table->string('city');
-        	$table->string('country');
-        	$table->string('iata');
-        	$table->string('icao');
-        	$table->double('lat');
-        	$table->double('lon');
-        	$table->longText('data')->nullable(); //JSON Data for All gate information for the system.
+            $table->increments('id');
+            $table->string('name');
+            $table->string('city');
+            $table->string('country');
+            $table->string('iata');
+            $table->string('icao');
+            $table->double('lat');
+            $table->double('lon');
+            $table->longText('data')->nullable(); //JSON Data for All gate information for the system.
             $table->softDeletes();
         });
         Schema::create('settings', function (Blueprint $table) {
-        	$table->increments('id');
-        	$table->string('friendlyname');
-        	$table->string('name');
-        	$table->string('value');
+            $table->increments('id');
+            $table->string('friendlyname');
+            $table->string('name');
+            $table->string('value');
             $table->timestamps();
             $table->softDeletes();
         });

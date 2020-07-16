@@ -17,11 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
 //
 // Pilot Center
 
-Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' => ['auth', 'App\Http\Middleware\ActiveAccountCheck']], function() {
+Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' => ['auth', 'App\Http\Middleware\ActiveAccountCheck']], function () {
     Route::get('/', 'CrewOpsController@index');
     Route::post('/settings', 'CrewOpsController@profileUpdate');
     Route::get('/settings', 'CrewOpsController@profileEdit');
@@ -36,7 +35,7 @@ Route::group(['prefix' => '/flightops', 'namespace' => 'CrewOps', 'middleware' =
 });
 
 // Web Admin Center
-Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['auth','App\Http\Middleware\AdminPerms']], function () {
+Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'App\Http\Middleware\AdminPerms']], function () {
     Route::get('/', 'AdminController@index');
     Route::resource('/schedule', 'ScheduleController');
     Route::resource('/fleet', 'FleetController');
@@ -65,4 +64,3 @@ Route::get('/setup', 'Admin\InstallController@index');
 Route::post('/settings', 'Admin\InstallController@settings');
 Route::post('/install', 'Admin\InstallController@doInstall');
 Route::get('/accountmigrate', 'Admin\InstallController@migrate');
-

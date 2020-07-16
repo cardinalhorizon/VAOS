@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddUserGroups extends Migration
 {
@@ -13,8 +13,7 @@ class AddUserGroups extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function(Blueprint $table)
-        {
+        Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->boolean('progress');
@@ -22,8 +21,7 @@ class AddUserGroups extends Migration
             // ACCESS PERMISSIONS AND AIRCRAFT PIVOT TABLES
             $table->timestamps();
         });
-        Schema::create('group_user', function (Blueprint $table)
-        {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

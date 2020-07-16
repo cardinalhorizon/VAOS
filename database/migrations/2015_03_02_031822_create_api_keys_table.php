@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateApiKeysTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -72,5 +71,4 @@ class CreateApiKeysTable extends Migration
         Schema::drop('api_keys');
         Schema::drop('api_logs');
     }
-
 }

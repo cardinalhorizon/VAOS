@@ -35,13 +35,15 @@ class LoginController extends Controller
      */
 
     /**
-     * Override the trait method to allow login using either email or username
+     * Override the trait method to allow login using either email or username.
+     *
      * @param Request $request
+     *
      * @return array
      */
     protected function credentials(Request $request)
     {
-        $usernameInput = trim($request->{$this->username()});
+        $usernameInput  = trim($request->{$this->username()});
         $usernameColumn = filter_var($usernameInput, FILTER_VALIDATE_EMAIL) ? 'email' : $this->username();
 
         return [$usernameColumn => $usernameInput, 'password' => $request->password];

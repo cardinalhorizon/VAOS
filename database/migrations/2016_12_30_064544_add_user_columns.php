@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class AddUserColumns extends Migration
 {
@@ -13,7 +12,7 @@ class AddUserColumns extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function ($table) {
             $table->string('pid')->nullable();
             $table->integer('hub_id')->nullable()->unsigned();
             $table->foreign('hub_id')->references('id')->on('hubs')->onDelete('set null');
