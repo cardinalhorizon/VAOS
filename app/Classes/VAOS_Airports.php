@@ -8,8 +8,8 @@
 
 namespace App\Classes;
 
-use GuzzleHttp\Client;
 use App\Models\Airport;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
 class VAOS_Airports
@@ -20,38 +20,39 @@ class VAOS_Airports
         if (is_string($input)) {
             try {
                 $apt = Airport::where('icao', $input)->firstOrFail();
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $id = self::AddAirport($input);
+
                 return $id;
             }
+
             return $apt;
-        }
-        else if(is_int($input)) {
+        } elseif (is_int($input)) {
             try {
                 $apt = Airport::where('id', $input)->firstOrFail();
-            }
-            catch (\Exception $e)
-            {
+            } catch (\Exception $e) {
                 $id = self::AddAirport($input, true);
+
                 return $id;
             }
+
             return $apt;
-        }
-        else {
+        } else {
             $apt = Airport::where('id', $input->id)->first();
             if ($apt === null) {
                 $id = self::addWithObject($input);
+
                 return $id;
             }
+
             return $apt;
         }
     }
+
     public static function addWithObject($apt)
     {
         //dd($apt);
-        $airport = new Airport();
+        $airport             = new Airport();
         $airport->id         = $apt->id;
         $airport->name       = $apt->name;
         $airport->icao       = $apt->gps_code;
@@ -63,14 +64,16 @@ class VAOS_Airports
 
         $airport->save();
         Log::debug('Created Airport: '.$airport->icao);
+
         return $airport;
     }
+
     public static function AddAirport($icao, $id = false)
     {
         // lets request the airport identifier from the central database
         try {
             $client = new Client();
-            if(!$id) {
+            if (! $id) {
                 $res    = $client->request('GET', 'http://fsvaos.net/api/data/airports', [
                     'query' => [
                         'icao' => $icao,
@@ -107,7 +110,6 @@ class VAOS_Airports
         } catch (Exception $e) {
             return dd($data);
         }
-
 
         return $airport;
     }

@@ -1,4 +1,5 @@
 <?php
+
 $path_to_phpvms_folder = __DIR__;
 
 require $path_to_phpvms_folder.'/bootstrap/autoload.php';

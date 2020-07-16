@@ -11,7 +11,8 @@ namespace App\Classes;
 class VAOSHelpers
 {
     /**
-     * Gets the distance between two points
+     * Gets the distance between two points.
+     *
      * @param $lat1
      * @param $lon1
      * @param $lat2

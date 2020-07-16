@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-if (!env('VAOS_INSTALLED', true)) {
+if (! env('VAOS_INSTALLED', true)) {
     Route::get('/setup', 'Admin/InstallController@index');
     Route::get('/setup/integrity', 'Admin/InstallController@integrityCheck');
     Route::post('/setup', 'Admin/InstallController@install');

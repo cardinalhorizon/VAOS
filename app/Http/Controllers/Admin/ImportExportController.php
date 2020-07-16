@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Classes\VAOS_Aircraft as AircraftData;
+use App\Classes\VAOS_Schedule;
+use App\Http\Controllers\Controller;
 use App\Models\Airline;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
-use App\Classes\VAOS_Schedule;
-use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
-use App\Classes\VAOS_Aircraft as AircraftData;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportExportController extends Controller
 {
@@ -26,7 +26,7 @@ class ImportExportController extends Controller
                 'description'    => 'Uploading Workbook',
                 'totalitems'     => 1,
                 'itemscompleted' => 0,
-                ]);
+            ]);
 
             // Import the File to the file system
             $path = $request->file('file')->store('data');
