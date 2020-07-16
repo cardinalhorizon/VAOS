@@ -22,8 +22,8 @@ class AirportsAPI extends Controller
         $res    = $client->request('GET', 'http://fsvaos.net/api/central/airports', [
             'query' => [
                 'icao' => $request->icao,
-                ],
-            ])->getBody();
+            ],
+        ])->getBody();
         // Add the airport to the database
         $data    = json_decode($res, true);
         $airport = new Airport();
@@ -48,8 +48,8 @@ class AirportsAPI extends Controller
         $res    = $client->request('GET', 'http://fsvaos.net/api/central/airports', [
             'query' => [
                 'icao' => $icao,
-                ],
-            ])->getBody();
+            ],
+        ])->getBody();
         // Add the airport to the database
         $data    = json_decode($res, true);
         $airport = new Airport();

@@ -62,16 +62,16 @@ class VAOS_Aircraft
         $acf->save();
         //dd($acf);
         if (DB::table('aircraft_groups')->where([
-                    ['icao', '=', $data['icao']],
-                    ['userdefined', '=', 'false'],
-                    ['airline_id', '=', $air->id],
-                ])->first() === null) {
+            ['icao', '=', $data['icao']],
+            ['userdefined', '=', 'false'],
+            ['airline_id', '=', $air->id],
+        ])->first() === null) {
             // We didn't find it so lets create one real quick
             $group = new AircraftGroup([
-                    'name'        => $data['name'],
-                    'icao'        => $data['icao'],
-                    'userdefined' => false,
-                ]);
+                'name'        => $data['name'],
+                'icao'        => $data['icao'],
+                'userdefined' => false,
+            ]);
             $group->airline()->associate($air);
             // now lets associate the aircraft with the new group.
             $group->save();
