@@ -191,9 +191,9 @@ class ImportPhpVMS extends Command
             // Check if we have the hub.
 
             $hub = DB::table('hubs')->where([
-                    ['airport_id', '=', $apt->id],
-                    ['airline_id', '=', $airline->id],
-                ])->first();
+                ['airport_id', '=', $apt->id],
+                ['airline_id', '=', $airline->id],
+            ])->first();
 
             $airline->users()->attach($user, [
                 'status'   => 1,

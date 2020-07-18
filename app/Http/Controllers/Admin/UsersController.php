@@ -166,7 +166,7 @@ class UsersController extends Controller
                 'status'   => 1,
                 'primary'  => false,
                 'admin'    => false,
-                ]);
+            ]);
         }
     }
 

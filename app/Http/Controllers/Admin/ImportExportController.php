@@ -26,7 +26,7 @@ class ImportExportController extends Controller
                 'description'    => 'Uploading Workbook',
                 'totalitems'     => 1,
                 'itemscompleted' => 0,
-                ]);
+            ]);
 
             // Import the File to the file system
             $path = $request->file('file')->store('data');

@@ -74,7 +74,7 @@ class PirepFiled extends Notification
     public function toArray($notifiable)
     {
         return [
-      //
-    ];
+            //
+        ];
     }
 }
