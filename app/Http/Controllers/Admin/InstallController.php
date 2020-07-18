@@ -38,14 +38,14 @@ class InstallController extends Controller
             // Run the database migration
             Artisan::call('migrate');
             User::create([
-        'first_name' => $request->input('first_name'),
-        'last_name'  => $request->input('last_name'),
-        'email'      => $request->input('email'),
-        'password'   => bcrypt($request->input('password')),
-        'username'   => $request->input('username'),
-        'status'     => 1,
-        'admin'      => true,
-      ]);
+                'first_name' => $request->input('first_name'),
+                'last_name'  => $request->input('last_name'),
+                'email'      => $request->input('email'),
+                'password'   => bcrypt($request->input('password')),
+                'username'   => $request->input('username'),
+                'status'     => 1,
+                'admin'      => true,
+            ]);
 
             $this->changeEnvironmentVariable('VAOS_Setup', true);
 
@@ -128,11 +128,11 @@ class InstallController extends Controller
     {
         // Set the database
         $oldDB = new OTF_DB([
-      'database' => $request->input('database'),
-      'username' => $request->input('username'),
-      'password' => $request->input('password'),
-      'prefix'   => $request->input('prefix'),
-    ]);
+            'database' => $request->input('database'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'prefix'   => $request->input('prefix'),
+        ]);
         $aircraft = $oldDB->getTable('aircraft')->get();
         $users    = $oldDB->getTable('pilots')->get();
         $pireps   = $oldDB->getTable('pireps')->get();
