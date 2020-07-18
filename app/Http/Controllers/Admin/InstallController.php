@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
 use App\Classes\OTF_DB;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Schema;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class InstallController extends Controller
 {
@@ -39,7 +39,7 @@ class InstallController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'error' => "Unable to generate encryption key. Full details: {$e}"
+                'error'   => "Unable to generate encryption key. Full details: {$e}",
             ]);
         }
         // Run the database migration
@@ -48,7 +48,7 @@ class InstallController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'error' => "Unable to run database migration. Full details: {$e}"
+                'error'   => "Unable to run database migration. Full details: {$e}",
             ]);
         }
 
@@ -92,16 +92,16 @@ class InstallController extends Controller
             if ($key != '_token') {
                 if ($key == 'VAOS_ORG_NAME' || $key == 'VAOS_ORG_EMAIL') {
                     $this->changeEnvironmentVariableSpecial($key, $value);
-                    /*}
-                    #Removed in the view for the moment
-                    elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
-                        if ($key == "APP_ENV_Development"){
-                            $value = 'local';
+                /*}
+                #Removed in the view for the moment
+                elseif ($key == "APP_ENV_Development" || $key == "APP_ENV_Production") {
+                    if ($key == "APP_ENV_Development"){
+                        $value = 'local';
 
-                        }else{
-                            $value = 'production';
-                        }
-                      $this->changeEnvironmentVariable('APP_ENV', $value);*/
+                    }else{
+                        $value = 'production';
+                    }
+                  $this->changeEnvironmentVariable('APP_ENV', $value);*/
                 } else {
                     $this->changeEnvironmentVariable($key, $value);
                 }
@@ -160,24 +160,30 @@ class InstallController extends Controller
         $aircraft = $oldDB->getTable('aircraft')->get();
         $aircraft = $oldDB->getTable('aircraft')->get();
     }
-    private function doDatabaseConnectionCheck() {
+
+    private function doDatabaseConnectionCheck()
+    {
         try {
             DB::connection()->getPdo();
+
             return [
                 'success' => true,
-                'error' => null
+                'error'   => null,
             ];
         } catch (\Exception $e) {
             return [
                 'success' => false,
-                'error' => $e
+                'error'   => $e,
             ];
         }
     }
-    private function doWriteCheck() {
 
+    private function doWriteCheck()
+    {
     }
-    public function integrityCheck(Request $request) {
+
+    public function integrityCheck(Request $request)
+    {
         switch ($request->get('type')) {
             case 'dbConnection':
                 return response()->json($this->doDatabaseConnectionCheck());
@@ -185,6 +191,7 @@ class InstallController extends Controller
             default:
         }
     }
+
     public function importSystem(Request $request)
     {
     }

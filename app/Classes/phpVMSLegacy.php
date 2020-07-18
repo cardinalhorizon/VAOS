@@ -8,8 +8,8 @@
 
 namespace App\Classes;
 
-use App\Flight;
 use App\Airline;
+use App\Flight;
 
 /**
  * Helper Class that converts phpVMS formatted data into VAOS friendly stuff.

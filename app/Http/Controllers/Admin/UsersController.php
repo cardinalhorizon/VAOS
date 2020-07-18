@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Mail\AccountAccepted;
-use App\User;
-use App\Models\Hub;
 use App\Models\Airline;
+use App\Models\Hub;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -136,16 +134,12 @@ class UsersController extends Controller
         } else {
             $user->admin = 0;
         }
-        if ($user->status !== $request->status)
-        {
+        if ($user->status !== $request->status) {
             // STATUS CHANGED!!!
-            if ($request->status === '1')
-            {
+            if ($request->status === '1') {
                 $user->status = $request->status;
                 Mail::to($user)->send(new AccountAccepted($user));
-            }
-            else
-            {
+            } else {
                 $user->status = $request->status;
             }
         }
@@ -172,7 +166,7 @@ class UsersController extends Controller
                 'status'   => 1,
                 'primary'  => false,
                 'admin'    => false,
-                ]);
+            ]);
         }
     }
 
@@ -187,17 +181,16 @@ class UsersController extends Controller
     {
         //
     }
+
     public function importUsers(Request $request)
     {
-
         $path = $request->file('file')->storeAS('imports', 'schedule.json');
         //dd($path);
         // Load the Excel Import Object
         $data = json_decode(Storage::get($path), true);
-        foreach ($data as $d)
-        {
+        foreach ($data as $d) {
             // Check if the user already exists
-            if (!User::where('email', $d['email'])->exists()) {
+            if (! User::where('email', $d['email'])->exists()) {
                 $user = User::create([
                     'first_name' => $d['first_name'],
                     'last_name'  => $d['last_name'],
