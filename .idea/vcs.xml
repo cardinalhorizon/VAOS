@@ -4,6 +4,5 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Modules/IgniteModule" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Modules/MaterialCrewRedux" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Modules/VAOSDesktopModule" vcs="Git" />
   </component>
 </project>

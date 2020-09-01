@@ -9,12 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
-        "nwidart/laravel-modules": "^7.1",
-      "ext-json": "*"
+        "nwidart/laravel-modules": "^7.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

@@ -1,0 +1,72 @@
+@font-face {
+    font-family: 'turkey-bold';
+    src: font-url(asset-path('europa-bold-webfont.eot'));
+    src: font-url(asset-path('stylesheets/europa-bold-webfont.eot?#iefix')) format('embedded-opentype'),
+    font-url(asset-path('europa-bold-webfont.woff2')) format('woff2'),
+    font-url(asset-path('europa-bold-webfont.woff')) format('woff'),
+    font-url(asset-path('europa-bold-webfont.ttf')) format('truetype'),
+    font-url(asset-path('europa-bold-webfont.svg#europabold')) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'turkey-italic';
+    src: font-url('europa-bolditalic-webfont.eot');
+    src: font-url('europa-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('europa-bolditalic-webfont.woff2') format('woff2'),
+    font-url('europa-bolditalic-webfont.woff') format('woff'),
+    font-url('europa-bolditalic-webfont.ttf') format('truetype'),
+    font-url('europa-bolditalic-webfont.svg#europabolditalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'turkey-light';
+    src: font-url('europa-light-webfont.eot');
+    src: font-url('europa-light-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('europa-light-webfont.woff2') format('woff2'),
+    font-url('europa-light-webfont.woff') format('woff'),
+    font-url('europa-light-webfont.ttf') format('truetype'),
+    font-url('europa-light-webfont.svg#europalight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'turkey-light-italic';
+    src: font-url('europa-lightitalic-webfont.eot');
+    src: font-url('europa-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('europa-lightitalic-webfont.woff2') format('woff2'),
+    font-url('europa-lightitalic-webfont.woff') format('woff'),
+    font-url('europa-lightitalic-webfont.ttf') format('truetype'),
+    font-url('europa-lightitalic-webfont.svg#europalightitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'turkey-regular';
+    src: font-url('europa-regular-webfont.eot');
+    src: font-url('europa-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('europa-regular-webfont.woff2') format('woff2'),
+    font-url('europa-regular-webfont.woff') format('woff'),
+    font-url('europa-regular-webfont.ttf') format('truetype'),
+    font-url('europa-regular-webfont.svg#europaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'turkey-italic';
+    src: font-url('europa-regularitalic-webfont.eot');
+    src: font-url('europa-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('europa-regularitalic-webfont.woff2') format('woff2'),
+    font-url('europa-regularitalic-webfont.woff') format('woff'),
+    font-url('europa-regularitalic-webfont.ttf') format('truetype'),
+    font-url('europa-regularitalic-webfont.svg#europaitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

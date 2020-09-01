@@ -16,7 +16,6 @@ class AirlineController extends Controller
     public function index()
     {
         // Return the list of airlines
-
         $airlines = Airline::all();
         if ($airlines->count() == 0) {
             return redirect('/admin/airlines/create');
@@ -135,7 +134,6 @@ class AirlineController extends Controller
     {
         //
     }
-
     public function addHub(Request $request)
     {
     }

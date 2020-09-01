@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'admin', 'name' => 'admin.', 'namespace' => 'AdminAPI', 'middleware' => 'auth:api'], function() {
+    // Route::resource('aircraft', 'AircraftAPIController');
+    // Route::resource('schedule', 'ScheduleAPIController');
+    // Route::resource('type_ratings', 'TypeRatingsAPIController');
+    // Route::resource('trips', 'TripsAPIController');
+    // Route::resource('users', 'UsersAPIController');
+    // Route::resource('flights', 'FlightsAPIController');
+});

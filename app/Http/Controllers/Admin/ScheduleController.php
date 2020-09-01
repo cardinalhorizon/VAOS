@@ -14,7 +14,7 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response\JSONResponse
      */
     public function index()
     {
