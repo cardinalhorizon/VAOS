@@ -38,4 +38,18 @@ class Schedule extends Model
     {
         return with('depicao')->with('arricao')->with('airline')->with('aircraft_group')->get();
     }
+    public function getCallsign()
+    {
+        if (is_null($this->airline_id) && is_null($this->callsign)) {
+            return $this->flightnum;
+        }
+        if (is_null($this->callsign)) {
+            return $this->airline->icao.$this->flightnum;
+        }
+        if (is_null($this->callsign) && is_null($this->flightnum)) {
+            return 'N/A';
+        } else {
+            return $this->callsign;
+        }
+    }
 }
