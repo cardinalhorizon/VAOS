@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Mail\AccountAccepted;
-use App\User;
+use App\Models\User;
 use App\Models\Hub;
 use App\Models\Airline;
 use Illuminate\Http\Request;

@@ -80,11 +80,17 @@ class AircraftAPIController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     *
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        if (VAOS_Aircraft::updateAircraft($data, $id)) {
+            return response()->json([], 200);
+        } else {
+            return response()->json([], 500);
+        }
     }
 
     /**
