@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\Aircraft;
 use Illuminate\Http\Request;
 use App\Models\AircraftGroup;
@@ -40,12 +40,12 @@ class FleetController extends Controller
     {
         if ($agrp === 'all')
         {
-            $airlines  = Airline::all();
+            $airlines  = AviationGroup::all();
             $acfgroups = AircraftGroup::where('userdefined', true)->get();
         }
         else
         {
-            $airlines  = Airline::find($agrp);
+            $airlines  = AviationGroup::find($agrp);
             $acfgroups = AircraftGroup::where(['userdefined' => true, 'airline_id' => $agrp])->get();
         }
         return view('admin.fleet.create', ['airlines' => $airlines, 'acfgroups' => $acfgroups]);
@@ -118,7 +118,7 @@ class FleetController extends Controller
     {
         $aircraft = Aircraft::findOrFail($id);
 
-        $airlines  = Airline::all();
+        $airlines  = AviationGroup::all();
         $acfgroups = AircraftGroup::where('userdefined', true)->get();
 
         return view('admin.fleet.edit', ['aircraft' => $aircraft, 'airlines' => $airlines, 'acfgroups' => $acfgroups]);

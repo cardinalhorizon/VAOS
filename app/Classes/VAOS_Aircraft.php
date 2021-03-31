@@ -8,7 +8,7 @@
 
 namespace App\Classes;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\Airport;
 use App\Models\Aircraft;
 use App\Models\AircraftGroup;
@@ -50,7 +50,7 @@ class VAOS_Aircraft
         $air = null;
         if (array_key_exists('airline', $data)) {
             //dd($data);
-            $air = Airline::where('icao', $data['airline'])->first();
+            $air = AviationGroup::where('icao', $data['airline'])->first();
 
             $acf->airline()->associate($air);
         }
@@ -121,7 +121,7 @@ class VAOS_Aircraft
             $acf->location()->associate($hub);
         }
         if (array_key_exists('airline', $data)) {
-            $air = Airline::where('icao', $data['airline'])->first();
+            $air = AviationGroup::where('icao', $data['airline'])->first();
 
             $acf->airline()->associate($air);
         }

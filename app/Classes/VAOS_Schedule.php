@@ -8,7 +8,7 @@
 
 namespace App\Classes;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\Airport;
 use App\Models\Schedule;
 use App\Models\AircraftGroup;

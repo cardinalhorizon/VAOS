@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Mail\AccountAccepted;
 use App\Models\User;
-use App\Models\Hub;
-use App\Models\Airline;
+use App\Models\Base;
+use App\Models\AviationGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -61,8 +61,8 @@ class UsersController extends Controller
     public function show($id)
     {
         $user     = User::findOrFail($id);
-        $airlines = Airline::all();
-        $hubs     = Hub::all();
+        $airlines = AviationGroup::all();
+        $hubs     = Base::all();
 
         return view('admin.users.show', ['user' => $user, 'airlines' => $airlines, 'hubs' => $hubs]);
     }
@@ -164,11 +164,11 @@ class UsersController extends Controller
             // Ok, now let's get started. Add the user to the foreign key with the supplied info
             $user = User::find($id);
 
-            $airline = Airline::find($request->input('airline_id'));
+            $airline = AviationGroup::find($request->input('airline_id'));
 
             $user->airlines()->attach($airline, [
                 'pilot_id' => $request->input('pilotid'),
-                'hub_id'   => Hub::find($id),
+                'hub_id'   => Base::find($id),
                 'status'   => 1,
                 'primary'  => false,
                 'admin'    => false,

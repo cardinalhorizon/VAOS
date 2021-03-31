@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,7 @@ class AirlineController extends Controller
     public function index()
     {
         // Return the list of airlines
-        $airlines = Airline::all();
+        $airlines = AviationGroup::all();
         if ($airlines->count() == 0) {
             return redirect('/admin/airlines/create');
         }
@@ -43,7 +43,7 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        $airline = new Airline();
+        $airline = new AviationGroup();
 
         $airline->name = $request->input('name');
         $airline->icao = $request->input('icao');
@@ -86,7 +86,7 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-        $airline = Airline::findOrFail($id);
+        $airline = AviationGroup::findOrFail($id);
 
         return view('admin.airline.edit', ['airline' => $airline]);
     }
@@ -101,7 +101,7 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $airline = Airline::find($id);
+        $airline = AviationGroup::find($id);
 
         $airline->name = $request->input('name');
         $airline->icao = $request->input('icao');

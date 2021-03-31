@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\AircraftGroup;
@@ -39,11 +39,11 @@ class ScheduleController extends Controller
     public function create($agrp)
     {
         if ($agrp === 'all') {
-            $airline = Airline::all();
+            $airline = AviationGroup::all();
         }
         else
         {
-            $airline = Airline::with('aircraft_groups')->find($agrp);
+            $airline = AviationGroup::with('aircraft_groups')->find($agrp);
         }
         $acfgroups = AircraftGroup::with('airline')->get();
         //return $acfgroups;
@@ -98,7 +98,7 @@ class ScheduleController extends Controller
     public function edit($agrp, $id)
     {
         $schedule = Schedule::with('airline','aircraft_group','aircraft','depapt','arrapt')->findOrFail($id);
-        $airline = Airline::with('aircraft_groups')->find($agrp);
+        $airline = AviationGroup::with('aircraft_groups')->find($agrp);
         foreach ($schedule->aircraft_group as $a) {
             if ($a['pivot']['primary']) {
                 $schedule->primary_group = $a;
