@@ -11,7 +11,7 @@ class AirlineEventFlight extends Model
 
     public function airline()
     {
-        return $this->belongsTo('App\Models\Airline');
+        return $this->belongsTo('App\Models\AviationGroup');
     }
 
     public function depapt()

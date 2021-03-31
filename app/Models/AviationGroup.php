@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Airline extends Model
+class AviationGroup extends Model
 {
     protected $fillable = [
         'name',

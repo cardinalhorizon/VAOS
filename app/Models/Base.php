@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hub extends Model
+class Base extends Model
 {
     public function airport()
     {
@@ -13,7 +13,7 @@ class Hub extends Model
 
     public function airline()
     {
-        return $this->belongsTo('App\Models\Airline');
+        return $this->belongsTo('App\Models\AviationGroup');
     }
 
     public function user()

@@ -106,7 +106,7 @@ class User extends Authenticatable
 
     public function airlines()
     {
-        return $this->belongsToMany('App\Models\Airline')->withPivot('pilot_id', 'status', 'primary', 'admin');
+        return $this->belongsToMany('App\Models\AviationGroup')->withPivot('pilot_id', 'status', 'primary', 'admin');
     }
 
     public function hasAirline($airline)
@@ -116,7 +116,7 @@ class User extends Authenticatable
 
     public function ext_hours()
     {
-        return $this->hasMany('App\Models\ExtHour');
+        return $this->hasMany('App\Models\UserExternalHour');
     }
 
 }
