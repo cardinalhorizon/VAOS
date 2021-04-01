@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class Core_003_User_Management extends TestCase
+class Core_001_Aircraft_ManagementTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -16,6 +16,12 @@ class Core_003_User_Management extends TestCase
     public function testExample()
     {
         $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+    public function testCreateAircraft()
+    {
+        $response = $this->post('/');
 
         $response->assertStatus(200);
     }

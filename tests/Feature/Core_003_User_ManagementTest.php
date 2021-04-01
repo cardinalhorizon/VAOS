@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class Core_001_Aircraft_Management extends TestCase
+class Core_003_User_ManagementTest extends TestCase
 {
     /**
      * A basic feature test example.
