@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
+use App\Models\User;
 use App\Classes\OTF_DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

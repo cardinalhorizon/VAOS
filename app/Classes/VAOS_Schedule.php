@@ -8,7 +8,7 @@
 
 namespace App\Classes;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\Airport;
 use App\Models\Schedule;
 use App\Models\AircraftGroup;
@@ -88,13 +88,12 @@ class VAOS_Schedule
         // Lets JSON decode the defaults so we can place the route correctly within the system.
 
         $defaults = json_decode($template->defaults);
-
         $complete->flightnum = $template->flightnum;
-        $complete->route     = $defaults['route'];
+        //$complete->route     = $defaults['route'];
         // Now lets encode the cruise altitude in the JSON
         $rte_data = [];
 
-        $rte_data['cruise'] = $defaults['cruise'];
+        //$rte_data['cruise'] = $defaults['cruise'];
         // store it
 
         $complete->route_data = json_encode($rte_data);

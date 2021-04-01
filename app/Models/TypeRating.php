@@ -8,12 +8,12 @@ class TypeRating extends Model
 {
     public function user()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Models\User');
     }
 
     public function airline()
     {
-        return $this->belongsTo('App\Models\Airline');
+        return $this->belongsTo('App\Models\AviationGroup');
     }
 
     public function aircraft()

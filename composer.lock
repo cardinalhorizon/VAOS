@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68aaca7e6d781b6592d8a06b2df8152a",
+    "content-hash": "b2c3054812df792cfc49126b3533a17c",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1601,21 +1601,21 @@
         },
         {
             "name": "nwidart/laravel-modules",
-            "version": "7.1.0",
+            "version": "7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nWidart/laravel-modules.git",
-                "reference": "245426d4d0c0293a44e4cc8cc44d1c5d50e0d0ba"
+                "reference": "8980876d63096951e067bcaf8649d591d4c7f0da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/245426d4d0c0293a44e4cc8cc44d1c5d50e0d0ba",
-                "reference": "245426d4d0c0293a44e4cc8cc44d1c5d50e0d0ba",
+                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/8980876d63096951e067bcaf8649d591d4c7f0da",
+                "reference": "8980876d63096951e067bcaf8649d591d4c7f0da",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.2.5"
+                "php": ">=7.2.5"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
@@ -1668,7 +1668,13 @@
                 "nwidart",
                 "rad"
             ],
-            "time": "2020-04-14T17:21:11+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/nwidart",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-30T17:10:13+00:00"
         },
         {
             "name": "nyholm/psr7",
@@ -6223,7 +6229,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-json": "*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

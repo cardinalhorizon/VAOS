@@ -9,7 +9,7 @@
 namespace App\Classes;
 
 use MongoDB\BSON\Type;
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\TypeRating;
 
 class VAOS_TypeRatings
@@ -17,7 +17,7 @@ class VAOS_TypeRatings
     public static function AddTypeRating($data)
     {
         $tr       = new TypeRating();
-        $airline  = Airline::find($data['airline']);
+        $airline  = AviationGroup::find($data['airline']);
         $tr->code = $data['code'];
         $tr->name = $data['name'];
         $tr->airline()->associate($airline);

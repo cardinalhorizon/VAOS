@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Airline;
+use App\Models\AviationGroup;
 use App\Models\JobProgress;
 use Illuminate\Http\Request;
 use App\Classes\VAOS_Schedule;
@@ -73,7 +73,7 @@ class ImportExportController extends Controller
             $data = json_decode(Storage::get($path), true);
 
             foreach ($data as $row) {
-                //$airline_id = Airline::where('icao', $row['airline'])->first();
+                //$airline_id = AviationGroup::where('icao', $row['airline'])->first();
                 //$row['airline'] = $airline_id->id;
                 $data = [
                     'airline'      => $row['airline'],

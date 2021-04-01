@@ -10,7 +10,7 @@ class Schedule extends Model
 
     public function airline()
     {
-        return $this->belongsTo('App\Models\Airline');
+        return $this->belongsTo('App\Models\AviationGroup');
     }
 
     public function depapt()
@@ -37,5 +37,19 @@ class Schedule extends Model
     public static function allFK()
     {
         return with('depicao')->with('arricao')->with('airline')->with('aircraft_group')->get();
+    }
+    public function getCallsign()
+    {
+        if (is_null($this->airline_id) && is_null($this->callsign)) {
+            return $this->flightnum;
+        }
+        if (is_null($this->callsign)) {
+            return $this->airline->icao.$this->flightnum;
+        }
+        if (is_null($this->callsign) && is_null($this->flightnum)) {
+            return 'N/A';
+        } else {
+            return $this->callsign;
+        }
     }
 }
