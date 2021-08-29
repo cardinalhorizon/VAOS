@@ -1,0 +1,3 @@
+[submodule "Modules/MaterialCrewRedux"]
+	path = Modules/MaterialCrewRedux
+	url = https://github.com/fsvaos/MaterialCrewRedux
