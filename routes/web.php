@@ -27,3 +27,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+// Include all JetStream Routes
+require_once __DIR__.'/jetstream.php';
+
+// Include Admin Panel Routes
+require_once __DIR__.'/admin.php';
