@@ -26,8 +26,8 @@ services:
             - redis
             - meilisearch
             - selenium
-    mysql:
-        image: 'mysql:8.0'
+    mariadb:
+        image: 'mariadb:10.5.8'
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
