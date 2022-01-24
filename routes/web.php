@@ -16,6 +16,15 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    // If in walled garden mode, pull up login page.
+    if (config('vaos.walled_garden')) {
+        return Inertia::render('Login', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
+    }
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
