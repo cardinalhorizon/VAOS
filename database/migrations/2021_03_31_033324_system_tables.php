@@ -25,8 +25,17 @@ class SystemTables extends Migration
             $table->double('latitude');
             $table->double('longitude');
             $table->string('image_url');
-            $table->longText('data')->nullable(); //JSON Data for All gate information for the system.
+            $table->json('data')->nullable(); //JSON Data for All gate information for the system.
             $table->softDeletes();
+        });
+        Schema::create('sub_locations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('location_id');
+            $table->string('location_type')->nullable();
+            $table->string('name');
+            $table->double('latitude');
+            $table->double('longitude');
+            $table->json('data');
         });
         Schema::create('aviation_groups', function (Blueprint $table) {
             $table->id();
@@ -181,7 +190,7 @@ class SystemTables extends Migration
             $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('comment');
+            $table->longText('content');
             $table->integer('type');
             $table->timestamps();
             $table->softDeletes();
