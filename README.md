@@ -1,5 +1,9 @@
-![alt text](https://scontent-mia3-2.xx.fbcdn.net/v/t1.0-9/34504448_1051727904981394_3792026264861147136_o.png?_nc_cat=0&oh=91c3e19aeb45201ca43bc7e4ecd47160&oe=5C0971C5)
+# NOTICE
+This Git Repository is in a archive state and is not supported anymore.
 
+The next version of the system will utilize a brand new repository.
+
+In the meantime, if you need a Virtual Airline system, consider phpVMS 7, which is very similar in features to VAOS. https://github.com/nabeelio/phpvms
 
 # Download
 
